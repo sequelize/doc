@@ -1,7 +1,7 @@
 {
   "name": "sequelizejs.com",
   "description": "The official sequelize webite.",
-  "version": "0.4.3",
+  "version": "1.0.0",
   "homepage": "http://sequelizejs.com",
   "repository": {
     "type": "git",
