@@ -23,3 +23,17 @@ Project.hasOne(User, { foreignKey: 'initiator_id' })
 
 Project.hasOne(User, { as: 'Initiator' })
 // Now you will get Project#getInitiator and Project#setInitiator
+
+// Or let's define some self references
+var Person = sequelize.define('Person', { /* ... */})
+
+Person.hasOne(Person, {as: 'Father'})
+// this will add the attribute FatherId to Person
+
+// also possible:
+Person.hasOne(Person, {as: 'Father', foreignKey: 'DadId'})
+// this will add the attribute DadId to Person
+
+// In both cases you will be able to do:
+Person#setFather
+Person#getFather

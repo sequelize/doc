@@ -1,0 +1,7 @@
+Project.count().on('success', function(c) {
+  console.log("There are " + c + " projects!")
+})
+
+Project.count({where: ["id > ?", 25]}).on('success', function(c) {
+  console.log("There are " + c + " projects with an id greater than 25.")
+})

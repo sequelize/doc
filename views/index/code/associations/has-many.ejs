@@ -24,3 +24,8 @@ User.hasMany(Project)
   Now you can use Project#getWorkers, Project#setWorkers, User#getTasks and
   User#setTasks.
 */
+
+// Of course you can also define self references with hasMany:
+
+Person.hasMany(Person, {as: 'Children'})
+// This will create the table ChildrenPersons which stores the ids of the objects.
