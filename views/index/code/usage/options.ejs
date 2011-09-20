@@ -6,7 +6,17 @@ var sequelize = new Sequelize('database', 'username', 'password', {
 // No need for password?
 var sequelize = new Sequelize('database', 'username'[, null])
 
-// Want no logging? Use that:
+// All options at once:
 var sequelize = new Sequelize('database', 'username', 'password', {
-  logging: false
+  // custom host; default: localhost
+  host: 'my.server.tld',
+
+  // custom port; default: 3306
+  port: 12345,
+
+  // disable logging; default: true
+  logging: false,
+
+  // max concurrent database requests; default: 50
+  maxConcurrentQueries: 100
 })
