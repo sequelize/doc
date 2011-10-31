@@ -1,7 +1,9 @@
-<%- partial('index/intro') %>
+<div class="bordered">
+  <%- partial('index/intro') %>
+</div>
+
 <% for(var key in navigation) { %>
-  <div class="seperator"></div>
-  <div>
+  <div class="bordered">
     <a name="<%= key %>"></a>
     <h2><%= navigation[key] %></h2>
     <p><%- partial('index/'+key) %></p>

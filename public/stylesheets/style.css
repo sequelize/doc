@@ -12,8 +12,8 @@ h2 {
   text-decoration: underline !important;
 }
 .bordered {
-  -moz-border-radius: 15px;
-  border-radius: 15px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
   padding: 20px;
   border: 1px solid #888;
   color: white;
@@ -22,6 +22,7 @@ h2 {
   -o-box-shadow: 0 2px 16px #000, 0 0 1px #000, 0 0 1px #000;
   -webkit-box-shadow: 0 2px 16px #000, 0 0 1px #000, 0 0 1px #000;
   -moz-box-shadow: 0 2px 16px #000, 0 0 1px #000, 0 0 1px #000;
+  margin-bottom: 10px;
 }
 #wrapper {
   text-align: center;
@@ -30,7 +31,7 @@ h2 {
 #navigation, #content, #footer {
   width: 800px;
   text-align: justify;
-  margin: 0px auto;
+  margin: 0px auto 10px auto;
 }
 #footer {
   margin-top: 15px;
@@ -41,8 +42,8 @@ h2 {
   color: white;
 }
 #navigation {
-  margin-bottom: 15px;
   padding: 10px 20px;
+  width: 760px;
 }
 #navigation a {
   color: white;
