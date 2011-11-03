@@ -17,11 +17,11 @@ app.configure(function(){
 })
 
 app.configure('development', function(){
-  app.use(express.errorHandler({ dumpExceptions: true, showStack: true })) 
+  app.use(express.errorHandler({ dumpExceptions: true, showStack: true }))
 })
 
 app.configure('production', function(){
-  app.use(express.errorHandler()) 
+  app.use(express.errorHandler())
 })
 
 // Routes
@@ -42,14 +42,14 @@ app.get('/', function(req, res){
     "installation": 'Installation',
     "usage": 'Usage',
     "sync-with-db": 'Synchronize with database',
-    "instances": "Creating and working with instances",
+    "instances": "Models and instances",
     "expanding-models": "Expanding models",
     "chain-queries": "Chain queries",
     "associations": "Associations",
     "find-objects": "Finding objects",
     "projects": "Sequelize-based projects"
   }
-  
+
   res.render('index', {
     navigation: navigation,
     active: req.param('active') || 'installation'
