@@ -18,3 +18,14 @@ Now lets change some values and save changes to the database... There are two wa
 
 <a name="instances-update" data-title="update"></a>
 <pre><%- koala(".js", partial("code/instances/update.ejs")) %></pre>
+
+
+<a name="encoding"></a>
+In order to define the encoding of a table you can do this:
+
+<pre><%- koala(".js", partial("code/instances/encoding.ejs")) %></pre>
+
+<a name="engine"></a>
+You can also change the database engine, e.g. to MyISAM. InnoDB is default since v1.2.1.
+
+<pre><%- koala(".js", partial("code/instances/engine.ejs")) %></pre>

@@ -1,6 +1,6 @@
 // search for known ids
 Project.find(123).on('success', function(project) {
-  // project will be an instance of Project and stores the content of the table entry 
+  // project will be an instance of Project and stores the content of the table entry
   // with id 123. if such an entry is not defined you will get null
 })
 
@@ -27,6 +27,12 @@ Project.findAll({where: {name: 'A Project'}}).on('success', function(projects) {
 // search with string replacements
 Project.findAll({where: ["id > ?", 25]}).on('success', function(projects) {
   // projects will be an array of Projects having a greater id than 25
+})
+
+// search within a specific range
+Project.findAll({where: { id: [1,2,3] }}).on('success', function(projects) {
+  // projects will be an array of Projects having the id 1, 2 or 3
+  // this is actually doing an IN query
 })
 
 // or

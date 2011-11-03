@@ -18,5 +18,14 @@ var sequelize = new Sequelize('database', 'username', 'password', {
   logging: false,
 
   // max concurrent database requests; default: 50
-  maxConcurrentQueries: 100
+  maxConcurrentQueries: 100,
+
+  // specify options, which are used when sequelize.define is called
+  // the following example is basically the same as:
+  // sequelize.define(name, attributes, { timestamps: false })
+  // so defining the timestamps for each model will be not necessary
+  define: { timestamps: false },
+
+  // similiar for sync: you can define this to always force sync for models
+  sync: { force: true }
 })
