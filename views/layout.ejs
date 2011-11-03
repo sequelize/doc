@@ -4,13 +4,27 @@
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <title>Sequelize &raquo; A MySQL Object-Relational-Mapper for NodeJS</title>
     <link rel="stylesheet" href="/stylesheets/style.css">
-    <script type="text/javascript" charset="utf-8">
-      setTimeout(function() {
+    <script src="/javascripts/jquery-1.6.4.min.js"></script>
+    <script>
+      $(function() {
         if(window.location.href.indexOf('#') == -1)
           window.location.href = window.location.href + "#<%= active %>"
-      }, 50)
+
+        $('#content a:not([href])').each(function() {
+          var $this = $(this)
+
+          if(!$this.hasClass('section-anchor')) {
+            var h2    = $this.siblings().filter(function(){ return $(this).is("h2") })
+              , ul    = $('#sidebar ul[data-headline="' + h2.html() + '"]')
+              , text  = $this.attr('data-title') || this.name.replace(/-/g, ' ')
+              , klass = (this.name == location.hash.replace('#', '')) ? 'active' : ''
+
+            ul.append($('<li><a href="/?active=' + this.name + '" class="' + klass + '">' + text + '</a></li>'))
+          }
+        })
+      })
     </script>
-    <script type="text/javascript">
+    <script>
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-9039631-4']);
       _gaq.push(['_trackPageview']);
@@ -26,7 +40,9 @@
     <div id="sidebar" class="bordered">
       <h2>Navigation</h2><br/>
       <% for(var key in navigation) { %>
-        <%- linkTo(navigation[key], "?active=" + key, {class: (active==key) ? "active" : ""}) %>
+        <% options = { class: (active==key) ? "active" : "" } %>
+        <%- linkTo(navigation[key], "?active=" + key, options) %>
+        <ul data-headline="<%- navigation[key] %>"></ul>
       <% } %>
     </div>
     <div id="wrapper">

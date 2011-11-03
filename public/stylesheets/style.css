@@ -18,10 +18,10 @@ h2 {
   border: 1px solid #888;
   color: white;
   background-color: rgba(0, 0, 0, 0.7);
-  box-shadow: 0 2px 16px #000, 0 0 1px #000, 0 0 1px #000;
-  -o-box-shadow: 0 2px 16px #000, 0 0 1px #000, 0 0 1px #000;
-  -webkit-box-shadow: 0 2px 16px #000, 0 0 1px #000, 0 0 1px #000;
-  -moz-box-shadow: 0 2px 16px #000, 0 0 1px #000, 0 0 1px #000;
+  box-shadow: 0 0px 5px #000;
+  -o-box-shadow: 0 0px 5px #000;
+  -webkit-box-shadow: 0 0px 5px #000;
+  -moz-box-shadow: 0 0px 5px #000;
   margin-bottom: 10px;
 }
 #wrapper {
@@ -58,7 +58,7 @@ h2 {
 }
 #sidebar {
   float: left;
-  position: fixed;
+  /*position: fixed;*/
   width: 140px;
 }
 #sidebar a {
@@ -69,6 +69,16 @@ h2 {
 }
 #sidebar a:hover {
   text-decoration: underline;
+}
+#sidebar ul {
+  padding: 0px 0px 0px 20px;
+  margin: 0px;
+}
+#sidebar ul li {
+  font-size: 12px;
+  padding: 0px;
+  margin: 0px;
+  line-height: 12px;
 }
 pre, .pre_like {
   border: 1px solid #888;

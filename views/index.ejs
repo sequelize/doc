@@ -4,7 +4,7 @@
 
 <% for(var key in navigation) { %>
   <div class="bordered">
-    <a name="<%= key %>"></a>
+    <a name="<%= key %>" class='section-anchor'></a>
     <h2><%= navigation[key] %></h2>
     <p><%- partial('index/'+key) %></p>
   </div>
