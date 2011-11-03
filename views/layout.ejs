@@ -22,6 +22,10 @@
             ul.append($('<li><a href="/?active=' + this.name + '" class="' + klass + '">' + text + '</a></li>'))
           }
         })
+
+        $('#sidebar ul').each(function() {
+          if($(this).is(':empty')) $(this).remove()
+        })
       })
     </script>
     <script>
@@ -38,9 +42,9 @@
   </head>
   <body>
     <div id="sidebar" class="bordered">
-      <h2>Navigation</h2><br/>
+      <h2>Navigation</h2>
       <% for(var key in navigation) { %>
-        <% options = { class: (active==key) ? "active" : "" } %>
+        <% options = { class: 'super ' + ((active==key) ? "active" : "") } %>
         <%- linkTo(navigation[key], "?active=" + key, options) %>
         <ul data-headline="<%- navigation[key] %>"></ul>
       <% } %>

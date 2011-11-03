@@ -1,4 +1,4 @@
-When starting a new project you won't have a database structure and using Sequelize you won't need to. Just specify 
+When starting a new project you won't have a database structure and using Sequelize you won't need to. Just specify
 your model structures and let the library do the rest.<br><br>
 
 Currently supported is the creation and deletion of tables:
@@ -8,4 +8,5 @@ Currently supported is the creation and deletion of tables:
 Because synchronizing and dropping all of your tables might be a lot of lines to write, you can also let
 Sequelize do the work for you:
 
+<a name="sequelize-sync" data-title="synchronize"></a>
 <pre><%- koala(".js", partial("code/sync-with-db/sequelize-sync.ejs")) %></pre>
