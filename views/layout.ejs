@@ -26,6 +26,22 @@
         $('#sidebar ul').each(function() {
           if($(this).is(':empty')) $(this).remove()
         })
+
+        $(document).scroll(function() {
+          var $sidebar      = $('#sidebar')
+            , $scrollTop    = $('#scrollToTop')
+            , sidebarHidden = (($sidebar.position().top + $sidebar.height()) < scrollY)
+
+          if(sidebarHidden && !$('#scrollToTop').is(":visible"))
+            $('#scrollToTop').show()
+          else if(!sidebarHidden)
+            $('#scrollToTop').hide()
+        })
+
+        $('scrollToTop a').click(function() {
+          scrollY = 0
+          return false
+        })
       })
     </script>
     <script>
@@ -41,6 +57,10 @@
     </script>
   </head>
   <body>
+    <a name="top"></top>
+    <div id="scrollToTop" class="bordered">
+      <a href="#">Jump to top!</a>
+    </div>
     <div id="sidebar" class="bordered">
       <h2>Navigation</h2>
       <% for(var key in navigation) { %>

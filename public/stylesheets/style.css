@@ -1,5 +1,5 @@
 body {
-  padding: 50px;
+  padding: 50px 50px 0px 50px;
   font-size: 14px;
   font-family: "Helvetica Neue", Verdana;
   line-height: 1.5;
@@ -148,4 +148,18 @@ pre, .pre_like {
   margin: 5px 0px;
   padding-left: 30px;
   padding-bottom: 0px;
+}
+#scrollToTop {
+  width: 140px;
+  text-align: center;
+  position: fixed;
+  bottom: 0px;
+  display: none;
+}
+#scrollToTop a {
+  color: white;
+  text-decoration: none;
+}
+#scrollToTop a:hover {
+  text-decoration: underline;
 }
