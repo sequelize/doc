@@ -1,0 +1,18 @@
+<a name="compatibility"></a>
+1. Sequelize is compatible to the following versions of Node.JS:
+
+<ul>
+  <li>0.4.12</li>
+  <li>0.5.10</li>
+  <li>0.6.6</li>
+</ul>
+
+<p>
+2. Multiple ways of handling the asynchronicity is possible:<br/><br/>
+
+Since v1.3.0 there are multiple ways of adding listeners to asynchronous requests.
+First of all, each time you call a finder method or save an object, sequelize triggers
+asynchronous logic. To react to the success or the failure of the request, you can do the
+following:
+
+<pre><%- koala(".js", partial("code/additional/async.ejs")) %></pre>

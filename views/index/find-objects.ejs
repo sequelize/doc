@@ -2,7 +2,12 @@ OK... you can define classes and associations. You can save them. You would prob
 the database again ;-) Easy:
 
 <a name="find-basics" data-title="basics"></a>
-<pre><%- koala(".js", partial("code/find-objects/basics.ejs")) %></pre>
+<pre>
+  <%-
+    koala(".js", partial("code/find-objects/basics.ejs"))
+      .replace(/(<span class="class">Project<\/span>.<span class="variable">all<\/span>.*{)/g, '<div style="display: inline-block; text-decoration: line-through;">$1</div> // changed in v1.3.0<br/><span class="class">Project</span>.<span class="variable">all()</span>.<span class="variable">success</span>(<span class="keyword">function</span>(<span class="variable">projects</span>) {')
+  %>
+</pre>
 
 Of course you can pass a some options to the finder methods, to get more relevant data:
 

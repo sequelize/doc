@@ -47,6 +47,7 @@ app.get('/', function(req, res){
     "chain-queries": "Chain queries",
     "associations": "Associations",
     "find-objects": "Finding objects",
+    'additional': 'Additional information',
     "projects": "Sequelize-based projects"
   }
 

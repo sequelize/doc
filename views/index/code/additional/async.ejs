@@ -1,0 +1,20 @@
+// the old, pre-v1.3.0 way
+Model.findAll().on('success', function(models) { /* foo */ })
+Model.findAll().on('failure', function(err) { /* bar */ })
+
+// the new, >=v1.3.0 way
+// each one is valid
+Model.findAll().on('success', function(models) { /* foo */ })
+Model.findAll().success(function(models) { /* foo */ })
+Model.findAll().ok(function(models) { /* foo */ })
+
+Model.findAll().on('failure', function(err) { /* bar */ })
+Model.findAll().error(function(err) { /* bar */ })
+Model.findAll().failure(function(err) { /* bar */ })
+Model.findAll().fail(function(err) { /* bar */ })
+
+/*
+  please notice:
+  I will replace .on('failure') with .on('error') in future releases.
+  This will be done, due to being more native in the node environment.
+*/

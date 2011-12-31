@@ -18,7 +18,7 @@
               , ul    = $('#sidebar ul[data-headline="' + h2.html() + '"]')
               , text  = $this.attr('data-title') || this.name.replace(/-/g, ' ')
               , klass = (this.name == location.hash.replace('#', '')) ? 'active' : ''
-
+console.log(text, ul)
             ul.append($('<li><a href="/?active=' + this.name + '" class="' + klass + '">' + text + '</a></li>'))
           }
         })
