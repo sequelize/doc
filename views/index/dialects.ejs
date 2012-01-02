@@ -1,0 +1,15 @@
+With v1.3.0 of Sequelize, it is possible to use non-mysql dialects. For now sqlite is available, but other dialects can and will be implemented. Here is how you do it.<br/><br/>
+
+<a name="instantiation"></a>
+As describe at the very top of the documentation, you can pass the wanted dialect to the
+sequelize instantiation and (for sqlite) define the storage:
+
+<pre><%- koala(".js", partial("code/dialects/instantiation.ejs")) %></pre>
+
+<a name="sqlite"></a>
+<h3>SQLite</h3>
+Due to the default of mysql you have to specifically install the sqlite library. In order to do this, just add change the dependencies in your package.json and add node-sqlite3:
+
+<pre><%- koala(".js", partial("code/dialects/sqlite3.ejs")) %></pre>
+
+Notice: The ">="-operator is used for compatibility to Node 0.4 - 0.6.

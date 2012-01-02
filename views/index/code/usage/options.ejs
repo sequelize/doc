@@ -20,6 +20,15 @@ var sequelize = new Sequelize('database', 'username', 'password', {
   // max concurrent database requests; default: 50
   maxConcurrentQueries: 100,
 
+  // the sql dialect of the database
+  // - default is 'mysql'
+  // - currently supported: 'mysql', 'sqlite'
+  dialect: 'mysql',
+
+  // the storage engine for sqlite
+  // - default ':memory:'
+  storage: 'path/to/database.sqlite',
+
   // specify options, which are used when sequelize.define is called
   // the following example is basically the same as:
   // sequelize.define(name, attributes, { timestamps: false })
