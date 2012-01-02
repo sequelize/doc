@@ -14,7 +14,9 @@ Model.findAll().failure(function(err) { /* bar */ })
 Model.findAll().fail(function(err) { /* bar */ })
 
 /*
-  please notice:
+  Please notice:
   I will replace .on('failure') with .on('error') in future releases.
   This will be done, due to being more native in the node environment.
+  Doing so will throw an error each time you don't listen for the 'error'-
+  event.
 */
