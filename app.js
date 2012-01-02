@@ -36,6 +36,7 @@ app.get('/', function(req, res){
     "associations": "Associations",
     "find-objects": "Finding objects",
     "dialects": 'SQL dialects',
+    "migrations": 'Migrations',
     'additional': 'Additional information',
     "projects": "Sequelize-based projects"
   }
