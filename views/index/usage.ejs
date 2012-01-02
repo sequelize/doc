@@ -14,12 +14,23 @@ To define mappings between a class and a table, use the define method (Stop tell
 <pre><%- koala(".js", partial("code/usage/basic-mapping.ejs")) %></pre>
 
 Sequelize currently supports the following datatypes:
-
 <a name="data-types"></a>
 <pre><%= partial("code/usage/data-types.ejs") %></pre>
 
-You can also store your model definitions in a single file using the import method:
+<a name="advanced-data-types"></a>
+You can also set some options:
+<pre><%- koala(".js", partial("code/usage/advanced-data-types.ejs")) %></pre>
 
+<a name="validations"></a>
+In v1.3.0 model validations have been added. They allow you to specify
+format/content/inheritance validations for each attribute of the model:
+<pre><%- koala(".js", partial("code/usage/validations.ejs")) %></pre>
+
+<a name="mapping-options"></a>
+You can also take influence of the way, Sequelize handles your column names:
+<pre><%- koala(".js", partial("code/usage/mapping-options.ejs")) %></pre>
+
+You can also store your model definitions in a single file using the import method:
 <a name="import"></a>
 <pre><%- koala(".js", partial("code/usage/import.ejs")) %></pre>
 
