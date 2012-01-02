@@ -25,18 +25,6 @@ app.configure('production', function(){
 })
 
 // Routes
-app.get("/background", function(req, res) {
-  var bgFolder = __dirname + "/public/images/backgrounds/"
-  require("fs").readdir(bgFolder, function(err, files) {
-    if(err) sys.log(err)
-    else {
-      if(files[0] == ".DS_Store") files.shift()
-      var i = Math.round(Math.random() * (files.length - 1))
-      res.sendfile(bgFolder + files[i])
-    }
-  })
-})
-
 app.get('/', function(req, res){
   var navigation = {
     "installation": 'Installation',
