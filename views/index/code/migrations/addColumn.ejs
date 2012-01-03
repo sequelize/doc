@@ -1,0 +1,16 @@
+migration.addColumn(
+  'nameOfAnExistingTable',
+  'nameOfTheNewAttribute',
+  DataTypes.STRING
+)
+
+// or
+
+migration.addColumn(
+  'nameOfAnExistingTable',
+  'nameOfTheNewAttribute',
+  {
+    type: DataTypes.STRING,
+    allowNull: false
+  }
+)

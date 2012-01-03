@@ -1,3 +1,51 @@
 Sequelize v1.3.0 introduced migrations. With those mechanism you can transform your existing database into another state and vice versa. Those state transitions are saved in migration files, which describe the way how to get to the new state and how to revert the changes in order to get back to the old state. The following skeleton show a typical migration file:
 
+<a name="skeleton"></a>
 <pre><%- koala(".js", partial("code/migrations/skeleton.ejs")) %></pre>
+
+The passed "migration" object can be used to modify the database. The DataTypes object stores the available data types such as STRING or INTEGER. The available methods of the migration object are the following.
+
+<%
+  var migrationMethods = [
+    {
+      name: 'createTable',
+      params: ['tableName', 'attributes', 'options'],
+      description: "This method allows creation of new tables. It is allowed to pass simple or complex attribute definitions. You can define the encoding of the table and the table's engine via options."
+    }, {
+      name: 'dropTable',
+      params: ['tableName'],
+      description: 'This method allows deletion of an existing table.'
+    }, {
+      name: 'dropAllTables',
+      params: [],
+      description: 'This method allows deletion of all existing tables in the database.'
+    }, {
+      name: 'renameTable',
+      params: ['before', 'after'],
+      description: 'This method allows renaming of an existing table.'
+    }, {
+      name: 'showAllTables',
+      params: [],
+      description: 'This method returns the name of all existing tables in the database.'
+    }, {
+      name: 'describeTable',
+      params: ['tableName'],
+      description: 'This method returns an array of hashes containing information about all attributes in the table.'
+    }, {
+      name: 'addColumn',
+      params: ['tableName', 'attributeName', 'dataTypeOrOptions'],
+      description: 'This method allows adding columns to an existing table. The data type can be simple or complex.'
+    }, {
+      name: 'removeColumn',
+      params: ['tableName', 'attributeName'],
+      description: 'This method allows deletion of a specific column of an existing table'
+    }
+  ]
+%>
+
+<% migrationMethods.forEach(function(migrationMethod) { %>
+  <a name="<%= migrationMethod.name %>"></a>
+  <h3><%= migrationMethod.name %>(<%= migrationMethod.params.join(', ') %>)</h3>
+  <%= migrationMethod.description %>
+  <pre><%- koala(".js", partial("code/migrations/" + migrationMethod.name + ".ejs")) %></pre>
+<% }) %>

@@ -1,0 +1,16 @@
+migration.createTable(
+  'nameOfTheNewTable',
+  {
+    attr1: DataTypes.STRING,
+    attr2: DataTypes.INTEGER,
+    attr3: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+      allowNull: false
+    }
+  },
+  {
+    engine: 'MYISAM', // default: 'InnoDB'
+    charset: 'latin1' // default: null
+  }
+)
