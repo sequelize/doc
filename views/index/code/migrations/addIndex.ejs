@@ -1,0 +1,13 @@
+migration.addIndex('Person', ['firstname', 'lastname'])
+// will create the index person_firstname_lastname
+
+// or with options
+
+migration.addIndex(
+  'Person',
+  ['firstname', 'lastname'],
+  {
+    indexName: 'SuperDuperIndex'
+  }
+)
+// will create the index SuperDuperIndex

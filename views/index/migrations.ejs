@@ -1,6 +1,6 @@
 Sequelize v1.3.0 introduced migrations. With those mechanism you can transform your existing database into another state and vice versa. Those state transitions are saved in migration files, which describe the way how to get to the new state and how to revert the changes in order to get back to the old state. The following skeleton show a typical migration file:
 
-<a name="skeleton"></a>
+<a name="skeleton" data-title="Migration template"></a>
 <pre><%- koala(".js", partial("code/migrations/skeleton.ejs")) %></pre>
 
 The passed "migration" object can be used to modify the database. The DataTypes object stores the available data types such as STRING or INTEGER. The available methods of the migration object are the following.
@@ -39,6 +39,26 @@ The passed "migration" object can be used to modify the database. The DataTypes 
       name: 'removeColumn',
       params: ['tableName', 'attributeName'],
       description: 'This method allows deletion of a specific column of an existing table'
+    }, {
+      name: 'changeColumn',
+      params: ['tableName', 'attributeName', 'dataTypeOrOptions'],
+      description: "This method changes the meta data of an attribute. It is possible to change the default value, allowance of null or the data type. Please make sure, that you are completely describing the new data type. Missing information are expected to be defaults."
+    }, {
+      name: 'renameColumn',
+      params: ['tableName', 'attrNameBefore', 'attrNameAfter'],
+      description: 'This methods allows renaming attributes.'
+    }, {
+      name: 'addIndex',
+      params: ['tableName', 'attributes', 'options'],
+      description: "This methods creates indexes for specific attributes of a table. The index name will be automatically generate if it is not passed via in the options (indexName)."
+    }, {
+      name: 'showIndex',
+      params: ['tableName', 'options'],
+      description: 'This method returns all indexes on the table.'
+    }, {
+      name: 'removeIndex',
+      params: ['tableName', 'indexNameOrAttributes'],
+      description: 'This method deletes an existing index of a table.'
     }
   ]
 %>
