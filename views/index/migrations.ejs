@@ -1,6 +1,46 @@
-Sequelize v1.3.0 introduced migrations. With those mechanism you can transform your existing database into another state and vice versa. Those state transitions are saved in migration files, which describe the way how to get to the new state and how to revert the changes in order to get back to the old state. The following skeleton show a typical migration file:
+Sequelize v1.3.0 introduced migrations. With those mechanism you can transform your existing database into another state and vice versa. Those state transitions are saved in migration files, which describe the way how to get to the new state and how to revert the changes in order to get back to the old state.<br><br>
+
+<a name="binary" data-title="The sequelize binary"></a>
+<h3>The sequelize binary</h3>
+In order to run migrations, sequelize comes with a handy binary file which can setup your project and run migrations. The following snippet shows the possible things:
+
+<pre>
+<span class="string">sequelize</span> <span class="class">-h</span>
+<span class="string">sequelize</span> <span class="class">--help</span>
+--> prints the help
+
+<span class="string">sequelize</span> <span class="class">-V</span>
+<span class="string">sequelize</span> <span class="class">--version</span>
+--> prints the version
+
+<span class="string">sequelize</span> <span class="class">-i</span>
+<span class="string">sequelize</span> <span class="class">--init</span>
+--> creates a migration folder
+--> creates a config folder
+--> saves a config.json inside the config folder
+
+<span class="string">sequelize</span> <span class="class">-i -f</span>
+<span class="string">sequelize</span> <span class="class">--init --force</span>
+--> forced creation of migration and config folder
+--> existing data will be deleted first
+
+<span class="string">sequelize</span> <span class="class">-m</span>
+<span class="string">sequelize</span> <span class="class">--migrate</span>
+--> needs a valid config.json
+--> runs pending migrations
+--> saves successfully executed migrations inside the database
+
+<span class="string">sequelize</span> <span class="class">-m -u</span>
+<span class="string">sequelize</span> <span class="class">--migrate --undo</span>
+--> needs a valid config.json
+--> reverts the last successfull migration
+--> when there were multiple executed migrations, all of them are reverted
+</pre>
 
 <a name="skeleton" data-title="Migration template"></a>
+<h3>Migration template</h3>
+The following skeleton shows a typical migration file:
+
 <pre><%- koala(".js", partial("code/migrations/skeleton.ejs")) %></pre>
 
 The passed "migration" object can be used to modify the database. The DataTypes object stores the available data types such as STRING or INTEGER. The available methods of the migration object are the following.
