@@ -31,7 +31,13 @@ var ValidateMe = sequelize.define('Foo', {
       max: 23,             // only allow values <= 23
       min: 23,             // only allow values >= 23
       isArray: true,       // only allow arrays
-      isCreditCard: true  // check for valid credit card numbers
+      isCreditCard: true,  // check for valid credit card numbers
+
+      // custom validations are also possible:
+      isEven: function(value) {
+        if(parseInt(value) % 2 != 0)
+          throw new Error('Only even values are allowed!')
+      }
     }
   }
 })
