@@ -12,7 +12,7 @@
     "lib": "lib"
   },
   "engines": {
-    "node": "0.6.2"
+    "node": "0.6.3"
   },
   "dependencies": {
     "koala": ">=0.1.2",
