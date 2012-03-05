@@ -11,7 +11,7 @@ app.configure(function(){
   })
   app.use(express.bodyParser())
   app.use(express.methodOverride())
-  app.use(require('connect').compiler({ src: __dirname + '/public', enable: ['less'] }))
+  app.use(express.compiler({ src: __dirname + '/public', enable: ['less'] }))
   app.use(app.router)
   app.use(express.static(__dirname + '/public'))
 })
