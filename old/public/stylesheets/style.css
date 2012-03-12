@@ -1,0 +1,165 @@
+body {
+  padding: 50px 50px 0px 50px;
+  font-size: 14px;
+  font-family: "Helvetica Neue", Verdana;
+  line-height: 1.5;
+  background: url(/images/backgrounds/c04-3.jpg) repeat top left fixed;
+}
+h2 {
+  margin: 0px;
+}
+.active {
+  text-decoration: underline !important;
+}
+.bordered {
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  padding: 20px;
+  border: 1px solid #888;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.7);
+  box-shadow: 0 0px 5px #000;
+  -o-box-shadow: 0 0px 5px #000;
+  -webkit-box-shadow: 0 0px 5px #000;
+  -moz-box-shadow: 0 0px 5px #000;
+  margin-bottom: 10px;
+}
+#wrapper {
+  text-align: center;
+  padding: 0 200px;
+}
+#navigation, #content, #footer {
+  width: 800px;
+  text-align: justify;
+  margin: 0px auto 10px auto;
+}
+#footer {
+  margin-top: 15px;
+  color: white;
+  text-align: center;
+  width: 760px;
+}
+#footer a {
+  color: white;
+}
+#navigation {
+  padding: 10px 20px;
+  width: 760px;
+}
+#navigation a {
+  color: white;
+  display: block;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+}
+#navigation a:hover {
+  text-decoration: underline;
+}
+#sidebar {
+  float: left;
+  width: 140px;
+}
+#sidebar a {
+  color: white;
+  padding: 5px 0px;
+  display: block;
+  text-decoration: none;
+}
+#sidebar a:hover {
+  text-decoration: underline;
+}
+#sidebar a.super {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  display: block;
+  margin-top: 15px;
+}
+#sidebar a.super:hover {
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+}
+#sidebar ul {
+  padding: 0px 0px 0px 20px;
+  margin: 0px;
+  list-style-type: square;
+  margin-top: 5px;
+}
+#sidebar ul li {
+  padding: 0px;
+  margin: 0px;
+  line-height: 8px;
+}
+#sidebar ul li a {
+  font-size: 12px;
+}
+pre, .pre_like {
+  border: 1px solid #888;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  padding: 5px;
+  background-color: rgba(43, 32, 28, 0.7);
+}
+.comment {
+  color: grey;
+}
+.string {
+  color: #04d80d;
+}
+.regexp {
+  color: #2fe420;
+}
+.number {
+  color: #44aa43;
+}
+.class, .this {
+  color: #8ac9f2;
+}
+.inst.variable, .class.variable, .global.variable {
+  color: #2f5fe0;
+}
+.keyword {
+  font-weight: bold;
+  color: #43a8ed;
+}
+.seperator {
+  border-top: 1px solid white;
+  height: 1px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+#forkBadge {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+}
+#forkBadge img {
+  border: none;
+}
+#changelog p {
+  margin: 0px;
+}
+#changelog h3 {
+  margin: 5px 0px;
+}
+#changelog .pre_like {
+  margin: 10px 0px;
+}
+#changelog ul {
+  margin: 5px 0px;
+  padding-left: 30px;
+  padding-bottom: 0px;
+}
+#scrollToTop {
+  width: 140px;
+  text-align: center;
+  position: fixed;
+  bottom: 0px;
+  display: none;
+}
+#scrollToTop a {
+  color: white;
+  text-decoration: none;
+}
+#scrollToTop a:hover {
+  text-decoration: underline;
+}
