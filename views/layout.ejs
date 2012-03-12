@@ -3,47 +3,18 @@
   <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <title>Sequelize &raquo; A MySQL Object-Relational-Mapper for NodeJS</title>
-    <link rel="stylesheet" href="/stylesheets/style.css">
-    <script src="/javascripts/jquery-1.6.4.min.js"></script>
-    <script>
-      $(function() {
-        if(window.location.href.indexOf('#') == -1)
-          window.location.href = window.location.href + "#<%= active %>"
 
-        $('#content a:not([href])').each(function() {
-          var $this = $(this)
+    <link href="/stylesheets/bootstrap.min.css">
+    <link href="/stylesheets/bootstrap-responsive.min.css">
+    <link href="/stylesheets/docs.css" rel="stylesheet">
+    <link href="/javascripts/google-code-prettify/prettify.css" rel="stylesheet">
 
-          if(!$this.hasClass('section-anchor')) {
-            var h2    = $this.siblings().filter(function(){ return $(this).is("h2") })
-              , ul    = $('#sidebar ul[data-headline="' + h2.html() + '"]')
-              , text  = $this.attr('data-title') || this.name.replace(/-/g, ' ')
-              , klass = (this.name == location.hash.replace('#', '')) ? 'active' : ''
-console.log(text, ul)
-            ul.append($('<li><a href="/?active=' + this.name + '" class="' + klass + '">' + text + '</a></li>'))
-          }
-        })
+    <script src="/javascripts/jquery-1.7.1.min.js"></script>
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
 
-        $('#sidebar ul').each(function() {
-          if($(this).is(':empty')) $(this).remove()
-        })
-
-        $(document).scroll(function() {
-          var $sidebar      = $('#sidebar')
-            , $scrollTop    = $('#scrollToTop')
-            , sidebarHidden = (($sidebar.position().top + $sidebar.height()) < scrollY)
-
-          if(sidebarHidden && !$('#scrollToTop').is(":visible"))
-            $('#scrollToTop').show()
-          else if(!sidebarHidden)
-            $('#scrollToTop').hide()
-        })
-
-        $('scrollToTop a').click(function() {
-          scrollY = 0
-          return false
-        })
-      })
-    </script>
     <script>
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-9039631-4']);
@@ -56,40 +27,9 @@ console.log(text, ul)
       })();
     </script>
   </head>
-  <body>
-    <a name="top"></top>
-    <div id="scrollToTop" class="bordered">
-      <a href="#">Jump to top!</a>
+  <body data-spy="scroll" data-target=".subnav" data-offset="50">
+    <div class="container">
+      <%- body %>
     </div>
-    <div id="sidebar" class="bordered">
-      <h2>Navigation</h2>
-      <% for(var key in navigation) { %>
-        <% options = { class: 'super ' + ((active==key) ? "active" : "") } %>
-        <%- linkTo(navigation[key], "?active=" + key, options) %>
-        <ul data-headline="<%- navigation[key] %>"></ul>
-      <% } %>
-    </div>
-    <div id="wrapper">
-      <div id="navigation" class="bordered">
-        <table width="100%">
-          <tr>
-            <td align="center" width="33%"><a href="/">Documentation</a></td>
-            <!--
-              <td align="center" width="33%"><a href="/examples">Examples</a></td>
-              <td align="center" width="33%"><a href="/changelog">Changelog</a></td>
-            -->
-          </tr>
-        </table>
-      </div>
-      <div id="content"><%- body %></div>
-      <div id="footer" class="bordered">
-        &copy; 2010 - <%= new Date().getFullYear() %> Layout | Code by <a href="http://depold.com" target="_blank">Sascha Depold</a>;
-        Website based on <a href="http://nodejs.org" target="_blank" rel="nofollow">NodeJS</a> and
-        <a href="http://expressjs.com" target="_blank" rel="nofollow">ExpressJS</a>.
-      </div>
-    </div>
-    <a href="http://github.com/sdepold/sequelize" id="forkBadge">
-		  <img src="/images/forkme_right_white_ffffff.png" id="ribbon" alt="Fork me on GitHub">
-		</a>
   </body>
 </html>
