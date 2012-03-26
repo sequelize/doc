@@ -12,7 +12,7 @@ var Application = {
     // fix sub nav on scroll
     var $win = $(window)
       , $nav = $('.subnav')
-      , navTop = $('.subnav').length && $('.subnav').offset().top - 40
+      , navTop = $nav.length && $nav.offset().top - 40
       , isFixed = 0
 
     processScroll()
@@ -25,9 +25,11 @@ var Application = {
       if (scrollTop >= navTop && !isFixed) {
         isFixed = 1
         $nav.addClass('subnav-fixed')
+        $('body').addClass('with-subnav')
       } else if (scrollTop <= navTop && isFixed) {
         isFixed = 0
         $nav.removeClass('subnav-fixed')
+        $('body').removeClass('with-subnav')
       }
     }
   }
