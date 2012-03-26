@@ -1,4 +1,6 @@
 const express = require('express')
+    , fs      = require('fs')
+    , path    = require('path')
 
 var app = module.exports = express.createServer();
 
@@ -11,6 +13,26 @@ app.configure(function(){
   app.use(express.methodOverride());
   app.use(app.router);
   app.use(express.static(__dirname + '/public'));
+  app.helpers({
+    toSlug: function(s) {
+      var match  = s.match(/([a-zA-Z0-9]*)/g)
+        , result = match.filter(function(s) { return s != '' }).join('-')
+
+      return result.toLowerCase()
+    },
+
+    loadSection: function(section) {
+      var filename = __dirname + '/views/sections/' + this.toSlug(section) + '.jade'
+        , result   = filename
+
+      if(path.existsSync(filename)) {
+        var content = fs.readFileSync(filename)
+        result = require('jade').compile(content)({})
+      }
+
+      return result
+    }
+  })
 });
 
 app.configure('development', function(){
