@@ -26,7 +26,8 @@ app.configure('production', function(){
 
 app.get('/', function(req, res){
   res.render('index', {
-    title: 'Sequelize &raquo A MySQL Object-Relational-Mapper for NodeJS',
+    title: 'Sequelize',
+    subtitle: 'A multi-dialect Object-Relational-Mapper for Node.JS',
     sections: [
       'Installation',
       'Usage',

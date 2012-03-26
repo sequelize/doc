@@ -1,24 +1,21 @@
 !!! 5
 html
   head
-    title= title
+    title!= title + " &raquo; " + subtitle
 
     link(rel="stylesheet", href='/stylesheets/bootstrap.min.css')
     link(rel="stylesheet", href='/stylesheets/bootstrap-responsive.min.css')
     link(rel="stylesheet", href='/stylesheets/prettify.css')
-
-    style
-      body {
-        padding-top: 60px;
-      }
+    link(rel="stylesheet", href='/stylesheets/styles.css')
 
     script(src="/javascripts/jquery-1.7.1.min.js")
     script(src="/javascripts/prettify.js")
     script(src="/javascripts/bootstrap.min.js")
+    script(src="/javascripts/application.js")
 
     script
       $(function() {
-        window.prettyPrint && prettyPrint()
+        Application.init()
       })
 
   body(data-spy="scroll")

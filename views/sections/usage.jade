@@ -1,0 +1,61 @@
+section#usage
+  .subnav
+    ul.nav.nav-pills
+      li
+        a(href='#usage-foo') foo
+      li
+        a(href='#usage-bar') bar
+      li
+        a(href='#usage-baz') baz
+
+  section#usage-foo
+    p To get the ball rollin' you first have to create an instance of Sequelize. Use it the following way:
+
+    pre.prettyprint.linenums
+      | var sequelize = new Sequelize('database', 'username'[, 'password'])
+
+  section#usage-bar
+    p This will save the passed database credentials and provide all further methods. Furthermore you can specify a non-default host or port and some options:
+
+  section#usage-baz
+    pre.prettyprint.linenums
+      | var sequelize = new Sequelize('database', 'username', 'password', {
+      |   host: "my.server.tld",
+      |   port: 12345
+      | })
+      | &nbsp;
+      | // No need for password?
+      | var sequelize = new Sequelize('database', 'username'[, null])
+      | &nbsp;
+      | // All options at once:
+      | var sequelize = new Sequelize('database', 'username', 'password', {
+      |   // custom host; default: localhost
+      |   host: 'my.server.tld',
+      | &nbsp;
+      |   // custom port; default: 3306
+      |   port: 12345,
+      | &nbsp;
+      |   // disable logging; default: true
+      |   logging: false,
+      | &nbsp;
+      |   // max concurrent database requests; default: 50
+      |   maxConcurrentQueries: 100,
+      | &nbsp;
+      |   // the sql dialect of the database
+      |   // - default is 'mysql'
+      |   // - currently supported: 'mysql', 'sqlite'
+      |   dialect: 'mysql',
+      | &nbsp;
+      |   // the storage engine for sqlite
+      |   // - default ':memory:'
+      |   storage: 'path/to/database.sqlite',
+      | &nbsp;
+      |   // specify options, which are used when sequelize.define is called
+      |   // the following example is basically the same as:
+      |   // sequelize.define(name, attributes, { timestamps: false })
+      |   // so defining the timestamps for each model will be not necessary
+      |   define: { timestamps: false },
+      | &nbsp;
+      |   // similiar for sync: you can define this to always force sync for models
+      |   sync: { force: true }
+      | })
