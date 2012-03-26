@@ -5,13 +5,28 @@ html
 
     link(rel="stylesheet", href='/stylesheets/bootstrap.min.css')
     link(rel="stylesheet", href='/stylesheets/bootstrap-responsive.min.css')
+    link(rel="stylesheet", href='/stylesheets/prettify.css')
 
     style
       body {
         padding-top: 60px;
       }
 
+    script(src="/javascripts/jquery-1.7.1.min.js")
+    script(src="/javascripts/prettify.js")
+    script(src="/javascripts/bootstrap.min.js")
+
     script
+      $(function() {
+        window.prettyPrint && prettyPrint()
+      })
+
+  body(data-spy="scroll")
+    .navbar.navbar-fixed-top!= partial('navigation', { sections: sections })
+    .container!= body
+
+    script
+      /*
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-9039631-4']);
       _gaq.push(['_trackPageview']);
@@ -21,33 +36,4 @@ html
         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
-
-  body
-    .navbar.navbar-fixed-top
-      .navbar-inner
-        .container
-          a.brand(href="#") Sequelize
-          .nav-collapse
-            ul.nav
-              li
-                a(href='#') Home
-              - each section in sections
-                li
-                  a(href="#" + section)= section
-
-    .container!= body
-
-    script(src="/javascripts/jquery-1.7.1.min.js")
-    script(src="/javascripts/bootstrap-transition.js")
-    script(src="/javascripts/bootstrap-alert.js")
-    script(src="/javascripts/bootstrap-modal.js")
-    script(src="/javascripts/bootstrap-dropdown.js")
-    script(src="/javascripts/bootstrap-scrollspy.js")
-    script(src="/javascripts/bootstrap-tab.js")
-    script(src="/javascripts/bootstrap-tooltip.js")
-    script(src="/javascripts/bootstrap-popover.js")
-    script(src="/javascripts/bootstrap-button.js")
-    script(src="/javascripts/bootstrap-collapse.js")
-    script(src="/javascripts/bootstrap-carousel.js")
-    script(src="/javascripts/bootstrap-typeahead.js")
-
+      */
