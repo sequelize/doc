@@ -1,0 +1,10 @@
+.navbar-inner
+  .container
+    a.brand(href="#") Sequelize
+    .nav-collapse
+      ul.nav
+        li(class="active")
+          a(href='#home') Home
+        - each section in sections
+          li
+            a(href="#" + toSlug(section))= section
