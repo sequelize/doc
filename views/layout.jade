@@ -8,18 +8,20 @@ html
     link(rel="stylesheet", href='/stylesheets/prettify.css')
     link(rel="stylesheet", href='/stylesheets/styles.css')
 
-    script(src="/javascripts/jquery-1.7.1.min.js")
-    script(src="/javascripts/prettify.js")
-    script(src="/javascripts/bootstrap.min.js")
-    script(src="/javascripts/application.js")
+    script(src="/javascripts/lib/jquery-1.7.1.min.js")
+    script(src="/javascripts/lib/prettify.js")
+    script(src="/javascripts/lib/bootstrap.min.js")
+    script(src="/javascripts/src/sequelize-doc.js")
+    script(src="/javascripts/src/sub-navigation.js")
 
     script
       $(function() {
-        Application.init()
+        SequelizeDoc.init()
       })
 
-  body(data-spy="scroll")
-    .navbar.navbar-fixed-top!= partial('navigation', { sections: sections })
+  body
+    .navbar.navbar-fixed-top(data-spy="scroll")
+      != partial('navigation', { sections: sections })
     .container!= body
 
     script

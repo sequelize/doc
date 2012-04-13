@@ -31,8 +31,8 @@ app.get('/', function(req, res){
     sections: [
       'Installation',
       'Usage',
-      'DAOFactory',
-      'DAO',
+      'Models',
+      'Instances',
       'Migrations',
       'Further information',
       'Projects'

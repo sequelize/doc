@@ -1,0 +1,133 @@
+section#models
+  .subnav
+    ul.nav.nav-pills
+      li
+        a(href='#models-definition') Definition
+      li
+        a(href='#models-data-types') Data types
+      li
+        a(href="#models-validations") Validations
+      li
+        a(href="#models-configuration") Configuration
+      li
+        a(href="#models-import") Import
+
+  section#models-definition
+    p To define mappings between a model and a table, use the <code>define</code> method. Sequelize will then automatically add the attributes <code>createdAt</code> and <code>updatedAt</code> to it. So you will be able to know when the database entry went into the db and when it was updated the last time.
+    pre.prettyprint.linenums
+      | var Project = sequelize.define('Project', {
+      |   title: Sequelize.STRING,
+      |   description: Sequelize.TEXT
+      | })
+      | &nbsp;
+      | var Task = sequelize.define('Task', {
+      |   title: Sequelize.STRING,
+      |   description: Sequelize.TEXT,
+      |   deadline: Sequelize.DATE
+      | })
+
+    p You can also set some options:
+    pre.prettyprint.linenums
+      | var Foo = sequelize.define('Foo', {
+      |   // instantiating will automatically set the flag to true if not set
+      |   flag: { type: Sequelize.BOOLEAN, allowNull: false, defaultValue: true},
+      |   // setting no title will throw an error when trying to save
+      |   title: { type: Sequelize.STRING, allowNull: false},
+      |   // creating 2 objects with the same value will throw an error
+      |   someUnique: {type: Sequelize.STRING, unique: true},
+      |   // go on reading for further information about primary keys
+      |   identifier: { type: Sequelize.String, primaryKey: true},
+      |   // autoIncrement can be used to create auto_incrementing integer columns
+      |   incrementMe: { type: Sequelize.INTEGER, autoIncrement: true }
+      | })
+
+  section#models-data-types
+    p Sequelize currently supports the following datatypes:
+    pre.prettyprint.linenums
+      | Sequelize.STRING  ===> VARCHAR(255)
+      | Sequelize.TEXT    ===> TEXT
+      | Sequelize.INTEGER ===> INTEGER
+      | Sequelize.DATE    ===> DATETIME
+      | Sequelize.BOOLEAN ===> TINYINT(1)
+      | Sequelize.FLOAT   ===> FLOAT
+
+  section#models-validations
+    p In v1.3.0 model validations have been added. They allow you to specify format/content/inheritance validations for each attribute of the model. You can perform the validation by calling the <code>validate()</code> method on an instance before saving.
+    pre.prettyprint.linenums
+      | var ValidateMe = sequelize.define('Foo', {
+      |   foo: {
+      |     type: Sequelize.STRING,
+      |     validate: {
+      |       is: ["[a-z]",'i'],        // will only allow letters
+      |       not: ["[a-z]",'i'],       // will not allow letters
+      |       isEmail: true,            // checks for email format (foo@bar.com)
+      |       isUrl: true,              // checks for url format (http://foo.com)
+      |       isIP: true,               // checks for IPv4 format (129.89.23.1)
+      |       isAlpha: true,            // will only allow letters
+      |       isAlphanumeric: true      // will only allow alphanumeric characters, so "_abc" will fail
+      |       isNumeric: true           // will only allow numbers
+      |       isInt: true,              // checks for valid integers
+      |       isFloat: true,            // checks for valid floating point numbers
+      |       isDecimal: true,          // checks for any numbers
+      |       isLowercase: true,        // checks for lowercase
+      |       isUppercase: true,        // checks for uppercase
+      |       notNull: true,            // won't allow null
+      |       isNull: true,             // only allows null
+      |       notEmpty: true,           // don't allow empty strings
+      |       equals: 'specific value', // only allow a specific value
+      |       contains: 'foo',          // force specific substrings
+      |       notIn: 'foo',             // force specific substrings
+      |       isIn: "foo",              // force specific substrings
+      |       notContains: 'bar',       // don't allow specific substrings
+      |       len: [2,10],              // only allow values with length between 2 and 10
+      |       isUUID: 4,                // only allow uuids
+      |       isDate: true,             // only allow date strings
+      |       isAfter: "2011-11-05",    // only allow date strings after a specific date
+      |       isBefore: "2011-11-05",   // only allow date strings before a specific date
+      |       max: 23,                  // only allow values <= 23
+      |       min: 23,                  // only allow values >= 23
+      |       isArray: true,            // only allow arrays
+      |       isCreditCard: true,       // check for valid credit card numbers
+      | &nbsp;
+      |       // custom validations are also possible:
+      |       isEven: function(value) {
+      |         if(parseInt(value) % 2 != 0)
+      |           throw new Error('Only even values are allowed!')
+      |       }
+      |     }
+      |   }
+      | })
+
+  section#models-configuration
+    p You can also take influence of the way, Sequelize handles your column names:
+    pre.prettyprint.linenums
+      | var Bar = sequelize.define('Bar', { /* bla */ }, {
+      |   // don't add the timestamp attributes (updatedAt, createdAt)
+      |   timestamps: false,
+      |   // don't delete database entries but set the newly added attribute deletedAt
+      |   // to the current date (when deletion was done). paranoid will only work if
+      |   // timestamps are not disabled
+      |   paranoid: true,
+      |   // don't use camelcase for automatically added attributes but underscore style
+      |   // so updatedAt will be updated_at
+      |   underscored: true,
+      |   // disable the modification of tablenames; By default, sequelize will automatically
+      |   // transform all passed model names (first parameter of define) into plural.
+      |   // if you don't want that, set the following
+      |   freezeTableName: true
+      | })
+
+  section#models-import
+    p You can also store your model definitions in a single file using the <code>import</code> method. The returned object is exactly the same as defined in the imported file's function.
+    pre.prettyprint.linenums
+      | // in your server file - e.g. app.js
+      | var Project = sequelize.import(__dirname + "/path/to/models/project")
+      | &nbsp;
+      | // /path/to/models/project.js
+      | // as you might notice, the DataTypes are the very same as explained above
+      | module.exports = function(sequelize, DataTypes) {
+      |   return sequelize.define("Project", {
+      |     name: DataTypes.STRING,
+      |     description: DataTypes.TEXT
+      |   })
+      | }

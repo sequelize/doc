@@ -1,5 +1,4 @@
 body { padding: 60px; }
-body.with-subnav { padding-top: 130px; }
 a { color: #00B7FF; }
 p { font-size: 16px; }
 p.lead { font-size: 19px; }
@@ -27,6 +26,9 @@ h1 small { padding-left: 15px; }
      -moz-border-radius: 4px;
           border-radius: 4px;
   margin-bottom: 30px;
+}
+.subnav-placeholder {
+  height: 68px;
 }
 .subnav .nav {
   margin-bottom: 0;
