@@ -19,8 +19,8 @@ html
         SequelizeDoc.init()
       })
 
-  body
-    .navbar.navbar-fixed-top(data-spy="scroll")
+  body(data-spy="scroll", data-target=".subnav")
+    .navbar.navbar-fixed-top
       != partial('navigation', { sections: sections })
     .container!= body
 
