@@ -11,6 +11,8 @@ section#models
         a(href="#models-configuration") Configuration
       li
         a(href="#models-import") Import
+      li
+        a(href="#models-sync") Database synchronization
 
   section#models-definition
     p To define mappings between a model and a table, use the <code>define</code> method. Sequelize will then automatically add the attributes <code>createdAt</code> and <code>updatedAt</code> to it. So you will be able to know when the database entry went into the db and when it was updated the last time.
@@ -131,3 +133,50 @@ section#models
       |     description: DataTypes.TEXT
       |   })
       | }
+
+  section#models-sync
+    h3 Synchronization with database
+    p
+      | When starting a new project you won't have a database structure
+      | and using Sequelize you won't need to. Just specify your model structures
+      | and let the library do the rest.
+      | Currently supported is the creation and deletion of tables:
+    pre.prettyprint.linenums
+      | // create my nice tables:
+      | Project.sync() // will emit success or failure event
+      | Task.sync() // will emit success or failure event
+      | &nbsp;
+      | // force the creation!
+      | Project.sync({force: true}) // this will drop the table first and re-create it afterwards
+      | &nbsp;
+      | // drop the tables:
+      | Project.drop() // will emit success or failure event
+      | Task.drop() // will emit success or failure event
+      | &nbsp;
+      | // event handling:
+      | Project.[sync|drop]().success(function() {
+      |   // ok ... everything is nice!
+      | }).error(function(error) {
+      |   // oooh, did you entered wrong database credentials?
+      | })
+    p Because synchronizing and dropping all of your tables might be a lot of lines to write, you can also let Sequelize do the work for you:
+    pre.prettyprint.linenums
+      | // create all tables... now!
+      | sequelize.sync() // will emit success or failure
+      | &nbsp;
+      | // force it!
+      | sequelize.sync({force: true}) // emit ... nomnomnom
+      | &nbsp;
+      | // want to drop 'em all?
+      | sequelize.drop() // I guess you've got it (emit)
+      | &nbsp;
+      | // emit handling:
+      | sequelize.[sync|drop]().success(function() {
+      |   // woot woot
+      | }).error(function(error) {
+      |   // whooops
+      | })
+
+
+
+
