@@ -1,6 +1,6 @@
 body { padding: 60px; }
 a { color: #00B7FF; }
-p { font-size: 16px; }
+p { font-size: 16px; line-height: 24px; }
 p.lead { font-size: 19px; }
 pre { font-size: 13px; }
 h1 { font-size: 54px; }
