@@ -1,0 +1,117 @@
+section#instances
+  .subnav
+    ul.nav.nav-pills
+      li
+        a(href='#instances-build') Build
+      li
+        a(href='#instances-create') Create
+      li
+        a(href='#instances-update-save') Update/Save
+      li
+        a(href='#instances-configuration') Configuration
+
+  section#instances-build
+    p
+      | In order to create instances of defined classes just do as follows.
+      | You might recognize the syntax if you coded Ruby in the past.
+      | Using the <code>build</code>-method will return an unsaved object, which you explicitly have to save.
+
+    pre.prettyprint.linenums
+      | var project = Project.build({
+      |   title: 'my awesome project',
+      |   description: 'woot woot. this will make me a rich man'
+      | })
+      | &nbsp;
+      | var task = Task.build({
+      |   title: 'specify the project idea',
+      |   description: 'bla',
+      |   deadline: new Date()
+      | })
+
+    p Built instances will automatically get default values when they were defined:
+
+    pre.prettyprint.linenums
+      | // first define the model
+      | var Task = sequelize.define('Project', {
+      |   title: Sequelize.STRING,
+      |   rating: { type: Sequelize.STRING, defaultValue: 3 }
+      | })
+      | &nbsp;
+      | // now instantiate an object
+      | var task = Task.build({title: 'very important task'})
+      | &nbsp;
+      | task.title // ==> 'very important task'
+      | task.rating // ==> 3
+
+    p To get it stored in the database, use the <code>save</code>-method and catch the events … if needed:
+
+    pre.prettyprint.linenums
+      | project.save().success(function() {
+      |   // my nice callback stuff
+      | })
+      | &nbsp;
+      | task.save().error(function(error) {
+      |   // mhhh, wth!
+      | })
+      | &nbsp;
+      | // you can also build, save and access the object with chaining:
+      | Task
+      |   .build({ title: 'foo', description: 'bar', deadline: new Date() })
+      |   .save()
+      |   .success(function(anotherTask) {
+      |     // you can now access the currently saved task with the variable anotherTask... nice!
+      |   })
+
+  section#instances-create
+    p Besides constructing objects, that needs an explicit save call to get stored in the database, there is also the possibility to do all those steps with one single command. It's called <code>create</code>.
+
+    pre.prettyprint.linenums
+      | Task.create({ title: 'foo', description: 'bar', deadline: new Date() }).success(function(task) {
+      |   // you can now access the newly created task via the variable task
+      | })
+
+  section#instances-update-save
+    p Now lets change some values and save changes to the database... There are two ways to do that:
+
+    pre.prettyprint.linenums
+      | // way 1
+      | task.title = 'a very different title now'
+      | task.save().success(function() {})
+      | &nbsp;
+      | // way 2
+      | task.updateAttributes({
+      |   title: 'a very different title now'
+      | }).success(function() {})
+
+  section#instances-configuration
+    p In order to define the encoding of a table you can do this:
+
+    pre.prettyprint.linenums
+      | // charset only
+      | var Person = sequelize.define('Person', { /* attributes */ }, {
+      |   charset: 'latin1'
+      | })
+      | &nbsp;
+      | // charset + collate; this is still experimental
+      | var Person = sequelize.define('Person', { /* attributes */ }, {
+      |   charset: 'utf8',
+      |   collate: 'utf8_general_ci'
+      | })
+      | &nbsp;
+      | // or of course global
+      | var sequelize = new Sequelize(db, user, pw, {
+      |   define: { charset: 'latin1' }
+      | })
+
+    p You can also change the database engine, e.g. to MyISAM. InnoDB is default since <code>v1.2.1</code>.
+
+    pre.prettyprint.linenums
+      | // charset only
+      | var Person = sequelize.define('Person', { /* attributes */ }, {
+      |   engine: 'MYISAM'
+      | })
+      | &nbsp;
+      | // or of course global
+      | var sequelize = new Sequelize(db, user, pw, {
+      |   define: { engine: 'MYISAM' }
+      | })
