@@ -34,6 +34,7 @@ app.get('/', function(req, res){
       'Models',
       'Instances',
       'Migrations',
+      'Query-Chainer',
       'Further information',
       'Projects'
     ]
