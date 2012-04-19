@@ -33,6 +33,7 @@ app.get('/', function(req, res){
       'Usage',
       'Models',
       'Instances',
+      'Associations',
       'Migrations',
       'Query-Chainer',
       'Further information',

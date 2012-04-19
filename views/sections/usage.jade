@@ -5,6 +5,8 @@ section#usage
         a(href='#usage-basics') Basic usage
       li
         a(href='#usage-options') Options
+      li
+        a(href='#usage-dialects') Dialects
 
   section#usage-basics
     p To get the ball rollin' you first have to create an instance of Sequelize. Use it the following way:
@@ -56,3 +58,46 @@ section#usage
       |   // similiar for sync: you can define this to always force sync for models
       |   sync: { force: true }
       | })
+  section#usage-dialects
+    h3 SQL dialects
+    p
+      | With v1.3.0 of Sequelize, it is possible to use non-mysql dialects.
+      | For now sqlite is available, but other dialects can and will be
+      | implemented. Here is how you do it.
+      | As describe before, you can pass the wanted dialect to the sequelize
+      | instantiation (and for sqlite define the storage):
+    pre.prettyprint.linenums
+      | // All options at once:
+      | var sequelize = new Sequelize('database', 'username', 'password', {
+      |   // the sql dialect of the database
+      |   // - default is 'mysql'
+      |   // - currently supported: 'mysql', 'sqlite'
+      |   dialect: 'mysql',
+      | &nbsp;
+      |   // the storage engine for sqlite
+      |   // - default ':memory:'
+      |   storage: 'path/to/database.sqlite'
+      | })
+
+    h4 SQLite
+    p
+      | Due to the default of mysql you have to specifically install the sqlite
+      | library. In order to do this, just change the dependencies in your
+      | package.json and add <code>node-sqlite3</code>:
+    pre.prettyprint.linenums
+      | {
+      |   "name": "my project",
+      |   // ...
+      |   "dependencies": {
+      |     // ...
+      |     "sqlite3": ">=2.0.0",
+      |     "sequelize": "1.3.x",
+      |     // ...
+      |   }
+      |   // ...
+      | }
+    p
+      | That's it. Besides some strangeness in SQLite you won't notice any differences
+      | while using it with sequelize.
+    p
+      | Notice: The ">="-operator is used for compatibility to Node 0.4 - 0.6.

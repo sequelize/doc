@@ -1,0 +1,44 @@
+section#further-information
+  .subnav
+    ul.nav.nav-pills
+      li
+        a(href='#further-information-compatibility') Compatibility
+      li
+        a(href='#further-information-asynchronicity') Asynchronicity
+
+  section#further-information-compatibility
+    h3 Compatibility
+    p Sequelize is compatible to the following versions of Node.JS:
+    ul
+      li 0.4.12
+      li 0.5.10
+      li 0.6.x
+
+  section#further-information-asynchronicity
+    h3 Asynchronicity
+    p Since v1.3.0 there are multiple ways of adding listeners to asynchronous requests. First of all, each time you call a finder method or save an object, sequelize triggers asynchronous logic. To react to the success or the failure of the request, you can do the following:
+    pre.prettyprint.linenums
+      | // the old, pre-v1.3.0 way
+      | Model.findAll().on('success', function(models) { /* foo */ })
+      | Model.findAll().on('failure', function(err) { /* bar */ })
+      | &nbsp;
+      | // the new, >=v1.3.0 way
+      | // each one is valid
+      | Model.findAll().on('success', function(models) { /* foo */ })
+      | Model.findAll().success(function(models) { /* foo */ })
+      | Model.findAll().ok(function(models) { /* foo */ })
+      | &nbsp;
+      | Model.findAll().on('failure', function(err) { /* bar */ })
+      | Model.findAll().error(function(err) { /* bar */ })
+      | Model.findAll().failure(function(err) { /* bar */ })
+      | Model.findAll().fail(function(err) { /* bar */ })
+      | &nbsp;
+      | /*
+      |   Please notice:
+      |   I will replace .on('failure') with .on('error') in future releases.
+      |   This will be done, due to being more native in the node environment.
+      |   Doing so will throw an error each time you don't listen for the 'error'-
+      |   event.
+      | */
+
+

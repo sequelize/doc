@@ -1,0 +1,229 @@
+section#migrations
+  .subnav
+    ul.nav.nav-pills
+      li
+        a(href='#migrations-binary') Binary
+      li
+        a(href='#migrations-skeleton') Skeleton
+      li
+        a(href='#migrations-functions') Functions
+
+  p
+    | Sequelize v1.3.0 introduced migrations. With those mechanism you can
+    | transform your existing database into another state and vice versa.
+    | Those state transitions are saved in migration files, which describe
+    | the way how to get to the new state and how to revert the changes in
+    | order to get back to the old state.
+
+  section#migrations-binary
+    h3 The sequelize binary
+    p In order to run migrations, sequelize comes with a handy binary file which can setup your project and run migrations. The following snippet shows the possible things:
+    pre.prettyprint.linenums
+      | sequelize -h
+      | sequelize --help
+      | --> prints the help
+      | &nbsp;
+      | sequelize -V
+      | sequelize --version
+      | --> prints the version
+      | &nbsp;
+      | sequelize -i
+      | sequelize --init
+      | --> creates a migration folder
+      | --> creates a config folder
+      | --> saves a config.json inside the config folder
+      | &nbsp;
+      | sequelize -i -f
+      | sequelize --init --force
+      | --> forced creation of migration and config folder
+      | --> existing data will be deleted first
+      | &nbsp;
+      | sequelize -m
+      | sequelize --migrate
+      | --> needs a valid config.json
+      | --> runs pending migrations
+      | --> saves successfully executed migrations inside the database
+      | &nbsp;
+      | sequelize -m -u
+      | sequelize --migrate --undo
+      | --> needs a valid config.json
+      | --> reverts the last successfull migration
+      | --> when there were multiple executed migrations, all of them are reverted
+
+  section#migrations-skeleton
+    h3 Migration Skeleton
+
+    p
+      | The following skeleton shows a typical migration file. All migrations
+      | are expected to be located in a folder called "migrations" at the very
+      | top of the project.
+    pre.prettyprint.linenums
+      | module.exports = {
+      |   up: function(migration, DataTypes) {
+      |     // logic for transforming into the new state
+      |   },
+      |   down: function(migration, DataTypes) {
+      |     // logic for reverting the changes
+      |   }
+      | }
+    p
+      | The passed <code>migration</code> object can be used to modify the database.
+      | The <code>DataTypes</code> object stores the available data types such as
+      | STRING or INTEGER. The available methods of the migration object are the
+      | following.
+
+  section#migrations-functions
+    h3 Migration functions
+    p
+      | Using the <code>migration</code> object describe before, you will have access
+      | to most of already introduced functions. Furthermore there are some other
+      | methods, which are designed to actually change the database schema.
+
+    h4 createTable(tableName, attributes, options)
+    p This method allows creation of new tables. It is allowed to pass simple or complex attribute definitions. You can define the encoding of the table and the table's engine via options.
+    pre.prettyprint.linenums
+      | migration.createTable(
+      |   'nameOfTheNewTable',
+      |   {
+      |     attr1: DataTypes.STRING,
+      |     attr2: DataTypes.INTEGER,
+      |     attr3: {
+      |       type: DataTypes.BOOLEAN,
+      |       defaultValue: false,
+      |       allowNull: false
+      |     }
+      |   },
+      |   {
+      |     engine: 'MYISAM', // default: 'InnoDB'
+      |     charset: 'latin1' // default: null
+      |   }
+      | )
+
+    h4 dropTable(tableName)
+    p This method allows deletion of an existing table.
+    pre.prettyprint.linenums
+      | migration.dropTable('nameOfTheExistingTable')
+
+    h4 dropAllTables()
+    p This method allows deletion of all existing tables in the database.
+    pre.prettyprint.linenums
+      | migration.dropAllTables()
+
+    h4 renameTable(before, after)
+    p This method allows renaming of an existing table.
+    pre.prettyprint.linenums
+      | migration.renameTable('Person', 'User')
+
+    h4 showAllTables()
+    p This method returns the name of all existing tables in the database.
+    pre.prettyprint.linenums
+      | migration.showAllTables().success(function(tableNames) {})
+
+    h4 describeTable(tableName)
+    p This method returns an array of hashes containing information about all attributes in the table.
+    pre.prettyprint.linenums
+      | migration.describeTable('Person').success(function(attributes) {
+      |   /*
+      |     tableNames will be something like:
+      |     [ { Field: 'name',
+      |       Type: 'varchar(255)',
+      |       Null: 'YES',
+      |       Key: '',
+      |       Default: null,
+      |       Extra: '' },
+      |     { Field: 'isBetaMember',
+      |       Type: 'tinyint(1)',
+      |       Null: 'NO',
+      |       Key: '',
+      |       Default: '0',
+      |       Extra: '' } ]
+      |   */
+      | })
+
+    h4 addColumn(tableName, attributeName, dataTypeOrOptions)
+    p This method allows adding columns to an existing table. The data type can be simple or complex.
+    pre.prettyprint.linenums
+      | migration.addColumn(
+      |   'nameOfAnExistingTable',
+      |   'nameOfTheNewAttribute',
+      |   DataTypes.STRING
+      | )
+      | &nbsp;
+      | // or
+      | &nbsp;
+      | migration.addColumn(
+      |   'nameOfAnExistingTable',
+      |   'nameOfTheNewAttribute',
+      |   {
+      |     type: DataTypes.STRING,
+      |     allowNull: false
+      |   }
+      | )
+
+    h4 removeColumn(tableName, attributeName)
+    p This method allows deletion of a specific column of an existing table
+    pre.prettyprint.linenums
+      | migration.removeColumn('Person', 'signature')
+
+    h4 changeColumn(tableName, attributeName, dataTypeOrOptions)
+    p This method changes the meta data of an attribute. It is possible to change the default value, allowance of null or the data type. Please make sure, that you are completely describing the new data type. Missing information are expected to be defaults.
+    pre.prettyprint.linenums
+      | migration.addColumn(
+      |   'nameOfAnExistingTable',
+      |   'nameOfAnExistingAttribute',
+      |   DataTypes.STRING
+      | )
+      | &nbsp;
+      | // or
+      | &nbsp;
+      | migration.addColumn(
+      |   'nameOfAnExistingTable',
+      |   'nameOfAnExistingAttribute',
+      |   {
+      |     type: DataTypes.FLOAT,
+      |     allowNull: false,
+      |     default: 0.0
+      |   }
+      | )
+
+    h4 renameColumn(tableName, attrNameBefore, attrNameAfter)
+    p This methods allows renaming attributes.
+    pre.prettyprint.linenums
+      | migration.renameColumn('Person', 'signature', 'sig')
+
+    h4 addIndex(tableName, attributes, options)
+    p This methods creates indexes for specific attributes of a table. The index name will be automatically generate if it is not passed via in the options (indexName).
+    pre.prettyprint.linenums
+      | migration.addIndex('Person', ['firstname', 'lastname'])
+      | // will create the index person_firstname_lastname
+      | &nbsp;
+      | // or with options
+      | &nbp;
+      | migration.addIndex(
+      |   'Person',
+      |   ['firstname', 'lastname'],
+      |   {
+      |     indexName: 'SuperDuperIndex'
+      |   }
+      | )
+      | // will create the index SuperDuperIndex
+
+    h4 showIndex(tableName, options)
+    p This method returns all indexes on the table.
+    pre.prettyprint.linenums
+      | migration.showIndex('Person')
+
+    h4 removeIndex(tableName, indexNameOrAttributes)
+    p This method deletes an existing index of a table.
+    pre.prettyprint.linenums
+      | migration.removeIndex('Person', 'SuperDuperIndex')
+      | &nbsp;
+      | // or
+      | &nbsp;
+      | migration.removeIndex('Person', ['firstname', 'lastname'])
+
+
+
+
+
+
