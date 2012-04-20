@@ -1,9 +1,0 @@
-// charset only
-var Person = sequelize.define('Person', { /* attributes */ }, {
-  engine: 'MYISAM'
-})
-
-// or of course global
-var sequelize = new Sequelize(db, user, pw, {
-  define: { engine: 'MYISAM' }
-})
