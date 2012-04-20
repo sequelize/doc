@@ -23,6 +23,10 @@ html
     .navbar.navbar-fixed-top
       != partial('navigation', { sections: sections })
     .container!= body
+    .footer
+      | Copyright © 2010 -
+      = new Date().getFullYear()
+      | , Sascha Depold.
 
     script
       /*
