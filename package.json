@@ -9,6 +9,7 @@
     , "ejs": "*"
     , "jade": "*"
     , "less": "*"
+    , "sequelize": "*"
   }
   , "engines": {
     "node": "0.6.3"
