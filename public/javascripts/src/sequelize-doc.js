@@ -2,9 +2,10 @@ var SequelizeDoc = (function() {
   "use strict"
 
   return {
-    init: function() {
+    init: function(version) {
       this.initPrettify()
       this.initSubNavigationBars()
+      this.highlightChanges(version)
     },
 
     initPrettify: function() {
@@ -18,6 +19,15 @@ var SequelizeDoc = (function() {
         if($('.subnav', $section).length > 0) {
           new SequelizeDoc.SubNavigation($section).observeScrolling()
         }
+      })
+    },
+
+    highlightChanges: function(version) {
+      var formattedVersion = version.replace(/\./g, '-')
+
+      $('.v' + formattedVersion).each(function() {
+        var $element = $(this)
+        console.log($element)
       })
     }
   }

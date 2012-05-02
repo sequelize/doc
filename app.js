@@ -1,4 +1,5 @@
-const express = require('express')
+const express     = require('express')
+    , Application = require("./src/application")
 
 var app = module.exports = express.createServer()
 
@@ -24,21 +25,25 @@ app.configure('production', function(){
 
 // Routes
 
-app.get('/', function(req, res){
-  res.render('index', {
-    title: 'Sequelize',
-    subtitle: 'A multi-dialect Object-Relational-Mapper for Node.JS',
-    sections: [
-      'Installation',
-      'Usage',
-      'Models',
-      'Instances',
-      'Associations',
-      'Migrations',
-      'Query-Chainer',
-      'Further information',
-      'Projects'
-    ]
+app.get('/', function(req, res) {
+  Application.getSequelizeVersion(function(err, version) {
+    res.render('index', {
+      title: 'Sequelize',
+      subtitle: 'A multi-dialect Object-Relational-Mapper for Node.JS',
+      sections: [
+        'Installation',
+        'Usage',
+        'Models',
+        'Instances',
+        'Associations',
+        'Migrations',
+        'Query-Chainer',
+        'Further information',
+        'Projects'
+      ],
+      version: version,
+      inProduction: (process.env.NODE_ENV == 'production')
+    })
   })
 })
 

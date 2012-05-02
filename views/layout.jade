@@ -11,12 +11,12 @@ html
     script(src="/javascripts/lib/jquery-1.7.1.min.js")
     script(src="/javascripts/lib/prettify.js")
     script(src="/javascripts/lib/bootstrap.min.js")
-    script(src="/javascripts/src/sequelize-doc.js")
+    script(src="/javascripts/src/sequelize-doc.js?" + (Math.random() * 9999999))
     script(src="/javascripts/src/sub-navigation.js")
 
     script
       $(function() {
-        SequelizeDoc.init()
+        SequelizeDoc.init("#{version}")
         $('.navbar').scrollspy()
       })
 
@@ -29,13 +29,15 @@ html
       = new Date().getFullYear()
       | , Sascha Depold.
 
-    script
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-9039631-4']);
-      _gaq.push(['_trackPageview']);
+    - if (inProduction) {
+      script
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-9039631-4']);
+        _gaq.push(['_trackPageview']);
 
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
+        (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    - }
