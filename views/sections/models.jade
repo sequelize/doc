@@ -18,7 +18,7 @@ section#models
       li
         a(href="#models-finders") Finders
 
-  section#models-definition
+  section#models-definition.v1-4-0
     p To define mappings between a model and a table, use the <code>define</code> method. Sequelize will then automatically add the attributes <code>createdAt</code> and <code>updatedAt</code> to it. So you will be able to know when the database entry went into the db and when it was updated the last time.
     pre.prettyprint.linenums
       | var Project = sequelize.define('Project', {
@@ -37,6 +37,8 @@ section#models
       | var Foo = sequelize.define('Foo', {
       |   // instantiating will automatically set the flag to true if not set
       |   flag: { type: Sequelize.BOOLEAN, allowNull: false, defaultValue: true},
+      |   // default values for dates => current time
+      |   myDate: { type: Sequelize.DATE, defaultValue: Sequelize.NOW },
       |   // setting no title will throw an error when trying to save
       |   title: { type: Sequelize.STRING, allowNull: false},
       |   // creating 2 objects with the same value will throw an error

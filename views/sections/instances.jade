@@ -9,8 +9,12 @@ section#instances
         a(href='#instances-update-save') Update/Save
       li
         a(href='#instances-configuration') Configuration
+      li
+        a(href="#instances-values") Values
 
   section#instances-build
+    h3 Building an instance
+
     p
       | In order to create instances of defined classes just do as follows.
       | You might recognize the syntax if you coded Ruby in the past.
@@ -63,6 +67,8 @@ section#instances
       |   })
 
   section#instances-create
+    h3 Creating an instance
+
     p Besides constructing objects, that needs an explicit save call to get stored in the database, there is also the possibility to do all those steps with one single command. It's called <code>create</code>.
 
     pre.prettyprint.linenums
@@ -71,6 +77,8 @@ section#instances
       | })
 
   section#instances-update-save
+    h3 Updating / Saving an instance
+
     p Now lets change some values and save changes to the database... There are two ways to do that:
 
     pre.prettyprint.linenums
@@ -84,6 +92,8 @@ section#instances
       | }).success(function() {})
 
   section#instances-configuration
+    h3 Configuration
+
     p In order to define the encoding of a table you can do this:
 
     pre.prettyprint.linenums
@@ -115,3 +125,35 @@ section#instances
       | var sequelize = new Sequelize(db, user, pw, {
       |   define: { engine: 'MYISAM' }
       | })
+
+  section#instances-values.v1-4-0
+    h3 Values of an instance
+
+    p
+      | If you log an instance you will notice, that there are a lot of
+      | additional stuff. In order to hide such stuff and reduce it to the very
+      | interesting information, you can use the <code>values</code>-attribute.
+      | Calling it will return only the values of an instance.
+
+    pre.prettyprint.linenums
+      | Person.create({
+      |   name: 'Rambow',
+      |   firstname: 'John'
+      | }).success(function(john) {
+      |   console.log(john.values)
+      | })
+      | &nbsp;
+      | // result:
+      | &nbsp;
+      | // { name: 'Rambow',
+      | //   firstname: 'John',
+      | //   id: 1,
+      | //   createdAt: Tue, 01 May 2012 19:12:16 GMT,
+      | //   updatedAt: Tue, 01 May 2012 19:12:16 GMT
+      | // }
+
+    p
+      | You can also transform an instance into JSON by using
+      | <code>JSON.stringify(instance)</code>. This will basically return the
+      | very same as <code>values</code>.
+
