@@ -134,3 +134,13 @@ h4 {
 .right {
   float: right !important;
 }
+.new {
+  float: left;
+  color: red;
+  margin-right: 5px;
+}
+.nav .new {
+  float: none;
+  margin-left: 5px;
+  margin-right: 0px;
+}

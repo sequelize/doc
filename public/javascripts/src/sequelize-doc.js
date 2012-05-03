@@ -27,7 +27,16 @@ var SequelizeDoc = (function() {
 
       $('.v' + formattedVersion).each(function() {
         var $element = $(this)
-        console.log($element)
+          , $section = $element.is('section') ? $element : $element.parents('section')
+          , $newSpan = $('<span>').addClass('new').text('~new~')
+
+        $("> *", $element).first().prepend($newSpan.clone())
+
+        var $naviAnchor = $("a[href='#" + $section.attr("id") +"']")
+
+        if($(".new", $naviAnchor).length == 0) {
+          $naviAnchor.append($newSpan.clone())
+        }
       })
     }
   }
