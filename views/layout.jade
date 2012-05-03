@@ -25,9 +25,13 @@ html
       != partial('navigation', { sections: sections })
     .container!= body
     .footer
-      | Copyright © 2010 -
-      = new Date().getFullYear()
-      | , Sascha Depold.
+      .container
+        .right
+          | Current Sequelize release: v#{version}
+        .left
+          | Copyright © 2010 -
+          = new Date().getFullYear()
+          | , Sascha Depold.
 
     - if (inProduction) {
       script
