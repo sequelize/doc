@@ -26,15 +26,19 @@ var SequelizeDoc = (function() {
       var formattedVersion = version.replace(/\./g, '-')
 
       $('.v' + formattedVersion).each(function() {
-        var $element = $(this)
-          , $section = $element.is('section') ? $element : $element.parents('section')
-          , $newSpan = $('<span>').addClass('new').text('~new~')
+        var $element       = $(this)
+          , $section       = $element.is('section') ? $element : $element.parents('section')
+          , $newSpan       = $('<span>').addClass('new').text('~new~')
+          , $subNaviAnchor = $("a[href='#" + $section.attr("id") +"']")
+          , $naviAnchor    = $("a[href='#" + $subNaviAnchor.parents('section').attr("id") +"']")
 
         $("> *", $element).first().prepend($newSpan.clone())
 
-        var $naviAnchor = $("a[href='#" + $section.attr("id") +"']")
+        if ($(".new", $subNaviAnchor).length == 0) {
+          $subNaviAnchor.append($newSpan.clone())
+        }
 
-        if($(".new", $naviAnchor).length == 0) {
+        if (($naviAnchor.length > 0) && ($('.new', $naviAnchor).length == 0)) {
           $naviAnchor.append($newSpan.clone())
         }
       })

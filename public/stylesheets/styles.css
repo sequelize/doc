@@ -144,3 +144,5 @@ h4 {
   margin-left: 5px;
   margin-right: 0px;
 }
+.navbar-fixed-top .new { color: #ddd; }
+.navbar-fixed-top .active .new { color: #fff; }
