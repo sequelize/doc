@@ -1,17 +1,18 @@
 {
-    "name": "sequelizejs.com"
-  , "description": "The official sequelize webite."
-  , "version": "1.0.1"
-  , "homepage": "http://sequelizejs.com"
-  , "author": "Sascha Depold <sascha@depold.com> (http://depold.com)"
-  , "dependencies": {
-      "express": "2.5.8"
-    , "ejs": "*"
-    , "jade": "*"
-    , "less": "*"
-    , "sequelize": "*"
-  }
-  , "engines": {
+  "name": "sequelizejs.com",
+  "description": "The official sequelize webite.",
+  "version": "1.0.1",
+  "homepage": "http://sequelizejs.com",
+  "author": "Sascha Depold <sascha@depold.com> (http://depold.com)",
+  "dependencies": {
+    "express": "2.5.8",
+    "ejs": "*",
+    "jade": "*",
+    "less": "*",
+    "sequelize": "*",
+    "stylus": "~0.26.0"
+  },
+  "engines": {
     "node": "0.6.3"
   }
 }
