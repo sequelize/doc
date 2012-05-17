@@ -1,0 +1,136 @@
+<ul class="posts">
+  {block:Posts}
+  <li class="post"{block:NoteCount} style="min-height: 104px"{/block:NoteCount}>
+    {block:Date}
+    {block:IfDisqusShortname}<a href="{Permalink}#disqus_thread" class="comments">{lang:Comments}</a>{/block:IfDisqusShortname}
+    <a href="{Permalink}" class="post_type"></a>
+    <a href="{Permalink}" class="label type">
+      {block:Photo}{lang:Photo}{/block:Photo}
+      {block:Photoset}{lang:Photos}{/block:Photoset}
+      {block:Video}{lang:Video}{/block:Video}
+      {block:Link}{lang:Link}{/block:Link}
+      {block:Audio}{lang:Audio}{/block:Audio}
+      {block:Chat}{lang:Chat}{/block:Chat}
+      {block:Text}{lang:Text}{/block:Text}
+      {block:Quote}{lang:Quote}{/block:Quote}
+    </a>
+    {/block:Date}
+    {block:IfShowNoteCount}{block:NoteCount}<a href="{Permalink}" class="note_count"></a>
+    <a href="{Permalink}" class="label noteNumber">{NoteCount}<br /></a>
+    <a href="{Permalink}" class="label notes" style="text-transform:lowercase;">{lang:Notes}</a>{/block:NoteCount}{/block:IfShowNoteCount}
+    {block:Photo}
+    {LinkOpenTag}<img src="{PhotoURL-500}" class="media" alt="{PhotoAlt}" />{LinkCloseTag}
+    {block:HighRes}<a href="{PhotoURL-HighRes}" class="download image" target="_blank"></a>{/block:HighRes}
+    {block:Caption}
+    <div class="caption">
+      <p>{Caption}</p>
+    </div>
+    {block:Caption}
+    {/block:Photo}
+
+    {block:Photoset}
+    {Photoset-500}
+    {block:Caption}
+    <div class="caption">
+      <p>{Caption}</p>
+    </div>
+    {block:Caption}
+    {/block:Photoset}
+
+    {block:Video}
+    <div class="media">{Video-500}</div>
+    {block:Caption}
+    <div class="caption">
+      <p>{Caption}</p>
+    </div>
+    {block:Caption}
+    {/block:Video}
+
+    {block:Audio}
+    <div class="audio">
+      {block:AudioEmbed}
+        {AudioEmbed-500}
+      {/block:AudioEmbed}
+
+      {block:AudioPlayer}
+        <div class="player">{AudioPlayerGrey}</div>
+        <div style="margin: 4px 0 0 0;">
+          <span class="count">{block:PlayCount}{PlayCountWithLabel}{/block:PlayCount}<div class="right"></div></span>
+          {block:ExternalAudio} <a href="{ExternalAudioURL}" class="download"></a>{/block:ExternalAudio}
+        </div>
+      {/block:AudioPlayer}
+    </div>
+    {block:Caption}
+    <div class="caption">
+      <p>{Caption}</p>
+    </div>
+    {block:Caption}
+    {/block:Audio}
+
+    {block:Link}
+    <h2><a href="{URL}" class="title link" target="{Target}">{Name}<div class="arrow"></div></a></h2>
+    {block:Description}
+    <div class="caption">
+      <p>{Description}</p>
+    </div>
+    {block:Description}
+    {/block:Link}
+
+    {block:Text}
+    {block:Title}<h2><a href="{Permalink}" class="title">{Title}<div class="arrow"></div></a></h2>{/block:Title}
+    <div class="caption">
+      <p>
+          {Body}
+          {block:More}
+              <a href="{Permalink}" class="big_ass_button">{lang:Read more}</a>
+          {/block:More}
+      </p>
+    </div>
+    {/block:Text}
+
+    {block:Quote}
+    <div class="quote">"{Quote}"</div>
+    {block:Source}
+    <div class="caption">
+      <p>{Source}</p>
+    </div>
+    {/block:Source}
+    {/block:Quote}
+
+    {block:Chat}
+    {block:Title}<h2><a href="{Permalink}" class="title">{Title}<div class="arrow"></div></a></h2>{/block:Title}
+    <table class="chat" cellspacing="0">
+      {block:Lines}
+      <tr>
+        {block:Label}<td class="name line{UserNumber}">{Label}</td>{block:Label}<td class="words line{UserNumber}">{Line}</td>
+      </tr>
+      {/block:Lines}
+    </table>
+    {/block:Chat}
+
+    {block:HasTags}
+    <div class="tags">
+      {block:Tags}<a href="{TagURL}" class="tag">#{Tag}</a>&nbsp;{/block:Tags}
+    </div>
+    {/block:HasTags}
+  </li>
+
+  {block:PermalinkPage}
+  {block:IfShowNotesOnPermalinkPages}{PostNotes}{/block:IfShowNotesOnPermalinkPages}
+  {/block:PermalinkPage}
+
+  {block:Permalink}
+  {block:IfDisqusShortname}
+  <div class="notecontainer" style="margin: 40px 0 0 0; padding: 0;">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript" src="http://disqus.com/forums/{text:Disqus Shortname}/embed.js"></script>
+    <noscript><a href="http://{text:Disqus Shortname}.disqus.com/?url=ref">{lang:View the discussion thread}</a></noscript>
+  </div>
+  <div style="text-align: right; margin-top: 5px">
+    {lang:Blog comments powered by Disqus 2}
+  </div>
+  {/block:IfDisqusShortname}
+  {/block:Permalink}
+
+  {/block:Posts}
+</ul>

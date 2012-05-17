@@ -1,0 +1,13 @@
+!= partial("introduction")
+
+#container
+  != partial("blog-tumblr.ejs")
+
+script
+  var interval = setInterval(function() {
+    if($('#tumblr_controls').length == 1) {
+      $('#tumblr_controls').css({ position: 'fixed', top: '41px' })
+      clearInterval(interval)
+    }
+  }, 1000)
+

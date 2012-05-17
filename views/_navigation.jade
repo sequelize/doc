@@ -2,11 +2,13 @@
   .container
     .nav-collapse
       ul.nav
-        li(class="active")
+        li(class=(activeSection == 'Home' ? 'active' : ''))
           a(href='#home') Home
         - each section in sections
           li
             a(href="#" + toSlug(section))= section
       ul.nav.right
+        li(class=(activeSection == 'Blog' ? 'active' : ''))
+          a(href="http://blog.sequelizejs.com") Blog
         li
           a(href='http://github.com/sdepold/sequelize', target='_blank') Github

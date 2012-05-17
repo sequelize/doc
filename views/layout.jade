@@ -1,24 +1,77 @@
 !!! 5
 html
   head
-    title!= title + " &raquo; " + subtitle
+
+    script(src="/javascripts/lib/jquery-1.7.1.min.js")
+
+    - if(activeSection == 'Blog') {
+      title= '{Title}{block:SearchPage} ({lang:Search results for SearchQuery}){/block:SearchPage}{block:PostSummary} ({PostSummary}){/block:PostSummary}'
+      meta(http-equiv="Content-Type", content="text/html; charset=utf-8")
+      meta(name="description", content="{block:IndexPage}{block:Description}{MetaDescription}{/block:Description}{/block:IndexPage}{block:PermalinkPage}{PostSummary}{/block:PermalinkPage}")
+      meta(name="author", content="Peter Vidani")
+
+      meta(name="if:Show note count", content="1")
+      meta(name="if:Show notes on permalink pages", content="1")
+
+      meta(name="image:Background", content="http://static.tumblr.com/thpaaos/YbJkqnqr6/bg.jpg")
+
+      meta(name="color:Title", content="#454545")
+      meta(name="color:Links", content="#238db1")
+      meta(name="color:LinksBackground", content="#e5f8ff")
+      meta(name="color:LinkPost", content="#6db123")
+      meta(name="color:LinkPostBackground", content="#f1fae7")
+      meta(name="color:PhotoAndVideoBorders", content="#e1e1da")
+      meta(name="color:PostTypeCircle", content="#2aabd5")
+      meta(name="color:PostTypeText", content="#fff")
+      meta(name="color:NoteCountCircle", content="#e73939")
+      meta(name="color:NoteCountText", content="#fff")
+      meta(name="color:NotesLink", content="#f95d5d")
+      meta(name="color:NotesLinkBackground", content="#fff2f2")
+      meta(name="color:CommentsCount", content="#fbff86")
+      meta(name="color:CommentsText", content="#2e2d2a")
+      meta(name="color:TagText", content="#fff")
+      meta(name="color:TagBackground", content="#e3e3e3")
+      meta(name="color:TagTextHover", content="#fff")
+      meta(name="color:TagBackgroundHover", content="#b69ec8")
+
+      meta(name="text:Google Analytics ID", content="")
+      meta(name="text:Disqus Shortname", content="")
+
+      meta(name="image:Header",content="0")
+
+      link(rel="shortcut icon", href="{Favicon}")
+      link(rel="alternate", type="application/rss+xml", href="{RSS}")
+      link(rel="stylesheet", href="/stylesheets/tumblr.css")
+      != '{block:IndexPage}<script src="http://static.tumblr.com/thpaaos/78Jks5gyt/carousel.js" type="text/javascript"></script>{/block:IndexPage}'
+    - } else {
+      title!= title + " &raquo; " + subtitle
+    - }
 
     link(rel="stylesheet", href='/stylesheets/bootstrap.min.css')
     link(rel="stylesheet", href='/stylesheets/bootstrap-responsive.min.css')
     link(rel="stylesheet", href='/stylesheets/prettify.css')
     link(rel="stylesheet", href='/stylesheets/styles.css')
 
-    script(src="/javascripts/lib/jquery-1.7.1.min.js")
     script(src="/javascripts/lib/prettify.js")
     script(src="/javascripts/lib/bootstrap.min.js")
-    script(src="/javascripts/src/sequelize-doc.js?" + (Math.random() * 9999999))
+    script(src="/javascripts/src/sequelize-doc.js")
     script(src="/javascripts/src/sub-navigation.js")
 
-    script
-      $(function() {
-        SequelizeDoc.init("#{version}")
-        $('.navbar').scrollspy()
-      })
+    - if(activeSection == 'Blog') {
+      script
+        $(function() {
+          $.getJSON("/version?callback=?", function(data) {
+            $('#version').text(data.version)
+          })
+        })
+    - } else {
+      script
+        $(function() {
+          SequelizeDoc.init("#{version}")
+          $('.navbar').scrollspy()
+        })
+    - }
+
 
   body(data-spy="scroll", data-target=".subnav")
     .navbar.navbar-fixed-top
@@ -27,7 +80,8 @@ html
     .footer
       .container
         .right
-          | Current Sequelize release: v#{version}
+          | Current Sequelize release: v
+          span#version= version
         .left
           | Copyright © 2010 -
           = new Date().getFullYear()

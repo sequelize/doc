@@ -1,0 +1,502 @@
+body {
+  padding: 120px 100px 100px 100px !important;
+}
+
+#container {
+    position: relative;
+}
+
+#container .header {
+    overflow: hidden;
+}
+
+#container .header h1 {
+    font-size: 72px;
+    letter-spacing: -1px;
+    font-family: Cufon;
+    float: left;
+}
+
+#container .header a h1 {
+    color: #454545;
+    text-decoration: none;
+}
+
+#container .header td.description {
+    width: 240px;
+    font-size: 10px;
+    line-height: 14px;
+    text-align: right;
+    margin: 33px 0 0 0;
+    float: right;
+}
+
+#container .separate {
+    width: 570px;
+    height: 8px;
+    background: #EFEFEF;
+    margin: 50px 0 50px -35px;
+}
+
+#container ul.posts {
+  margin: 0px;
+}
+
+#container li.post {
+    min-height: 57px;
+    list-style-type: none;
+    margin: 80px 0px 0px 0px;
+    position: relative;
+}
+
+#container li.post a.post_type {
+    width: 57px;
+    height: 57px;
+    background: #2aabd5;
+    border-radius: 28px;
+    -moz-border-radius: 28px;
+    -webkit-border-radius: 28px;
+    filter: alpha(opacity=54);
+    -moz-opacity: 0.54;
+    -khtml-opacity: 0.54;
+    opacity: 0.54;
+    display: block;
+    position: absolute;
+    left: -79px;
+    top: 0px;
+}
+
+#container li.post a.note_count,
+        #container a.heart {
+    width: 57px;
+    height: 57px;
+    background: #e73939;
+    border-radius: 28px;
+    -moz-border-radius: 28px;
+    -webkit-border-radius: 28px;
+    filter: alpha(opacity=54);
+    -moz-opacity: 0.54;
+    -khtml-opacity: 0.54;
+    opacity: 0.54;
+    display: block;
+    position: absolute;
+    left: -79px;
+    top: 47px;
+}
+
+#container .heart {
+    top: 0px !important;
+}
+
+#container a.heart_icon {
+    width: 17px;
+    height: 15px;
+    background: url(http://static.tumblr.com/thpaaos/k6Eks51ol/heart.png) no-repeat;
+    position: absolute;
+    top: 21px;
+    left: -59px;
+    display: block;
+}
+
+#container li.post a.comments {
+    width: 103px;
+    color: #2e2d2a;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    line-height: 0px;
+    background: #fbff86;
+    border-top-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+    -webkit-border-bottom-right-radius: 6px;
+    -webkit-border-top-right-radius: 6px;
+    -moz-border-radius-bottomright: 6px;
+    -moz-border-radius-topright: 6px;
+    filter: alpha(opacity=54);
+    -moz-opacity: 0.54;
+    -khtml-opacity: 0.54;
+    opacity: 0.54;
+    padding: 12px 7px 8px 35px;
+    display: block;
+    position: absolute;
+    top: 0px;
+    right: -167px;
+}
+
+li.post .label {
+    width: 57px;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 0px;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    position: absolute;
+    display: block;
+    position: absolute;
+    left: -79px;
+    display: block;
+}
+
+li.post a.label {
+    text-decoration: none;
+}
+
+li.post a.label.type {
+    color: #fff;
+    top: 27px;
+}
+
+li.post a.label.noteNumber {
+    color: #fff;
+    top: 70px;
+    font-size: 18px;
+}
+
+li.post a.label.noteNumber span {
+    font-size: 10px;
+    display: block;
+    margin: 15px 0 0 0;
+}
+
+li.post .label.notes {
+    color: #fff;
+    font-size: 10px;
+    top: 85px;
+}
+
+#container li.post img {
+    max-width: 100%;
+}
+
+#container li.post .caption {
+}
+
+#container li.post .caption a {
+    padding: 1px;
+}
+
+#container li.post .caption a:hover,
+            #container .header .description a:hover,
+            .footer .credit a:hover,
+            ul#likes a:hover {
+    background: #e5f8ff;
+}
+
+#container li.post .caption ol,
+          #container li.post .caption ul {
+    margin: 0 0 14px 20px;
+}
+
+#container li.post a.title {
+    font-size: 24px;
+    line-height: 26px;
+    margin: 0 0 14px 0;
+    display: block;
+}
+
+#container li.post a.title:hover {
+    text-decoration: underline;
+}
+
+#container li.post a.title.link {
+    color: #6db123;
+    text-decoration: underline;
+    padding: 0 45px 0 0;
+    position: relative;
+}
+
+#container li.post a.title.link:hover span {
+    background: #f1fae7;
+}
+
+#container li.post a.title.link .arrow {
+    width: 32px;
+    height: 22px;
+    background: url(http://static.tumblr.com/thpaaos/4aWkqnqso/sprite-link.png) 0px 0px;
+    position: absolute;
+    right: 0px;
+    top: 3px;
+}
+
+#container li.post a.title.link:active .arrow {
+    background-position: -32px 0px;
+}
+
+table.chat {
+    width: 100%;
+    margin: 0 0 3px 0;
+    border-collapse: collapse;
+}
+
+h2 + table.chat {
+    margin: 0 0 14px 0 !important;
+}
+
+table.chat tr td {
+    padding: 3px 10px;
+}
+
+table.chat tr td.name {
+    font-weight: bold;
+    text-align: right;
+    vertical-align: top;
+}
+
+table.chat tr td.line1 {
+    background: #F2F2F2;
+}
+
+#container li.post .media {
+    width: 500px;
+    border: 8px solid #e1e1da;
+    margin: 0 0 14px -10px;
+    padding: 2px;
+}
+
+#container li.post .quote {
+    font-size: 24px;
+    line-height: 26px;
+    margin: 0 0 14px 0;
+}
+
+#container li.post .audio {
+    background: #fff;
+    margin: 0 0 14px 0;
+    padding: 1px;
+    overflow: hidden;
+}
+
+#container li.post .audio .player {
+    width: 207px;
+    height: 27px;
+    border: 1px solid #f2f2f2;
+    margin: 0 10px 0 0;
+    padding: 1px;
+    float: left;
+}
+
+#container li.post .audio span.count {
+    height: 22px;
+    color: #fff;
+    font-size: 10px;
+    font-weight: bold;
+    background: url(http://static.tumblr.com/thpaaos/TQFkqnqt1/play-count.png) top left;
+    padding: 4px 0 6px 12px;
+    position: relative;
+}
+
+#container li.post .audio span.count .right {
+    width: 10px;
+    height: 22px;
+    background: url(http://static.tumblr.com/thpaaos/TQFkqnqt1/play-count.png) top right;
+    position: absolute;
+    right: -10px;
+    top: 0px;
+}
+
+#container li.post a.download {
+    width: 25px;
+    height: 22px;
+    background: url(http://static.tumblr.com/thpaaos/GqXkqnqth/sprite-download.png) top left;
+    margin: 0 10px 0 0;
+    display: block;
+    float: left;
+}
+
+#container li.post a.download:active {
+    background-position: -25px 0;
+}
+
+#container li.post a.download.image {
+    position: absolute;
+    top: 25px;
+    left: 15px;
+    display: none;
+}
+
+#container li.post:hover a.download.image {
+    display: block;
+}
+
+li.post .tags {
+}
+
+li.post .tags a.tag {
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    background: #e3e3e3;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    padding: 1px 5px;
+}
+
+li.post .tags .tag:hover {
+    color: #fff;
+    background: #b69ec8;
+}
+
+.footer {
+    overflow: hidden;
+}
+
+.pagination {
+    width: 148px;
+    height: 67px;
+    background: url(http://static.tumblr.com/thpaaos/xNskqnqtx/sprite-pagination.png) top left;
+    float: right;
+    overflow: hidden;
+}
+
+a.button {
+    width: 67px;
+    height: 67px;
+    background: url(http://static.tumblr.com/thpaaos/xNskqnqtx/sprite-pagination.png);
+    display: block;
+}
+
+a.button.left {
+    background-position: 0px -67px;
+    float: left;
+}
+
+a.button.left:active {
+    background-position: -0px -134px;
+}
+
+a.button.right {
+    background-position: -81px -67px;
+    float: right;
+}
+
+a.button.right:active {
+    background-position: -81px -134px;
+}
+
+.footer .credit {
+    height: 50px;
+    font-size: 11px;
+    line-height: 17px;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border: 3px solid #efefef;
+    float: left;
+    padding: 7px 17px;
+}
+
+ul#likes {
+    width: 500px;
+    list-style-type: none;
+    overflow: hidden;
+}
+
+li.like_post {
+    width: 150px;
+    font-size: 11px;
+    padding: 0 25px 0 0;
+    list-style-type: none;
+    float: left;
+}
+
+li.like_post img {
+    max-width: 140px;
+    background: #fff;
+    border: 4px solid #e1e1da;
+    margin: 0 0 14px 0;
+    padding: 1px;
+}
+
+li.like_post .like_link a {
+    color: #6db123;
+    text-decoration: underline;
+    font-size: 14px;
+}
+
+li.like_post .like_link a:hover {
+    background: #f1fae7 !important;
+}
+
+li.like_post .like_title {
+    font-size: 14px;
+}
+
+li.like_post  blockquote {
+    border-left: 2px solid #EFEFEF;
+    margin: 0 0 14px 0;
+    padding: 0 0 0 7px;
+}
+
+.post_info_bottom {
+    background: #F2F2F2;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    padding: 0 6px;
+    display: block !important;
+}
+
+#post_info_bottom a:hover {
+    background: transparent !important;
+    text-decoration: underline;
+}
+
+li.like_post ul,
+    li.like_post ol {
+    margin: 0 0 0 15px;
+}
+
+a.arrow.back,
+  a.arrow.forward {
+    display: none !important;
+}
+
+a.install {
+    width: 96px;
+    height: 20px;
+    background: url(http://static.tumblr.com/thpaaos/dHHkt0jor/install_theme.png);
+    display: block;
+    position: absolute;
+    top: 26px;
+    right: 3px;
+}
+
+.post blockquote {
+    border-left: 3px solid #DDD;
+    line-height: 19px;
+    margin: 0px 20px 20px 10px;
+    padding-left: 10px;
+    font-style: normal;
+}
+
+p.highlighted {
+    border: 1px solid #CCC;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    padding: 10px;
+    background: #EFEFEF;
+    margin: 0px 10px 10px 10px;
+}
+
+h3 {
+    font-size: 1.3em;
+    margin: 1em 0 0.5em 0;
+    text-decoration: underline;
+}
+
+#container .label {
+  padding: 0px;
+  border: none;
+}
+
+h2 a {
+  color: black;
+}
+
+h2 a:hover {
+  color: black;
+}
