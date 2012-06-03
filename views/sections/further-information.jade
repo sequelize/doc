@@ -8,17 +8,22 @@ section#further-information
       li
         a(href='#further-information-additional-links') Additional links
 
-  section#further-information-compatibility
+  section#further-information-compatibility.v1-4-1
     h3 Compatibility
     p Sequelize is compatible to the following versions of Node.JS:
     ul
-      li 0.4.12
-      li 0.5.10
+      li(style="text-decoration: line-through") 0.4.12
+      li(style="text-decoration: line-through") 0.5.10
       li 0.6.x
+    p
+      | <code>NOTICE:</code> Compatibility for versions < 0.6 was
+      | dropped with Sequelize v1.4.1. It might still work with
+      | Node.JS v0.4.x but as tests were moved to BusterJS, total
+      | test coverage for < v0.6.x was not possible anymore.
 
   section#further-information-asynchronicity
     h3 Asynchronicity
-    p Since v1.3.0 there are multiple ways of adding listeners to asynchronous requests. First of all, each time you call a finder method or save an object, sequelize triggers asynchronous logic. To react to the success or the failure of the request, you can do the following:
+    p.v1-4-1 Since v1.3.0 there are multiple ways of adding listeners to asynchronous requests. First of all, each time you call a finder method or save an object, sequelize triggers asynchronous logic. To react to the success or the failure (or both) of the request, you can do the following:
     pre.prettyprint.linenums
       | // the old, pre-v1.3.0 way
       | Model.findAll().on('success', function(models) { /* foo */ })
@@ -34,6 +39,9 @@ section#further-information
       | Model.findAll().error(function(err) { /* bar */ })
       | Model.findAll().failure(function(err) { /* bar */ })
       | Model.findAll().fail(function(err) { /* bar */ })
+      | &nbsp;
+      | Model.findAll().complete(function(err, result) { /* bar */ })
+      | Model.findAll().done(function(err, result) { /* bar */ })
       | &nbsp;
       | /*
       |   Please notice:

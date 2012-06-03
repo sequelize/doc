@@ -31,8 +31,17 @@ var SequelizeDoc = (function() {
           , $newSpan       = $('<span>').addClass('new').text('~new~')
           , $subNaviAnchor = $("a[href='#" + $section.attr("id") +"']")
           , $naviAnchor    = $("a[href='#" + $subNaviAnchor.parents('section').attr("id") +"']")
+          , $child         = $("> *", $element).first()
 
-        $("> *", $element).first().prepend($newSpan.clone())
+        if($child.length === 0) {
+          $child = $element
+        }
+
+        if($child.is('h3')) {
+          $child.append($newSpan.clone().addClass('appended'))
+        } else {
+          $child.prepend($newSpan.clone())
+        }
 
         if ($(".new", $subNaviAnchor).length == 0) {
           $subNaviAnchor.append($newSpan.clone())
