@@ -14,7 +14,7 @@ section#usage
     pre.prettyprint.linenums
       | var sequelize = new Sequelize('database', 'username'[, 'password'])
 
-  section#usage-options.v1-4-0
+  section#usage-options.v1-4-0.v1-5-0
     p This will save the passed database credentials and provide all further methods. Furthermore you can specify a non-default host or port and some options:
 
     pre.prettyprint.linenums
@@ -33,6 +33,10 @@ section#usage
       | &nbsp;
       |   // custom port; default: 3306
       |   port: 12345,
+      | &nbsp;
+      |   // custom protocol; default: 'tcp'; added in: v1.5.0
+      |   // postgres only, useful for heroku
+      |   protocol: null,
       | &nbsp;
       |   // disable logging; default: console.log
       |   logging: false,
