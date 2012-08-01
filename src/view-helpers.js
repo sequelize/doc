@@ -1,5 +1,4 @@
 const fs   = require('fs')
-    , path = require('path')
 
 module.exports = {
   toSlug: function(s) {
@@ -13,7 +12,7 @@ module.exports = {
     var filename = __dirname + '/../views/sections/' + this.toSlug(section) + '.jade'
       , result   = filename
 
-    if(path.existsSync(filename)) {
+    if(fs.existsSync(filename)) {
       var content = fs.readFileSync(filename)
       result = require('jade').compile(content)({})
     }
