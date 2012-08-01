@@ -110,7 +110,7 @@ section#associations
       | */
 
   section#associations-many-to-many
-    h3 Many-To-Many associations
+    h3.v1-5-0 Many-To-Many associations
 
     p
       | Many-To-Many associations are connecting sources with multiple targets.
@@ -137,6 +137,10 @@ section#associations
       | &nbsp;
       | Person.hasMany(Person, { as: 'Children' })
       | // This will create the table ChildrenPersons which stores the ids of the objects.
+      | &nbsp;
+      | // Since v1.5.0 you can also reference the same Model without creating a junction
+      | // table. If you need that, use the option foreignKey and useJunctionTable:
+      | Person.hasMany(Person, { as: 'Children', foreignKey: 'ParentId', useJunctionTable: false })
 
     section#associations-associate-objects
       h3 Associate objects
