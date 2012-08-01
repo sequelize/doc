@@ -126,7 +126,12 @@ section#models
       | })
 
   section#models-import
-    p You can also store your model definitions in a single file using the <code>import</code>-method. The returned object is exactly the same as defined in the imported file's function.
+    p.v1-5-0
+      | You can also store your model definitions in a single file using
+      | the <code>import</code>-method. The returned object is exactly the
+      | same as defined in the imported file's function. Since <code>v1.5.0</code>
+      | the import is cached, so you won't run into troubles when calling the import
+      | of a file twice or more often.
     pre.prettyprint.linenums
       | // in your server file - e.g. app.js
       | var Project = sequelize.import(__dirname + "/path/to/models/project")
