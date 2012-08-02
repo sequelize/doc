@@ -34,8 +34,10 @@ section#usage
       |   // custom port; default: 3306
       |   port: 12345,
       | &nbsp;
-      |   // custom protocol; default: 'tcp'; added in: v1.5.0
-      |   // postgres only, useful for heroku
+      |   // custom protocol
+      |   // - default: 'tcp'
+      |   // - added in: v1.5.0
+      |   // - postgres only, useful for heroku
       |   protocol: null,
       | &nbsp;
       |   // disable logging; default: console.log
@@ -52,6 +54,10 @@ section#usage
       |   // the storage engine for sqlite
       |   // - default ':memory:'
       |   storage: 'path/to/database.sqlite',
+      | &nbsp;
+      |   // disable inserting undefined values as NULL
+      |   // - default: false
+      |   omitNull: true,
       | &nbsp;
       |   // specify options, which are used when sequelize.define is called
       |   // the following example is basically the same as:
