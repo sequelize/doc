@@ -24,7 +24,9 @@ section#usage
       | })
       | &nbsp;
       | // No need for password?
-      | var sequelize = new Sequelize('database', 'username'[, null])
+      | var sequelize = new Sequelize('database', 'username')
+      | // or 
+      | var sequelize = new Sequelize('database', 'username', null)
       | &nbsp;
       | // All options at once:
       | var sequelize = new Sequelize('database', 'username', 'password', {
