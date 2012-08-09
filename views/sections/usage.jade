@@ -25,7 +25,7 @@ section#usage
       | &nbsp;
       | // No need for password?
       | var sequelize = new Sequelize('database', 'username')
-      | // or 
+      | // or
       | var sequelize = new Sequelize('database', 'username', null)
       | &nbsp;
       | // All options at once:
@@ -71,7 +71,7 @@ section#usage
       |   sync: { force: true }
       | &nbsp;
       |   // use pooling in order to reduce db connection overload and to increase speed
-      |   // currently only for mysql
+      |   // currently only for mysql and postgresql (since v1.5.0)
       |   pool: { maxConnections: 5, maxIdleTime: 30}
       | })
 

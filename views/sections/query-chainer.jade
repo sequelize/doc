@@ -53,3 +53,17 @@ section#query-chainer
     |   .runSerially({ skipOnError: true })
     |   .success(function() { /* no problems :) */ })
     |   .error(function(err) { /* hmm not good :> */ })
+
+  p.v1-5-0
+    | If the success callbacks of the added methods are passing values,
+    | they can be utilized in the actual <code>success</code> method of
+    | the query chainer:
+
+  pre.prettyprint.linenums
+    | chainer.add(Project.getTasks())
+    | chainer.add(Project.getTeam())
+    | chainer.run().success(function(results){
+    |   var tasks = results[0]
+    |   var team = results[1]
+    | })
+

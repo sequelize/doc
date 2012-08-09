@@ -147,7 +147,7 @@ section#associations
     section#associations-associate-objects
       h3 Associate objects
 
-      p
+      p.v1-5-0
         | Because Sequelize is doing a lot of magic, you have to call
         | <code>Sequelize#sync</code> after setting the associations!
         | Doing so will allow you the following:
@@ -168,6 +168,12 @@ section#associations
         | // ok now they are save... how do I get them later on?
         | project.getTasks().success(function(associatedTasks) {
         |   // associatedTasks is an array of tasks
+        | })
+        | &nbsp;
+        | // You can also pass filters to the getter method.
+        | // They are equal to the options you can pass to a usual finder method.
+        | project.getTasks({ where: 'id > 10' }).success(function(tasks) {
+        |   // tasks with an id greater than 10 :)
         | })
 
       p To remove created associations you can just call the set method without a specific id:
