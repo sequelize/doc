@@ -8,6 +8,8 @@ section#instances
       li
         a(href='#instances-update-save') Update/Save
       li
+        a(href='#instances-destroy') Destroy
+      li
         a(href='#instances-configuration') Configuration
       li
         a(href="#instances-values") Values
@@ -112,6 +114,21 @@ section#instances
       | task.description = 'baaaaaar'
       | task.save(['title']).success(function() {
       |  // title will now be 'foooo' but description is the very same as before
+      | })
+
+  section#instances-destroy
+    h3 Destroying/deleting instances
+
+    p
+      | Once you created an object and got a reference to it, you can delete it
+      | from the database. The relevant method is <code>destroy</code>:
+
+    pre.prettyprint.linenums
+      | Task.create({ title: 'a task' }).success(function(task) {
+      |   // now you see me...
+      |   task.destroy().success(function() {
+      |     // now i'm gone :)
+      |   })
       | })
 
   section#instances-configuration
