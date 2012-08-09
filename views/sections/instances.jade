@@ -76,6 +76,20 @@ section#instances
       |   // you can now access the newly created task via the variable task
       | })
 
+    p.v1-5-0
+      | Sequelize <code>v1.5.0</code> introduced the possibility to define
+      | attributes which can be set via the create method. This can be especially
+      | very handy if you create database entries based on a form which can be
+      | filled by a user. Using that would for example allow you to restrict the
+      | <code>User</code> model to set a username and an address but not an
+      | admin flag:
+
+    pre.prettyprint.linenums
+      | User.create({ username: 'barfooz', isAdmin: true }, [ 'username' ]).success(function(user) {
+      |   // let's assume the default of isAdmin is false:
+      |   console.log(user.values) // => { username: 'barfooz', isAdmin: false }
+      | })
+
   section#instances-update-save
     h3 Updating / Saving an instance
 
