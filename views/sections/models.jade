@@ -205,6 +205,17 @@ section#models
       | &nbsp;
       | Foo.method1()
       | Foo.build().method2()
+    p Of course you can also access the instance's data and generate virtual getters:
+    pre.prettyprint.linenums
+      | var User = sequelize.define('User', { firstname: Sequelize.STRING, lastname: Sequelize.STRING }, {
+      |   instanceMethods: {
+      |     getFullname: function() {
+      |       return [this.firstname, this.lastname].join(' ')
+      |     }
+      |   }
+      | })
+      | &nbsp;
+      | User.build({ firstname: 'foo', lastname: 'bar' }).getFullname() // 'foo bar'
 
   section#models-finders
     h3 Finders
