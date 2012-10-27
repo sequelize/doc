@@ -143,6 +143,10 @@ section#associations
       | // Since v1.5.0 you can also reference the same Model without creating a junction
       | // table. If you need that, use the option foreignKey and useJunctionTable:
       | Person.hasMany(Person, { as: 'Children', foreignKey: 'ParentId', useJunctionTable: false })
+      | &nbsp;
+      | // You can also use a predefined junction table using the option joinTableName:
+      | Project.hasMany(User, {joinTableName: 'project_has_users'})
+      | User.hasMany(Project, {joinTableName: 'project_has_users'})
 
     section#associations-associate-objects
       h3 Associate objects
