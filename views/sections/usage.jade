@@ -63,11 +63,23 @@ section#usage
       |   // - default: false
       |   omitNull: true,
       | &nbsp;
-      |   // specify options, which are used when sequelize.define is called
-      |   // the following example is basically the same as:
-      |   // sequelize.define(name, attributes, { timestamps: false })
+      |   // Specify options, which are used when sequelize.define is called.
+      |   // The following example:
+      |   //   define: {timestamps: false}
+      |   // is basically the same as:
+      |   //   sequelize.define(name, attributes, { timestamps: false })
       |   // so defining the timestamps for each model will be not necessary
-      |   define: { timestamps: false },
+      |   // Below you can see the possible keys for settings. All of them are explained on this page
+      |   define: {
+      |     underscored: false
+      |     freezeTableName: false,
+      |     syncOnAssociation: true,
+      |     charset: 'utf8',
+      |     collate: 'utf8_general_ci',
+      |     classMethods: {method1: function() {}},
+      |     instanceMethods: {method2: function() {}},
+      |     timestamps: true
+      |   },
       | &nbsp;
       |   // similiar for sync: you can define this to always force sync for models
       |   sync: { force: true }

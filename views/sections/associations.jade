@@ -179,6 +179,13 @@ section#associations
         | project.getTasks({ where: 'id > 10' }).success(function(tasks) {
         |   // tasks with an id greater than 10 :)
         | })
+        | &nbsp;
+        | // You can also only retrieve certain fields of a associated object.
+        | // This example will retrieve the attibutes <code>title</code> and <code>id</code>
+        | project.getTasks({attributes: ['title']}).success(function(tasks) {
+        |   // tasks with an id greater than 10 :)
+        | })
+        
 
       p To remove created associations you can just call the set method without a specific id:
 

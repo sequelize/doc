@@ -201,8 +201,7 @@ section#models
       |   }
       | })
       | &nbsp;
-      | // ==>
-      | &nbsp;
+      | // Example:
       | Foo.method1()
       | Foo.build().method2()
     p Of course you can also access the instance's data and generate virtual getters:
@@ -215,7 +214,29 @@ section#models
       |   }
       | })
       | &nbsp;
+      | // Example:
       | User.build({ firstname: 'foo', lastname: 'bar' }).getFullname() // 'foo bar'
+    p You can also set custom methods to all of your models during the instantiation:
+    pre.prettyprint.linenums
+      | var sequelize = new Sequelize('database', 'username', 'password', {
+      |   // Other options during the initialization could be here
+      |   define: {
+      |     classMethods: {
+      |       method1: function() {},
+      |       method2: function() {}
+      |     },
+      |     instanceMethods: {
+      |       method3: function() {}
+      |     }
+      |   }
+      | })
+      | &nbsp;
+      | // Example:
+      | var Foo = sequelize.define('Foo', { /* attributes */});
+      | Foo.method1()
+      | Foo.method2()
+      | Foo.build().method3()
+      
 
   section#models-finders
     h3 Finders
