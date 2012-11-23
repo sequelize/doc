@@ -22,12 +22,14 @@ section#usage
       |   host: "my.server.tld",
       |   port: 12345
       | })
-      | &nbsp;
+    
+    pre.prettyprint.linenums
       | // No need for password?
       | var sequelize = new Sequelize('database', 'username')
       | // or
       | var sequelize = new Sequelize('database', 'username', null)
-      | &nbsp;
+
+    pre.prettyprint.linenums
       | // All options at once:
       | var sequelize = new Sequelize('database', 'username', 'password', {
       |   // custom host; default: localhost
@@ -61,14 +63,29 @@ section#usage
       |   // - default: false
       |   omitNull: true,
       | &nbsp;
-      |   // specify options, which are used when sequelize.define is called
-      |   // the following example is basically the same as:
-      |   // sequelize.define(name, attributes, { timestamps: false })
+      |   // Specify options, which are used when sequelize.define is called.
+      |   // The following example:
+      |   //   define: {timestamps: false}
+      |   // is basically the same as:
+      |   //   sequelize.define(name, attributes, { timestamps: false })
       |   // so defining the timestamps for each model will be not necessary
-      |   define: { timestamps: false },
+      |   // Below you can see the possible keys for settings. All of them are explained on this page
+      |   define: {
+      |     underscored: false
+      |     freezeTableName: false,
+      |     syncOnAssociation: true,
+      |     charset: 'utf8',
+      |     collate: 'utf8_general_ci',
+      |     classMethods: {method1: function() {}},
+      |     instanceMethods: {method2: function() {}},
+      |     timestamps: true
+      |   },
       | &nbsp;
       |   // similiar for sync: you can define this to always force sync for models
       |   sync: { force: true }
+      | &nbsp;
+      |   // sync after each association (see below). If set to false, you need to sync manually after setting all associations. Default: true
+      |   syncOnAssociation: true
       | &nbsp;
       |   // use pooling in order to reduce db connection overload and to increase speed
       |   // currently only for mysql and postgresql (since v1.5.0)
@@ -82,54 +99,46 @@ section#usage
   section#usage-dialects.v1-4-0
     h3 SQL dialects
     p
-      | With v1.3.0 of Sequelize, it is possible to use non-mysql dialects.
-      | For now sqlite is available, but other dialects can and will be
-      | implemented. Here is how you do it.
-      | As describe before, you can pass the wanted dialect to the sequelize
-      | instantiation (and for sqlite define the storage):
-    pre.prettyprint.linenums
-      | // All options at once:
-      | var sequelize = new Sequelize('database', 'username', 'password', {
-      |   // the sql dialect of the database
-      |   // - default is 'mysql'
-      |   // - currently supported: 'mysql', 'sqlite', 'postgres'
-      |   dialect: 'mysql',
-      | &nbsp;
-      |   // the storage engine for sqlite
-      |   // - default ':memory:'
-      |   storage: 'path/to/database.sqlite'
-      | })
+      | The default dialect of Sequelize is <code>mysql</code>, but with version 1.3.0 the support
+      | for non-mysql dialects was implemented. For non-mysql dialects, the dependency of the used
+      | library needs to be specified in the <code>package.json</code> of your application. Below
+      | you can see the required libraries and how to add them.
 
     h4 SQLite
     p
-      | Due to the default of mysql you have to specifically install the sqlite
-      | library. In order to do this, just change the dependencies in your
-      | package.json and add <code>node-sqlite3</code>:
+      | When defining the dialect as <code>sqlite</code> you'll be able to access SQLite databases.
+      | As described above you need to specifically install the SQLite library <code>node-sqlite3</code>.
+      | In order to do this, just change the dependencies in your <code>package.json</code>:
     pre.prettyprint.linenums
       | {
       |   "name": "my project",
       |   // ...
       |   "dependencies": {
-      |     // ...
+      |     // Note: The ">="-operator is used for compatibility to Node 0.4 - 0.6
       |     "sqlite3": ">=2.0.0",
       |     "sequelize": "1.3.x",
       |     // ...
       |   }
       |   // ...
       | }
-    p
-      | That's it. Besides some strangeness in SQLite you won't notice any differences
-      | while using it with sequelize.
-    p
-      | Notice: The ">="-operator is used for compatibility to Node 0.4 - 0.6.
+    p Now you need to specify the options <code>dialect</code> and <code>storage</code> in your instantiation:
+    pre.prettyprint.linenums
+      | var sequelize = new Sequelize('database', 'username', 'password', {
+      |   // the sql dialect of the database
+      |   dialect: 'sqlite',
+      | &nbsp;
+      |   // the storage engine for sqlite
+      |   // - default ':memory:'
+      |   storage: 'path/to/database.sqlite'
+      |   // Of course all other options can be specified as well
+      | })
+    p That's it. Besides some strangeness in SQLite you won't notice any differences while using it with sequelize.
 
     h4.v1-4-0 PostgreSQL
     p
-      | When defining the dialect as <code>postgres</code> you'll be able
-      | to access PostgreSQL databases. The used and expected library is
-      | <code>pg</code>. Please install it before switching to
-      | <code>postgres</code> dialect. Again a recommendation for your
-      | <code>package.json</code>.
+      | When defining the dialect as <code>postgres</code> you'll be able to access PostgreSQL databases.
+      | As described above you need to specifically install the PostgreSQL library <code>pg</code>.
+      | In order to do this, just change the dependencies in your <code>package.json</code>:
     pre.prettyprint.linenums
       | {
       |   "name": "my project",
@@ -142,3 +151,11 @@ section#usage
       |   }
       |   // ...
       | }
+    p Now you need to specify the option <code>dialect</code> in your instantiation:
+    pre.prettyprint.linenums
+      | var sequelize = new Sequelize('database', 'username', 'password', {
+      |   // the sql dialect of the database
+      |   dialect: 'postgres'
+      |   // Of course all other options can be specified as well
+      | })
+    p That's it. You won't notice any differences while using it with sequelize.

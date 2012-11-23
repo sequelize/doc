@@ -66,6 +66,8 @@ section#instances
       |   .save()
       |   .success(function(anotherTask) {
       |     // you can now access the currently saved task with the variable anotherTask... nice!
+      |   }).error(function(error) {
+      |     // Ooops, do some error-handling
       |   })
 
   section#instances-create
@@ -153,7 +155,7 @@ section#instances
       |   define: { charset: 'latin1' }
       | })
 
-    p You can also change the database engine, e.g. to MyISAM. InnoDB is default since <code>v1.2.1</code>.
+    p You can also change the database engine, e.g. to MyISAM. InnoDB is default since v1.2.1 of Sequelize.
 
     pre.prettyprint.linenums
       | // charset only
@@ -170,10 +172,9 @@ section#instances
     h3 Values of an instance
 
     p
-      | If you log an instance you will notice, that there are a lot of
-      | additional stuff. In order to hide such stuff and reduce it to the very
-      | interesting information, you can use the <code>values</code>-attribute.
-      | Calling it will return only the values of an instance.
+      | If you log an instance you will notice, that there is a lot of additional stuff. In order
+      | to hide such stuff and reduce it to the very interesting information, you can use the
+      | <code>values</code>-attribute. Calling it will return only the values of an instance.
 
     pre.prettyprint.linenums
       | Person.create({
