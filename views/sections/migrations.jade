@@ -200,21 +200,28 @@ section#migrations
       | migration.renameColumn('Person', 'signature', 'sig')
 
     h4 addIndex(tableName, attributes, options)
-    p This methods creates indexes for specific attributes of a table. The index name will be automatically generate if it is not passed via in the options (indexName).
+    p
+      | This methods creates indexes for specific attributes of a table. The index name will be
+      | automatically generated if it is not passed via in the options (See below).
     pre.prettyprint.linenums
+      | // This example will create the index person_firstname_lastname
       | migration.addIndex('Person', ['firstname', 'lastname'])
-      | // will create the index person_firstname_lastname
-      | &nbsp;
-      | // or with options
-      | &nbp;
+
+    pre.prettyprint.linenums
+      | // This example will create a unique index with the name SuperDuperIndex using the optional 'options' field.
+      | // Possible options:
+      | // - indicesType: UNIQUE|FULLTEXT|SPATIAL
+      | // - indexName: The name of the index. Default is <tableName>_<attrName1>_<attrName2>
+      | // - parser: For FULLTEXT columns set your parser
+      | // - indexType: Set a type for the index, e.g. BTREE. See the documentation of the used dialect
       | migration.addIndex(
       |   'Person',
       |   ['firstname', 'lastname'],
       |   {
-      |     indexName: 'SuperDuperIndex'
+      |     indexName: 'SuperDuperIndex',
+      |     indicesType: 'UNIQUE'
       |   }
       | )
-      | // will create the index SuperDuperIndex
 
     h4 showIndex(tableName, options)
     p This method returns all indexes on the table.

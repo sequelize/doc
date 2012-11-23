@@ -144,6 +144,10 @@ section#associations
       | // table (but only if each object will have just one 'parent'). If you need that, 
       | // use the option foreignKey and useJunctionTable:
       | Person.hasMany(Person, { as: 'Children', foreignKey: 'ParentId', useJunctionTable: false })
+      | &nbsp;
+      | // You can also use a predefined junction table using the option joinTableName:
+      | Project.hasMany(User, {joinTableName: 'project_has_users'})
+      | User.hasMany(Project, {joinTableName: 'project_has_users'})
 
     section#associations-associate-objects
       h3 Associate objects
@@ -176,6 +180,13 @@ section#associations
         | project.getTasks({ where: 'id > 10' }).success(function(tasks) {
         |   // tasks with an id greater than 10 :)
         | })
+        | &nbsp;
+        | // You can also only retrieve certain fields of a associated object.
+        | // This example will retrieve the attibutes <code>title</code> and <code>id</code>
+        | project.getTasks({attributes: ['title']}).success(function(tasks) {
+        |   // tasks with an id greater than 10 :)
+        | })
+        
 
       p To remove created associations you can just call the set method without a specific id:
 
