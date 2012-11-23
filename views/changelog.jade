@@ -1,0 +1,16 @@
+!= partial('introduction')
+
+.page-header
+  h2 Changelog
+
+section#changelog
+  .subnav
+    ul.nav.nav-pills
+      - var versions = changelog.match(/<h.>(.+)<\/h.>/g)
+      - versions.splice(0, 15).forEach(function(version) {
+        - version = version.replace('<h1>', '').replace('</h1>', '')
+        li
+          a(href='#changelog-' + version)= version
+      - })
+
+  != changelog.replace(/<h1>/g, '<h3>').replace(/(<h.>)(.+?)(<\/h.>)/g, '<div class="page-header" id="changelog-$2">$1$2$3</div>')

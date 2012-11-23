@@ -3,11 +3,13 @@
     .nav-collapse
       ul.nav
         li(class=(activeSection == 'Home' ? 'active' : ''))
-          a(href='#home') Home
+          a(href='/#home') Home
         - each section in sections
           li
-            a(href="#" + toSlug(section))= section
+            a(href="/#" + toSlug(section))= section
       ul.nav.right
+        li(class=(activeSection == 'Changelog' ? 'active' : ''))
+          a(href='/changelog') Changelog
         li(class=(activeSection == 'Blog' ? 'active' : ''))
           a(href="http://blog.sequelizejs.com") Blog
         li

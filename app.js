@@ -50,6 +50,14 @@ app.get('/', function(req, res) {
   res.render('index', getLocals())
 })
 
+app.get('/changelog', function(req, res) {
+  var locals = getLocals()
+
+  locals.changelog = Application.getChangelog()
+
+  res.render('changelog', locals)
+})
+
 app.get('/blog-layout', function(req, res) {
   var locals = getLocals()
 
