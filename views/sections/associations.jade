@@ -141,7 +141,8 @@ section#associations
       | // This will create the table ChildrenPersons which stores the ids of the objects.
       | &nbsp;
       | // Since v1.5.0 you can also reference the same Model without creating a junction
-      | // table. If you need that, use the option foreignKey and useJunctionTable:
+      | // table (but only if each object will have just one 'parent'). If you need that, 
+      | // use the option foreignKey and useJunctionTable:
       | Person.hasMany(Person, { as: 'Children', foreignKey: 'ParentId', useJunctionTable: false })
 
     section#associations-associate-objects
