@@ -10,6 +10,8 @@ section#associations
       li
         a(href='#associations-associate-objects') Associate objects
       li
+        a(href='#associations-fetch-related-objects') Fetch related objects
+      li
         a(href='#associations-check-associations') Check associations
 
   p
@@ -161,32 +163,21 @@ section#associations
         | Project.hasMany(Task)
         | Task.hasMany(Project)
         | &nbsp;
-        | Project.create()...
-        | Task.create()...
-        | Task.create()...
+        | var project = Project.create()...
+        | var task1 = Task.create()...
+        | var task2 = Task.create()...
         | &nbsp;
-        | // save them... and then:
-        | project.setTasks([task1, task2]).success(function() {
-        |   // saved!
-        | })
+        | // save them
+        | project.save().success(...)
+        | task1.save().success(...)
+        | task2.save().success(...)
         | &nbsp;
-        | // ok now they are save... how do I get them later on?
-        | project.getTasks().success(function(associatedTasks) {
-        |   // associatedTasks is an array of tasks
-        | })
+        | // associate them
+        | project.setTasks([task1, task2]).success(function(associatedTasks) {
+        |   // many-to-many relationship saved
+        |   // through creation of new ProjectTasks models
+        | });
         | &nbsp;
-        | // You can also pass filters to the getter method.
-        | // They are equal to the options you can pass to a usual finder method.
-        | project.getTasks({ where: 'id > 10' }).success(function(tasks) {
-        |   // tasks with an id greater than 10 :)
-        | })
-        | &nbsp;
-        | // You can also only retrieve certain fields of a associated object.
-        | // This example will retrieve the attibutes <code>title</code> and <code>id</code>
-        | project.getTasks({attributes: ['title']}).success(function(tasks) {
-        |   // tasks with an id greater than 10 :)
-        | })
-        
 
       p To remove created associations you can just call the set method without a specific id:
 
@@ -222,6 +213,48 @@ section#associations
       pre.prettyprint.linenums
         | Task.hasOne(User, {as: "Author"})
         | Task#setAuthor(anAuthor)
+
+    section#associations-fetch-related-objects
+      h3 Fetch related objects
+
+      pre.prettyprint.linenums
+        | // create and persist project, task1, task2 as above
+        | &nbsp;
+        | // associate the tasks to the project
+        | project.setTasks([task1, task2]).success(function() {
+        |   // saved!
+        | });
+        |
+        | // ok now relations are saved... how do you get them later on?
+        | project.getTasks().success(function(associatedTasks) {
+        |   // associatedTasks is an array of tasks
+        | })
+        | &nbsp;
+        | // you can also pass filters to the getter method.
+        | // they are equal to the options you can pass to a usual finder method.
+        | project.getTasks({ where: 'id > 10' }).success(function(tasks) {
+        |   // tasks with an id greater than 10 :)
+        | })
+        | &nbsp;
+        | // you can also only retrieve certain fields of a associated object.
+        | // this example will retrieve the attibutes `title` and `id`
+        | project.getTasks({attributes: ['title']}).success(function(tasks) {
+        |   // tasks with an id greater than 10 :)
+        | })
+
+      p
+        | Sequelize <code>v1.6.0</code> introduced prefetching of related objects
+        | for <code>find()</code> and <code>findAll()</code>, using the new 
+        | <code>include</code> query operator.
+        | Here is how to fetch a phone numbers and its owner in one query:
+
+      pre.prettyprint.linenums
+        | PhoneNumber.find({ where: { id: 123 }, include: ['Person'] }).success(function(phoneNumber) {
+        |   // now instead of using the getPerson() asynchronous accessor
+        |   // you can access the `person` property directly, synchronously,
+        |   // and this won't issue another query
+        |   console.log(phoneNumber.person.firstName);
+        | });
 
     section#associations-check-associations
       h3.v1-5-0 Check associations
