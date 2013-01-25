@@ -68,6 +68,12 @@ section#associations
       | Person#setFather
       | Person#getFather
       | &nbsp;
+      | // If you need to join a table twice you can double join the same table
+      | Team.hasOne(Game, {foreignKey : 'homeTeamId'});
+      |     .hasOne(Game, {foreignKey , 'awayTeamId'});
+      | Game.belongsTo(Team);
+      | &nbsp;
+      | &nbsp;
       | // Since v1.3.0 you can also chain associations:
       | Project
       |   .hasOne(User)
@@ -148,6 +154,21 @@ section#associations
       | // You can also use a predefined junction table using the option joinTableName:
       | Project.hasMany(User, {joinTableName: 'project_has_users'})
       | User.hasMany(Project, {joinTableName: 'project_has_users'})
+      | &nbsp;
+      | // If you need your association table to have additional attributes, an alternative
+      | // way to do this would be to define the table and then use two hasMany relationship.
+      | &nbsp;
+      | UserProject = sequelize.define('user_projects',{
+      |    count : Sequelize.INTEGER
+      | })
+      | &nbsp;
+      | Project.hasMany(UserProjects);
+      | User.hasMany(UserProjects);
+      | UserProject.belongsTo(User);
+      | UserProject.belongsTo(Project);
+      | &nbsp;
+      | // NOTE : this does NOT allow you direct access from Project to User. You can access
+      | // UserProject which will give you access to the User, but it is not a direct relationship
 
     section#associations-associate-objects
       h3 Associate objects
