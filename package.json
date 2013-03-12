@@ -4,8 +4,20 @@
   "version": "1.0.1",
   "homepage": "http://sequelizejs.com",
   "author": "Sascha Depold <sascha@depold.com> (http://depold.com)",
+  "contributors": [
+    {
+      "name": "Sascha Depold",
+      "email": "sascha@depold.com",
+      "web": "http://depold.com"
+    },
+    {
+      "name": "Uli Wolf",
+      "email": "github@wolf-u.li",
+      "web": "http://wolf-u.li"
+    }
+  ],
   "dependencies": {
-    "express": "2.5.8",
+    "express": "2.5.9",
     "ejs": "*",
     "jade": "*",
     "less": "*",

@@ -57,7 +57,10 @@ section#usage
       | &nbsp;
       |   // the storage engine for sqlite
       |   // - default ':memory:'
-      |   storage: 'path/to/database.sqlite',
+      |   //storage: 'path/to/database.sqlite',
+      | &nbsp;
+      |   // Enable the native postgres client to allow passwordless logins
+      |   //native: false
       | &nbsp;
       |   // disable inserting undefined values as NULL
       |   // - default: false
@@ -88,8 +91,15 @@ section#usage
       |   syncOnAssociation: true,
       | &nbsp;
       |   // use pooling in order to reduce db connection overload and to increase speed
-      |   // currently only for mysql and postgresql (since v1.5.0)
-      |   pool: { maxConnections: 5, maxIdleTime: 30}
+      |   // currently only for MySQL and postgresql (since v1.5.0)
+      |   // - 'minConnections' defines how many connections are at least opened (only MySQL, since v1.6.0-beta-3)
+      |   // - 'maxConnections' defines how many connections are at max opened
+      |   // - 'maxIdleTime' defines how long a connection can be in idle before it is closed
+      |   pool: {
+      |     minConnections: 0,
+      |     maxConnections: 10,
+      |     maxIdleTime: 30
+      |   }
       | })
 
     p.v1-4-0
