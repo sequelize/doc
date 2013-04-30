@@ -1,0 +1,11 @@
+{
+  "name": "js",
+  "version": "0.0.0",
+  "dependencies": {
+    "bootstrap": "git://github.com/sdepold/bootstrap.git#~2.3.1",
+    "es5-shim": "git://github.com/kriskowal/es5-shim#2.0.5",
+    "prism": "git://github.com/LeaVerou/prism.git",
+    "Font-Awesome": "git://github.com/FortAwesome/Font-Awesome.git#3.0.2",
+    "jquery_viewport": "git://github.com/sdepold/jquery_viewport.git#0.1.0"
+  }
+}
