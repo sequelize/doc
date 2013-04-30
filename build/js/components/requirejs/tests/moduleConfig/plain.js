@@ -1,1 +1,0 @@
-define(["require","exports","module"],function(e,t,n){return{id:"plain"+(n.config().foo||"")}});

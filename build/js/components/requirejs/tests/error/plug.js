@@ -1,1 +1,0 @@
-define({load:function(e,t,n,r){if(e==="broken"){var i=new Error("broken");i.plugMessage=e,n.error(i)}else n(e)}});

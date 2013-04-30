@@ -1,1 +1,0 @@
-define(["text!component.html"],function(e){return{name:"component",html:e}});

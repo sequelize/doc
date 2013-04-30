@@ -1,1 +1,0 @@
-define(["require","slowText!toolbar.html"],function(e){return{name:"toolbar",template:e("slowText!toolbar.html")}});

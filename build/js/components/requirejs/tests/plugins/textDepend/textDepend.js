@@ -1,1 +1,0 @@
-define(["text!test.txt"],function(e){return{load:function(t,n,r,i){r(e)}}});

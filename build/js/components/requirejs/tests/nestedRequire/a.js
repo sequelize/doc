@@ -1,1 +1,0 @@
-define(["base"],function(e){return{name:"a",counter:0,doSomething:function(){this.counter+=1,this.base=e,require(["base"],function(){})}}});

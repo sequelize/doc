@@ -1,1 +1,0 @@
-define(["component"],function(e){return{name:"collectionHelper",componentName:e.name,componentHtml:e.html}});

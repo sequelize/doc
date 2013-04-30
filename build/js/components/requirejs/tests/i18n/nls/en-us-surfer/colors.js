@@ -1,1 +1,0 @@
-define({red:"red, dude",black:{opacity:.5}});

@@ -1,1 +1,0 @@
-define(["chaplin"],function(e){return e.Layout.extend({})});

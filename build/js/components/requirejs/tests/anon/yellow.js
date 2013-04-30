@@ -1,1 +1,0 @@
-define("yellow",{name:"yellow"});

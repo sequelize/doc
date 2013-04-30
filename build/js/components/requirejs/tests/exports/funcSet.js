@@ -1,1 +1,0 @@
-define("funcSet",["require","exports","module"],function(e,t,n){n.exports="funcSet"});

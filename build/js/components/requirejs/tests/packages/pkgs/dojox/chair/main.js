@@ -1,1 +1,0 @@
-define(["./legs"],function(e){return{name:"dojox/chair",legsName:e.name}});

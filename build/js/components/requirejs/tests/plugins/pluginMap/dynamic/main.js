@@ -1,1 +1,0 @@
-require({map:{"*":{person:"employee"},employee:{person:"person"}}},["application"],function(e){doh.register("pluginMapDynamic",[function(n){n.is("application",e.name),n.is("employed person",e.person.name)}]),doh.run()});
