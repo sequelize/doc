@@ -1,0 +1,7 @@
+<div class="row">
+  <div class="span12">
+    <% ['definition', 'data_types', 'validations', 'configuration', 'import', 'synchronization', 'expansion', 'data_retrieval', 'eager_loading'].each do |section| %>
+      <%= markdown("documentation/sections/models/#{section}".to_sym) %>
+    <% end %>
+  </div>
+</div>

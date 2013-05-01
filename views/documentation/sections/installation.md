@@ -1,5 +1,3 @@
-## Installation
-
 You have two options to install Sequelize:
 
 1\. Install it via NPM:

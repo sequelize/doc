@@ -2,14 +2,12 @@ require 'sinatra'
 require 'redcarpet'
 
 class SequelizeRenderer < Redcarpet::Render::HTML
-  def header(text, header_level)
-    result = "<h#{header_level}>#{text}</h#{header_level}>"
+  def doc_header
+    '<div class="row"><div class="span12">'
+  end
 
-    if header_level == 2
-      result = "<div class=\"page-header\">#{result}</div>"
-    end
-
-    result
+  def doc_footer
+    '</div></div>'
   end
 end
 

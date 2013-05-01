@@ -1,0 +1,7 @@
+<div class="row">
+  <div class="span12">
+    <% ['teaser', 'one_to_one', 'one_to_many', 'many_to_many', 'associating', 'check'].each do |section| %>
+      <%= markdown("documentation/sections/associations/#{section}".to_sym) %>
+    <% end %>
+  </div>
+</div>

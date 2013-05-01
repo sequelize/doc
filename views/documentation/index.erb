@@ -1,3 +1,5 @@
+<% sections = ['Installation', 'Usage', 'Models', 'Instances', 'Associations', 'Migrations', 'Utils', 'Misc'] %>
+
 <header class="jumbotron subhead" id="overview">
   <div class="row">
     <div class="span12">
@@ -16,11 +18,20 @@
   </div>
 </header>
 
-<section id="installation"><%= markdown 'documentation/sections/installation'.to_sym %></section>
-<section id="usage"></section>
-<section id="models"></section>
-<section id="instances"></section>
-<section id="associations"></section>
-<section id="migrations"></section>
-<section id="utils"></section>
-<section id="misc"></section>
+
+<% sections.each do |section| %>
+  <section id="<%= section.downcase %>">
+    <div class="page-header"><h2><%= section %></h2></div>
+    <%=
+      begin
+        markdown("documentation/sections/#{section.downcase}".to_sym)
+      rescue
+        begin
+          erb("documentation/sections/#{section.downcase}".to_sym)
+        rescue
+          ''
+        end
+      end
+    %>
+  </section>
+<% end %>

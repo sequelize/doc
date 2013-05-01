@@ -2,6 +2,10 @@ body {
   padding-top: 100px;
 }
 
+strong {
+  font-family: Tahoma,sans-serif;
+}
+
 .jumbotron, .documentation.index > section {
   margin-bottom: 70px;
 }
