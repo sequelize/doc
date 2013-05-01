@@ -1,22 +1,15 @@
 require 'sinatra'
 require 'redcarpet'
 
-class SequelizeRenderer < Redcarpet::Render::HTML
-  def doc_header
-    '<div class="row"><div class="span12">'
-  end
-
-  def doc_footer
-    '</div></div>'
-  end
-end
+require './lib/sequelize_renderer'
+require './lib/helpers'
 
 set :markdown, :renderer => SequelizeRenderer, :fenced_code_blocks => true, :strikethrough => true
 
 get '/' do
-  def markdown
-  Redcarpet::Markdown.new(SequelizeRenderer, :fenced_code_blocks => true)
-end
+  html  = erb('documentation/index'.to_sym)
+  items = Helpers.find_navigation_items(html)
+  html  = Helpers.inject_navigation(items, html)
 
-  erb 'documentation/index'.to_sym
+  html
 end

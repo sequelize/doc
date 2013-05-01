@@ -16,11 +16,28 @@
   </head>
 
   <body data-spy="scroll" data-target=".subnav" data-offset="80">
-    <nav></nav>
+    <nav>
+      <%= erb :navigation %>
+    </nav>
     <div class="container">
       <%= yield %>
     </div>
 
-    <script type="text/javascript" src="/js/components/prism/prism.js"></script>
+    <script src="/js/components/jquery/jquery.js"></script>
+    <script src="/js/components/bootstrap/js/bootstrap-affix.js"></script>
+    <script src="/js/components/bootstrap/js/bootstrap-alert.js"></script>
+    <script src="/js/components/bootstrap/js/bootstrap-button.js"></script>
+    <script src="/js/components/bootstrap/js/bootstrap-carousel.js"></script>
+    <script src="/js/components/bootstrap/js/bootstrap-collapse.js"></script>
+    <script src="/js/components/bootstrap/js/bootstrap-dropdown.js"></script>
+    <script src="/js/components/bootstrap/js/bootstrap-modal.js"></script>
+    <script src="/js/components/bootstrap/js/bootstrap-tooltip.js"></script>
+    <script src="/js/components/bootstrap/js/bootstrap-popover.js"></script>
+    <script src="/js/components/bootstrap/js/bootstrap-scrollspy.js"></script>
+    <script src="/js/components/bootstrap/js/bootstrap-tab.js"></script>
+    <script src="/js/components/bootstrap/js/bootstrap-transition.js"></script>
+    <script src="/js/components/bootstrap/js/bootstrap-typeahead.js"></script>
+    <script src="/js/components/prism/prism.js" data-manual></script>
+    <script src="/js/application.js"></script>
   </body>
 </html>
