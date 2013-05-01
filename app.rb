@@ -11,7 +11,7 @@ class SequelizeRenderer < Redcarpet::Render::HTML
   end
 end
 
-set :markdown, :renderer => SequelizeRenderer, :fenced_code_blocks => true
+set :markdown, :renderer => SequelizeRenderer, :fenced_code_blocks => true, :strikethrough => true
 
 get '/' do
   def markdown
