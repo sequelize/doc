@@ -8,7 +8,6 @@ set :markdown, :renderer => SequelizeRenderer, :fenced_code_blocks => true, :str
 
 get '/' do
   html = erb('documentation/index'.to_sym)
-  html = Helpers.inject_sub_navigation(html)
-  # html = Helpers.inject_navigation(html)
+  html = Helpers.inject_navigation(html)
   html
 end

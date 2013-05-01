@@ -1,76 +1,76 @@
 class Helpers
   require 'nokogiri'
 
-  def self.inject_sub_navigation(document)
-    doc = Nokogiri::HTML(document)
+  def self.inject_navigation(document)
+    doc         = Nokogiri::HTML(document)
+    navigation  = doc.at_css('.nav.dynamic')
+    nav_content = ""
 
     doc.css('section').each do |section|
-      section_id = section.at_css('h2').content.downcase
-      sub_nav    = '<div class="subnav"><ul class="nav nav-pills">'
+      section_id   = section["id"]
+      section_name = section.at_css('h2').content
 
-      section.css('h3').each do |h3|
-        h3_id = "#{section_id}-#{h3.content.downcase.gsub(/\W/, '-')}"
-        h3.parent.parent["id"] = h3_id
+      if section.css('h3').size == 0
+        nav_content += navigation_item(section_id, section_name)
+      else
+        sub_nav = '<div class="subnav"><ul class="nav nav-pills">'
+        items   = []
 
-        if h3.parent.css('h4').size == 0
-          sub_nav += "<li><a href='##{h3_id}'>#{h3.content}</a></li>"
-        else
-          sub_nav += <<-HTML
-            <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                #{h3.content}
-                <b class="caret"></b>
-              </a>
-              <ul class="dropdown-menu">
-          HTML
+        section.css('h3').each do |h3|
+          h3_id = "#{section_id}-#{h3.content.downcase.gsub(/\W/, '-')}"
+          h3.parent.parent["id"] = h3_id
 
-          h3.parent.css('h4').each do |h4|
-            h4_id    = "#{h3_id}-#{h4.content.downcase.gsub(/\W/, '-')}"
-            h4["id"] = h4_id
-            sub_nav += "<li><a href='##{h4_id}'>#{h4.content}</a></li>"
+          items << { :identifier => h3_id, :label => h3.content }
+
+          if h3.parent.css('h4').size == 0
+            sub_nav += navigation_item(h3_id, h3.content)
+          else
+            items = h3.parent.css('h4').map do |h4|
+              h4_id    = "#{h3_id}-#{h4.content.downcase.gsub(/\W/, '-')}"
+              h4["id"] = h4_id
+
+              { :identifier => h4_id, :label => h4.content }
+            end
+
+            sub_nav += navigation_group(h3.content, items)
           end
-
-          sub_nav += <<-HTML
-              </ul>
-            </li>
-          HTML
         end
+
+        sub_nav += "</ul></div>"
+
+        section.at_css('.page-header').inner_html += sub_nav
+        nav_content += navigation_group(section_name, items)
       end
-
-      sub_nav += "</ul></div>"
-      section.at_css('.page-header').inner_html += sub_nav
     end
+
+    navigation.inner_html = nav_content
 
     doc.to_html
   end
 
-  def self.find_navigation_items(document)
-    doc   = Nokogiri::HTML(document)
-    items = []
+private
 
-    doc.css('section').map do |section|
-      items << {
-        :title => section.at_css('h2').content,
-        :url   => section['id']
-      }
-    end
-
-    items
+  def self.navigation_item(identifier, label)
+    "<li><a href='##{identifier}'>#{label}</a></li>"
   end
 
-  def self.inject_navigation(items, document)
-    doc     = Nokogiri::HTML(document)
-    nav     = doc.at_css('.nav.dynamic')
-    content = ""
+  def self.navigation_group(label, items)
+    html = <<-HTML
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+          #{label}
+          <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+    HTML
 
-    puts items.inspect
+    items.each{ |item| html += navigation_item(item[:identifer], item[:label]) }
 
-    items.each do |item|
-      content += "<li><a href='##{item[:title]}'>#{item[:title]}</a></li>"
-    end
+    html += <<-HTML
+        </ul>
+      </li>
+    HTML
 
-    nav.inner_html = content
-
-    doc.to_html
+    html
   end
 end
