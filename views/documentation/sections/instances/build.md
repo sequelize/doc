@@ -1,4 +1,4 @@
-### Building a not-persistant instance
+### Building a not-persistant instance | Build
 
 In order to create instances of defined classes just do as follows. You might recognize the syntax if you coded Ruby in the past. Using the `build`-method will return an unsaved object, which you explicitly have to save.
 

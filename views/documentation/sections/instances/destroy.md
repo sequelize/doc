@@ -1,4 +1,4 @@
-### Destroying / Deleting persistant instances
+### Destroying / Deleting persistant instances | Destroy
 
 Once you created an object and got a reference to it, you can delete it from the database. The relevant method is `destroy`:
 

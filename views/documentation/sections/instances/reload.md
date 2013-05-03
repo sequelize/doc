@@ -1,4 +1,4 @@
-### Reloading instances
+### Reloading instances | Reload
 
 If you need to get your instance in sync, you can use the method `reload`. It will fetch the current data from the database and overwrite the attributes of the model on which the method has been called on.
 

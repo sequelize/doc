@@ -1,4 +1,4 @@
-### Decrementing certain values of an instance
+### Decrementing certain values of an instance | Decrement
 
 In order to decrement values of an instance without running into concurrency issues, you may use `decrement`.
 

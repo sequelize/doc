@@ -1,4 +1,4 @@
-### Creating persistant instances
+### Creating persistant instances | Create
 
 Besides constructing objects, that needs an explicit save call to get stored in the database, there is also the possibility to do all those steps with one single command. It's called `create`.
 

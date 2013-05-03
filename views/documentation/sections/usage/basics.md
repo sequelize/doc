@@ -1,4 +1,4 @@
-### Basic usage
+### Basic usage | Basics
 
 To get the ball rollin' you first have to create an instance of Sequelize. Use it the following way:
 

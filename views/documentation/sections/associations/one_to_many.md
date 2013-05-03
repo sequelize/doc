@@ -1,4 +1,4 @@
-### One-To-Many associations
+### One-To-Many associations | One-To-Many
 
 One-To-Many associations are connecting one source with multiple targets. The targets however are again connected to exactly one specific source.
 

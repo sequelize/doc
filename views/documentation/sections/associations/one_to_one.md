@@ -1,4 +1,4 @@
-### One-To-One associations
+### One-To-One associations | One-To-One
 
 One-To-One associations are connecting one source with exactly one target. In order to define a proper database schema, Sequelize utilizes the methods `belongsTo` and `hasOne`. You can use them as follows:
 

@@ -1,4 +1,4 @@
-### Additional links
+### Additional links | Links
 
 If you want to keep track about latest development of sequelize or to just discuss things with other sequelize users you might want to take a look at the following resources:
 
