@@ -19,4 +19,12 @@ class SequelizeRenderer < Redcarpet::Render::HTML
   def doc_footer
     '</div></div>'
   end
+
+  def link(link, title, content)
+    html = "<a href='#{link}'"
+    html += " title='#{title}'" if title.to_s != ''
+    html += " rel='nofollow' target='_blank'" if link.start_with?('http')
+    html += ">#{content}</a>"
+    html
+  end
 end
