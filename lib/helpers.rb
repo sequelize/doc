@@ -5,13 +5,18 @@ class Helpers
     doc         = Nokogiri::HTML(document)
     navigation  = doc.at_css('.nav.dynamic')
     nav_content = ""
+    etc_items   = []
 
-    doc.css('section').each do |section|
+    doc.css('section').each_with_index do |section, i|
       section_name = section.at_css('h3')["data-nav-value"] || section.at_css('h3').content
       section_id   = section["id"] || (section["id"] = section_name.downcase.gsub(/\W/, '-'))
 
       if section.css('h4').size == 0
-        nav_content += navigation_item(section_id, section_name)
+        if i < 10
+          nav_content += navigation_item(section_id, section_name)
+        else
+          etc_items << { :identifier => section_id, :label => section_name }
+        end
       else
         sub_nav   = '<div class="subnav"><ul class="nav nav-pills">'
         sub_items = []
@@ -48,6 +53,10 @@ class Helpers
 
         nav_content += navigation_group(section_name, nav_items)
       end
+    end
+
+    if etc_items.size > 0
+      nav_content += navigation_group('...', etc_items)
     end
 
     navigation.inner_html = nav_content
