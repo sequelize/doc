@@ -1,4 +1,4 @@
-### Spawning a database on Heroku
+## Spawning a database on Heroku | Spawn the database
 
 In order to get a database on Heroku we can use their CLI. Just run the following command and take a closer look at it's output:
 

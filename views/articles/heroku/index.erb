@@ -20,9 +20,11 @@
 </header>
 
 <% sections.each do |section| %>
-  <div class="row">
-    <div class="span12">
-      <%= markdown("articles/heroku/_#{section.downcase}".to_sym) %>
+  <section>
+    <div class="row">
+      <div class="span12">
+        <%= markdown("articles/heroku/_#{section.downcase}".to_sym) %>
+      </div>
     </div>
-  </div>
+  </section>
 <% end %>

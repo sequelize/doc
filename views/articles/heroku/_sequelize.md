@@ -1,4 +1,4 @@
-### Adding Sequelize to the application
+## Adding Sequelize to the application | Adding Sequelize
 
 The following commands will install `sequelize`, the needed PostgreSQL library as well as the MySQL bindings. Also we will create a folder `models`, that will contain the model definitions.
 
@@ -7,7 +7,7 @@ npm install --save sequelize pg mysql
 mkdir models
 ```
 
-#### app.js
+###app.js
 
 In order to create a maintainable application, we will put all the database logic into the `models` folder. The application's main file will then just sync the models with the database and run the server. This way we don't clutter the application.
 
@@ -51,7 +51,7 @@ db.sequelize.sync().complete(function(err) {
 })
 ```
 
-#### models/index.js
+###models/index.js
 
 The idea of this file is to configure a connection to the database and to collect all model definitions. Once everything is in place we will store the stuff in a singleton. This will make it possible to load the file whenever we need database access without running into issues with duplicated database access.
 
@@ -95,7 +95,7 @@ if (!global.hasOwnProperty('db')) {
 module.exports = global.db
 ```
 
-#### models/user.js
+###models/user.js
 
 All the other models of our application will be located as separate files in the `models` folder. We will use the `import`-method of Sequelize to load those files.
 

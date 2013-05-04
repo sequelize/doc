@@ -7,8 +7,8 @@ class Helpers
     nav_content = ""
 
     doc.css('section').each do |section|
-      section_id   = section["id"]
-      section_name = section.at_css('h2').content
+      section_name = section.at_css('h2')["data-nav-value"] || section.at_css('h2').content
+      section_id   = section["id"] || (section["id"] = section_name.downcase.gsub(/\W/, '-'))
 
       if section.css('h3').size == 0
         nav_content += navigation_item(section_id, section_name)
@@ -42,7 +42,10 @@ class Helpers
 
         sub_nav += "</ul></div>"
 
-        section.at_css('.page-header').inner_html += sub_nav
+        if section.css('.page-header').size != 0
+          section.at_css('.page-header').inner_html += sub_nav
+        end
+
         nav_content += navigation_group(section_name, nav_items)
       end
     end

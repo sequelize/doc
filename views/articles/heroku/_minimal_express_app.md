@@ -1,4 +1,4 @@
-### A minimal express application
+## A minimal express application | Minimal express app
 
 In order to create a minimal express application, we need to install express first. We can do this via the following commands:
 
