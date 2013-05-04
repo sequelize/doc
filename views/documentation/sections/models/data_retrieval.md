@@ -1,8 +1,8 @@
-### Data retrieval a.k.a. finders | Finders
+#### Data retrieval a.k.a. finders | Finders
 
 Finder methods are designed to get data from the database. The returned data isn't just a plain object, but instances of one of the defined classes. Check the next major chapter about instances for further information. But as those things are instances, you can e.g. use the just describe expanded instance methods. So, here is what you can do:
 
-#### find - Search for one specific element in the database | find
+##### find - Search for one specific element in the database | find
 
 ```js
 // search for known ids
@@ -26,7 +26,7 @@ Project.find({
 })
 ```
 
-#### findOrCreate - Search for a specific element or create it if not available | findOrCreate
+##### findOrCreate - Search for a specific element or create it if not available | findOrCreate
 
 The method `findOrCreate` can be used to check if a certain element is already existing in the database. If that is the case the method will result in a respective instance. If the element does not yet exist, it will be created.
 
@@ -72,7 +72,7 @@ User.create({ username: 'fnord', job: 'omnomnom' }).success(function() {
 
 ... the existing entry will not be changed. See the `job` of the second user.
 
-#### findAll - Search for multiple elements in the database | findAll
+##### findAll - Search for multiple elements in the database | findAll
 
 ```js
 // find multiple entries
@@ -122,7 +122,7 @@ Project.findAll({limit: 10})
 Project.findAll({offset: 10, limit: 2})
 ```
 
-#### count - Count the occurences of elements in the database | count
+##### count - Count the occurences of elements in the database | count
 
 There is also a method for counting database objects:
 
@@ -136,7 +136,7 @@ Project.count({ where: ["id > ?", 25] }).success(function(c) {
 })
 ```
 
-#### max - Get the greatest value of a specific attribute within a specific table | max
+##### max - Get the greatest value of a specific attribute within a specific table | max
 
 And here is a method for getting the max value of an attribute:
 

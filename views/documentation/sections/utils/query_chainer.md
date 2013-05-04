@@ -1,4 +1,4 @@
-### QueryChainer
+#### QueryChainer
 
 Because you will want to save/create/delete several items at once and just go on after all of them are saved, Sequelize provides the `QueryChainer` module. It can be used like this:
 

@@ -1,4 +1,4 @@
-### Definition
+#### Definition
 
 To define mappings between a model and a table, use the `define` method. Sequelize will then automatically add the attributes `createdAt` and `updatedAt` to it. So you will be able to know when the database entry went into the db and when it was updated the last time.
 

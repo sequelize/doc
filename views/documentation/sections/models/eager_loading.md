@@ -1,4 +1,4 @@
-### Eager loading
+#### Eager loading
 
 When you are retrieving data from the database there is a fair chance that you also want to get their associations. This is possible since `v1.6.0` and is called eager loading. The basic idea behind that, is the use of the attribute `include` when you are calling `find` or `findAll`. Lets assume the following setup:
 

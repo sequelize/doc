@@ -1,4 +1,4 @@
-### The binary
+#### The binary
 
 In order to run migrations, sequelize comes with a handy binary file which can setup your project and run migrations. The following snippet shows the possible things:
 

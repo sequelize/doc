@@ -1,4 +1,4 @@
-### Skeleton
+#### Skeleton
 
 The following skeleton shows a typical migration file. All migrations are expected to be located in a folder called `migrations` at the very top of the project. Sequelize `1.4.1` added the possibility to let the sequelize binary generate a migration skeleton. See the aboves section for more details.
 

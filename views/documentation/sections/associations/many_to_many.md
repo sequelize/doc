@@ -1,4 +1,4 @@
-### Many-To-Many associations | Many-To-Many
+#### Many-To-Many associations | Many-To-Many
 
 Many-To-Many associations are connecting sources with multiple targets. Furthermore the targets can also have connections to multiple sources.
 

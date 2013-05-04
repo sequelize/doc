@@ -1,5 +1,3 @@
-## Getting started with Heroku | Getting started
-
 Before we can roll out any software on the Heroku cluster, we need to sign up and have to connect our development environment. Here are the most basic steps:
 
 * [Sign up](https://api.heroku.com/signup/devcenter) for a Heroku account.

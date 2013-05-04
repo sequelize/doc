@@ -1,4 +1,4 @@
-### Compatibility
+#### Compatibility
 
 Sequelize is compatible to the following versions of Node.JS:
 

@@ -1,15 +1,24 @@
-<style>
-  section .page-header {
-    margin-bottom: 5px;
-    margin-top: 60px;
-  }
-
-  section .page-header h2 {
-    line-height: 60px;
-  }
-</style>
-
-<% sections = ['getting_started', 'minimal_express_app', 'deployment', 'database', 'sequelize', 'tl_dr'] %>
+<%
+  sections = [{
+    :title => 'Getting started with Heroku',
+    :short => 'Getting started'
+  }, {
+    :title => 'A minimal express application',
+    :short => 'Minimal express app'
+  }, {
+    :title => 'Deployment to Heroku',
+    :short => 'Deployment'
+  }, {
+    :title => 'Spawning a database on Heroku',
+    :short => 'Spawn the database'
+  }, {
+    :title => 'Adding Sequelize to the application',
+    :short => 'Adding Sequelize'
+  }, {
+    :title => 'tl;dr',
+    :short => 'tl;dr'
+  }]
+%>
 
 <header class="jumbotron subhead" id="overview">
   <div class="row">
@@ -31,7 +40,12 @@
 </header>
 
 <% sections.each do |section| %>
+  <% partial_name = section[:short].downcase.gsub(/\W/, '_') %>
+
   <section>
-    <%= markdown("articles/heroku/_#{section.downcase}".to_sym) %>
+    <div class="page-header">
+      <h3 data-nav-value="<%= section[:short] %>"><%= section[:title] %></h3>
+    </div>
+    <%= markdown("articles/heroku/_#{partial_name}".to_sym) %>
   </section>
 <% end %>

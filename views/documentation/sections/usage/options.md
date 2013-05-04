@@ -1,4 +1,4 @@
-### Options
+#### Options
 
 Besides the host and the port, Sequelize comes with a whole bunch of options. Here they are:
 

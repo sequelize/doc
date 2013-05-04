@@ -1,4 +1,4 @@
-### Check associations
+#### Check associations
 
 Sequelize `v1.5.0` introduced methods which allows you, to check if an object is already associated with another one (N:M only). Here is how you'd do it:
 

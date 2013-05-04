@@ -1,4 +1,4 @@
-### Expansion of models
+#### Expansion of models
 
 Sequelize allows you to pass custom methods to a model and it's instances. Just do the following:
 

@@ -1,4 +1,4 @@
-### Asynchronicity
+#### Asynchronicity
 
 Since `v1.3.0` there are multiple ways of adding listeners to asynchronous requests. First of all, each time you call a finder method or save an object, sequelize triggers asynchronous logic. To react to the success or the failure (or both) of the request, you can do the following:
 

@@ -1,4 +1,4 @@
-### Configuration
+#### Configuration
 
 You can also take influence of the way, Sequelize handles your column names:
 

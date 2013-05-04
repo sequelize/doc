@@ -1,4 +1,4 @@
-### Associating objects
+#### Associating objects
 
 Because Sequelize is doing a lot of magic, you have to call `Sequelize#sync` after setting the associations! Doing so will allow you the following:
 

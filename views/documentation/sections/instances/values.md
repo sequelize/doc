@@ -1,4 +1,4 @@
-### Values of an instance | Values
+#### Values of an instance | Values
 
 If you log an instance you will notice, that there is a lot of additional stuff. In order to hide such stuff and reduce it to the very interesting information, you can use the `values`-attribute. Calling it will return only the values of an instance.
 

@@ -21,7 +21,7 @@
 
 <% sections.each do |section| %>
   <section id="<%= section.downcase %>">
-    <div class="page-header"><h2><%= section %></h2></div>
+    <div class="page-header"><h3><%= section %></h3></div>
     <%=
       begin
         markdown("documentation/sections/#{section.downcase}".to_sym)

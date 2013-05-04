@@ -1,4 +1,4 @@
-### Executing raw SQL queries | Raw queries
+#### Executing raw SQL queries | Raw queries
 
 As there are often use cases in which it is just easier to execute raw / already prepared SQL queries, you can utilize the function `sequelize.query`.
 

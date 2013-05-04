@@ -1,8 +1,8 @@
-### Dialects
+#### Dialects
 
 With the release of Sequelize `v1.6.0`, the library got independent from specific dialects. That mean, that you'll have to add the respective dialect library yourself. Another option is the use of the sequelize packages that ship the dialect libraries as well.
 
-#### MySQL
+##### MySQL
 
 In order to get Sequelize working nicely together with MySQL, you'll need to install `mysql@~2.0.0-alpha7`. Once that's done you can use it like this:
 
@@ -29,7 +29,7 @@ var sequelize = new Sequelize('database', 'username', 'password', {
 })
 ```
 
-#### SQLite
+##### SQLite
 
 For SQLite compatibility you'll need `sqlite3@~2.1.5`. Configure Sequelize like this:
 
@@ -56,7 +56,7 @@ var sqlite    = require('sequelize-sqlite').sqlite
 })
 ```
 
-#### PostgreSQL
+##### PostgreSQL
 
 The library for PostgreSQL is `pg@~0.10.2`. You'll just need to define the dialect:
 

@@ -1,4 +1,4 @@
-### Validations
+#### Validations
 
 In `v1.3.0` model validations have been added. They allow you to specify format/content/inheritance validations for each attribute of the model. You can perform the validation by calling the `validate()` method on an instance before saving.
 

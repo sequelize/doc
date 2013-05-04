@@ -1,5 +1,3 @@
-##tl;dr
-
 This article explains a straight-forward but maintainable approach for hosting an express application on Heroku. If you don't want to read all the stuff mentioned, just execute the following stuff and have fun.
 
 ```bash

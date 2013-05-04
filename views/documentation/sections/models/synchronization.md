@@ -1,4 +1,4 @@
-### Database synchronization
+#### Database synchronization
 
 When starting a new project you won't have a database structure and using Sequelize you won't need to. Just specify your model structures and let the library do the rest. Currently supported is the creation and deletion of tables:
 

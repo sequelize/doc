@@ -1,4 +1,4 @@
-### Incrementing certain values of an instance | Increment
+#### Incrementing certain values of an instance | Increment
 
 In order to increment values of an instance without running into concurrency issues, you may use `increment`.
 

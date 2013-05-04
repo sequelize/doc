@@ -1,4 +1,4 @@
-### Data types
+#### Data types
 
 Sequelize currently supports the following datatypes:
 
