@@ -1,3 +1,22 @@
+<style>
+  section .page-header {
+    margin-bottom: 5px;
+    margin-top: 60px;
+  }
+
+  section .page-header h2 {
+    line-height: 60px;
+  }
+
+  /*section .page-header .subnav {
+    margin-top: 0px;
+  }
+
+  section .page-header .subnav-fixed {
+    margin-top: 0px;
+  }*/
+</style>
+
 <% sections = ['getting_started', 'minimal_express_app', 'deployment', 'database', 'sequelize', 'tl_dr'] %>
 
 <header class="jumbotron subhead" id="overview">
@@ -21,10 +40,6 @@
 
 <% sections.each do |section| %>
   <section>
-    <div class="row">
-      <div class="span12">
-        <%= markdown("articles/heroku/_#{section.downcase}".to_sym) %>
-      </div>
-    </div>
+    <%= markdown("articles/heroku/_#{section.downcase}".to_sym) %>
   </section>
 <% end %>
