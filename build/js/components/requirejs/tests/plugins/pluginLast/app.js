@@ -1,1 +1,0 @@
-define(["specificCollection","bigCollection"],function(e,t){return{name:"app",specificCollection:e,bigCollection:t}});

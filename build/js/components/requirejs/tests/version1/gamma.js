@@ -1,1 +1,0 @@
-gamma={color:"green"};

@@ -1,1 +1,0 @@
-define(["./util"],function(e){return{name:"impl/array",utilName:e.name}});

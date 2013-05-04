@@ -1,1 +1,0 @@
-define(["require","exports","module"],function(e,t,n){t.foo=function(){return this},t.set=function(e){this.x=e},t.get=function(){return this.x},t.getClosed=function(){return t.x}});

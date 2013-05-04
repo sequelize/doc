@@ -1,1 +1,0 @@
-!function(e,t){typeof module!="undefined"?module.exports=t():typeof define=="function"&&typeof define.amd=="object"?define("tail",[],function(){return t()}):this[e]=t()}("tail",function(){return{name:"tail"}});

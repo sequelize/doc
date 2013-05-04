@@ -1,1 +1,0 @@
-define(["dojox/chair"],function(e){return{name:"dojox/table",chairName:e.name}});

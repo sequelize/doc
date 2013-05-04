@@ -1,1 +1,0 @@
-define(["require","./foo"],function(e){return{name:"baz",foo:e("./foo")}});

@@ -1,1 +1,0 @@
-define(["require","sub/b"],function(e){var t=e("sub/b");return{name:"a",bName:t.f()}});

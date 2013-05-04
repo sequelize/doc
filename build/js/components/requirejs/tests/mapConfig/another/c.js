@@ -1,1 +1,0 @@
-define(["./minor"],function(e){return{name:"another/c",minorName:e.name}});

@@ -1,1 +1,0 @@
-define(["chaplin","views/base/view","text!templates/pages/heroku.html"],function(e,t,n){return t.extend({template:n,className:"pages heroku index",autoRender:!1})});

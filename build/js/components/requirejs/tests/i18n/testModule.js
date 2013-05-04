@@ -1,1 +1,0 @@
-define(["i18n!nls/colors"],function(e){var t=e.red});

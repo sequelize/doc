@@ -1,1 +1,0 @@
-define({stdio:{print:function(e,t){console.log(e,t)}}});

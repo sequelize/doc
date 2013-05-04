@@ -1,1 +1,0 @@
-require({baseUrl:"./"},["a","c"],function(e,t){doh.register("cjsDotRequire",[function(r){r.is("a",e.name),r.is("b",e.b.name),r.is("c",t.name)}]),doh.run()});

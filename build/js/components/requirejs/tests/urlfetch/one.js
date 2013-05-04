@@ -1,1 +1,0 @@
-var one={name:"one"};

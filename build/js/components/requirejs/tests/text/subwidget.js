@@ -1,1 +1,0 @@
-define("subwidget",["text!subwidget.html!strip","text!subwidget2.html"],function(e,t){return{name:"subwidget",template:e,template2:t}});

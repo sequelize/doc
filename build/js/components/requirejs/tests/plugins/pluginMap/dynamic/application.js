@@ -1,1 +1,0 @@
-define("application",["person"],function(e){return{name:"application",person:e}});

@@ -1,1 +1,0 @@
-define(["views/base/collection_view","text!templates/changelog/index.html","views/changelog/item","jquery"],function(e,t,n,r){return e.extend({className:"changelog index",itemView:n,autoRender:!1,listen:{render:function(){this.$el.prepend(r(t))}},render:function(){e.prototype.render.apply(this,arguments)}})});

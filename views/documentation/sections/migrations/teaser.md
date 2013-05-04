@@ -1,0 +1,1 @@
+Sequelize `v1.3.0` introduced migrations. With those mechanism you can transform your existing database into another state and vice versa. Those state transitions are saved in migration files, which describe the way how to get to the new state and how to revert the changes in order to get back to the old state.

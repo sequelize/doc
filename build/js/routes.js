@@ -1,1 +1,0 @@
-define([],function(){return function(e){e("","home#index"),e("documentation","documentation#index"),e("changelog","changelog#index"),e("heroku","pages#heroku")}});
