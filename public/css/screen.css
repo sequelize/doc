@@ -223,6 +223,7 @@ section > .page-header {
 
 .company-or-project .mini-browser-container {
   text-align: right;
+  padding-top: 84px;
 }
 
 .company-or-project .mini-browser {
