@@ -8,7 +8,8 @@ class Helpers
     etc_items   = []
 
     doc.css('section').each_with_index do |section, i|
-      section_name = section.at_css('h3')["data-nav-value"] || section.at_css('h3').content
+      h3           = section.at_css('h3')
+      section_name = h3["data-nav-value"] || h3.content
       section_id   = section["id"] || (section["id"] = section_name.downcase.gsub(/\W/, '-'))
 
       if section.css('h4').size == 0
@@ -41,7 +42,7 @@ class Helpers
               { :identifier => h5_id, :label => h5_value }
             end
 
-            sub_nav += navigation_group(h4_value, sub_items)
+            sub_nav += navigation_group(h4_value, h4_id, sub_items)
           end
         end
 
@@ -51,12 +52,12 @@ class Helpers
           section.at_css('.page-header').inner_html += sub_nav
         end
 
-        nav_content += navigation_group(section_name, nav_items)
+        nav_content += navigation_group(section_name, section_id, nav_items)
       end
     end
 
     if etc_items.size > 0
-      nav_content += navigation_group('...', etc_items)
+      nav_content += navigation_group('...', 'etc', etc_items)
     end
 
     navigation.inner_html = nav_content
@@ -70,10 +71,10 @@ private
     "<li><a href='##{identifier}'>#{label}</a></li>"
   end
 
-  def self.navigation_group(label, items)
+  def self.navigation_group(label, identifier, items)
     html = <<-HTML
       <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#" data-href="##{identifier}">
           #{label}
           <b class="caret"></b>
         </a>
