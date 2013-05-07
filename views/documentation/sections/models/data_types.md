@@ -15,3 +15,15 @@ Sequelize.ENUM('value 1', 'value 2') // An ENUM with allowed values 'value 1' an
 Sequelize.DECIMAL(10, 2)             // DECIMAL(10,2)
 Sequelize.ARRAY(Sequelize.TEXT)      // Defines an array. PostgreSQL only.
 ```
+
+Usage in object notation:
+
+```js
+// for enums:
+sequelize.define('model', {
+  states: {
+    type:   Sequelize.ENUM,
+    values: ['active', 'pending', 'deleted']
+  }
+})
+```
