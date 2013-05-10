@@ -8,8 +8,6 @@ require './lib/helpers'
 
 set :markdown, :renderer => SequelizeRenderer, :fenced_code_blocks => true, :strikethrough => true
 
-
-
 def check_host(req)
   uri = URI(req.url)
 
