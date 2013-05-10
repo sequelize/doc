@@ -2,6 +2,10 @@ body {
   padding-top: 100px;
 }
 
+body > .container {
+  padding-bottom: 50px;
+}
+
 strong {
   font-family: Tahoma,sans-serif;
 }

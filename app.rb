@@ -54,3 +54,12 @@ get '/changelog' do
 
   html
 end
+
+get '/imprint' do
+  check_host(request)
+
+  html = erb('imprint/index'.to_sym)
+  html = Helpers.inject_navigation(html)
+
+  html
+end

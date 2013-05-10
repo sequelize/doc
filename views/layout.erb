@@ -16,12 +16,9 @@
   </head>
 
   <body data-spy="scroll" data-target=".subnav" data-offset="80">
-    <nav>
-      <%= erb :navigation %>
-    </nav>
-    <div class="container">
-      <%= yield %>
-    </div>
+    <nav><%= erb :navigation %></nav>
+    <div class="container"><%= yield %></div>
+    <%= erb :footer %>
 
     <script type="text/javascript">
       var _gaq = _gaq || [];
