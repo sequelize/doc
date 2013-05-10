@@ -16,7 +16,7 @@ def check_host(req)
   allowed_hosts = [/^www.sequelizejs.com/, /^localhost/]
 
   unless allowed_hosts.map{ |host| !!uri.host.match(host) }.include?(true)
-    uri.host = 'www.' + uri.host
+    uri.host = 'www.sequelizejs.com'
     redirect to(uri.to_s), 301
   end
 end
