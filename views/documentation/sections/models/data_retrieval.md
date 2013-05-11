@@ -122,6 +122,14 @@ Project.findAll({limit: 10})
 Project.findAll({offset: 10, limit: 2})
 ```
 
+Sometimes you might be expecting a massive dataset that you just want to display, without manipulation. For each row you select, Sequelize creates a *DAO*, with functions for update, delete, get associations etc. If you have thousands of rows, this might take some time. If you only need the raw data and don't want to update anything, you can do like this to get the raw data.
+
+```js
+// Are you expecting a masssive dataset from the DB, and don't want to spend the time building DAOs for each entry?
+// You can pass an extra query option to get the raw data instead:
+Project.findAll({ where: ... }, { raw: true })
+```
+
 ##### count - Count the occurences of elements in the database | count
 
 There is also a method for counting database objects:

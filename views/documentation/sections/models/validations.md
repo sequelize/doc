@@ -1,6 +1,6 @@
 #### Validations
 
-In `v1.3.0` model validations have been added. They allow you to specify format/content/inheritance validations for each attribute of the model. You can perform the validation by calling the `validate()` method on an instance before saving.
+In `v1.3.0` model validations have been added. They allow you to specify format/content/inheritance validations for each attribute of the model. You can perform the validation by calling the `validate()` method on an instance before saving. The validations are implemented by [node-validator](https://github.com/chriso/node-validator), and we are currently using v. 1.1.1.
 
 ```js
 var ValidateMe = sequelize.define('Foo', {
@@ -11,7 +11,9 @@ var ValidateMe = sequelize.define('Foo', {
       not: ["[a-z]",'i'],       // will not allow letters
       isEmail: true,            // checks for email format (foo@bar.com)
       isUrl: true,              // checks for url format (http://foo.com)
-      isIP: true,               // checks for IPv4 format (129.89.23.1)
+      isIP: true,               // checks for IPv4 (129.89.23.1) or IPv6 format
+      isIPv4: true,             // checks for IPv4 (129.89.23.1)
+      isIPv6: true,             // checks for IPv6 format
       isAlpha: true,            // will only allow letters
       isAlphanumeric: true      // will only allow alphanumeric characters, so "_abc" will fail
       isNumeric: true           // will only allow numbers
@@ -37,7 +39,7 @@ var ValidateMe = sequelize.define('Foo', {
       min: 23,                  // only allow values >= 23
       isArray: true,            // only allow arrays
       isCreditCard: true,       // check for valid credit card numbers
-
+ 
       // custom validations are also possible:
       isEven: function(value) {
         if(parseInt(value) % 2 != 0) {
