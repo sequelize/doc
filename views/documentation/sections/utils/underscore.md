@@ -1,6 +1,6 @@
-#### Underscore.js
+#### Lodash.js
 
-You can access all the methods of underscore like this:
+You can access all the methods of lodash like this:
 
 ```js
 Sequelize.Utils._.each(/* ... */)
@@ -14,4 +14,4 @@ Also Sequelize ships the Underscore extension `underscore.string`, which allows 
 Sequelize.Utils._.camelize('something') // Something
 ```
 
-Check out the page of [Underscore](http://underscorejs.org/) and [underscore.string](https://github.com/epeli/underscore.string) for further information.
+Check out the page of [Lodash](http://lodash.com/), [Underscore](http://underscorejs.org/) and [underscore.string](https://github.com/epeli/underscore.string) for further information.
