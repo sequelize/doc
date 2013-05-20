@@ -44,7 +44,7 @@ end
 get '/changelog' do
   check_host(request)
 
-  changelog = Net::HTTP.get(URI.parse('https://raw.github.com/sequelize/sequelize/master/changelog.md'))
+  changelog = `curl https://raw.github.com/sequelize/sequelize/master/changelog.md`
   changelog = changelog.gsub('# ', '### ').scan(/(###.+?)\n\n/m)
 
   html = erb('changelog/index'.to_sym, :locals => { :changelog => changelog })
