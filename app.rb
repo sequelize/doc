@@ -11,10 +11,10 @@ set :markdown, :renderer => SequelizeRenderer, :fenced_code_blocks => true, :str
 def check_host(req)
   uri = URI(req.url)
 
-  allowed_hosts = [/^www.sequelizejs.com/, /^localhost/]
+  allowed_hosts = [/^sequelizejs.com/, /^localhost/]
 
   unless allowed_hosts.map{ |host| !!uri.host.match(host) }.include?(true)
-    uri.host = 'www.sequelizejs.com'
+    uri.host = 'sequelizejs.com'
     redirect to(uri.to_s), 301
   end
 end
