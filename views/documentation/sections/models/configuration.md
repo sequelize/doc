@@ -1,6 +1,6 @@
 #### Configuration
 
-You can also take influence of the way, Sequelize handles your column names:
+You can also influence the way Sequelize handles your column names:
 
 ```js
 var Bar = sequelize.define('Bar', { /* bla */ }, {
