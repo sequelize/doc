@@ -94,3 +94,63 @@ Since `v1.7.0` if a particular field of model is set to allow null (with
 `allowNull: true`) and that value has been set to `null`, its validators do not
 run. This means you can, for instance, have a string field which validates its
 length to be at least 5 characters, but which also allows `null`.
+
+##### Model validations
+
+Since `v1.7.0`, validations can also be defined to check the model after the
+field-specific validators. Using this you could, for example, ensure either
+neither of <code>latitude</code> and <code>longitude</code> are set or both, and
+fail if one but not the other is set.
+
+Model validator methods are called with the model object's context and are
+deemed to fail if they throw an error, otherwise pass. This is just the same as
+with custom field-specific validators.
+
+Any error messages collected are put in the validation result object alongside
+the field validation errors, with keys named after the failed validation
+method's key in the `validate` option object. Even though there can only be one
+error message for each model validation method at any one time, it is presented
+as a single string error in an array, to maximize consistency with the field
+errors. (Note that the structure of `validate()`'s output is scheduled to change
+in `v2.0` to avoid this awkward situation. In the mean time, an error is issued
+if a field exists with the same name as a custom model validation.)
+
+An example:
+
+```js
+var Pub = Sequelize.define('Pub', {
+  name: { type: Sequelize.STRING },
+  address: { type: Sequelize.STRING },
+  latitude: {
+    type: Sequelize.INTEGER,
+    allowNull: true,
+    defaultValue: null,
+    validate: { min: -90, max: 90 }
+  },
+  longitude: {
+    type: Sequelize.INTEGER,
+    allowNull: true,
+    defaultValue: null,
+    validate: { min: -180, max: 180 }
+  },
+}, {
+  validate: {
+    bothCoordsOrNone: function() {
+      if ((this.latitude === null) === (this.longitude === null)) {
+        throw new Error('Require either both latitude and longitude or neither')
+      }
+    }
+  }
+})
+```
+
+In this simple case an object fails validation if latitude or longitude is
+given, but not both. If we try to build one with an out-of-range latitude and no
+longitude, `raging_bullock_arms.validate()` might return
+
+```js
+{
+  'latitude': ['Invalid number: latitude'],
+  'bothCoordsOrNone': ['Require either both latitude and longitude or neither']
+}
+```
