@@ -106,12 +106,14 @@ Model validator methods are called with the model object's context and are
 deemed to fail if they throw an error, otherwise pass. This is just the same as
 with custom field-specific validators.
 
-Any error messages collected are added to a `__model` member array of the
-validation result object, alongside the arrays named after any fields whose
-validations failed. (Note that the structure of `validate()`'s output is
-scheduled to change in `v2.0` to avoid any potential clash. In the mean time, if
-you have a field called "\_\_model" its errors and the model errors will be in
-the same array.)
+Any error messages collected are put in the validation result object alongside
+the field validation errors, with keys named after the failed validation
+method's key in the `validate` option object. Even though there can only be one
+error message for each model validation method at any one time, it is presented
+as a single string error in an array, to maximize consistency with the field
+errors. (Note that the structure of `validate()`'s output is scheduled to change
+in `v2.0` to avoid this awkward situation. In the mean time, an error is issued
+if a field exists with the same name as a custom model validation.)
 
 An example:
 
@@ -149,6 +151,6 @@ longitude, `raging_bullock_arms.validate()` might return
 ```js
 {
   'latitude': ['Invalid number: latitude'],
-  '__model': ['Require either both latitude and longitude or neither']
+  'bothCoordsOrNone': ['Require either both latitude and longitude or neither']
 }
 ```
