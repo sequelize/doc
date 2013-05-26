@@ -68,7 +68,7 @@ User.findAll({ include: [ Task ] }).success(function(users) {
 
 Notice that the accessor is plural. This is because the association is many-to-something.
 
-One last thing is the use of aliased associations. In order to get that right you have to specify the model you want to load, as well as the alias:
+If an association is aliased (using the `as` option), you *must* specify this alias when including the model. Notice how the user's `Tool`s are aliased as `Instruments` above. In order to get that right you have to specify the model you want to load, as well as the alias:
 
 ```js
 User.findAll({ include: [{ model: Tool, as: 'Instruments' }] }).success(function(users) {
