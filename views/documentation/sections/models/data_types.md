@@ -3,18 +3,39 @@
 Sequelize currently supports the following datatypes:
 
 ```js
-Sequelize.STRING  // VARCHAR(255)
-Sequelize.TEXT    // TEXT
-Sequelize.INTEGER // INTEGER
-Sequelize.BIGINT  // BIGINT
-Sequelize.DATE    // DATETIME
-Sequelize.BOOLEAN // TINYINT(1)
-Sequelize.FLOAT   // FLOAT
+Sequelize.STRING                      // VARCHAR(255)
+Sequelize.STRING(1234)                // VARCHAR(1234)
+Sequelize.STRING.BINARY               // VARCHAR BINARY
+Sequelize.TEXT                        // TEXT
 
-Sequelize.ENUM('value 1', 'value 2') // An ENUM with allowed values 'value 1' and 'value 2'
-Sequelize.DECIMAL(10, 2)             // DECIMAL(10,2)
-Sequelize.ARRAY(Sequelize.TEXT)      // Defines an array. PostgreSQL only.
+Sequelize.INTEGER                     // INTEGER
+Sequelize.BIGINT                      // BIGINT
+Sequelize.BIGINT(11)                  // BIGINT(11)
+Sequelize.FLOAT                       // FLOAT
+Sequelize.FLOAT(11)                   // FLOAT(11)
+Sequelize.FLOAT(11, 12)               // FLOAT(11,12) 
+
+Sequelize.DECIMAL                     // DECIMAL
+Sequelize.DECIMAL(10, 2)              // DECIMAL(10,2)
+
+Sequelize.DATE                        // DATETIME for mysql / sqlite, TIMESTAMP WITH TIME ZONE for postgres
+Sequelize.BOOLEAN                     // TINYINT(1)
+
+Sequelize.ENUM('value 1', 'value 2')  // An ENUM with allowed values 'value 1' and 'value 2'
+Sequelize.ARRAY(Sequelize.TEXT)       // Defines an array. PostgreSQL only.
 ```
+
+In addition, integer, bigint and float also support unsigned and zerofill properties, which can be combined in any order:
+
+```js
+Sequelize.INTEGER.UNSIGNED              // INTEGER UNSIGNED
+Sequelize.INTEGER(11).UNSIGNED          // INTEGER(11) UNSIGNED
+Sequelize.INTEGER(11).ZEROFILL          // INTEGER(11) ZEROFILL
+Sequelize.INTEGER(11).ZEROFILL.UNSIGNED // INTEGER(11) UNSIGNED ZEROFILL
+Sequelize.INTEGER(11).UNSIGNED.ZEROFILL // INTEGER(11) UNSIGNED ZEROFILL
+```
+
+*The examples above only show integer, but the same can be done with bigint and float*
 
 Usage in object notation:
 
