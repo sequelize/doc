@@ -24,6 +24,7 @@ var sequelize = new Sequelize('database', 'username', null)
 ```
 
 You can also use a connection string:
+
 ```js
  var sequelize = new Sequelize('mysql://user:pass@example.com:9821/dbname', {
   // Look to the next section for possible options

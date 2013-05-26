@@ -33,8 +33,9 @@ The method `findOrCreate` can be used to check if a certain element is already e
 Let's assume we have an empty database with a `User` model which has a `username` and a `job`.
 
 ```js
-User.findOrCreate({ username: 'sdepold' }, { job: 'Technical Lead JavaScript' }).success(function(user) {
+User.findOrCreate({ username: 'sdepold' }, { job: 'Technical Lead JavaScript' }).success(function(user, created) {
   console.log(user.values)
+  console.log(created)
 
   /*
     {
@@ -44,18 +45,20 @@ User.findOrCreate({ username: 'sdepold' }, { job: 'Technical Lead JavaScript' })
       createdAt: Fri Mar 22 2013 21: 28: 34 GMT + 0100(CET),
       updatedAt: Fri Mar 22 2013 21: 28: 34 GMT + 0100(CET)
     }
+    created: true
   */
 })
 ```
 
-The code created a just created instance.
+The code created a new instance.
 
 So when we already have an instance ...
 
 ```js
 User.create({ username: 'fnord', job: 'omnomnom' }).success(function() {
-  User.findOrCreate({ username: 'fnord' }, { job: 'something else' }).success(function(user) {
+  User.findOrCreate({ username: 'fnord' }, { job: 'something else' }).success(function(user, created) {
     console.log(user.values)
+    console.log(created)
 
     /*
       {
@@ -65,12 +68,13 @@ User.create({ username: 'fnord', job: 'omnomnom' }).success(function() {
         createdAt: Fri Mar 22 2013 21: 28: 34 GMT + 0100(CET),
         updatedAt: Fri Mar 22 2013 21: 28: 34 GMT + 0100(CET)
       }
+      created: false
     */
   })
 })
 ```
 
-... the existing entry will not be changed. See the `job` of the second user.
+... the existing entry will not be changed. See the `job` of the second user, and the fact that created was false.
 
 ##### findAll - Search for multiple elements in the database | findAll
 
