@@ -58,7 +58,7 @@ functions, the arguments to be passed must be in an array. But if a single array
 argument is to be passed, for instance an array of acceptable strings for
 `isIn`, this will be interpreted as multiple string arguments instead of one
 array argument. To work around this pass a single-length array of arguments,
-such as `[['one', two']]` as shown above.
+such as `[['one', 'two']]` as shown above.
 
 To use a custom error message instead of that provided by node-validator, use an
 object instead of the plain value or array of arguments, for example a validator
