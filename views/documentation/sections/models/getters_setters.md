@@ -64,6 +64,7 @@ var Foo = sequelize.define('Foo', {
 ##### <a id="get_and_set_helper_funcs"></a> Helper functions for use inside getter/setter definitions
 
 + retrieving an underlying property value? always use `this.getDataValue()`, e.g.:
+
 ```js
 /* a getter for 'title' property */
 function() {
@@ -71,6 +72,7 @@ function() {
 }
 ```
 + setting an underlying property value? always use `this.setDataValue()`, e.g.:
+
 ```js
 /* a setter for 'title' property */
 function(title) {
