@@ -58,7 +58,7 @@ functions, the arguments to be passed must be in an array. But if a single array
 argument is to be passed, for instance an array of acceptable strings for
 `isIn`, this will be interpreted as multiple string arguments instead of one
 array argument. To work around this pass a single-length array of arguments,
-such as `[['one', two']]` as shown above.
+such as `[['one', 'two']]` as shown above.
 
 To use a custom error message instead of that provided by node-validator, use an
 object instead of the plain value or array of arguments, for example a validator
@@ -90,7 +90,7 @@ a function. The first parameter will be the string that is logged.
 
 ##### Validators and `allowNull`
 
-Since `v1.7.0` if a particular field of model is set to allow null (with
+Since `v1.7.0` if a particular field of a model is set to allow null (with
 `allowNull: true`) and that value has been set to `null`, its validators do not
 run. This means you can, for instance, have a string field which validates its
 length to be at least 5 characters, but which also allows `null`.
