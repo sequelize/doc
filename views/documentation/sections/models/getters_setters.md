@@ -64,19 +64,19 @@ var Foo = sequelize.define('Foo', {
 ##### <a id="get_and_set_helper_funcs"></a> Helper functions for use inside getter/setter definitions
 
 + retrieving an underlying property value? always use `this.getDataValue()`, e.g.:
-    ```js
-    /* a getter for 'title' property */
-    function() {
-        return this.getDataValue('title');
-    }
-    ```
+```js
+/* a getter for 'title' property */
+function() {
+    return this.getDataValue('title');
+}
+```
 + setting an underlying property value? always use `this.setDataValue()`, e.g.:
-    ```js
-    /* a setter for 'title' property */
-    function(title) {
-        return this.setDataValue('title', title.toString().toLowerCase());
-    }
-    ```
+```js
+/* a setter for 'title' property */
+function(title) {
+    return this.setDataValue('title', title.toString().toLowerCase());
+}
+```
 
 **N.B.:** It is important to stick to using the `setDataValue()` and `getDataValue()` functions (as opposed to accessing the underlying "data values" property directly) - doing so protects your custom getters and setters from changes in the underlying model implementations (i.e. how and where data values are stored in your model instances)
 
