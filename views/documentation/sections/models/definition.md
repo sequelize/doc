@@ -25,7 +25,9 @@ var Foo = sequelize.define('Foo', {
   // default values for dates => current time
   myDate: { type: Sequelize.DATE, defaultValue: Sequelize.NOW },
 
-  // setting no title will throw an error when trying to save
+  // setting allowNull to false will add NOT NULL to the column, which means an error will be
+  // thrown from the DB when the query is executed if the column is null. If you want to check that a value
+  // is not null before querying the DB, look at the validations section below.
   title: { type: Sequelize.STRING, allowNull: false},
 
   // Creating two objects with the same value will throw an error. Currently composite unique
