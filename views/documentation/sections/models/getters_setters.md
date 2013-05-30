@@ -28,10 +28,21 @@ Below is an example of defining the getters and setters in the model options, no
 use the `getDataValue()` method ([see below](#get_and_set_helper_funcs)).
 
 ```js
+
+
+  var defaultToWhiteSpace = function(characters) {
+    if (characters == null)
+      return '\\s';
+    else if (characters.source)
+      return characters.source;
+    else
+      return ;
+  };
+
 var slugify function(str) {
   var from  = "ąàáäâãåæćęèéëêìíïîłńòóöôõøśùúüûñçżź",
       to    = "aaaaaaaaceeeeeiiiilnoooooosuuuunczz",
-      regex = new RegExp(defaultToWhiteSpace(from), 'g');
+      regex = new RegExp('[' + from.replace(/([.*+?^=!:${}()|[\]\/\\])/g, '\\$1') + ']', 'g');
 
   if (str == null) return '';
 
