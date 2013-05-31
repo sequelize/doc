@@ -12,12 +12,15 @@ var Sequelize = require("sequelize")
 
 2\. Download the code from the git repository and require it's entry file index.js:
 
-```js
+```bash
 // Checkout the current code from the repository using the commandline
 cd path/to/lib
-git clone git://github.com/sdepold/sequelize.git
+git clone git://github.com/sequelize/sequelize.git
+```
 
-// Then require the installed library in your application code:
+Then require the installed library in your application code:
+
+```js
 var Sequelize = require(__dirname + "/lib/sequelize/index")
 ```
 
