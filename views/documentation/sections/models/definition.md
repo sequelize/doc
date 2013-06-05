@@ -15,7 +15,7 @@ var Task = sequelize.define('Task', {
 })
 ```
 
-You can also set some options:
+You can also set some options on each column:
 
 ```js
 var Foo = sequelize.define('Foo', {
@@ -32,13 +32,17 @@ var Foo = sequelize.define('Foo', {
 
   // Creating two objects with the same value will throw an error. Currently composite unique
   // keys can only be created 'addIndex' from the migration-section below
-
   someUnique: {type: Sequelize.STRING, unique: true},
   // Go on reading for further information about primary keys
 
   identifier: { type: Sequelize.STRING, primaryKey: true},
-  // autoIncrement can be used to create auto_incrementing integer columns
 
+  // autoIncrement can be used to create auto_incrementing integer columns
   incrementMe: { type: Sequelize.INTEGER, autoIncrement: true }
+
+  // Comments can be specified for each field for MySQL and PG
+  hasComment: { type: Sequelize.INTEGER, comment: "I'm a comment!" }
 })
 ```
+
+The comment option can also be used on a table, see [model configuration](http://sequelizejs.com/documentation#models-configuration)
