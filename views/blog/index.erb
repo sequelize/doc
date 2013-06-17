@@ -1,0 +1,27 @@
+<header class="jumbotron subhead" id="overview">
+  <div class="row">
+    <div class="span12">
+      <h2>
+        The blog
+        <small>Stay informed about changes on Sequelize</small>
+
+        <a href="http://flattr.com/thing/1259407/Sequelize" target="_blank" style="float: right; position: relative; top: 10px;">
+          <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" />
+        </a>
+      </h2>
+      <p class="lead">
+        noot
+      </p>
+    </div>
+  </div>
+</header>
+
+<% posts.each do |path, data| %>
+  <section id="<%= path %>">
+    <div class="page-header"><h3><%= data[:title] %></h3></div>
+    <p>
+      <%= [data[:content].match(/<p>(.+?)<\/p>/), $1].last %>
+      <a href="/blog/<%= path.sub("#{path.to_i}-", "") %>">Read more</a>
+    </p>
+  </section>
+<% end %>
