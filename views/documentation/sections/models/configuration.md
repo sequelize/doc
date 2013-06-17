@@ -39,3 +39,12 @@ var sequelize = new Sequelize(db, user, pw, {
   define: { engine: 'MYISAM' }
 })
 ```
+
+
+Finaly you can specify a comment for the table in MySQL and PG
+
+```js
+var Person = sequelize.define('Person', { /* attributes */ }, {
+  commment: "I'm a table comment!"
+})
+```
