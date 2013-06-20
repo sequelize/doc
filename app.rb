@@ -57,6 +57,9 @@ get '/blog' do
   end.reverse
 
   html = erb('blog/index'.to_sym, :locals => { :posts => posts })
+  # html = Helpers.inject_navigation(html)
+
+  html
 end
 
 get '/blog/:title' do
