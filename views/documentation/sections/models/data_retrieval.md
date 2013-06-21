@@ -76,6 +76,25 @@ User.create({ username: 'fnord', job: 'omnomnom' }).success(function() {
 
 ... the existing entry will not be changed. See the `job` of the second user, and the fact that created was false.
 
+##### findAndCountAll - Search for multiple elements in the database, returns both data and total count | findAndCountAll
+
+This is a convienience method that combines `findAll()` and `count()` (see below), this is useful when dealing with queries related to pagination
+where you want to retrieve data with a `limit` and `offset` but also need to know the total number of records that match the query.
+
+The success handler will always receive an object with to properties:
+
++ `count`   - an integer, total number records (matching the where clause)
++ `rows`    - an array of objects, the records (matching the where clause) within the limit/offset range
+
+```js
+Project.findAndCountAll({where: ["title LIKE 'foo%'"], offset: 10, limit: 2}).success(function(result) {
+  console.log(result.count);
+  console.log(result.rows);
+});
+```
+
+The options [object] that you pass to `findAndCountAll()` is the same as for `findAll()` (described below).
+
 ##### findAll - Search for multiple elements in the database | findAll
 
 ```js
