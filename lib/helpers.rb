@@ -69,10 +69,42 @@ class Helpers
     doc.to_html
   end
 
+  def self.inject_blogpost_navigation(document, posts)
+    doc        = Nokogiri::HTML(document)
+    navigation = doc.at_css('.nav.dynamic')
+    items      = []
+    etc_items  = []
+
+    posts.each_with_index do |(filename, metadata), i|
+      if i < 3
+        items << navigation_item("/blog/#{metadata[:url_fragment]}", metadata[:title], { absolute: true })
+      else
+        etc_items << { :identifier => "/blog/#{metadata[:url_fragment]}", :label => metadata[:title], :absolute => true }
+      end
+    end
+
+
+    items.each_with_index do |item, i|
+      navigation.inner_html += item
+    end
+
+    if etc_items.size > 0
+      navigation.inner_html += navigation_group('...', 'etc', etc_items)
+    end
+
+    doc.to_html
+  end
+
 private
 
-  def self.navigation_item(identifier, label)
-    "<li><a href='##{identifier}'>#{label}</a></li>"
+  def self.navigation_item(identifier, label, options={})
+    options = {
+      absolute: false
+    }.merge(options)
+
+
+
+    "<li><a href='#{options[:absolute] ? '' : '#'}#{identifier}'>#{label}</a></li>"
   end
 
   def self.navigation_group(label, identifier, items)
@@ -86,7 +118,7 @@ private
     HTML
 
     items.each do |item|
-      html += navigation_item(item[:identifier], item[:label])
+      html += navigation_item(item.delete(:identifier), item.delete(:label), item)
     end
 
     html += <<-HTML

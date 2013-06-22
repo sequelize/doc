@@ -43,21 +43,10 @@ get '/imprint' do
 end
 
 get '/blog' do
-  posts = Dir['views/blog/posts/*md'].map do |d|
-    d.sub('views/blog/posts/', '').sub('.md', '')
-  end.sort_by(&:to_i).map do |filename|
-    html = markdown("blog/posts/#{filename}".to_sym)
-
-    [
-      filename, {
-        :title   => [html.match(/<h3>(.*)<\/h3>/), $1].last,
-        :content => html
-      }
-    ]
-  end.reverse
+  posts = get_blog_posts
 
   html = erb('blog/index'.to_sym, :locals => { :posts => posts })
-  html = Helpers.inject_navigation(html, :limit => 3)
+  html = Helpers.inject_blogpost_navigation(html, posts)
 
   html
 end
@@ -70,4 +59,22 @@ get '/blog/:title' do
   end
 
   html = erb('blog/show'.to_sym, :locals => { :post => post })
+  html = Helpers.inject_blogpost_navigation(html, get_blog_posts)
+  html
+end
+
+def get_blog_posts
+  Dir['views/blog/posts/*md'].map do |d|
+    d.sub('views/blog/posts/', '').sub('.md', '')
+  end.sort_by(&:to_i).map do |filename|
+    html = markdown("blog/posts/#{filename}".to_sym)
+
+    [
+      filename, {
+        :title        => [html.match(/<h3>(.*)<\/h3>/), $1].last,
+        :content      => html,
+        :url_fragment => filename.sub("#{filename.to_i}-", "")
+      }
+    ]
+  end.reverse
 end
