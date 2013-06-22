@@ -1,11 +1,15 @@
 class Helpers
   require 'nokogiri'
 
-  def self.inject_navigation(document)
+  def self.inject_navigation(document, options={})
     doc         = Nokogiri::HTML(document)
     navigation  = doc.at_css('.nav.dynamic')
     nav_content = ""
     etc_items   = []
+
+    options = {
+      limit: 10
+    }.merge(options)
 
     doc.css('section').each_with_index do |section, i|
       h3           = section.at_css('h3')
@@ -13,7 +17,7 @@ class Helpers
       section_id   = section["id"] || (section["id"] = section_name.downcase.gsub(/\W/, '-'))
 
       if section.css('h4').size == 0
-        if i < 10
+        if i < options[:limit]
           nav_content += navigation_item(section_id, section_name)
         else
           etc_items << { :identifier => section_id, :label => section_name }
