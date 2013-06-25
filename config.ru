@@ -1,11 +1,12 @@
 require 'rack/rewrite'
 
 use Rack::Rewrite do
+  r301 %r{.*}, 'http://sequelizejs.com/blog', :if => Proc.new { |rack_env|
+    puts rack_env.inspect
+    rack_env['REQUEST_URI'] == 'http://blog.sequelizejs.com'
+  }
   r301 %r{.*}, 'http://sequelizejs.com$&', :if => Proc.new { |rack_env|
     (rack_env['SERVER_NAME'] != 'sequelizejs.com') && !rack_env['SERVER_NAME'].include?('localhost')
-  }
-  r301 %r{.*}, 'http://sequelizejs.com/blog', :if => Proc.new { |rack_env|
-    rack_env['REQUEST_URI'] == 'http://blog.sequelizejs.com'
   }
   r301 '/post/23227764351/changes-in-sequelize-1-2-1', '/blog/changes-in-sequelize-v1-2-1'
   r301 '/post/23227707458/changes-in-sequelize-1-3-0', '/blog/changes-in-sequelize-v1-3-0'
