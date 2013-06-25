@@ -2,11 +2,11 @@
 
 Sequelize v1.4.1 was released on May 3rd, 2012. Major changes are deprecation of Node.JS < v0.6.0, the possibility of selective saves, some additions to the sequelize binary, a often requested complete function for asynchronous progresses, as well as the chance to customize the logging strategy.
 
-### Deprecation of Node.JS < v0.6.0
+#### Deprecation of Node.JS < v0.6.0
 
 From now on, Sequelize officially dropped support for Node.JS 0.5.x and earlier versions. The reason for that, is the incompatibility of BusterJS with those versions. Even if the tests are failing in earlier releases, v1.4.0 was completely compatible with Node.JS v0.5 and v0.4. So feel free to use it, as well as trying out newer releases of Sequelize. But as I pretty much want to move on to BusterJS, keeping compatibility with those outdated versions seems not acceptable at all.
 
-### Selective saving of instances
+#### Selective saving of instances
 
 [kioopi](https://github.com/kioopi) added the possibility to save only a very selection of attributes when calling the save function on instances. That means, you can modify an object in a very massive way and afterwards only save some specific changes. This for example important for forms in a webapp, which could affect sensitive data. So in order to force save of specific fields only you can iterate over the passed data, set all the new values and afterwards define which, of those changes should actually get saved. This is how it works:
 
@@ -18,7 +18,7 @@ task.save(['title']).success(function() {
 })
 ```
 
-### Migration skeleton creation
+#### Migration skeleton creation
 
 The `sequelize` binary was extended. It can now generate migration skeletons, which have the name of the current timestamp plus a passed name. This is how it works:
 
