@@ -1,4 +1,4 @@
-#### Property getters and setters
+#### Getters / setters
 
 It is possible to define 'object-property' getters and setter functions on your models, these can be used both for 'protecting' properties that map to database fields and for defining 'pseudo' properties.
 
