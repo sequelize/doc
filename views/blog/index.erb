@@ -3,13 +3,11 @@
 <% posts.each do |path, data| %>
   <section id="<%= path %>">
     <div class="page-header"><h3><%= data[:title] %></h3></div>
-    <p>
-      <%= [data[:content].match(/<p>(.+?)<\/p>/), $1].last %>
-      <br><br>
-      <a href="/blog/<%= path.sub("#{path.to_i}-", "") %>">
-        <i class="icon-chevron-right"></i>
-        Read more
-      </a>
-    </p>
+    <%= [data[:content].match(/<\/h3>(.+?)<h4>/m), $1].last %>
+    <br><br>
+    <a href="/blog/<%= path.sub("#{path.to_i}-", "") %>">
+      <i class="icon-chevron-right"></i>
+      Read more
+    </a>
   </section>
 <% end %>
