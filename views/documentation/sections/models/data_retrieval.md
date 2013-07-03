@@ -129,6 +129,21 @@ Project.findAll({ where: "name = 'A Project'" }).success(function(projects) {
   // the difference between this and the usage of hashes (objects) is, that string usage
   // is not sql injection safe. so make sure you know what you are doing!
 })
+
+// since v1.7.0 we can now improve our where searches
+Project.findAll({
+  where: {
+    id: {
+      gt: 6,              // id > 6
+      gte: 6,             // id >= 6
+      lt: 10,             // id < 10
+      lte: 10,            // id <= 10
+      ne: 20,             // id != 20
+      between: [6, 10],   // BETWEEN 6 AND 10
+      nbetween: [11, 15]  // NOT BETWEEN 11 AND 15
+    }
+  }
+})
 ```
 
 Of course you can pass a some options to the finder methods, to get more relevant data:
