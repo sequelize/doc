@@ -22,3 +22,19 @@ task.save(['title']).success(function() {
  // title will now be 'foooo' but description is the very same as before
 })
 ```
+
+Since `v1.7.0` you can now call an `update()` method on the model.
+
+```js
+Task.bulkCreate([
+  {subject: 'programming', status: 'executing'},
+  {subject: 'reading', status: 'executing'},
+  {subject: 'programming', status: 'finished'}
+]).success(function() {
+  Task.update({subject: 'programming'} /* where criteria */, {status: 'inactive'} /* set attributes' value */).success(function() {
+    Task.findAll().success(function(tasks) {
+      console.log(tasks) // the 'programming' tasks will both have a status of 'inactive'
+    })
+  })
+})
+```
