@@ -158,6 +158,10 @@ Project.findAll({limit: 10})
 // step over some elements
 // this only works with a specified limit
 Project.findAll({offset: 10, limit: 2})
+
+// group by an element/elements
+Project.findAll({group: 'name'}) // single element
+Project.findAll({group: ['name', 'type', 'team_id']}) // multiple elements
 ```
 
 Sometimes you might be expecting a massive dataset that you just want to display, without manipulation. For each row you select, Sequelize creates a *DAO*, with functions for update, delete, get associations etc. If you have thousands of rows, this might take some time. If you only need the raw data and don't want to update anything, you can do like this to get the raw data.
