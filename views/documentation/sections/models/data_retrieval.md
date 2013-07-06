@@ -152,10 +152,6 @@ Of course you can pass a some options to the finder methods, to get more relevan
 // define the order of the queried data
 Project.findAll({order: 'title DESC'})
 
-// group the returned data
-Project.findAll({group: 'title'})
-Project.findAll({group: ['title', 'owner']})
-
 // limit the results of the query
 Project.findAll({limit: 10})
 
