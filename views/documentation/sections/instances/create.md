@@ -16,3 +16,16 @@ User.create({ username: 'barfooz', isAdmin: true }, [ 'username' ]).success(func
   console.log(user.values) // => { username: 'barfooz', isAdmin: false }
 })
 ```
+Sequelize `v1.7.0` introduced the possibility to create multiple records at once
+
+```js
+User.bulkCreate([
+  { username: 'barfooz', isAdmin: true },
+  { username: 'foo', isAdmin: true },
+  { username: 'bar', isAdmin: false }
+]).success(function() { // Notice: There are no arguments here, as of right now you'll have to...
+  User.findAll().success(function(users) {
+    console.log(users) // ... in order to get the array of user objects
+  })
+})
+```

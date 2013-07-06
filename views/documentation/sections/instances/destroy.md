@@ -10,4 +10,14 @@ Task.create({ title: 'a task' }).success(function(task) {
     // now i'm gone :)
   })
 })
+
+// you can also add a where search criteria
+Task.bulkCreate([...]).success(function() {
+    Task.destroy({subject: 'programming', status: 'completed'}).success(function() {
+      Task.findAll().success(function(tasks) {
+        console.log(tasks) // tasks that don't match the above criteria
+      })
+    })
+  })
+})
 ```
