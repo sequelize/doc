@@ -41,3 +41,36 @@ sequelize.[sync|drop]().success(function() {
   // whooops
 })
 ```
+
+Sometimes you'll want to wipe out an entire table without having to drop/create it. As of `1.7.0` you can do so by executing the `deleteAll()` method:
+
+```js
+// Create the table(s)
+Bars.sync()
+
+// Insert some data
+Bars.bulkCreate([
+  {name: 'Pub'},
+  {name: 'Dive'},
+  {name: 'Speakeasy'}
+]).success(function() {
+  Bars.deleteAll({ // This method
+    truncate: false|true // [optional] will only execute the TRUNCATE command if your dialect supports it
+  }).success(function() {
+    Bars.findAll().success(function(bars) {
+      console.log(bars) // will be empty!
+    })
+  }).on('sql', function(sql) {
+    // if truncate is set to false (which is the default as well)
+    // MySQL: DELETE FROM `myTable`
+    // Postgres: DELETE FROM "myTable"
+
+    // if truncate is set to true
+    // MySQL: TRUNCATE `myTable`
+    // Postgres: TRUNCATE "myTable"
+
+    // sqlite will always perform...
+    // DELETE FROM FROM `myTable`
+  })
+})
+```
