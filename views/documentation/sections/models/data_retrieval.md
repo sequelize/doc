@@ -129,6 +129,21 @@ Project.findAll({ where: "name = 'A Project'" }).success(function(projects) {
   // the difference between this and the usage of hashes (objects) is, that string usage
   // is not sql injection safe. so make sure you know what you are doing!
 })
+
+// since v1.7.0 we can now improve our where searches
+Project.findAll({
+  where: {
+    id: {
+      gt: 6,              // id > 6
+      gte: 6,             // id >= 6
+      lt: 10,             // id < 10
+      lte: 10,            // id <= 10
+      ne: 20,             // id != 20
+      between: [6, 10],   // BETWEEN 6 AND 10
+      nbetween: [11, 15]  // NOT BETWEEN 11 AND 15
+    }
+  }
+})
 ```
 
 Of course you can pass a some options to the finder methods, to get more relevant data:
@@ -143,6 +158,10 @@ Project.findAll({limit: 10})
 // step over some elements
 // this only works with a specified limit
 Project.findAll({offset: 10, limit: 2})
+
+// group by an element/elements
+Project.findAll({group: 'name'}) // single element
+Project.findAll({group: ['name', 'type', 'team_id']}) // multiple elements
 ```
 
 Sometimes you might be expecting a massive dataset that you just want to display, without manipulation. For each row you select, Sequelize creates a *DAO*, with functions for update, delete, get associations etc. If you have thousands of rows, this might take some time. If you only need the raw data and don't want to update anything, you can do like this to get the raw data.

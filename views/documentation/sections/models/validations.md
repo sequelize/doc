@@ -2,6 +2,8 @@
 
 In `v1.3.0` model validations have been added. They allow you to specify format/content/inheritance validations for each attribute of the model. You can perform the validation by calling the `validate()` method on an instance before saving. The validations are implemented by [node-validator](https://github.com/chriso/node-validator), and we are currently using v. 1.1.1.
 
+**Note:** In `v1.7.0` validations will now be called when executing the `build()` or `create()` functions.
+
 ```js
 var ValidateMe = sequelize.define('Foo', {
   foo: {
