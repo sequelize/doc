@@ -21,6 +21,19 @@ Model.findAll().fail(function(err) { /* bar */ })
 
 Model.findAll().complete(function(err, result) { /* bar */ })
 Model.findAll().done(function(err, result) { /* bar */ })
+
+// As of 1.7.0 we support Promises/A
+var self = User
+
+user.find(1).then(function(user1) {
+  return user1.increment(['aNumber'], 2)
+}).then(function(user2) {
+  return user.find(1)
+}).then(function(user3) {
+  console.log(user3.aNumber) // 2
+}, function(err) {
+  // err...
+})
 ```
 
 **Please notice:** Since v1.5.0 the 'error' event is used to notify about errors. If such events aren't caught however, Node.JS will throw an error. So you would probably like to catch them :D
