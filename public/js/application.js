@@ -1,4 +1,4 @@
-/*global $:false, Prism:false, window:false*/
+/*global $, Prism, window*/
 
 (function() {
   'use strict';
@@ -63,6 +63,26 @@
         $('.navbar .active').removeClass('active')
         $parent.addClass('active')
         $parent.parents('.dropdown').addClass('active')
+      })
+    },
+
+    checkForFlickrImages: function() {
+      $("[data-source='flickr']").each(function() {
+        var $img  = $(this)
+
+        $img
+          .wrap($("<a href='" + $img.data('page') + "' style='position: relative; display: inline-block'></a>"))
+          .addClass('img-polaroid')
+          .css({ "padding-bottom": 40 })
+          .after(
+            $("<span>")
+              .html("<img src='/img/cc.png' style='width: 20px'>&nbsp;&nbsp;&nbsp;Image courtesy of " + $img.data('author') + " on Flickr")
+              .css({
+                position: "absolute",
+                bottom:   10,
+                left:     10
+              })
+          )
       })
     }
   }
