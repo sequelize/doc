@@ -4,7 +4,7 @@ After 552 commits, almost 8 months of work, 42 relevant changes and the acquisit
 
 #### Changes
 
-** IMPORTANT !!! **
+**IMPORTANT !!!**
 
 There have been two changes, which might break backwards compatibility for your project. However, as they are more likely fixing some of your issues, we have decided to not release v2.0.0 but v1.6.0 instead.
 

@@ -3,8 +3,9 @@ require 'redcarpet'
 require 'net/http'
 require 'uri'
 
-require './lib/sequelize_renderer'
+require './lib/misc/sequelize_renderer'
 require './lib/helpers'
+require './lib/models/post'
 
 set :markdown, :renderer => SequelizeRenderer, :fenced_code_blocks => true, :strikethrough => true
 
@@ -43,7 +44,7 @@ get '/imprint' do
 end
 
 get '/blog' do
-  posts = get_blog_posts
+  posts = Post.all
 
   html = erb('blog/index'.to_sym, :locals => { :posts => posts })
   html = Helpers.inject_blogpost_navigation(html, posts)
@@ -52,29 +53,10 @@ get '/blog' do
 end
 
 get '/blog/:title' do
-  post = Dir['views/blog/posts/*md'].map do |d|
-    d.sub('views/blog/posts/', '').sub('.md', '')
-  end.detect do |d|
-    d.sub("#{d.to_i}-", "") == params[:title]
-  end
+  post = Post.find_by_basename(params[:title])
 
   html = erb('blog/show'.to_sym, :locals => { :post => post })
-  html = Helpers.inject_blogpost_navigation(html, get_blog_posts)
+  html = Helpers.inject_blogpost_navigation(html, Post.all)
+
   html
-end
-
-def get_blog_posts
-  Dir['views/blog/posts/*md'].map do |d|
-    d.sub('views/blog/posts/', '').sub('.md', '')
-  end.sort_by(&:to_i).map do |filename|
-    html = markdown("blog/posts/#{filename}".to_sym)
-
-    [
-      filename, {
-        :title        => [html.match(/<h3>(.*)<\/h3>/), $1].last,
-        :content      => html,
-        :url_fragment => filename.sub("#{filename.to_i}-", "")
-      }
-    ]
-  end.reverse
 end

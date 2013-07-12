@@ -1,6 +1,6 @@
 ### The future of Sequelize
 
-<img src="http://farm3.staticflickr.com/2740/4356185807_511c7c9106.jpg" alt="Time paradox" data-author="Stéfan" data-page="http://www.flickr.com/photos/st3f4n/4356185807/" data-source="flickr">
+<img src="http://farm3.staticflickr.com/2740/4356185807_511c7c9106.jpg" alt="Time paradox" data-author="Stéfan" data-page="http://www.flickr.com/photos/st3f4n/4356185807/" data-source="flickr" class="span12">
 
 Since some weeks `v2.0.0` of the library is available. Its important to know that this release isn't actively developed but the sum of all the changes of the yet to be developed upcoming versions `v1.7.0`, `v1.8.0` and probably some further ones. Also all the backwards compatibility breaking changes are part of `v2.0.0`.
 
@@ -127,7 +127,7 @@ sequelize.sync().success(function() {
 })
 ```
 
-##### [FEATURE] Support for bulk insert (`<DAOFactory>.bulkCreate()`, update (`<DAOFactory>.update()`) and delete (`<DAOFactor
+##### [FEATURE] Support for bulk insert/update/delete
 ##### [FEATURE] Add an extra `queryOptions` parameter to `DAOFactory.find` and `DAOFactory.findAll`. This allows a user to spe
 ##### [FEATURE] Added convenient data types. [#616](https://github.com/sequelize/sequelize/pull/616). Thanks to Costent
 ##### [FEATURE] Binary is more verbose now. [#612](https://github.com/sequelize/sequelize/pull/612). Thanks to terraflubb
