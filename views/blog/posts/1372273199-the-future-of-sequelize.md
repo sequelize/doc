@@ -70,7 +70,7 @@ sequelize.createSchema('wordpress').success(function() {
 
 ##### [FEATURE] Foreign key constraints
 
-It is now possible to define foreign keys to connect tables / models with each other. Also we can now define what should happen to the associated objects after a `delete` operation, etc. This is the way to do it:
+It is now possible to define foreign keys to connect tables / models with each other. The following snippet connects the `Post` model with the `Author` model.
 
 ```js
 var Author = sequelize.define('author', { first_name: Sequelize.STRING })
@@ -85,6 +85,46 @@ var Post   = sequelize.define('post', {
 
 Author.hasMany(Post)
 Post.belongsTo(Author)
+```
+
+Also we can now define reactions of certain events. E.g. what should happen to the associated objects after a `delete` operation, etc. This is the way to do it:
+
+```js
+var Author = sequelize.define('author', { first_name: Sequelize.STRING })
+var Post   = sequelize.define('post', {
+  title: Sequelize.STRING,
+  authorId: {
+    type:          Sequelize.INTEGER,
+    references:    'authors',
+    referencesKey: 'id',
+    onDelete:      'cascade'
+  }
+})
+
+Author.hasMany(Post)
+Post.belongsTo(Author)
+
+sequelize.sync().success(function() {
+  new Sequelize.Utils.QueryChainer()
+    .add(Author.create({ first_name: 'John' }))
+    .add(Post.create({ title: 'news' }))
+    .add(Post.create({ title: 'milestone reached' }))
+    .run()
+    .success(function(results) {
+      var author    = results[0]
+        , news      = results[1]
+        , milestone = results[2]
+
+      author.setPosts([ news, milestone ]).success(function() {
+        author.destroy()
+        /*
+          At this point, you won't find any authors and posts in the database anymore,
+          as we have dropped the only author and due to the cascade option every related
+          posts of him.
+        */
+      })
+    })
+})
 ```
 
 ##### [FEATURE] Support for bulk insert (`<DAOFactory>.bulkCreate()`, update (`<DAOFactory>.update()`) and delete (`<DAOFactor
