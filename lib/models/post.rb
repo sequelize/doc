@@ -11,7 +11,7 @@ class Post
     Dir['views/blog/posts/*md'].map do |d|
       d.sub('views/blog/posts/', '')
     end.sort_by(&:to_i).map do |filename|
-      Post.new(filename, markdown("blog/posts/#{filename.sub('.md', '')}".to_sym))
+      Post.new(filename)
     end.reverse
   end
 
@@ -21,9 +21,11 @@ class Post
     end
   end
 
-  def initialize(filename, content)
+  def initialize(filename)
     @filename = filename
-    @content  = content
+    @content  = Post.markdown("blog/posts/#{filename.sub('.md', '')}".to_sym)
+
+    inject_anchors!
   end
 
   def content
@@ -52,11 +54,22 @@ class Post
 
   def teaser_image
     doc = to_nokogiri_doc
-    doc.at_css('[data-source="flickr"]').to_html
+    doc.at_css('[data-source="flickr"]').to_html rescue ""
   end
 
   def to_nokogiri_doc
     Nokogiri::HTML(content)
+  end
+
+  def outline
+    doc     = to_nokogiri_doc
+    outline = []
+
+    doc.css('h4').each do |headline|
+      outline << { :title => headline.inner_html, :anchor => headline_to_slug(headline.inner_html) }
+    end
+
+    outline
   end
 
 private
@@ -69,5 +82,24 @@ private
     end
 
     Post.renderer.render(content)
+  end
+
+  def inject_anchors!
+    doc = to_nokogiri_doc
+
+    doc.css('h4').each do |headline|
+      headline["id"] = headline_to_slug(headline.inner_html)
+    end
+
+    @content = doc.to_html
+  end
+
+  def headline_to_slug(headline)
+    headline
+      .downcase
+      .gsub(/[^a-zA-Z1-9]/, '-')
+      .gsub(/(-{2,})/, "-")
+      .sub(/^(-+)/, "")
+      .sub(/(-+)$/, "")
   end
 end
