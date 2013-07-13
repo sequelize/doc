@@ -10,5 +10,13 @@
   </div>
   <div class="span5 well" style="margin-top: 110px">
     <%= post.teaser_image %>
+
+    <strong style="font-size: 16px;">Outline</strong><br><br>
+
+    <ul>
+      <% post.outline.each do |item| %>
+        <li><a href="#<%= item[:anchor] %>"><%= item[:title] %></a></li>
+      <% end %>
+    </ul>
   </div>
 </div>
