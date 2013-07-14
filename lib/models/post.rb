@@ -3,6 +3,8 @@ class Post
   require 'nokogiri'
   require './lib/misc/sequelize_renderer.rb'
 
+  SEPARATOR = "<!-- read more -->"
+
   def self.renderer
     @@renderer ||= Redcarpet::Markdown.new(SequelizeRenderer, :fenced_code_blocks => true, :strikethrough => true)
   end
@@ -33,7 +35,7 @@ class Post
   end
 
   def teaser
-    [content.match(/<\/h3>(.+?)<h4>/m), $1].last
+    [content.match(/<\/h3>(.+?)<h4/m), $1].last
   end
 
   def filename
@@ -70,6 +72,10 @@ class Post
     end
 
     outline
+  end
+
+  def has_separator?
+    (teaser || "").include? SEPARATOR
   end
 
 private
