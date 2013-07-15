@@ -71,7 +71,14 @@
         var $img  = $(this)
 
         $img
-          .wrap($("<a href='" + $img.data('page') + "' style='position: relative; display: inline-block'></a>"))
+          .wrap(
+            $("<a href='" + $img.data('page') + "'></a>")
+              .css({
+                position:        "relative",
+                display:         "inline-block",
+                "margin-bottom": "30px"
+              })
+          )
           .addClass('img-polaroid')
           .css({ "padding-bottom": 40 })
           .after(
