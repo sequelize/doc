@@ -58,7 +58,7 @@ var sqlite    = require('sequelize-sqlite').sqlite
 
 ##### PostgreSQL
 
-The library for PostgreSQL is `pg@~0.10.2`. You'll just need to define the dialect:
+The library for PostgreSQL is `pg@~2.0.0`. You'll just need to define the dialect:
 
 ```js
 var sequelize = new Sequelize('database', 'username', 'password', {
