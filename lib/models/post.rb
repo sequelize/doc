@@ -35,7 +35,9 @@ class Post
   end
 
   def teaser
-    [content.match(/<\/h3>(.+?)<h4/m), $1].last
+    result = [content.match(/<\/h3>(.+?)<h4/m), $1].last
+    result = result.sub(teaser_image, '')
+    result
   end
 
   def filename
