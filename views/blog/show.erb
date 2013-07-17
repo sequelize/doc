@@ -1,2 +1,22 @@
-<%= erb "blog/_header".to_sym %>
-<%= markdown("blog/posts/#{post}".to_sym) %>
+<div class="row-fluid">
+  <div class="span12">
+    <%= erb "blog/_header".to_sym %>
+  </div>
+</div>
+
+<div class="row-fluid">
+  <div class="span7">
+    <%= post.content.sub(post.teaser_image, '') %>
+  </div>
+  <div class="span5 well" style="margin-top: 110px">
+    <%= post.teaser_image %>
+
+    <strong style="font-size: 16px;">Outline</strong><br><br>
+
+    <ul>
+      <% post.outline.each do |item| %>
+        <li><a href="#<%= item[:anchor] %>"><%= item[:title] %></a></li>
+      <% end %>
+    </ul>
+  </div>
+</div>

@@ -75,11 +75,11 @@ class Helpers
     items      = []
     etc_items  = []
 
-    posts.each_with_index do |(filename, metadata), i|
+    posts.each_with_index do |post, i|
       if i < 3
-        items << navigation_item("/blog/#{metadata[:url_fragment]}", metadata[:title], { absolute: true })
+        items << navigation_item("/blog/#{post.url_fragment}", post.title, { absolute: true })
       else
-        etc_items << { :identifier => "/blog/#{metadata[:url_fragment]}", :label => metadata[:title], :absolute => true }
+        etc_items << { :identifier => "/blog/#{post.url_fragment}", :label => post.title, :absolute => true }
       end
     end
 

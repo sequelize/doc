@@ -1,13 +1,17 @@
 <%= erb "blog/_header".to_sym %>
 
-<% posts.each do |path, data| %>
-  <section id="<%= path %>">
-    <div class="page-header"><h3><%= data[:title] %></h3></div>
-    <%= [data[:content].match(/<\/h3>(.+?)<h4>/m), $1].last %>
-    <br><br>
-    <a href="/blog/<%= path.sub("#{path.to_i}-", "") %>">
-      <i class="icon-chevron-right"></i>
-      Read more
-    </a>
-  </section>
-<% end %>
+<div class="blog posts">
+  <% posts.each do |post| %>
+    <section id="<%= post.basename %>" class="post">
+      <div class="page-header"><h3><%= post.title %></h3></div>
+
+      <% if post.has_separator? %>
+        <%= post.teaser.sub("<!-- read more -->", "<br><br><a href=\"/blog/#{post.basename}\"><i class=\"icon-chevron-right\"></i> Read more</a>") %>
+      <% else %>
+        <%= post.teaser %>
+
+        <p><a href="/blog/<%= post.basename %>"><i class="icon-chevron-right"></i> Read more</a></p>
+      <% end %>
+    </section>
+  <% end %>
+</div>

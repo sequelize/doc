@@ -249,3 +249,7 @@ section > .page-header {
   outline: 0;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffdd4814',endColorstr='#ffc64012',GradientType=0);
 }
+
+.clear {
+  clear: both;
+}
