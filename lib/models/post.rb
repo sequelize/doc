@@ -19,7 +19,7 @@ class Post
 
   def self.find_by_basename(basename)
     Post.all.detect do |post|
-      post.basename == basename
+      post.url_fragment == basename
     end
   end
 

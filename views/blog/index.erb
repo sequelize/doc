@@ -2,15 +2,15 @@
 
 <div class="blog posts">
   <% posts.each do |post| %>
-    <section id="<%= post.basename %>" class="post">
+    <section id="<%= post.url_fragment %>" class="post">
       <div class="page-header"><h3><%= post.title %></h3></div>
 
       <% if post.has_separator? %>
-        <%= post.teaser.sub("<!-- read more -->", "<br><br><a href=\"/blog/#{post.basename}\"><i class=\"icon-chevron-right\"></i> Read more</a>") %>
+        <%= post.teaser.sub("<!-- read more -->", "<br><br><a href=\"/blog/#{post.url_fragment}\"><i class=\"icon-chevron-right\"></i> Read more</a>") %>
       <% else %>
         <%= post.teaser %>
 
-        <p><a href="/blog/<%= post.basename %>"><i class="icon-chevron-right"></i> Read more</a></p>
+        <p><a href="/blog/<%= post.url_fragment %>"><i class="icon-chevron-right"></i> Read more</a></p>
       <% end %>
     </section>
   <% end %>
