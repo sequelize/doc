@@ -201,3 +201,19 @@ Project.max('age').success(function(max) {
   // this will return 40
 })
 ```
+
+##### min - Get the least value of a specific attribute within a specific table | min
+
+And here is a method for getting the min value of an attribute:
+
+```js
+/*
+  Let's assume 3 person objects with an attribute age.
+  The first one is 10 years old,
+  the second one is 5 years old,
+  the third one is 40 years old.
+*/
+Project.min('age').success(function(max) {
+  // this will return 5
+})
+```

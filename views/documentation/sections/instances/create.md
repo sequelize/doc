@@ -29,3 +29,38 @@ User.bulkCreate([
   })
 })
 ```
+
+```bulkCreate()``` by default will try to build every attribute within the DAO/Factory. For instance...
+
+```js
+User.bulkCreate([
+  { username: 'foo' },
+  { username: 'bar' }
+]).success(function() {
+  // most likely wont happen due to the model having an "id" column that's a sequence/serial/auto increment primary key (which isn't allowed to be null)
+}).error(function() {
+  // will most likely happen since every object became
+  // { id: null, username: <username> }
+})
+```
+
+To remedy this problem, ```bulkCreate()``` accepts a second parameter (an array) to let it know which fields you want to build explicitly
+
+```js
+User.bulkCreate([
+  { username: 'foo' },
+  { username: 'bar'}
+], ['username']).success(function() {
+  // will succeed due to .create() omiting values that can't be null, etc.
+})
+
+// an easier way to keep track of which fields you want to explicitly build, use Object.keys() like so
+var objects = [
+  { username: 'foo' },
+  { username: 'bar' }
+]
+
+User.bulkCreate(objects, Object.keys(objects)).success(function() {
+  // ...
+})
+```
