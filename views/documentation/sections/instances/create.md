@@ -64,3 +64,54 @@ User.bulkCreate(objects, Object.keys(objects)).success(function() {
   // ...
 })
 ```
+
+```bulkCreate()``` was originally made to be a mainstream/fast way of inserting records, however, sometimes you want the luxury of being able to insert multiple rows at once without sacrificing model validations even when you explicitly tell Sequelize which columns to sift through. You can do by adding a third parameter of an object with the value of ```{validate: true}```
+
+```js
+var Tasks = sequelize.define('Task', {
+  name: {
+    type: Sequelize.STRING,
+    validate: {
+      notNull: { args: true, msg: 'name cannot be null' }
+    }
+  },
+  code: {
+    type: Sequelize.STRING,
+    validate: {
+      len: [3, 10]
+    }
+  }
+})
+
+Tasks.bulkCreate([
+  {name: 'foo', code: '123'},
+  {code: '1234'},
+  {name: 'bar', code: '1'}
+], null, {validate: true}).error(function(errors) {
+  /* console.log(errors) would look like:
+  [
+    {
+      "record": {
+        "code": "1234"
+      },
+      "errors": {
+        "name": [
+          "name cannot be null"
+        ]
+      }
+    },
+    {
+      "record": {
+        "name": "bar",
+        "code": "1"
+      },
+      "errors": {
+        "code": [
+          "String is not in range: code"
+        ]
+      }
+    }
+  ]
+  */
+})
+```
