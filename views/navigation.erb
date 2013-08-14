@@ -49,13 +49,18 @@
                   :external   => true,
                   :url        => 'https://groups.google.com/forum/#!forum/sequelize',
                   :text       => 'Google Groups'
+                }, {
+                  :external   => true,
+                  :url        => "https://plus.google.com/107986388268837768912",
+                  :text       => 'About me',
+                  :rel        => 'author'
                 }].each do |entry|
               %>
                 <% if entry[:divider] %>
                   <li class="divider"></li>
                 <% elsif entry[:external] %>
                   <li>
-                    <a href="<%= entry[:url] %>" target="_blank" rel="nofollow">
+                    <a href="<%= entry[:url] %>" target="_blank" rel="<%= entry[:rel] || 'nofollow' %>">
                       <i class="icon-share"></i>
                       <%= entry[:text] %>
                     </a>
