@@ -31,7 +31,7 @@ Task.bulkCreate([
   {subject: 'reading', status: 'executing'},
   {subject: 'programming', status: 'finished'}
 ]).success(function() {
-  Task.update({subject: 'programming'} /* where criteria */, {status: 'inactive'} /* set attributes' value */).success(function() {
+  Task.update({status: 'inactive'} /* set attributes' value */, {subject: 'programming'} /* where criteria */).success(function() {
     Task.findAll().success(function(tasks) {
       console.log(tasks) // the 'programming' tasks will both have a status of 'inactive'
     })
