@@ -23,9 +23,14 @@ Sequelize.BOOLEAN                     // TINYINT(1)
 
 Sequelize.ENUM('value 1', 'value 2')  // An ENUM with allowed values 'value 1' and 'value 2'
 Sequelize.ARRAY(Sequelize.TEXT)       // Defines an array. PostgreSQL only.
+
+Sequelize.BLOB                        // BLOB (bytea for PostgreSQL)
+Sequelize.BLOB('tiny')                // TINYBLOB (bytea for PostgreSQL. Other options are medium and long)
 ```
 
-In addition, integer, bigint and float also support unsigned and zerofill properties, which can be combined in any order:
+The BLOB data type allows you to insert data both as strings and as buffers. When you do a find or findAll on a model which has a BLOB column, that data will always be returned as a buffer.
+
+In addition to the type mentioned above, integer, bigint and float also support unsigned and zerofill properties, which can be combined in any order:
 
 ```js
 Sequelize.INTEGER.UNSIGNED              // INTEGER UNSIGNED
