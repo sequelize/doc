@@ -34,8 +34,19 @@ sequelize.query('SELECT * FROM projects', null, {raw: true}).success(function(pr
   console.log(projects)
 })
 
-// Replacements is a simple array that replaces all of the bindings within your query
-sequelize.query('SELECT * FROM projects WHERE status=?', null, {raw: true}, ['active']).success(function(projects) {
+/*
+Replacements in a query can be done in two different ways, either using named parameters (starting with :), or unnamed, represented by a ?
+
+The syntax used depends on the fourth argument passed to the function:
+  * If an array is passed, ? will be replaced in the order that they appear in the array
+  * If an object is passed, :key will be replaced with the keys from that object. If the object contains keys not found in the query or vice verca, 
+    an exception will be thrown.
+*/
+sequelize.query('SELECT * FROM projects WHERE status = ?', null, {raw: true}, ['active']).success(function(projects) {
+  console.log(projects)
+})
+
+sequelize.query('SELECT * FROM projects WHERE status = :status ', null, {raw: true}, { status: 'active' }).success(function(projects) {
   console.log(projects)
 })
 ```
