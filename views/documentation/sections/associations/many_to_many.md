@@ -1,6 +1,6 @@
 #### Many-To-Many associations | Many-To-Many
 
-Many-To-Many associations are connecting sources with multiple targets. Furthermore the targets can also have connections to multiple sources.
+Many-To-Many associations are used to connect sources with multiple targets. Furthermore the targets can also have connections to multiple sources.
 
 ```js
 // again the Project association to User
@@ -26,25 +26,25 @@ Person.hasMany(Person, { as: 'Children' })
 
 // Since v1.5.0 you can also reference the same Model without creating a junction
 // table (but only if each object will have just one 'parent'). If you need that,
-// use the option foreignKey and useJunctionTable:
+// use the option foreignKey and set useJunctionTable to false
 Person.hasMany(Person, { as: 'Children', foreignKey: 'ParentId', useJunctionTable: false })
 
 // You can also use a predefined junction table using the option joinTableName:
 Project.hasMany(User, {joinTableName: 'project_has_users'})
 User.hasMany(Project, {joinTableName: 'project_has_users'})
+```
 
-// If you need your association table to have additional attributes, an alternative
-// way to do this would be to define the table and then use two hasMany relationship.
+If you want additional attributes in your join table, you can define a model for the join table in sequelize, before you define the association, and then tell sequelize that it should use that model for joining, instead of creating a new one:
 
-UserProject = sequelize.define('user_projects',{
-   count : Sequelize.INTEGER
+```js
+User = sequelize.define('User', {})
+Project = sequelize.define('Project', {})
+UserProjects = sequelize.define('UserProjects', {
+    status: DataTypes.STRING
 })
 
-Project.hasMany(UserProjects);
-User.hasMany(UserProjects);
-UserProject.belongsTo(User);
-UserProject.belongsTo(Project);
-
-// NOTE : this does NOT allow you direct access from Project to User. You can access
-// UserProject which will give you access to the User, but it is not a direct relationship
+User.hasMany(Project, { joinTableModel: UserProjects })
+Project.hasMany(User, { joinTableModel: UserProjects })
 ```
+
+The code above will add ProjectId and UserId to the UserProjects table, and *remove the id attribute*, if it was added previously - the table will be uniquely identified by the combination of the keys of the two tables, and there is no reason to have an id column as well.

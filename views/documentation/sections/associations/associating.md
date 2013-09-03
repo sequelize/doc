@@ -72,3 +72,48 @@ For hasOne/belongsTo its basically the same:
 Task.hasOne(User, {as: "Author"})
 Task#setAuthor(anAuthor)
 ```
+
+Adding associations to a relation with a custom join table can be done in two ways (continuing with the associations defined in the previous chapter):
+
+```js
+// Either by adding a property with the name of the join table model to the object, before creating the association
+project.UserProjects = {
+  status: 'active'
+}
+u.addProject(project)
+            
+// Or by providing a second argument when adding the association, containing the data that should go in the join table
+u.addProject(project, { status: 'active' })
+
+
+// When associating multiple objects, you can combine the two options above. In this case the second argument 
+// will be treated as a defaults object, that will be used if no data is provided
+project1.UserProjects = {
+    status: 'inactive'
+}
+
+u.setProjects([project1, project2], { status: 'active' })
+// The code above will record inactive for project one, and active for project two in the join table
+```
+
+When getting data on an association that has a custom join table, the data from the join table will be returned as a DAO instance:
+
+```js
+u.getProjects().success(function(projects) {
+  var project = projects[0]
+
+  if (project.UserProjects.status === 'active') {
+    // .. do magic
+
+    // since this is a real DAO instance, you can save it directly after you are done doing magic
+    project.UserProjects.save()
+  }
+})
+```
+
+If you only need some of the attributes from the join table, you can provide an array with the attributes you want:
+
+```js
+// This will select only name from the Projects table, and only status from the UserProjects table
+user.getProjects({ attributes: ['name'], joinTableAttributes: ['status']})
+```
