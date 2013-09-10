@@ -47,4 +47,4 @@ User.hasMany(Project, { joinTableModel: UserProjects })
 Project.hasMany(User, { joinTableModel: UserProjects })
 ```
 
-The code above will add ProjectId and UserId to the UserProjects table, and *remove the id attribute*, if it was added previously - the table will be uniquely identified by the combination of the keys of the two tables, and there is no reason to have an id column as well.
+The code above will add ProjectId and UserId to the UserProjects table, and *remove any previsouly defined primary key attribute*, - the table will be uniquely identified by the combination of the keys of the two tables, and there is no reason to have other PK columns.
