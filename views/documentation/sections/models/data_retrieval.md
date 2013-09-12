@@ -175,33 +175,23 @@ Notice how in the two examples above, the string provided is inserted verbatim i
 ```js
 something.find({
   order: [
-    'name', // will return `name`
-    'username DESC', // will return `username DESC` -- i.e. don't do it!
-    ['username', 'DESC'], // will return `username` DESC
-    {
-      fn: 'max',
-      cols: ['age']
-    }, // will return max(`age`)
-    [{
-      fn: 'max',
-      cols: ['age']
-    }, 'DESC'], // will return max(`age`) DESC
-    {
-      fn: 'otherfunction',
-      cols: ['col1', 'col2'],
-      direction: 'DESC'
-    }], // will return otherfunction(`col1`, `col2`) DESC
-    {
-      fn: 'otherfunction',
-      cols: [{
-        fn: 'awesomefunction',
-        cols: ['col']
-      }],
-      direction: 'DESC'
-    }, // will return otherfunction(awesomefunction(`col`)). This nesting is potentially infinite!
-    {
-      raw: 'otherfunction(awesomefunction(col))'
-    } // Will return otherfunction(awesomefunction(col)), i.e. the raw argument is not quoted
+    'name',
+    // will return `name`
+    'username DESC', 
+    // will return `username DESC` -- i.e. don't do it!
+    ['username', 'DESC'], 
+    // will return `username` DESC
+    sequelize.fn('max', sequelize.col('age')), 
+    // will return max(`age`)
+    [sequelize.fn('max', sequelize.col('age')), 'DESC'], 
+    // will return max(`age`) DESC
+    [sequelize.fn('otherfunction', sequelize.col('col1'), 12, 'lalala'), 'DESC'], 
+    // will return otherfunction(`col1`, 12, 'lalala') DESC
+    [sequelize.fn('otherfunction', sequelize.fn('awesomefunction', sequelize.col('col'))), 'DESC'] 
+    // will return otherfunction(awesomefunction(`col`)) DESC, This nesting is potentially infinite!
+    [{ raw: 'otherfunction(awesomefunction(`col`))' }, 'DESC']
+    // This won't be quoted, but direction will be added
+  ]
 })
 ```
 
@@ -211,8 +201,8 @@ To recap, the elements of the order / group array can be the following:
 * Array - first element will be qouted, second will be appended verbatim
 * Object -
   * Raw will be added verbatim without quoting
-  * fn will be treated as a function call with cols as an array of arguments
-  * Direction will be appended
+  * Everything else is ignored, and if raw is not set, the query will fail
+* Sequelize.fn and Sequelize.col returns functions and quoted cools
 
 ##### Raw queries | raw
 Sometimes you might be expecting a massive dataset that you just want to display, without manipulation. For each row you select, Sequelize creates a *DAO*, with functions for update, delete, get associations etc. If you have thousands of rows, this might take some time. If you only need the raw data and don't want to update anything, you can do like this to get the raw data.
