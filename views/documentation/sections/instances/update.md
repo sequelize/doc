@@ -13,12 +13,17 @@ task.updateAttributes({
 }).success(function() {})
 ```
 
-Since `v1.4.1` it's also possible to define which attributes should be saved when calling `save`. This is useful when you set attributes based on a previously defined object. E.g. if you get the values of an object via a form of a web app. Furthermore this is used internally for `updateAttributes`. This is how it looks like:
+Since `v1.4.1` it's also possible to define which attributes should be saved when calling `save`, by passing an array of column names. This is useful when you set attributes based on a previously defined object. E.g. if you get the values of an object via a form of a web app. Furthermore this is used internally for `updateAttributes`. This is how it looks like:
 
 ```js
 task.title = 'foooo'
 task.description = 'baaaaaar'
 task.save(['title']).success(function() {
+ // title will now be 'foooo' but description is the very same as before
+})
+
+// The equivalent call using updateAttributes looks like this:
+task.updateAttributes({ title: 'foooo', description: 'baaaaaar'}, ['title']).success(function() {
  // title will now be 'foooo' but description is the very same as before
 })
 ```
