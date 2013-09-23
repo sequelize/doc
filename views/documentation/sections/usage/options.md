@@ -35,6 +35,11 @@ var sequelize = new Sequelize('database', 'username', 'password', {
   // - default: false
   omitNull: true,
 
+  // a flag for using a native library or not.
+  // in the case of 'pg' -- set this to true will allow SSL support
+  // - default: false
+  native: true,
+
   // Specify options, which are used when sequelize.define is called.
   // The following example:
   //   define: {timestamps: false}
