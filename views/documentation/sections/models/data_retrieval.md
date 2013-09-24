@@ -146,24 +146,65 @@ Project.findAll({
 })
 ```
 
-Of course you can pass a some options to the finder methods, to get more relevant data:
+##### Manipulating the dataset with limit, offset, order and group | limit / offset / order / group
+To get more relevant data, you can use limit, offset, order and grouping:
 
 ```js
-// define the order of the queried data
-Project.findAll({order: 'title DESC'})
-
 // limit the results of the query
-Project.findAll({limit: 10})
+Project.findAll({ limit: 10 })
 
-// step over some elements
-// this only works with a specified limit
-Project.findAll({offset: 10, limit: 2})
+// step over the first 10 elements
+Project.findAll({ offset: 10 })
 
-// group by an element/elements
-Project.findAll({group: 'name'}) // single element
-Project.findAll({group: ['name', 'type', 'team_id']}) // multiple elements
+// step over the first 10 elements, and take 2
+Project.findAll({ offset: 10, limit: 2 })
 ```
 
+The syntax for grouping and ordering are equal, so below it is only explained with a single example for group, and the rest for order. Everything you see below can also be done for group
+
+```js
+Project.findAll({order: 'title DESC'})
+// yields ORDER BY title DESC 
+
+Project.findAll({group: 'name'})
+// yields GROUP BY name
+```
+
+Notice how in the two examples above, the string provided is inserted verbatim into the query, i.e. column names are not escaped. When you provide a string to order / group, this will always be the case as per v 1.7.0. If you want to escape column names, you should provide an array of arguments, even though you only want to order / group by a single column
+
+```js
+something.find({
+  order: [
+    'name',
+    // will return `name`
+    'username DESC', 
+    // will return `username DESC` -- i.e. don't do it!
+    ['username', 'DESC'], 
+    // will return `username` DESC
+    sequelize.fn('max', sequelize.col('age')), 
+    // will return max(`age`)
+    [sequelize.fn('max', sequelize.col('age')), 'DESC'], 
+    // will return max(`age`) DESC
+    [sequelize.fn('otherfunction', sequelize.col('col1'), 12, 'lalala'), 'DESC'], 
+    // will return otherfunction(`col1`, 12, 'lalala') DESC
+    [sequelize.fn('otherfunction', sequelize.fn('awesomefunction', sequelize.col('col'))), 'DESC'] 
+    // will return otherfunction(awesomefunction(`col`)) DESC, This nesting is potentially infinite!
+    [{ raw: 'otherfunction(awesomefunction(`col`))' }, 'DESC']
+    // This won't be quoted, but direction will be added
+  ]
+})
+```
+
+To recap, the elements of the order / group array can be the following:
+
+* String - will be quoted
+* Array - first element will be qouted, second will be appended verbatim
+* Object -
+  * Raw will be added verbatim without quoting
+  * Everything else is ignored, and if raw is not set, the query will fail
+* Sequelize.fn and Sequelize.col returns functions and quoted cools
+
+##### Raw queries | raw
 Sometimes you might be expecting a massive dataset that you just want to display, without manipulation. For each row you select, Sequelize creates a *DAO*, with functions for update, delete, get associations etc. If you have thousands of rows, this might take some time. If you only need the raw data and don't want to update anything, you can do like this to get the raw data.
 
 ```js
