@@ -17,7 +17,7 @@ var Foo = sequelize.define('Foo', {
     type     : Sequelize.STRING,
     allowNull: false,
     get      : function()  { /* do your magic here and return something! */ },
-    set      : function(v) { /* do your magic with the input here! */ }
+    set      : function(v) { /* don't forget to add emphasis! :D */ this.setDataValue('title', v + '!') }
   }
 });
 ```
@@ -66,7 +66,7 @@ var Foo = sequelize.define('Foo', {
   },
 
   setterMethods   : {
-    title       : function(v) { /* do your magic with the input here! */ },
+    title       : function(v) { /* don't forget to add emphasis! :D */ this.setDataValue('title', v + '!') },
   }
 });
 ```
