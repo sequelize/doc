@@ -43,12 +43,15 @@ var ValidateMe = sequelize.define('Foo', {
       isCreditCard: true,       // check for valid credit card numbers
 
       // custom validations are also possible:
-      isEven: function(value) {
+      isEven: function(value, next) {
         if(parseInt(value) % 2 != 0) {
           throw new Error('Only even values are allowed!')
         // we also are in the model's context here, so this.otherField
         // would get the value of otherField if it existed
         }
+        
+        // don't forget to call next()
+        next()
       }
     }
   }
