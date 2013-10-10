@@ -44,14 +44,14 @@ var ValidateMe = sequelize.define('Foo', {
 
       // custom validations are also possible:
       isEven: function(value, next) {
-        if(parseInt(value) % 2 != 0) {
-          throw new Error('Only even values are allowed!')
-        // we also are in the model's context here, so this.otherField
-        // would get the value of otherField if it existed
+        if (parseInt(value) % 2 != 0) {
+          // pass the error message to the next() method
+          next('Only even values are allowed!')
+        } else {
+          // call next() without any arguments if validation was successful
+          next()
         }
         
-        // don't forget to call next()
-        next()
       }
     }
   }
@@ -140,9 +140,13 @@ var Pub = Sequelize.define('Pub', {
   },
 }, {
   validate: {
-    bothCoordsOrNone: function() {
+    bothCoordsOrNone: function(next) {
       if ((this.latitude === null) === (this.longitude === null)) {
-        throw new Error('Require either both latitude and longitude or neither')
+        // pass the error message to the next() method
+        next('Require either both latitude and longitude or neither')
+      } else {
+        // call next() without any arguments if validation was successful
+        next()
       }
     }
   }
