@@ -46,7 +46,7 @@ Person#getFather
 // If you need to join a table twice you can double join the same table
 Team
   .hasOne(Game, {foreignKey : 'homeTeamId'});
-  .hasOne(Game, {foreignKey , 'awayTeamId'});
+  .hasOne(Game, {foreignKey : 'awayTeamId'});
 Game
   .belongsTo(Team);
 
