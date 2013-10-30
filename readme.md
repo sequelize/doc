@@ -1,4 +1,4 @@
-# The Sequelize documentation
+# The Sequelize documentation [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/sequelize/sequelize-admin/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 This repository contains the documentation of the multi-dialect object relational mapper [Sequelize](http://sequelizejs.com). It is based on Ruby and Markdown.
 
 ## Running the documentation locally
