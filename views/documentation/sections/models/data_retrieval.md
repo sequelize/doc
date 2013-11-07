@@ -141,6 +141,8 @@ Project.findAll({
       ne: 20,             // id != 20
       between: [6, 10],   // BETWEEN 6 AND 10
       nbetween: [11, 15]  // NOT BETWEEN 11 AND 15
+      like: '%sdepold'    // LIKE '%monkey'
+      nlike: 'cat'        // NOT LIKE 'cat'
     }
   }
 })
