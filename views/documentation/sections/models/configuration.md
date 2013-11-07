@@ -7,13 +7,20 @@ var Bar = sequelize.define('Bar', { /* bla */ }, {
   // don't add the timestamp attributes (updatedAt, createdAt)
   timestamps: false,
 
+  // don't like the fact that timestamp columns are called createdAt etc?
+  // then you can overwrite them, and still have sequelize update them automatically
+  updatedAt: 'updatedOn',
+  createdAt: 'dateCreated',
+  deletedAt: 'deletedAtThisTime',
+
   // don't delete database entries but set the newly added attribute deletedAt
   // to the current date (when deletion was done). paranoid will only work if
   // timestamps are not disabled
   paranoid: true,
 
   // don't use camelcase for automatically added attributes but underscore style
-  // so updatedAt will be updated_at
+  // so updatedAt will be updated_at. This also applies for custom defined timestamp 
+  // columns, so updatedOn above becomes updated_on
   underscored: true,
 
   // disable the modification of tablenames; By default, sequelize will automatically
