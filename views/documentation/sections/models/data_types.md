@@ -1,4 +1,4 @@
-#### Data types
+<#### Data types
 
 Sequelize currently supports the following datatypes:
 
@@ -22,6 +22,9 @@ Sequelize.DATE                        // DATETIME for mysql / sqlite, TIMESTAMP 
 Sequelize.BOOLEAN                     // TINYINT(1)
 
 Sequelize.ENUM('value 1', 'value 2')  // An ENUM with allowed values 'value 1' and 'value 2'
+                                      // please note that this notation can only be used in the form typename: Sequelize.ENUM ...
+                                      // If you are setting extra options on the type, see the example below
+
 Sequelize.ARRAY(Sequelize.TEXT)       // Defines an array. PostgreSQL only.
 
 Sequelize.BLOB                        // BLOB (bytea for PostgreSQL)
@@ -42,7 +45,7 @@ Sequelize.INTEGER(11).UNSIGNED.ZEROFILL // INTEGER(11) UNSIGNED ZEROFILL
 
 *The examples above only show integer, but the same can be done with bigint and float*
 
-Usage in object notation:
+Usage of enums in object notation (notice how values must be provided seperately):
 
 ```js
 // for enums:
