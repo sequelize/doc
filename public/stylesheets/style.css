@@ -22,6 +22,7 @@ body  body .navbar .navbar-brand span {
   }
   body .navbar ul.nav.navbar-nav li a {
     padding: 10px 20px;
+    text-transform: uppercase;
   }
   body .navbar ul.nav.navbar-nav li.active a {
     box-shadow: none;
@@ -57,6 +58,7 @@ body .navbar ul.nav.navbar-nav {
 }
 body .navbar ul.nav.navbar-nav li a {
   padding: 10px 20px;
+  text-transform: uppercase;
 }
 body .navbar ul.nav.navbar-nav li.active a {
   box-shadow: none;
@@ -69,4 +71,7 @@ body .main {
 }
 body .main {
   background-color: #f7f6f1;
+}
+body .main .jumbotron {
+  background: transparent;
 }
