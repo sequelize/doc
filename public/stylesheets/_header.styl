@@ -1,0 +1,45 @@
+.navbar {
+  .navbar-brand {
+    span {
+      font-size: 35px;
+      position: relative;
+      top: 8px;
+      left: 15px;
+      color: #3B7CB9;
+    }
+
+    img {
+      width: 60px
+    }
+  }
+
+  @media (max-width: 768px) {
+    .navbar-toggle {
+      margin-top: 30px;
+    }
+  }
+
+  ul.nav.navbar-nav {
+    margin-top: 25px;
+    font-size: 16px;
+
+    li {
+      a { padding: 10px 20px}
+
+      &.active {
+        a {
+          box-shadow: none;
+          background: #3B7CB9;
+          border-radius: 20px
+          color: white;
+        }
+      }
+    }
+  }
+}
+
+
+
+.main {
+  margin-top: 90px
+}
