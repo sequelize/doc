@@ -43,6 +43,9 @@ body h4,
 body h5 {
   font-family: 'Ubuntu', sans-serif;
 }
+body .headline-spacer {
+  height: 90px;
+}
 body .full-height {
   height: 100%;
   max-height: 768px;
@@ -64,16 +67,16 @@ body .mid-blue,
 body .dark-blue {
   color: #fff;
 }
-body .light-blue h2,
-body .mid-blue h2,
-body .dark-blue h2 {
+body .light-blue h2.centered,
+body .mid-blue h2.centered,
+body .dark-blue h2.centered {
   text-transform: uppercase;
   text-align: center;
   margin-bottom: 30px;
 }
-body .light-blue h2:not(:first-of-type),
-body .mid-blue h2:not(:first-of-type),
-body .dark-blue h2:not(:first-of-type) {
+body .light-blue h2.centered:not(:first-of-type),
+body .mid-blue h2.centered:not(:first-of-type),
+body .dark-blue h2.centered:not(:first-of-type) {
   margin-top: 80px;
 }
 body pre {
@@ -95,4 +98,21 @@ body section.users .row > * {
 }
 body section.users img {
   width: 100%;
+}
+body .navigation ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+body .navigation ul:first-of-type {
+  margin-top: 60px;
+}
+body .navigation ul li {
+  list-style-type: none;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  font-size: 20px;
+  line-height: 60px;
+}
+body .navigation ul li:first-of-type {
+  border-top: 1px solid rgba(255,255,255,0.2);
 }

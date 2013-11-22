@@ -8,8 +8,13 @@ exports.index = function(req, res) {
   } else if (!req.param('section')) {
     res.redirect("/docs/latest/" + sections[0], 301)
   } else if (req.param('version') !== 'latest') {
-    path = 'docs/' + req.param('version') + '/views/' + path
+    path = 'docs/.' + req.param('version') + '/views/' + path
   }
 
-  res.render(path + '/' + req.param('section'), { title: 'Documentation' })
+  res.render(path + '/' + req.param('section'), {
+    title:    'Documentation',
+    version:  req.param('version'),
+    section:  req.param('section'),
+    sections: sections
+  })
 }

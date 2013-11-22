@@ -1,9 +1,9 @@
-var express = require('express')
-  , routes  = require('./routes/index')
-  , docs    = require('./routes/docs')
-  , http    = require('http')
-  , path    = require('path')
-  , app     = express()
+var express   = require('express')
+  , routes    = require('./routes/index')
+  , docs      = require('./routes/docs')
+  , http      = require('http')
+  , path      = require('path')
+  , app       = express()
 
 // all environments
 app.set('port', process.env.PORT || 3000)

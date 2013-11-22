@@ -12,10 +12,12 @@ var latest = tags.reduce(function(latest, tag) {
 tags.forEach(function(tag) {
   console.log("Downloading", tag, "...")
 
+  var tagFolder = "." + tag
+
   sh.run([
     "cd " + __dirname + "/../views/docs/",
-    "git clone --quiet https://github.com/sequelize/sequelize-doc.git " + tag,
-    "cd " + tag,
+    "git clone --quiet https://github.com/sequelize/sequelize-doc.git " + tagFolder,
+    "cd " + tagFolder,
     "git checkout --quiet " + tag
   ].join(";"))
 })

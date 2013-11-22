@@ -1,0 +1,19 @@
+extends ../layout
+
+block content
+  .container
+    .row
+      .col-md-3.mid-blue
+        .headline-spacer
+        section.navigation
+          h2 Navigation
+
+          ul
+            each _section in sections
+              - isActive = (_section === section)
+              li(class=(isActive ? 'active' : ''))
+                a(href="/docs/"+version+"/"+_section)
+                  = _section.charAt(0).toUpperCase() + _section.slice(1)
+      .col-md-9.beige
+        .headline-spacer
+        block documentation
