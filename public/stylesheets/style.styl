@@ -1,19 +1,59 @@
 @import "bootstrap.min.css"
 @import "bootstrap-theme.min.css"
 @import url(http://fonts.googleapis.com/css?family=Ubuntu)
+@import url(http://fonts.googleapis.com/css?family=Ubuntu+Mono)
+
+@import '_header';
 
 body {
-  @import '_header'
+  &, h1, h2, h3, h4, h5 {
+    font-family: 'Ubuntu', sans-serif;
+  }
 
-  font-family: 'Ubuntu', sans-serif;
+  .beige { background-color: #f7f6f1 }
+  .light-blue { background-color: #4BAFEA }
+  .mid-blue { background-color: #3B7CB9 }
+  .dark-blue { background-color: #314267 }
 
-  .main {
-    background-color: #f7f6f1
+  .light-blue, .mid-blue, .dark-blue {
+    color: white
 
+    h2 {
+      text-transform: uppercase
+      text-align: center
+      margin-bottom: 30px
+
+      &:not(:first-of-type) {
+        margin-top: 80px
+      }
+    }
+
+    pre {
+      border: 0;
+      padding: 40px
+      line-height: 30px
+
+      code {
+        background:transparent;
+        font-family: 'Ubuntu Mono', sans-serif;
+        font-size: 18px;
+      }
+    }
+  }
+
+  section {
     .jumbotron {
       background: transparent;
     }
+
+    &.users {
+      .row > * {
+        line-height: 100px
+      }
+
+      img {
+        width: 100%
+      }
+    }
   }
 }
-
-

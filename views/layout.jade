@@ -5,6 +5,10 @@ html
       = "Sequelize - "
       = title
     link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel="stylesheet", href="http://yandex.st/highlightjs/7.5/styles/ir_black.min.css")
+    script(src="http://yandex.st/highlightjs/7.5/highlight.min.js")
+    script hljs.initHighlightingOnLoad();
+
   body
     .navbar.navbar-default.navbar-fixed-top(role='navigation')
       .navbar-header
@@ -29,9 +33,7 @@ html
             a(href='../navbar-fixed-top/') Changelog
           li
             a(href='../navbar-fixed-top/') Blog
-    .main
-      .container
-        block content
+    block content
     //- script(src='https://code.jquery.com/jquery-1.10.2.min.js')
     //- script(src='../../dist/js/bootstrap.min.js')
 

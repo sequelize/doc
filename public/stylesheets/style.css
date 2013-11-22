@@ -1,42 +1,7 @@
 @import "bootstrap.min.css";
 @import "bootstrap-theme.min.css";
 @import url("http://fonts.googleapis.com/css?family=Ubuntu");
-body  body .navbar .navbar-brand span {
-    font-size: 35px;
-    position: relative;
-    top: 8px;
-    left: 15px;
-    color: #3b7cb9;
-  }
-  body .navbar .navbar-brand img {
-    width: 60px;
-  }
-@media (max-width: 768px) {
-    body .navbar .navbar-toggle {
-      margin-top: 30px;
-    }
-}
-  body .navbar ul.nav.navbar-nav {
-    margin-top: 25px;
-    font-size: 16px;
-  }
-  body .navbar ul.nav.navbar-nav li a {
-    padding: 10px 20px;
-    text-transform: uppercase;
-  }
-  body .navbar ul.nav.navbar-nav li.active a {
-    box-shadow: none;
-    background: #3b7cb9;
-    border-radius: 20px;
-    color: #fff;
-  }
-  body .main {
-    margin-top: 90px;
-  }
- {
-
-  font-family: 'Ubuntu', sans-serif;
-}
+@import url("http://fonts.googleapis.com/css?family=UbuntuMono");
 body .navbar .navbar-brand span {
   font-size: 35px;
   position: relative;
@@ -66,12 +31,66 @@ body .navbar ul.nav.navbar-nav li.active a {
   border-radius: 20px;
   color: #fff;
 }
-body .main {
+body section:first-of-type {
   margin-top: 90px;
 }
-body .main {
+body,
+body h1,
+body h2,
+body h3,
+body h4,
+body h5 {
+  font-family: 'Ubuntu', sans-serif;
+}
+body .beige {
   background-color: #f7f6f1;
 }
-body .main .jumbotron {
+body .light-blue {
+  background-color: #4bafea;
+}
+body .mid-blue {
+  background-color: #3b7cb9;
+}
+body .dark-blue {
+  background-color: #314267;
+}
+body .light-blue,
+body .mid-blue,
+body .dark-blue {
+  color: #fff;
+}
+body .light-blue h2,
+body .mid-blue h2,
+body .dark-blue h2 {
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 30px;
+}
+body .light-blue h2:not(:first-of-type),
+body .mid-blue h2:not(:first-of-type),
+body .dark-blue h2:not(:first-of-type) {
+  margin-top: 80px;
+}
+body .light-blue pre,
+body .mid-blue pre,
+body .dark-blue pre {
+  border: 0;
+  padding: 40px;
+  line-height: 30px;
+}
+body .light-blue pre code,
+body .mid-blue pre code,
+body .dark-blue pre code {
   background: transparent;
+  font-family: 'Ubuntu Mono', sans-serif;
+  font-size: 18px;
+}
+body section .jumbotron {
+  background: transparent;
+}
+body section.users .row > * {
+  line-height: 100px;
+}
+body section.users img {
+  width: 100%;
 }

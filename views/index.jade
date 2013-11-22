@@ -1,20 +1,62 @@
 extends layout
 
 block content
-  .jumbotron
-    .row
-      table
-        td.col-md-4(style="vertical-align: top")
-          img(src="/images/logo.png", width='100%')
-        td.col-md-8
-          h1 Sequelize
+  section.beige
+    .container
+      .jumbotron
+        .row
+          table
+            td.col-md-4(style="vertical-align: top")
+              img(src="/images/logo.png", width='100%')
+            td.col-md-8
+              h1 Sequelize
 
-          p(style="margin: 1em 0")
-            | The Sequelize library provides easy access to MySQL, MariaDB, SQLite or PostgreSQL
-            | databases by mapping database entries to objects and vice versa.
-            | To put it in a nutshell, it's an ORM (Object-Relational-Mapper).
-            | The library is written entirely in JavaScript
-            | and can be used in the Node.JS environment.
+              p(style="margin: 1em 0")
+                | The Sequelize library provides easy access to MySQL, MariaDB, SQLite or PostgreSQL
+                | databases by mapping database entries to objects and vice versa.
+                | To put it in a nutshell, it's an ORM (Object-Relational-Mapper).
+                | The library is written entirely in JavaScript
+                | and can be used in the Node.JS environment.
 
-          p
-            a.btn.btn-lg.btn-primary(href='../../components/#navbar', role='button') View navbar docs »
+              p
+                a.btn.btn-lg.btn-primary(href='../../components/#navbar', role='button') Getting started
+  section.light-blue
+    .container
+      .jumbotron
+        h2 Easy installation
+        pre.dark-blue
+          code.bash
+            | $ npm install sequelize
+            | $ npm install mysql
+
+        h2 Simple usage
+        pre.dark-blue
+          code.javascript
+            | var Sequelize = require('sequelize')
+            |   , sequelize = new Sequelize('database', 'username', 'password')
+            | &nbsp;
+            | var User = sequelize.define('User', {
+            |   username: Sequelize.STRING,
+            |   birthday: Sequelize.DATE
+            | })
+            | &nbsp;
+            | sequelize.sync().success(function() {
+            |   User.create({
+            |     username: 'sdepold',
+            |     birthday: new Date(1986, 06, 28)
+            |   }).success(function(sdepold) {
+            |     console.log(sdepold.values)
+            |   })
+            | })
+
+  section.dark-blue.users
+    .container
+      .jumbotron
+          h2 Trusted and used by
+          .row
+            .col-md-4
+              img(src="/images/users/clevertech.png")
+            .col-md-4
+              img(src="/images/users/shutterstock.png")
+            .col-md-4
+              img(src="/images/users/metamarkets.png")
