@@ -3,6 +3,7 @@ html
   head
     title
       = ["Sequelize", title].join(" - ")
+    link(rel="shortcut icon", type="image/x-icon", href="/favicon.ico")
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel="stylesheet", href="http://yandex.st/highlightjs/7.5/styles/ir_black.min.css")
     script(src="http://yandex.st/highlightjs/7.5/highlight.min.js")
@@ -17,13 +18,13 @@ html
           span.icon-bar
           span.icon-bar
         a.navbar-brand(href='/')
-          img(src="/images/logo.png")
+          img(src="/images/logo-small.png")
           span Sequelize
       .navbar-collapse.collapse
         ul.nav.navbar-nav
         ul.nav.navbar-nav.navbar-right
           li.active
-            a(href='./') Home
+            a(href='/') Home
           li
             a(href='../navbar-static-top/') Documentation
           li

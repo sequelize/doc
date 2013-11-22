@@ -1,0 +1,50 @@
+extends ../../layout
+
+block content
+  .row(style="height: 90px")
+  .row
+    .col-md-3.mid-blue(style="padding: 30px 0")
+      section
+        .container
+          ul
+            li Installation
+            li Usage <-
+            li Models
+            li Instances
+            li Associations
+            li Migrations
+            li Utils
+            li Misc
+    .col-md-9.beige(style="padding: 30px 0")
+      section
+        div(style="margin: 30px")
+          h2 Usage
+
+          p You have two options to install Sequelize:
+          p Install it via NPM:
+
+          pre.dark-blue
+            code.bash
+              | # Use npm on the commandline:
+              | $ npm install sequelize
+
+          pre.dark-blue
+            code.javascript
+              | // Then require the installed library in your application code:
+              | var Sequelize = require("sequelize")
+
+          p 2. Download the code from the git repository and require it's entry file index.js:
+
+          pre.dark-blue
+            code.bash
+              | # Checkout the current code from the repository using the commandline
+              | cd path/to/lib
+              | git clone git://github.com/sequelize/sequelize.git
+
+          p Then require the installed library in your application code:
+
+          pre.dark-blue
+            code.javascript
+              | var Sequelize = require(__dirname + "/lib/sequelize/index")
+
+          p This will make the class `Sequelize` available.

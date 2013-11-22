@@ -76,16 +76,13 @@ body .mid-blue h2:not(:first-of-type),
 body .dark-blue h2:not(:first-of-type) {
   margin-top: 80px;
 }
-body .light-blue pre,
-body .mid-blue pre,
-body .dark-blue pre {
+body pre {
   border: 0;
-  padding: 40px;
   line-height: 30px;
+  padding: 0;
 }
-body .light-blue pre code,
-body .mid-blue pre code,
-body .dark-blue pre code {
+body pre code {
+  margin: 40px;
   background: transparent;
   font-family: 'Ubuntu Mono', sans-serif;
   font-size: 18px;
