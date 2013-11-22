@@ -1,14 +1,14 @@
 extends layout
 
 block content
-  section.beige
-    .container
-      .jumbotron
-        .row
-          table
-            td.col-md-4(style="vertical-align: top")
+  section.beige.full-height
+    .container.full-height
+      .jumbotron.full-height
+        .row.full-height
+          table.full-height
+            td.col-md-4.full-height
               img(src="/images/logo.png", width='100%')
-            td.col-md-8
+            td.col-md-8.full-height
               h1 Sequelize
 
               p(style="margin: 1em 0")
@@ -18,8 +18,10 @@ block content
                 | The library is written entirely in JavaScript
                 | and can be used in the Node.JS environment.
 
-              p
-                a.btn.btn-lg.btn-primary(href='../../components/#navbar', role='button') Getting started
+              p.shortcuts
+                a.btn.btn-primary(href='../../components/#navbar', role='button') Getting started
+                a.btn.btn-default(href='../../components/#navbar', role='button', style="margin-left: 10px") Use with Express
+                a.btn.btn-default(href='../../components/#navbar', role='button', style="margin-left: 10px") Use on Heroku
   section.light-blue
     .container
       .jumbotron
