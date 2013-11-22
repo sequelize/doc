@@ -1,0 +1,21 @@
+#!/usr/bin/env node
+
+var sh     = require('execSync')
+  , semver = require('semver')
+  , _      = require('lodash')
+  , tags   = _.compact(sh.exec("git tag").stdout.split("\n"))
+
+var latest = tags.reduce(function(latest, tag) {
+  return semver.gt(tag, latest) ? tag : latest
+})
+
+tags.forEach(function(tag) {
+  console.log("Downloading", tag, "...")
+
+  sh.run([
+    "cd " + __dirname + "/../views/docs/",
+    "git clone --quiet https://github.com/sequelize/sequelize-doc.git " + tag,
+    "cd " + tag,
+    "git checkout --quiet " + tag
+  ].join(";"))
+})
