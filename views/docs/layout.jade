@@ -13,7 +13,7 @@ block content
               - sectionPath     = "/docs/" + version + "/" + name
               li(class=(isActiveSection ? 'active' : ''))
                 a(href=sectionPath)= name.charAt(0).toUpperCase() + name.slice(1)
-                if isActiveSection
+                if isActiveSection && subs.length > 0
                   ul
                     each item in subs
                       li
