@@ -12,9 +12,10 @@ exports.index = function(req, res) {
   }
 
   res.render(path + '/' + req.param('section'), {
-    title:    'Documentation',
-    version:  req.param('version'),
-    section:  req.param('section'),
-    sections: sections
+    title:         'Documentation',
+    version:       req.param('version'),
+    section:       req.param('section'),
+    sections:      sections,
+    activeNavItem: 'docs'
   })
 }

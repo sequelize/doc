@@ -24,15 +24,15 @@ html
         .navbar-collapse.collapse
           ul.nav.navbar-nav
           ul.nav.navbar-nav.navbar-right
-            li.active
+            li(class=(activeNavItem === 'home' ? 'active' : ''))
               a(href='/') Home
-            li
+            li(class=(activeNavItem === 'docs' ? 'active' : ''))
               a(href='/docs') Documentation
-            li
+            li(class=(activeNavItem === 'articles' ? 'active' : ''))
               a(href='../navbar-fixed-top/') Articles
-            li
+            li(class=(activeNavItem === 'changelog' ? 'active' : ''))
               a(href='../navbar-fixed-top/') Changelog
-            li
+            li(class=(activeNavItem === 'blog' ? 'active' : ''))
               a(href='../navbar-fixed-top/') Blog
     block content
     //- script(src='https://code.jquery.com/jquery-1.10.2.min.js')

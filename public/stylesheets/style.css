@@ -99,6 +99,9 @@ body section.users .row > * {
 body section.users img {
   width: 100%;
 }
+body .navigation a {
+  color: #fff;
+}
 body .navigation ul {
   list-style-type: none;
   padding: 0;
