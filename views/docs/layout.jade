@@ -7,13 +7,17 @@ block content
         .headline-spacer
         section.navigation
           h2 Documentation
-
           ul
-            each _section in sections
-              - isActive = (_section === section)
-              li(class=(isActive ? 'active' : ''))
-                a(href="/docs/"+version+"/"+_section)
-                  = _section.charAt(0).toUpperCase() + _section.slice(1)
+            each subs, name in sections
+              - isActiveSection = (name === section)
+              - sectionPath     = "/docs/" + version + "/" + name
+              li(class=(isActiveSection ? 'active' : ''))
+                a(href=sectionPath)= name.charAt(0).toUpperCase() + name.slice(1)
+                if isActiveSection
+                  ul
+                    each item in subs
+                      li
+                        a(href=sectionPath + "#" + item.anchor)= item.text
       .col-md-9.beige
         .headline-spacer
         block documentation

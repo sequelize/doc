@@ -102,20 +102,33 @@ body section.users img {
 body .navigation a {
   color: #fff;
 }
-body .navigation ul {
+body .navigation > ul {
   list-style-type: none;
   padding: 0;
   margin: 0;
 }
-body .navigation ul:first-of-type {
+body .navigation > ul:first-of-type {
   margin-top: 60px;
 }
-body .navigation ul li {
+body .navigation > ul > li {
   list-style-type: none;
   border-bottom: 1px solid rgba(255,255,255,0.2);
   font-size: 20px;
   line-height: 60px;
 }
-body .navigation ul li:first-of-type {
+body .navigation > ul > li:first-of-type {
   border-top: 1px solid rgba(255,255,255,0.2);
+}
+body .navigation > ul > li.active > a:first-of-type {
+  color: rgba(255,255,255,0.6);
+}
+body .navigation > ul > li ul {
+  list-style-type: none;
+  margin: 0 0 10px 30px;
+  padding: 0;
+}
+body .navigation > ul > li ul li {
+  list-style-type: none;
+  font-size: 16px;
+  line-height: 40px;
 }
