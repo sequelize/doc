@@ -51,6 +51,10 @@ request('http://sequelizejs.com/documentation', function (err, res, body) {
             match[1] + match[2] + ".dark-blue",
             match[1] + "  code.javascript"
           ].concat(code).join('\n')
+        } else if (line.trim() === '.row') {
+          return ''
+        } else if (line.trim() === '.span12') {
+          return ''
         } else {
           return line
         }
@@ -59,6 +63,6 @@ request('http://sequelizejs.com/documentation', function (err, res, body) {
       callback(null, jade)
     })
   }, function(errors, result) {
-    console.log(result[0])
+    console.log(result[7])
   })
 })
