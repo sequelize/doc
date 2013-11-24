@@ -31,7 +31,7 @@ exports.index = function(req, res) {
   if (!req.param('version')) {
     res.redirect("/docs/latest", 301)
   } else if (!req.param('section')) {
-    res.redirect("/docs/latest/" + sections[0], 301)
+    res.redirect("/docs/latest/" + sectionNames[0], 301)
   } else if (req.param('version') !== 'latest') {
     path = 'docs/.' + req.param('version') + '/views/' + path
   }
@@ -40,10 +40,8 @@ exports.index = function(req, res) {
     sections[section] = readSubSections(path + '/' + section)
   })
 
-  console.log(sections)
-
   res.render(path + '/' + req.param('section'), {
-    title:         'Documentation',
+    title:         'Documentation - ' + req.param('section').charAt(0).toUpperCase() + req.param('section').slice(1),
     version:       req.param('version'),
     section:       req.param('section'),
     sections:      sections,
