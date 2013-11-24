@@ -15,7 +15,7 @@ request('http://sequelizejs.com/documentation', function (err, res, body) {
 
   $sections.each(function() {
     $(this).find('pre > code').each(function() {
-      var text = $(this).text().split('\n')
+      var text = $(this).text().trim().split('\n')
         , id   = uuid.v4()
 
       text = text.map(function(line) {
