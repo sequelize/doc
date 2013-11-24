@@ -1,6 +1,6 @@
 @import "bootstrap.min.css"
 @import "bootstrap-theme.min.css"
-@import url(http://fonts.googleapis.com/css?family=Ubuntu)
+@import url(http://fonts.googleapis.com/css?family=Ubuntu:400,700)
 @import url(http://fonts.googleapis.com/css?family=Ubuntu+Mono)
 
 @import '_header'
@@ -33,7 +33,6 @@ body {
         margin-top: 80px
       }
     }
-
   }
 
   pre {
@@ -42,7 +41,7 @@ body {
     padding: 0;
 
     code {
-      margin: 40px
+      margin: 0 40px 40px 40px
       background:transparent;
       font-family: 'Ubuntu Mono', sans-serif;
       font-size: 18px;
@@ -108,9 +107,25 @@ body {
     }
   }
 
-  .documentation-content {
-    h2, h3 {
-      padding-top: 90px
+  .sidebar {
+    padding: 0 30px 30px 30px
+  }
+
+  .content {
+    padding: 30px
+
+    h2 { padding-top: 60px }
+    h3 { padding-top: 90px }
+
+    p {
+      font-size: 18px
+      line-height: 36px
+
+      code {
+        background: #3B7CB9;
+        margin: 0 10px;
+        color: white;
+      }
     }
   }
 }

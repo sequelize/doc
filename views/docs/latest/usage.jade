@@ -113,12 +113,12 @@ block documentation
 
       p
         strong Hint&colon;
-        | You can also define a custom function for the logging part&period; Just pass a function&period; The first parameter will be the string that is logged&period;
+        | &nbsp;You can also define a custom function for the logging part&period; Just pass a function&period; The first parameter will be the string that is logged&period;
 
       h3#read-replication Read replication
       p
         | Sequelize supports read replication&comma; i&period;e&period; having multiple servers that you can connect to when you want to do a SELECT query&period; When you do read replication&comma; you specify one or more servers to act as read replicas&comma; and one server to act as the write master&comma; which handles all writes and updates and propagates them to the replicas &lpar;note that the actual replication process is
-        strong not
+        strong &nbsp;not&nbsp;
         | handled by Sequelize&comma; but should be set up in MySql&rpar;&period;
       pre.dark-blue
         code.javascript
@@ -163,7 +163,7 @@ block documentation
         | If you want to modify these&comma; you can pass pool as an options when instantiating Sequelize&comma; as shown above&period;
       p
         strong Note&colon;
-        | Read replication only works for MySQL at the moment&excl;
+        | &nbsp;Read replication only works for MySQL at the moment&excl;
 
       h3#dialects Dialects
       p
@@ -311,7 +311,7 @@ block documentation
           | })
 
       p
-        strong One note&colon;
+        strong One note&colon;&nbsp;
         | If the attribute names of the table contain dots&comma; the resulting objects will get a nesting&colon;
       pre.dark-blue
         code.javascript

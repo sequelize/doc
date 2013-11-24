@@ -1,6 +1,6 @@
 @import "bootstrap.min.css";
 @import "bootstrap-theme.min.css";
-@import url("http://fonts.googleapis.com/css?family=Ubuntu");
+@import url("http://fonts.googleapis.com/css?family=Ubuntu:400,700");
 @import url("http://fonts.googleapis.com/css?family=UbuntuMono");
 body .navbar .navbar-brand span {
   font-size: 35px;
@@ -85,7 +85,7 @@ body pre {
   padding: 0;
 }
 body pre code {
-  margin: 40px;
+  margin: 0 40px 40px 40px;
   background: transparent;
   font-family: 'Ubuntu Mono', sans-serif;
   font-size: 18px;
@@ -132,7 +132,24 @@ body .navigation > ul > li ul li {
   font-size: 16px;
   line-height: 40px;
 }
-body .documentation-content h2,
-body .documentation-content h3 {
+body .sidebar {
+  padding: 0 30px 30px 30px;
+}
+body .content {
+  padding: 30px;
+}
+body .content h2 {
+  padding-top: 60px;
+}
+body .content h3 {
   padding-top: 90px;
+}
+body .content p {
+  font-size: 18px;
+  line-height: 36px;
+}
+body .content p code {
+  background: #3b7cb9;
+  margin: 0 10px;
+  color: #fff;
 }
