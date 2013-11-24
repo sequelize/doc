@@ -7,7 +7,7 @@ block documentation
       p
         | With Sequelize you can also specify associations between multiple classes&period; Doing so will help you to easily access and set those associated objects&period; The library therefore provides for each defined class different methods&comma; which are explained in the following chapters&period;
       p
-        strong Note&colon;
+        strong Note&colon;&nbsp;
         | Associations with models that use custom primaryKeys &lpar;so not the field &apos;id&apos;&rpar; are currently unsupported&period;
 
 
@@ -422,9 +422,8 @@ block documentation
           | and
           code enableForeignKeyConstraints&lpar;&rpar;
           | &lpar;MySQL and SQLite&semi; no-ops in Postgres&rpar; and&sol;or pass &lcub;cascade&colon; true&rcub; in options &lpar;Postgres&semi; no-op in MySQL and SQLite&rpar;&period;
-      h5.dark-blue
-        code.javascript
-          |
+      h4 Enforcing a foreign key reference
+
       pre.dark-blue
         code.javascript
           | var Series, Trainer, Video

@@ -144,11 +144,16 @@ body .content h2 {
 body .content h3 {
   padding-top: 90px;
 }
+body .content h4 {
+  padding-top: 30px;
+  text-decoration: underline;
+}
 body .content p {
   font-size: 18px;
   line-height: 36px;
 }
-body .content p code {
+body .content p code,
+body .content li code {
   background: #3b7cb9;
   margin: 0 10px;
   color: #fff;
