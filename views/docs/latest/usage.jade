@@ -7,14 +7,14 @@ block documentation
 
       h3#basics Basic usage
 
-      p To get the ball rollin' you first have to create an instance of Sequelize. Use it the following way:
-
+      p
+        | To get the ball rollin&apos; you first have to create an instance of Sequelize&period; Use it the following way&colon;
       pre.dark-blue
         code.javascript
           | var sequelize = new Sequelize('database', 'username'[, 'password'])
 
-      p This will save the passed database credentials and provide all further methods. Furthermore you can specify a non-default host/port:
-
+      p
+        | This will save the passed database credentials and provide all further methods&period; Furthermore you can specify a non-default host&sol;port&colon;
       pre.dark-blue
         code.javascript
           | var sequelize = new Sequelize('database', 'username', 'password', {
@@ -22,16 +22,14 @@ block documentation
           |   port: 12345
           | })
 
-      p If you just don't have a password:
-
+      p If you just don&apos;t have a password&colon;
       pre.dark-blue
         code.javascript
           | var sequelize = new Sequelize('database', 'username')
           | // or
           | var sequelize = new Sequelize('database', 'username', null)
 
-      p You can also use a connection string:
-
+      p You can also use a connection string&colon;
       pre.dark-blue
         code.javascript
           | var sequelize = new Sequelize('mysql://user:pass@example.com:9821/dbname', {
@@ -39,48 +37,47 @@ block documentation
           | })
 
       h3#options Options
-
-      p Besides the host and the port, Sequelize comes with a whole bunch of options. Here they are:
-
+      p
+        | Besides the host and the port&comma; Sequelize comes with a whole bunch of options&period; Here they are&colon;
       pre.dark-blue
         code.javascript
           | var sequelize = new Sequelize('database', 'username', 'password', {
           |   // custom host; default: localhost
           |   host: 'my.server.tld',
-          |   &nbsp;
+          | &nbsp;
           |   // custom port; default: 3306
           |   port: 12345,
-          |   &nbsp;
+          | &nbsp;
           |   // custom protocol
           |   // - default: 'tcp'
           |   // - added in: v1.5.0
           |   // - postgres only, useful for heroku
           |   protocol: null,
-          |   &nbsp;
+          | &nbsp;
           |   // disable logging; default: console.log
           |   logging: false,
-          |   &nbsp;
+          | &nbsp;
           |   // max concurrent database requests; default: 50
           |   maxConcurrentQueries: 100,
-          |   &nbsp;
+          | &nbsp;
           |   // the sql dialect of the database
           |   // - default is 'mysql'
           |   // - currently supported: 'mysql', 'sqlite', 'postgres'
           |   dialect: 'mysql',
-          |   &nbsp;
+          | &nbsp;
           |   // the storage engine for sqlite
           |   // - default ':memory:'
           |   storage: 'path/to/database.sqlite',
-          |   &nbsp;
+          | &nbsp;
           |   // disable inserting undefined values as NULL
           |   // - default: false
           |   omitNull: true,
-          |   &nbsp;
+          | &nbsp;
           |   // a flag for using a native library or not.
           |   // in the case of 'pg' -- set this to true will allow SSL support
           |   // - default: false
           |   native: true,
-          |   &nbsp;
+          | &nbsp;
           |   // Specify options, which are used when sequelize.define is called.
           |   // The following example:
           |   //   define: {timestamps: false}
@@ -98,31 +95,31 @@ block documentation
           |     instanceMethods: {method2: function() {}},
           |     timestamps: true
           |   },
-          |   &nbsp;
+          | &nbsp;
           |   // similiar for sync: you can define this to always force sync for models
           |   sync: { force: true },
-          |   &nbsp;
+          | &nbsp;
           |   // sync after each association (see below). If set to false, you need to sync manually after setting all associations. Default: true
           |   syncOnAssociation: true,
-          |   &nbsp;
+          | &nbsp;
           |   // use pooling in order to reduce db connection overload and to increase speed
           |   // currently only for mysql and postgresql (since v1.5.0)
           |   pool: { maxConnections: 5, maxIdleTime: 30},
-          |   &nbsp;
+          | &nbsp;
           |   // language is used to determine how to translate words into singular or plural form based on the [lingo project](https://github.com/visionmedia/lingo)
           |   // options are: en [default], es
           |   language: 'en'
           | })
 
       p
-        strong Hint:
-        | You can also define a custom function for the logging part. Just pass a function.
-        | The first parameter will be the string that is logged.
+        strong Hint&colon;
+        | You can also define a custom function for the logging part&period; Just pass a function&period; The first parameter will be the string that is logged&period;
 
       h3#read-replication Read replication
-
-      p Sequelize supports read replication, i.e. having multiple servers that you can connect to when you want to do a SELECT query. When you do read replication, you specify one or more servers to act as read replicas, and one server to act as the write master, which handles all writes and updates and propagates them to the replicas (note that the actual replication process is <strong>not</strong> handled by Sequelize, but should be set up in MySql).
-
+      p
+        | Sequelize supports read replication&comma; i&period;e&period; having multiple servers that you can connect to when you want to do a SELECT query&period; When you do read replication&comma; you specify one or more servers to act as read replicas&comma; and one server to act as the write master&comma; which handles all writes and updates and propagates them to the replicas &lpar;note that the actual replication process is
+        strong not
+        | handled by Sequelize&comma; but should be set up in MySql&rpar;&period;
       pre.dark-blue
         code.javascript
           | var sequelize = new Sequelize('database', null, null, {
@@ -141,10 +138,19 @@ block documentation
           |   },
           | })
 
-      p If you have any general settings that apply to all replicas you do not need to provide them for each instance. In the code above, database name and port is propagated to all replicas. The same will happen for user and password, if you leave them out for any of the replicas. Each replica has the following options: `host`, `port`, `username`, `password`, `database`
-
-      p Sequelize uses a pool to manage connections to your replicas. The default options are:
-
+      p
+        | If you have any general settings that apply to all replicas you do not need to provide them for each instance&period; In the code above&comma; database name and port is propagated to all replicas&period; The same will happen for user and password&comma; if you leave them out for any of the replicas&period; Each replica has the following options&colon;
+        code host
+        | &comma;
+        code port
+        | &comma;
+        code username
+        | &comma;
+        code password
+        | &comma;
+        code database
+      p
+        | Sequelize uses a pool to manage connections to your replicas&period; The default options are&colon;
       pre.dark-blue
         code.javascript
           | {
@@ -153,20 +159,22 @@ block documentation
           |   maxIdleTime:    1000
           | }
 
-      p If you want to modify these, you can pass pool as an options when instantiating Sequelize, as shown above.
-
       p
-        strong Note:
-        | Read replication only works for MySQL at the moment!
+        | If you want to modify these&comma; you can pass pool as an options when instantiating Sequelize&comma; as shown above&period;
+      p
+        strong Note&colon;
+        | Read replication only works for MySQL at the moment&excl;
 
       h3#dialects Dialects
-
-      p With the release of Sequelize <code>v1.6.0</code>, the library got independent from specific dialects. That mean, that you'll have to add the respective dialect library yourself. Another option is the use of the sequelize packages that ship the dialect libraries as well.
-
-      h4 MySQL
-
-      p In order to get Sequelize working nicely together with MySQL, you'll need to install <code>mysql@~2.0.0-alpha7</code>. Once that's done you can use it like this:
-
+      p
+        | With the release of Sequelize
+        code v1&period;6&period;0
+        | &comma; the library got independent from specific dialects&period; That mean&comma; that you&apos;ll have to add the respective dialect library yourself&period; Another option is the use of the sequelize packages that ship the dialect libraries as well&period;
+      h4#dialects-mysql MySQL
+      p
+        | In order to get Sequelize working nicely together with MySQL&comma; you&apos;ll need to install
+        code mysql&commat;~2&period;0&period;0-alpha7
+        | &period; Once that&apos;s done you can use it like this&colon;
       pre.dark-blue
         code.javascript
           | var sequelize = new Sequelize('database', 'username', 'password', {
@@ -176,8 +184,12 @@ block documentation
           |   dialect: 'mysql'
           | })
 
-      p Also possible is the use of <code>sequelize-mysql</code>. Just install it via <code>npm install sequelize-mysql</code> and use it like this:
-
+      p
+        | Also possible is the use of
+        code sequelize-mysql
+        | &period; Just install it via
+        code npm install sequelize-mysql
+        | and use it like this&colon;
       pre.dark-blue
         code.javascript
           | var Sequelize = require('sequelize-mysql').sequelize
@@ -190,10 +202,11 @@ block documentation
           |   dialect: 'mysql'
           | })
 
-      h4 SQLite
-
-      p For SQLite compatibility you'll need <code>sqlite3@~2.1.5</code>. Configure Sequelize like this:
-
+      h4#dialects-sqlite SQLite
+      p
+        | For SQLite compatibility you&apos;ll need
+        code sqlite3&commat;~2&period;1&period;5
+        | &period; Configure Sequelize like this&colon;
       pre.dark-blue
         code.javascript
           | var sequelize = new Sequelize('database', 'username', 'password', {
@@ -205,8 +218,10 @@ block documentation
           |   storage: 'path/to/database.sqlite'
           | })
 
-      p If you want to use the bundled version, run <code>npm install sequelize-sqlite</code> and use the following code:
-
+      p
+        | If you want to use the bundled version&comma; run
+        code npm install sequelize-sqlite
+        | and use the following code&colon;
       pre.dark-blue
         code.javascript
           | var Sequelize = require('sequelize-sqlite').sequelize
@@ -217,10 +232,11 @@ block documentation
           |   storage: 'path/to/database.sqlite'
           | })
 
-      h4 PostgreSQL
-
-      p The library for PostgreSQL is <code>pg@~2.0.0</code>. You'll just need to define the dialect:
-
+      h4#dialects-postgresql PostgreSQL
+      p
+        | The library for PostgreSQL is
+        code pg&commat;~2&period;0&period;0
+        | &period; You&apos;ll just need to define the dialect&colon;
       pre.dark-blue
         code.javascript
           | var sequelize = new Sequelize('database', 'username', 'password', {
@@ -228,8 +244,10 @@ block documentation
           |   dialect: 'postgres'
           | })
 
-      p In order to use the bundled version, use this <code>npm install sequelize-postgres</code> and require the lib this way:
-
+      p
+        | In order to use the bundled version&comma; use this
+        code npm install sequelize-postgres
+        | and require the lib this way&colon;
       pre.dark-blue
         code.javascript
           | var Sequelize = require('sequelize-postgres').sequelize
@@ -240,11 +258,11 @@ block documentation
           | })
 
       h3#raw-queries Executing raw SQL queries
-
-      p As there are often use cases in which it is just easier to execute raw / already prepared SQL queries, you can utilize the function <code>sequelize.query</code>.
-
-      p Here is how it works:
-
+      p
+        | As there are often use cases in which it is just easier to execute raw &sol; already prepared SQL queries&comma; you can utilize the function
+        code sequelize&period;query
+        | &period;
+      p Here is how it works&colon;
       pre.dark-blue
         code.javascript
           | // Arguments for raw queries
@@ -293,9 +311,8 @@ block documentation
           | })
 
       p
-        strong One note:
-        | If the attribute names of the table contain dots, the resulting objects will get a nesting:
-
+        strong One note&colon;
+        | If the attribute names of the table contain dots&comma; the resulting objects will get a nesting&colon;
       pre.dark-blue
         code.javascript
           | sequelize.query('select 1 as `foo.bar.baz`').success(function(rows) {
