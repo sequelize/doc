@@ -29,6 +29,8 @@ var sequelize = new Sequelize('database', 'username', 'password', {
 })
 ```
 
+**Note:** You can pass options directly to dialect library by setting the `dialectOptions` parameter. See [Options](#usage-options) for examples (currently only mysql and mariadb are supported).
+
 ##### SQLite
 
 For SQLite compatibility you'll need `sqlite3@~2.1.5`. Configure Sequelize like this:

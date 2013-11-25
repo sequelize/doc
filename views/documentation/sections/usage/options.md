@@ -27,6 +27,15 @@ var sequelize = new Sequelize('database', 'username', 'password', {
   // - currently supported: 'mysql', 'sqlite', 'postgres'
   dialect: 'mysql',
 
+  // you can also pass any dialect options to the underlying dialect library
+  // - default is empty
+  // - currently supported: 'mysql', 'mariadb'
+  dialectOptions: {
+    socketPath: '/Applications/MAMP/tmp/mysql/mysql.sock',
+    supportBigNumbers: true,
+    bigNumberStrings: true
+  },
+
   // the storage engine for sqlite
   // - default ':memory:'
   storage: 'path/to/database.sqlite',
