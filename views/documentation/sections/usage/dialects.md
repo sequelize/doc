@@ -77,3 +77,5 @@ var postgres  = require('sequelize-postgres').postgres
   dialect: 'postgres'
 })
 ```
+
+**Note:** You can pass options directly to your dialect library by setting the `dialectOptions` parameter. See [Options](#usage-options) for examples.
