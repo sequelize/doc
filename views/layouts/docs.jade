@@ -1,9 +1,9 @@
-extends ../layout
+extends main
 
 block content
-  .container
+  .container-liquid
     .row
-      .col-md-3.mid-blue.sidebar
+      .col-sm-4.mid-blue.sidebar
         .headline-spacer
         section.navigation
           h2 Documentation
@@ -18,5 +18,9 @@ block content
                     each item in subs
                       li
                         a(href=sectionPath + "#" + item.anchor)= item.text
-      .col-md-9.beige.content
+        .clearfix
+      .col-sm-8.beige.content
         block documentation
+
+block bottom
+  script(src="/javascripts/documentation.js")

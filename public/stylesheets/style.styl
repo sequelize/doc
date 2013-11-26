@@ -111,8 +111,20 @@ body {
     padding: 0 30px 30px 30px
   }
 
+  .sidebar, .navbar .navbar-left {
+    @media (min-width: 768px) {
+      section {
+        float: right
+      }
+    }
+  }
+
   .content {
     padding: 30px
+
+    section {
+      max-width: 900px
+    }
 
     h2 { padding-top: 60px }
     h3 { padding-top: 90px }
@@ -128,6 +140,14 @@ body {
         background: #3B7CB9;
         margin: 0 10px;
         color: white;
+      }
+    }
+
+    .company-or-project {
+      .mini-browser {
+        height: 252px;
+        width: 246px;
+        display: inline-block;
       }
     }
   }
