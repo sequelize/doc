@@ -13,10 +13,18 @@ Getters and Setters can be defined in 2 ways (you can mix and match these 2 appr
 
 ```js
 var Foo = sequelize.define('Foo', {
+  name: { Sequelize.STRING },
   title: {
     type     : Sequelize.STRING,
     allowNull: false,
-    get      : function()  { /* do your magic here and return something! */ },
+    get      : function()  {
+      /*
+        do your magic here and return something!
+        'this' allows you to access attributes of the model.
+
+        example: this.name works
+      */
+    },
     set      : function(v) { /* don't forget to add emphasis! :D */ this.setDataValue('title', v + '!') }
   }
 });
