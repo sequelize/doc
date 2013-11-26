@@ -22,7 +22,7 @@ var Foo = sequelize.define('Foo', {
         do your magic here and return something!
         'this' allows you to access attributes of the model.
 
-        example: this.name works
+        example: this.getDataValue('name') works
       */
     },
     set      : function(v) { /* don't forget to add emphasis! :D */ this.setDataValue('title', v + '!') }
