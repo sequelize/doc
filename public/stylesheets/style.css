@@ -47,6 +47,15 @@ body .navbar ul.nav.navbar-nav li.active a {
   border-radius: 20px;
   color: #fff;
 }
+.company-or-project h4 {
+  padding-top: 90px;
+  border-bottom: 1px dotted #333;
+  padding-bottom: 5px;
+  text-decoration: none !important;
+}
+.company-or-project .col-md-3 {
+  margin-top: 23px;
+}
 body,
 html {
   height: 100%;
