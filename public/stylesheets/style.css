@@ -53,8 +53,9 @@ body .navbar ul.nav.navbar-nav li.active a {
   padding-bottom: 5px;
   text-decoration: none !important;
 }
-.company-or-project .col-md-3 {
+.company-or-project .col-md-4 {
   margin-top: 23px;
+  text-align: right;
 }
 body,
 html {
