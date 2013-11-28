@@ -87,6 +87,9 @@ body .mid-blue {
 body .dark-blue {
   background-color: #314267;
 }
+body .documentation {
+  background: #3b7cb9;
+}
 body .light-blue,
 body .mid-blue,
 body .dark-blue {
