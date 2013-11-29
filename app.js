@@ -29,6 +29,7 @@ app.get('/docs', docs.index)
 app.get('/docs/:version', docs.index)
 app.get('/docs/:version/:section', docs.index)
 app.get('/docs/:version/:section/:subsection', docs.index)
+app.get('/heroku', function(req, res) { res.redirect('/articles/heroku', 301) })
 app.get('/articles', articles.index)
 app.get('/articles/:title', articles.show)
 
