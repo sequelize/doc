@@ -1,6 +1,7 @@
 var express   = require('express')
   , routes    = require('./routes/index')
   , docs      = require('./routes/docs')
+  , articles  = require('./routes/articles')
   , http      = require('http')
   , path      = require('path')
   , app       = express()
@@ -28,6 +29,8 @@ app.get('/docs', docs.index)
 app.get('/docs/:version', docs.index)
 app.get('/docs/:version/:section', docs.index)
 app.get('/docs/:version/:section/:subsection', docs.index)
+app.get('/articles', articles.index)
+app.get('/articles/:title', articles.show)
 
 http.createServer(app).listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'))
