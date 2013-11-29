@@ -6,10 +6,14 @@ The following skeleton shows a typical migration file. All migrations are expect
 module.exports = {
   up: function(migration, DataTypes, done) {
     // logic for transforming into the new state
+
+    done(); // sets the migraation as finished
   },
 
   down: function(migration, DataTypes, done) {
     // logic for reverting the changes
+
+    done(); // sets the migraation as finished
   }
 }
 ```
