@@ -57,6 +57,37 @@ body .navbar ul.nav.navbar-nav li.active a {
   margin-top: 23px;
   text-align: right;
 }
+.company-or-project .mini-browser {
+  height: 252px;
+  width: 246px;
+  display: inline-block;
+}
+.beige {
+  background-color: #f7f6f1;
+}
+.light-blue {
+  background-color: #4bafea;
+}
+.mid-blue {
+  background-color: #3b7cb9;
+}
+.dark-blue {
+  background-color: #314267;
+}
+.light-blue,
+.mid-blue,
+.dark-blue {
+  color: #fff;
+}
+.container-liquid {
+  min-height: 100%;
+}
+.container-liquid .documentation {
+  min-height: 100%;
+}
+.container-liquid .documentation > * {
+  min-height: 100%;
+}
 body,
 html {
   height: 100%;
@@ -76,25 +107,8 @@ body .full-height {
   height: 100%;
   max-height: 768px;
 }
-body .beige {
-  background-color: #f7f6f1;
-}
-body .light-blue {
-  background-color: #4bafea;
-}
-body .mid-blue {
-  background-color: #3b7cb9;
-}
-body .dark-blue {
-  background-color: #314267;
-}
 body .documentation {
   background: #3b7cb9;
-}
-body .light-blue,
-body .mid-blue,
-body .dark-blue {
-  color: #fff;
 }
 body .light-blue h2.centered,
 body .mid-blue h2.centered,
@@ -195,9 +209,4 @@ body .content li code {
   background: #3b7cb9;
   margin: 0 10px;
   color: #fff;
-}
-body .content .company-or-project .mini-browser {
-  height: 252px;
-  width: 246px;
-  display: inline-block;
 }
