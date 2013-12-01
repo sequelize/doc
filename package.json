@@ -11,7 +11,8 @@
     "stylus": "*",
     "execSync": "~1.0.1-pre",
     "semver": "~2.2.1",
-    "lodash": "~2.3.0"
+    "lodash": "~2.3.0",
+    "marked": "~0.2.10"
   },
   "devDependencies": {
     "html2jade": "~0.5.3",
