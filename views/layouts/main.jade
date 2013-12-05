@@ -5,7 +5,6 @@ html
       = ["Sequelize", title].join(" - ")
     link(rel="shortcut icon", type="image/x-icon", href="/favicon.ico")
     link(rel='stylesheet', href='/stylesheets/style.css')
-    link(rel="stylesheet", href="http://yandex.st/highlightjs/7.5/styles/ir_black.min.css")
 
   body
     .navbar.navbar-default.navbar-fixed-top(role='navigation')
@@ -40,8 +39,8 @@ html
 
     block content
 
-    script(src='https://code.jquery.com/jquery-1.10.2.min.js')
-    script(src="http://yandex.st/highlightjs/7.5/highlight.min.js")
+    script(src='/javascripts/jquery-1.10.2.min.js')
+    script(src="/javascripts/highlight.pack.js")
     script hljs.initHighlightingOnLoad();
 
     block bottom
