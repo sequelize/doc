@@ -1,0 +1,131 @@
+extends ../../layouts/with-sidebar
+
+block documentation
+  section
+    div
+      h2 Changes in Sequelize v1.3.0
+      p
+        | Sequelize v1.3.0 was just released and comes with some funky new
+        | features and some minor refactorings, which you should know about.
+        | Most important things are: Migrations, validations, cross-database
+        | support and new event-listener notation.
+
+      h3 Model#all is now a function and not a getter
+      p
+        | In earlier versions it was possible to get all entries of a model
+        | with the following command:
+
+      pre.dark-blue
+        code.javascript
+          | User.all.success(function(users){})
+
+      p
+        | This has changed and the all-getter was refactored to be a function.
+        | This way it is more consistent to the rest of the API
+        | (<code>.find()</code>, <code>.findAll()</code>, etc.). So it's now:
+
+      pre.dark-blue
+        code.javascript
+          | User.all().success(function(users){})
+
+      h3 Use the new util module for node 0.6.x compatibility
+      p
+        | All references to the <code>sys</code>-module have been removed
+        | and replaced with the <code>util</code>-module. To be honest,
+        | I have no idea when that module has been made available, but
+        | it actually is in 0.4.12 and above. So Sequelize is compatible
+        | to all versions of node having the <code>util</code>-module.
+
+      h3 QueryChainer can now run serially
+      p
+        | The QueryChainer has been extended in order to run migrations serially.
+        | The basic idea is to pass an object, the to be called function's name
+        | and some parameters. After adding some items you can run them with
+        | <code>chainer.runSerially()</code>. You can find detailed information
+        | about this <a href="/docs/latest/utils#querychainer">in the documentation</a>.
+
+      h3 Association definitions are now chainable
+      p
+        | Each association declaration now returns the ModelFactory.
+        | So it is possible to chain such declarations. Here is an example:
+
+      pre.dark-blue
+        code.javascript
+          | Person.hasOne(House).hasMany(Address)
+
+      h3 Validations
+      p
+        | <a href="https://github.com/hiddentao" target="_blank" rel="nofollow">hiddentao</a>
+        | has added validations to Sequelize. This is pretty awesome and comes with a
+        | handy preset of known validations, but can be extended with custom validations
+        | as well. You can find detailed information about this in
+        | <a href="/docs/latest/models#validations">the documentation</a>.
+
+      h3 jQuery-like event listeners
+      p
+        | Because the <code>.on('foo', function(){})</code>-syntax really drove me nuts,
+        | I've added some shorter notations. Inspired by jQuery (I know it has already
+        | changed in v1.7) you can now do the following:
+
+      pre.dark-blue
+        code.javascript
+          | Model
+          |   .findAll()
+          |   .success(function(models) { /* foo */ })
+          | &nbsp;
+          | Model
+          |   .findAll()
+          |   .error(function(err) { /* bar */ })
+
+      p
+        | There are also some aliases, which
+        | <a href="/docs/latest/misc#asynchronicity">can be found here</a>.
+
+
+      p
+        | <strong>Please notice:</strong> I will replace <code>.on('failure')</code>
+        | with <code>.on('error')</code> in future releases. This will be done,
+        | due to being more native in the node environment. Doing so will throw
+        | an error each time you don't listen for the <code>error</code>-event, what is actually
+        | pretty good!
+
+      h3 Aliasing for select queries
+      p
+        | You can now rename attributes of a model for only a specific query.
+        | The following example gets a specific user and renames the original
+        | name-attribute to username. On database side this is a simple <code>SELECT
+        | name as username FROM table;</code>.
+
+      pre.dark-blue
+        code.javascript
+          | Model
+          |   .find({
+          |     where: 'id = 1',
+          |     attributes: ['id', ['name', 'username']]
+          |   })
+          |   .success(function(user) {
+          |     console.log(user.name) // undefined
+          |     console.log(user.username) // something
+          |   })
+
+      h3 Cross-database support
+      p
+        | Sequelize has been refactored to be open for other SQL dialects.
+        | Doing so I’ve added examplary sqlite support. If you want to use
+        | it, make sure to install the sqlite3 package manually.
+        | <a href="/docs/latest/usage#dialects">You can find more information about that here.</a>
+
+      h3 migrations
+      p
+        | Another new awesome feature is migration support. With this mechanism
+        | it is now possible to modify the database manually. This should of
+        | course not be mixed with the sync-function of sequelize. In order
+        | to execute migrations there is a new sequelize binary which you should
+        | look at. Just run <code>node_modules/.bin/sequelize -h</code> to see
+        | what’s possible and make sure
+        | <a href="/docs/latest/migrations#the-binary">to visit the documentation</a>.
+
+      h3 Ex-expresso-ed the project :D
+      p I moved all tests to jasmine and removed all expresso-related things.
+
+      p I hope you will like it!
