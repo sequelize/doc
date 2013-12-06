@@ -205,6 +205,10 @@ body .content p {
   font-size: 18px;
   line-height: 36px;
 }
+body .content li {
+  font-size: 16px;
+  line-height: 32px;
+}
 body .content p code,
 body .content li code {
   background: #3b7cb9;

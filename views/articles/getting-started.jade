@@ -5,37 +5,225 @@ block documentation
     div
       h2 Getting started
 
-      p noot
-      br
-      p noot
-      br
-      p noot
-      br
-      p noot
-      br
-      p noot
-      br
-      p noot
-      br
-      p noot
-      br
-      p noot
-      br
-      p noot
-      br
-      p noot
-      br
-      p noot
-      br
-      p noot
-      br
-      p noot
-      br
-      p noot
-      br
-      p noot
-      br
-      p noot
-      br
-      p noot
-      br
+      h3 Introduction
+      p
+        | This article explains the basic concepts of Sequelize. You will learn how to use the
+        | supported dialects, which ways of database setup approaches are available and how
+        | common scenarios can be achieved.
+
+      h3 Premise
+      p
+        | We will skip the very basic things and directly dive into the Sequelize related
+        | stuff. Here is a list of things that have to be in place before you can start:
+
+      ul
+        li Node.JS at v0.8 or higher
+        li One of the supported databases / SQLite bindings
+        li The credentials for the respective database
+        li A basic understanding of how databases are working
+        li Optional but recommended: Coffee :)
+
+      h3 Setting up a project
+      p
+        | Now that your computer is prepared and your coffee sits next to your keyboard,
+        | we can finally get started. First things first: Create a directory and initialize
+        | it with NPM!
+
+      pre.dark-blue
+        code.bash
+          | mkdir my-project
+          | cd my-project
+          | npm init
+
+      p
+        | NPM will ask you a couple of questions. Answer them or just hit the return key until it's satisfied.
+        | Once done, you can install Sequelize and the connector for your database of choice.
+
+      pre.dark-blue
+        code.bash
+          | npm install --save sequelize
+          | npm install --save pg       # for postgres
+          | npm install --save mysql    # for mysql
+          | npm install --save sqlite3  # for sqlite
+          | npm install --save mariasql # for mariasql
+
+      h3 Connecting to the database
+      p
+        | Open the created directory in your favorite text editor and add a new file called <code>app.js</code> with the following content.
+
+      pre.dark-blue
+        code.javascript
+          | var Sequelize = require('sequelize')
+          |   , sequelize = new Sequelize('database_name', 'username', 'password', {
+          |       dialect: "mysql", // or 'sqlite', 'postgres', 'mariadb'
+          |       port:    3306, // or 5432 (for postgres)
+          |     })
+          | &nbsp;
+          | sequelize
+          |   .authenticate()
+          |   .complete(function(err) {
+          |     if (!!err) {
+          |       console.log('Unable to connect to the database.')
+          |     } else {
+          |       console.log('Connection has been established successfully.')
+          |     }
+          |   })
+
+      h3 Managing the schema of your database
+      p
+        | Sequelize supports two way of schema management. You can either define so called migrations,
+        | which are programmatically changing your database's structure. Or you can let Sequelize
+        | create the tables for you.
+
+      p
+        | While the first possibility of using <code>migrations</code> takes more time to setup, it's most likely
+        | the way to go, if you want to deploy your application on many different server environments.
+        | The reason for that is based on the fact, that migrations are consistently changing your
+        | database according to the current state of the schema.
+
+      p
+        | However, the automated way of using Sequelize's function <code>sequelize.sync</code> will
+        | probably be a good choice on your local machine or if you just want to quickly spin up a
+        | prototype.
+
+      p
+        | As this article is for beginners, we will skip migrations for now and take a closer look at the
+        | automated way.
+
+      h4 Defining a model
+      p
+        | In order to let Sequelize create a schemas in the database, you need to describe, what kind of
+        | data you want to store. This can be done with <code>sequelize.define</code>:
+
+      pre.dark-blue
+        code.javascript
+          | var User = sequelize.define('User', {
+          |   username: Sequelize.STRING,
+          |   password: Sequelize.STRING
+          | })
+
+      p
+        | This will define a user model that has a username and password. Furthermore, Sequelize will
+        | automatically add the columns <code>id</code>, <code>createdAt</code> and <code>updatedAt</code>.
+
+      h4 Synchronizing the schema
+      p
+        | As we want to store data in the database, we need to create a representation of the model.
+
+      pre.dark-blue
+        code.javascript
+          | sequelize
+          |   .sync({ force: true })
+          |   .complete(function(err) {
+          |      if (!!err) {
+          |        console.log('An error occurred while create the table.')
+          |      } else {
+          |        console.log('It worked!')
+          |      }
+          |   })
+
+      p
+        | Once executed, the database will contain a table <code>Users</code> (note the plural) with the columns:
+
+      ul
+        li id - INT(11)
+        li username - VARCHAR(255)
+        li password - VARCHAR(255)
+        li createdAt - DATETIME
+        li updatedAt - DATETIME
+
+      p Please note, that <code>{ force: true }</code> will remove all existing tables and re-create them afterwards.
+
+      h4 Configuration
+      p
+        | You might not need the timestamps or you might not want the plural of the model's name as table name, right?
+        | Luckily there are configuration possibilities for that.
+
+      pre.dark-blue
+        code.javascript
+          | var User = sequelize.define('User', {
+          |   username: Sequelize.STRING,
+          |   password: Sequelize.STRING
+          | }, {
+          |   tableName: 'my_user_table', // this will define the table's name
+          |   timestamps: false           // this will deactivate the timestamp columns
+          | })
+
+      h3 Creating and persisting instances
+      p
+        | Sequelize allows the creation of instances in two ways. You can either <code>build</code> an
+        | object and <code>save</code> it afterwards. Or you can directly <code>create</code> an instance
+        | in the database:
+
+      pre.dark-blue
+        code.javascript
+          | var user = User.build({
+          |   username: 'john-doe',
+          |   password: generatePasswordHash('i-am-so-great')
+          | })
+          | &nbsp;
+          | user
+          |   .save()
+          |   .complete(function(err) {
+          |     if (!!err) {
+          |       console.log('The instance has not been saved.')
+          |     } else {
+          |       console.log('We have a persisted instance now')
+          |     }
+          |   })
+
+      p This persists the instance in a two step way. If you want to do everything at once, use the following approach:
+
+      pre.dark-blue
+        code.javascript
+          | User
+          |   .create({
+          |     username: 'john-doe',
+          |     password: generatePasswordHash('i-am-so-great')
+          |   })
+          |   .complete(function(err, user) {
+          |     /* ... */
+          |   })
+
+      h3 Reading data from the database
+      p
+        | Every defined model has finder methods, with which you can read the database.
+        | Searching for a specific item can be done with <code>Model.find</code>. Retrieval of
+        | multiple items needs the use of <code>Model.findAll</code>.
+
+      pre.dark-blue
+        code.javascript
+          | User
+          |   .find({ where: { username: 'john-doe' } })
+          |   .complete(function(err, johnDoe) {
+          |     if (!!err) {
+          |       console.log('An error occurred while searching for John!')
+          |     } else if (!johnDoe) {
+          |       console.log('No user with the username "john-doe" has been found.')
+          |     } else {
+          |       console.log('Hello ' + johnDoe.username + '!')
+          |     }
+          |   })
+
+      p
+        | Please note that there won't be any error if no user with the name "john-doe" has been found.
+        | This is intended, as there is not internal or authentication error.
+
+      h3 What's next?
+      p
+        | As there are some more advanced features in Sequelize which are a bit inappropriate for this
+        | article, you can check the following resources for further advice:
+
+      ul
+        li
+          a(href="/docs/latest/migrations") Migrations
+        li
+          a(href="/docs/latest/models#data-types") Data types
+        li
+          a(href="/docs/latest/models#configuration") Configuration of the model
+        li
+          a(href="/docs/latest/models#validations") Validations
+        li
+          a(href="/docs/latest/models#finders") Finders
+
+
