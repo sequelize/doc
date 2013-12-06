@@ -5,10 +5,10 @@ block documentation
     div
       h2 Usage on Heroku
 
-      h3 Introduction
+      h3#introduction Introduction
       p This section covers the use of Sequelize on Heroku. It will explain how to get started with Heroku and what is necessary to setup a proper environment. We will use MySQL on the development machine and PostgreSQL on the remote servers.
 
-      h3 Getting started with Heroku
+      h3#getting-started Getting started with Heroku
       p Before we can roll out any software on the Heroku cluster, we need to sign up and have to connect our development environment. Here are the most basic steps:
 
       ul
@@ -37,7 +37,7 @@ block documentation
           | You can get further information about the registration process here
         | .
 
-      h3 A minimal express application
+      h3#minimal-app A minimal express application
 
       p
         | In order to create a minimal express application, we need to install express first.
@@ -59,7 +59,7 @@ block documentation
 
       p Next step: Deploy the application to Heroku.
 
-      h3 Deployment to Heroku
+      h3#deployment Deployment to Heroku
       p
         | First of all, we need to add the right version of Node.JS and NPM to
         | the <code>package.json</code>. The file should look similiar to this:
@@ -98,7 +98,7 @@ block documentation
 
       p You should now see a browser with the same application as on your local machine.
 
-      h3 Spawning a database on Heroku
+      h3#spawning-a-database Spawning a database on Heroku
 
       p
         | In order to get a database on Heroku we can use their CLI.
@@ -132,7 +132,7 @@ block documentation
           | heroku config:get HEROKU_POSTGRESQL_BRONZE_URL
           | # => postgres://pfforbjhkrletg:aic5oO6Cran1g3hk6mJa5QqNZB@ec2-23-21-91-97.compute-1.amazonaws.com:5432/dek11b2j1g3mfb
 
-      h3 Adding Sequelize to the application
+      h3#adding-sequelize Adding Sequelize to the application
 
       p
         | The following commands will install <code>sequelize</code>, the needed
@@ -254,7 +254,7 @@ block documentation
           |   })
           | }
 
-      h3 tl;dr
+      h3#tldr tl;dr
 
       p
         | This article explains a straight-forward but maintainable approach

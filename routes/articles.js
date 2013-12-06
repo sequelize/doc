@@ -1,6 +1,7 @@
-var fs       = require('fs')
-  , path     = require('path')
-  , articles = null
+var fs            = require('fs')
+  , path          = require('path')
+  , SidebarHelper = require('../helpers/sidebar-helpers')
+  , articles      = null
 
 exports.index = function(req, res) {
   res.redirect('/articles/getting-started')
@@ -11,7 +12,8 @@ exports.show = function(req, res) {
     activeNavItem: 'articles',
     sidebarTitle:  'Articles',
     title:         'Articles',
-    sections:      articles
+    sections:      articles,
+    permalink:     req.param('title')
   })
 }
 
@@ -31,7 +33,7 @@ var getArticles = function() {
       permalink:   filename.split('.')[0],
       title:       title,
       url:         '/articles/' + filename.split('.')[0],
-      subSections: []
+      subSections: SidebarHelper.readSubSections('/articles/' + filename.split('.')[0])
     })
   })
 

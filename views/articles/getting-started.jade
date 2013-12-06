@@ -5,13 +5,13 @@ block documentation
     div
       h2 Getting started
 
-      h3 Introduction
+      h3#introduction Introduction
       p
         | This article explains the basic concepts of Sequelize. You will learn how to use the
         | supported dialects, which ways of database setup approaches are available and how
         | common scenarios can be achieved.
 
-      h3 Premise
+      h3#premise Premise
       p
         | We will skip the very basic things and directly dive into the Sequelize related
         | stuff. Here is a list of things that have to be in place before you can start:
@@ -23,7 +23,7 @@ block documentation
         li A basic understanding of how databases are working
         li Optional but recommended: Coffee :)
 
-      h3 Setting up a project
+      h3#setup Setting up a project
       p
         | Now that your computer is prepared and your coffee sits next to your keyboard,
         | we can finally get started. First things first: Create a directory and initialize
@@ -47,7 +47,7 @@ block documentation
           | npm install --save sqlite3  # for sqlite
           | npm install --save mariasql # for mariasql
 
-      h3 Connecting to the database
+      h3#connecting Connecting to the database
       p
         | Open the created directory in your favorite text editor and add a new file called <code>app.js</code> with the following content.
 
@@ -69,7 +69,7 @@ block documentation
           |     }
           |   })
 
-      h3 Managing the schema of your database
+      h3#schema Managing the schema of your database
       p
         | Sequelize supports two way of schema management. You can either define so called migrations,
         | which are programmatically changing your database's structure. Or you can let Sequelize
@@ -149,7 +149,7 @@ block documentation
           |   timestamps: false           // this will deactivate the timestamp columns
           | })
 
-      h3 Creating and persisting instances
+      h3#instance Creating and persisting instances
       p
         | Sequelize allows the creation of instances in two ways. You can either <code>build</code> an
         | object and <code>save</code> it afterwards. Or you can directly <code>create</code> an instance
@@ -185,7 +185,7 @@ block documentation
           |     /* ... */
           |   })
 
-      h3 Reading data from the database
+      h3#reading Reading data from the database
       p
         | Every defined model has finder methods, with which you can read the database.
         | Searching for a specific item can be done with <code>Model.find</code>. Retrieval of
@@ -210,7 +210,7 @@ block documentation
         | Please note that there won't be any error if no user with the name "john-doe" has been found.
         | This is intended, as there is not internal or authentication error.
 
-      h3 A combined example
+      h3#combined A combined example
       p
         | Now that you know the basics of Sequelize, you might want to see everything in a single program.
 
@@ -231,7 +231,7 @@ block documentation
           |   })
           | })
 
-      h3 What's next?
+      h3#whats-next What's next?
       p
         | As there are some more advanced features in Sequelize which are a bit inappropriate for this
         | article, you can check the following resources for further advice:

@@ -6,8 +6,6 @@ module.exports.readSubSections = function(file) {
   var _path = path.join(__dirname, '..', 'views', file + '.jade')
 
   try {
-    console.log(_path)
-
     var content = fs.readFileSync(_path).toString()
       , result  = []
 
