@@ -12,11 +12,12 @@ block content
               - isActiveSection = (section.permalink === permalink)
               li(class=(isActiveSection ? 'active' : ''))
                 a(href=section.url)= section.title
-                if isActiveSection && section.subSections.length > 0
+                if (section.showSubSections || isActiveSection) && section.subSections.length > 0
                   ul
                     each item in section.subSections
+                      - url = item.url || (section.url + "#" + item.anchor)
                       li
-                        a(href=section.url + "#" + item.anchor)= item.text
+                        a(href=url)= item.text
         .clearfix
       .col-sm-8.beige.content
         block documentation
