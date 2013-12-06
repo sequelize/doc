@@ -202,12 +202,34 @@ block documentation
           |       console.log('No user with the username "john-doe" has been found.')
           |     } else {
           |       console.log('Hello ' + johnDoe.username + '!')
+          |       console.log('All attributes of john:', johnDoe.values)
           |     }
           |   })
 
       p
         | Please note that there won't be any error if no user with the name "john-doe" has been found.
         | This is intended, as there is not internal or authentication error.
+
+      h3 A combined example
+      p
+        | Now that you know the basics of Sequelize, you might want to see everything in a single program.
+
+      pre.dark-blue
+        code.javascript
+          | var Sequelize = require('sequelize')
+          |   , sequelize = new Sequelize('database_name', 'username', 'password')
+          |   , User      = sequelize.define('User', {
+          |                   username: Sequelize.STRING,
+          |                   password: Sequelize.STRING
+          |                 })
+          | &nbsp;
+          | sequelize.sync({ force: true }).complete(function(err) {
+          |   User.create({ username: 'john', password: '1111' }).complete(function(err, user1) {
+          |     User.find({ username: 'john' }).complete(function(err, user2) {
+          |       console.log(user1.values, user2.values)
+          |     })
+          |   })
+          | })
 
       h3 What's next?
       p
@@ -225,5 +247,7 @@ block documentation
           a(href="/docs/latest/models#validations") Validations
         li
           a(href="/docs/latest/models#finders") Finders
+        li
+          a(href="/docs/latest/associations") Associations
 
 
