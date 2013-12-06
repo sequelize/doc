@@ -5,7 +5,7 @@ block documentation
     div
       h2 v1.6.0 - Eager loading, enums, ...
 
-      h3 Introduction
+      h3#introduction Introduction
       p
         | After 552 commits, almost 8 months of work, 42 relevant changes and the
         | acquisition of two more core contributors since the last stable version,
@@ -18,7 +18,7 @@ block documentation
         | right way. Also, every repository which was somehow related to Sequelize,
         | has been moved to a <a href="https://github.com/sequelize" target="_blank" rel="nofollow">Github organization</a>.
 
-      h3 Changes
+      h3#changes Changes
       p
         strong IMPORTANT !!!
 
@@ -63,7 +63,7 @@ block documentation
           |   }
           | }
 
-      h3 Dependencies
+      h3#dependencies Dependencies
 
       pre.dark-blue
         code.bash
@@ -77,7 +77,7 @@ block documentation
         | or choose the <a href="https://github.com/sequelize/sequelize-mysql" target="_blank" rel="nofollow">sequelize-mysql</a>
         | bundle instead. If you aren’t using mysql at all, you can just keep everything as it was.
 
-      h3 Refactorings
+      h3#refactorings Refactorings
 
       pre.dark-blue
         code.bash
@@ -96,7 +96,7 @@ block documentation
         | This has been reported quite often. Adding an element to an N:M
         | association is now resulting in less SQL queries.
 
-      h3 Features
+      h3#features Features
 
       pre.dark-blue
         code.bash
@@ -135,7 +135,7 @@ block documentation
           | - [FEATURE] allow usage of enums. #440 (thanks to KevinMartin)
           | - [FEATURE] support for array serialization. pg only. #443 (thanks to clkao)
 
-      pg Sequelize can now handle enums, bigints, decimals and (pg only) arrays:
+      p Sequelize can now handle enums, bigints, decimals and (pg only) arrays:
 
       pre.dark-blue
         code.javascript
@@ -245,7 +245,7 @@ block documentation
 
       p Should be more or less clear. Feel free to ask for further information.
 
-      h3 Others
+      h3#others Others
 
       pre.dark-blue
         code.bash
@@ -254,7 +254,7 @@ block documentation
           | - [OTHERS] Overwrite existing daoFactoryDefinition if there already has been one. (thanks to robraux)
       ```
 
-      h3 Bugfixes
+      h3#bug-fixes Bugfixes
 
       pre.dark-blue
         code.bash

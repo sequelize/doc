@@ -7,7 +7,7 @@ block documentation
 
       <!-- <img src="http://farm3.staticflickr.com/2306/1992019542_709ca81523.jpg" alt="...non fidarsi è meglio - my scared cat / gatto" data-author="Paolo Margari" data-page="http://www.flickr.com/photos/paolomargari/1992019542/" data-source="flickr" class="span12"> -->
 
-      h3 Introduction
+      h3#introduction Introduction
       p
         | Since the release of <code>v1.6.0</code> in April 2013, many new features have
         | been added to Sequelize. This was mostly possible due to the great
@@ -19,7 +19,7 @@ block documentation
         | This post is about the features, that have been added since April
         | and that are currently available in the current NPM package <code>v1.7.0-alpha2</code>.
 
-      h3 [DEPENDENCIES] Upgraded validator for IPv6 support
+      h3#validator-upgrade [DEPENDENCIES] Upgraded validator for IPv6 support
       p
         | The <a href="https://github.com/chriso/node-validator" target="_blank" rel="nofollow">validator</a>
         | plugin has been updated to <code>1.1.1</code>. Part of the new version
@@ -36,7 +36,7 @@ block documentation
           |   }
           | })
 
-      h3 [DEPENDENCIES] replaced underscore by lodash
+      h3#lodash [DEPENDENCIES] replaced underscore by lodash
       p
         | In order to improve performance of the library, we replaced
         | <a href="http://underscorejs.org" target="_blank" rel="nofollow">underscore.js</a>
@@ -44,7 +44,7 @@ block documentation
         | <a href="http://lodash.com" target="_blank" rel="nofollow">lodash</a>
         | . You can access it via the already existing way <code>Sequelize.Utils._</code>.
 
-      h3 [FEATURE] Validate a model before it gets saved
+      h3#validate-before-save [FEATURE] Validate a model before it gets saved
       p
         | Many people requested, that the model needs to be validated before
         | it gets saved. This is now the case. So whenever the <code>save</code>
@@ -67,7 +67,7 @@ block documentation
           |   console.log(errors) // { username: [ 'String is empty' ] }
           | })
 
-      h3 [FEATURE] Schematics
+      h3#schematics [FEATURE] Schematics
       p
         | It is now possible to create schemas for postgres respectively to
         | prefix table names for sqlite and mysql. That means that you can
@@ -84,7 +84,7 @@ block documentation
           |   })
           | })
 
-      h3 [FEATURE] Foreign key constraints
+      h3#foreign-keys [FEATURE] Foreign key constraints
       p
         | It is now possible to define foreign keys to connect tables / models
         | with each other. The following snippet connects the <code>Post</code> model with
@@ -148,7 +148,7 @@ block documentation
           |     })
           | })
 
-      h3 [FEATURE] Support for bulk insert/update/delete
+      h3#bulk-support [FEATURE] Support for bulk insert/update/delete
       p
         | In order to minimize the number of SQL requests while
         | creating/updating/deleting a bunch of entries, we introduced bulk support.
@@ -195,7 +195,7 @@ block documentation
           |   })
           | })
 
-      h3 [FEATURE] Added convenient data types
+      h3#data-types [FEATURE] Added convenient data types
       p
         | Costent added support for advanced data types. For example, you
         | are now able to define a column as unsigned, zerofilled integer
@@ -212,12 +212,12 @@ block documentation
         | <code>ENUM</code>, <code>ARRAY</code> and some other things.
         | <a href="/docs/latest/models#data-types">They are nicely documented over here.</a>
 
-      h3 [FEATURE] Binary is more verbose now
+      h3#binary [FEATURE] Binary is more verbose now
       p
         | <a href="https://github.com/terraflubb" target="_blank" rel="nofollow">Rob Fletcher</a>
         | made the Sequelize binary a bit more talkative, when it comes to errors or misusage.
 
-      h3 [FEATURE] Promises/A support
+      h3#promises [FEATURE] Promises/A support
       p
         | In order to make chaining of events easier and smoother,
         | Sequelize now has support for Promises/A. Just call <code>then</code> instead
@@ -240,7 +240,7 @@ block documentation
           |     console.log(pete.values)
           |   })
 
-      h3 [FEATURE] Added Getters/Setters method for DAO
+      h3#getters-setters [FEATURE] Added Getters/Setters method for DAO
 
       p
         | Virtual attributes have been introduced and allows you, to e.g.
@@ -276,7 +276,7 @@ block documentation
           |     // Let's welcome: John Doe
           |   })
 
-      h3 [FEATURE] Added model wide validations
+      h3#model-validations [FEATURE] Added model wide validations
       p
         | In addition to the already existing possibilities of validating certain
         | single attributes, the current version adds support for instance wide
@@ -314,7 +314,7 @@ block documentation
           |     })
           |   })
 
-      h3 Bug-Fixes
+      h3#bug-fixes Bug-Fixes
       ul
         li
           | [BUG] Fix string escape with postgresql on raw SQL queries.

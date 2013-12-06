@@ -5,7 +5,7 @@ block documentation
     div
       h2 Changes in Sequelize v1.4.1
 
-      h3 Introduction
+      h3#introduction Introduction
       p
         | Sequelize v1.4.1 was released on May 3rd, 2012. Major changes
         | are deprecation of Node.JS < v0.6.0, the possibility of selective
@@ -13,14 +13,14 @@ block documentation
         | complete function for asynchronous progresses, as well as the
         | chance to customize the logging strategy.
 
-      h3 Deprecation of Node.JS < v0.6.0
+      h3#deprecation Deprecation of Node.JS < v0.6.0
       p
         | From now on, Sequelize officially dropped support for Node.JS 0.5.x
         | and earlier versions. The reason for that, is the incompatibility of
         | BusterJS with those versions. Even if the tests are failing in earlier
         | releases, v1.4.0 was completely compatible with Node.JS v0.5 and v0.4. So feel free to use it, as well as trying out newer releases of Sequelize. But as I pretty much want to move on to BusterJS, keeping compatibility with those outdated versions seems not acceptable at all.
 
-      h3 Selective saving of instances
+      h3#selective-saving Selective saving of instances
       p
         | <a href="https://github.com/kioopi" target="_blank" rel="nofollow">kioopi</a>
         | added the possibility to save only a very selection of attributes when
@@ -39,7 +39,7 @@ block documentation
           |   // title will now be 'foooo' but description is the very same as before
           | })
 
-      h3 Migration skeleton creation
+      h3#migration-skeletons Migration skeleton creation
       p
         | The <code>sequelize</code> binary was extended. It can now generate migration
         | skeletons, which have the name of the current timestamp plus a passed name.
@@ -53,7 +53,7 @@ block documentation
           | # --> creates a file with current timestamp + migration-name
           | # --> migration-name has the default 'unnamed-migration'
 
-      h3 The complete function for asynchronicity
+      h3#complete The complete function for asynchronicity
       p
         | When you request data from the database or save things in it, you
         | can now wait for the success or the error case using the function
@@ -66,7 +66,7 @@ block documentation
           | Model.findAll().complete(function(err, result) { /* bar */ })
           | Model.findAll().done(function(err, result) { /* bar */ })
 
-      h3 Custom logging
+      h3#logging Custom logging
       p
         | In the new version the logging strategy was modified. In previous
         | version it was possible to specify <code>logging: false</code> as
@@ -78,7 +78,7 @@ block documentation
         | to call that function once something is logged. The first and
         | only parameter of that function will be the string.
 
-      h3 Bug fixes
+      h3#bug-fixes Bug fixes
       p
         | <code>v1.4.1</code> fixed the following bugs:
 

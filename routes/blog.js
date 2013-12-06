@@ -1,6 +1,7 @@
-var fs       = require('fs')
-  , path     = require('path')
-  , jade     = require('jade')
+var fs            = require('fs')
+  , path          = require('path')
+  , jade          = require('jade')
+  , SidebarHelper = require('../helpers/sidebar-helpers')
 
 exports.index = function(req, res) {
   res.render('blog/index', {
@@ -20,7 +21,8 @@ exports.show = function(req, res) {
     activeNavItem: 'blog',
     sidebarTitle:  'Blog',
     title:         'Blog - ' + section.title,
-    sections:      getSections()
+    sections:      getSections(),
+    permalink:     req.param('permalink')
   })
 }
 
@@ -37,12 +39,14 @@ var getSections = function() {
     if (!!m) {
       var content = fs.readFileSync(path.join(dir, section)).toString()
         , title   = content.match(/h2\s(.+)\n/)[1]
+        , subs    = SidebarHelper.readSubSections('blog/posts/' + section.replace('.jade', ''))
+        console.log(subs)
 
       var teaser = content.split('\n').reduce(function(acc, line) {
-        if (line.indexOf('h3 Introduction') !== -1) {
+        if (!!line.match(/h3.+Introduction/)) {
           acc[1] = true
           return acc
-        } else if (line.indexOf('h3 ') !== -1) {
+        } else if (!!line.match(/h3[#\s]/)) {
           acc[1] = false
           return acc
         }
@@ -54,13 +58,15 @@ var getSections = function() {
         return acc
       }, [[], false])
 
+      console.log(m[2])
+
       sections.push({
         timestamp:   parseInt(m[1], 10),
         teaser:      jade.compile(teaser[0].join("\n"))(),
         permalink:   m[2],
         title:       title,
         url:         '/blog/' + m[2],
-        subSections: []
+        subSections: subs
       })
     }
   })

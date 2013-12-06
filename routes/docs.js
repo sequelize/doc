@@ -1,8 +1,9 @@
-var fs           = require('fs')
-  , path         = require('path')
-  , _            = require('lodash')
-  , semver       = require('semver')
-  , sectionNames = ["installation", "usage", "models", "instances", "associations", "migrations", "utils", "misc"]
+var fs            = require('fs')
+  , path          = require('path')
+  , _             = require('lodash')
+  , semver        = require('semver')
+  , SidebarHelper = require('../helpers/sidebar-helpers')
+  , sectionNames  = ["installation", "usage", "models", "instances", "associations", "migrations", "utils", "misc"]
 
 exports.index = function(req, res) {
   var path     = 'docs/latest'
@@ -20,7 +21,7 @@ exports.index = function(req, res) {
     var section = {
       permalink:   sectionName,
       title:       sectionName.charAt(0).toUpperCase() + sectionName.slice(1),
-      subSections: readSubSections(path + '/' + sectionName),
+      subSections: SidebarHelper.readSubSections(path + '/' + sectionName),
     }
 
     section.url = "/docs/" + req.param('version') + "/" + section.permalink
@@ -42,28 +43,6 @@ exports.index = function(req, res) {
 
 // helpers
 
-
-var readSubSections = function(path) {
-  try {
-    var content = fs.readFileSync(__dirname + '/../views/' + path + '.jade').toString()
-      , result  = []
-
-    content.split('\n').forEach(function(line) {
-      if (_.contains(line, 'h3')) {
-        var fragments = line.match(/h3#([^\s]+)\s(.+)/)
-        result.push({
-          anchor: fragments[1],
-          text:   fragments[2]
-        })
-      }
-    })
-
-    return result
-  } catch(e) {
-    console.log('Unknown file: ', path)
-    return []
-  }
-}
 
 var getVersions = function(sections) {
   var dirs = fs.readdirSync(path.join(__dirname, '..', 'views', 'docs'))

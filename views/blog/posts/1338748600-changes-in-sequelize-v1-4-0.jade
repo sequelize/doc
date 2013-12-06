@@ -5,7 +5,7 @@ block documentation
     div
       h2 Changes in Sequelize v1.4.0
 
-      h3 Introduction
+      h3#introduction Introduction
       p
         | Sequelize v1.4.0 was released in April 2012. Besides some
         | important bugfixes, the new version shipped also major improvements
@@ -13,7 +13,7 @@ block documentation
         | connection pooling for MySQL, the possibility to set a date’s default
         | value to the current date, as well as the chance to customize the logging strategy.
 
-      h3 PostgreSQL support
+      h3#postgres PostgreSQL support
       p
         | Due to the great work of
         | <a href="https://github.com/swoodtke" target="_blank" rel="nofollow">Shawn Woodtke</a>,
@@ -48,14 +48,14 @@ block documentation
           |   dialect: 'postgres'
           | })
 
-      h3 JSON.stringify
+      h3#json-stringify JSON.stringify
       p
         | One often reported issue was the incompatibility of objects to
         | <code>JSON.stringify</code>. In the past you got an error saying
         | something about circular references. Instead of that error, you
         | will now get a map of all attributes and it’s values.
 
-      h3 Connection pooling (MySQL)
+      h3#pooling Connection pooling (MySQL)
       p
         | <a href="https://github.com/megshark" target="_blank" rel="nofollow">Meg Sharkey</a>
         | added (again :D) support for connection pooling for MySQL. You can
@@ -68,7 +68,7 @@ block documentation
           |   pool: { maxConnections: 5, maxIdleTime: 30 }
           | })
 
-      h3 Default value for date attributes
+      h3#default-values Default value for date attributes
       p
         | You can now define, that a date’s value should be the current
         | time by default. This is how to do it:
@@ -79,7 +79,7 @@ block documentation
           |   myDate: { type: Sequelize.DATE, defaultValue: Sequelize.NOW }
           | })
 
-      h3 Bug fixes
+      h3#bug-fixes Bug fixes
 
       p <code>v1.4.0</code> fixed the following bugs:
       ul
