@@ -282,8 +282,8 @@ block documentation
           | /*
           | Options is an object with the following keys:
           | {
-          |   logging: console.log, // a function (or false) for logging your queries
-          |   plain: false,         // if plain is true, then sequelize will return all of the records within an array, otherwise it will return a single object/first record returned.
+          |   logging: console.log, // A function (or false) for logging your queries
+          |   plain: false,         // If plain is true, then sequelize will only return the first record of the result set. In case of false it will all records.
           |   raw: false            // Set this to true if you don't have a model definition for your query
           | }
           | */
