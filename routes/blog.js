@@ -39,7 +39,7 @@ var getSections = function() {
         , title   = content.match(/h2\s(.+)\n/)[1]
 
       var teaser = content.split('\n').reduce(function(acc, line) {
-        if (line.indexOf('h3 Teaser') !== -1) {
+        if (line.indexOf('h3 Introduction') !== -1) {
           acc[1] = true
           return acc
         } else if (line.indexOf('h3 ') !== -1) {
