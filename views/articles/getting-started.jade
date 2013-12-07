@@ -149,6 +149,19 @@ block documentation
           |   timestamps: false           // this will deactivate the timestamp columns
           | })
 
+      p
+        | And just in case you want to customize the timestamp field names, you can do it likely this:
+
+      pre.dark-blue
+        code.javascript
+          | var User = sequelize.define('User', {
+          |   username: Sequelize.STRING,
+          |   password: Sequelize.STRING
+          | }, {
+          |   updatedAt: 'last_update',
+          |   createdAt: 'date_of_creation'
+          | })
+
       h3#instance Creating and persisting instances
       p
         | Sequelize allows the creation of instances in two ways. You can either <code>build</code> an
