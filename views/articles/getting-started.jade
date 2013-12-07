@@ -243,6 +243,21 @@ block documentation
         | Sequelize expects a foreign key in the target's schema. That means that there has to be an
         | attribute respectively a column in the target's table.
 
+      pre.dark-blue
+        code.javascript
+          | var Source = sequelize.define('Source', {})
+          |   , Target = sequelize.define('Target', {})
+          | &nbsp;
+          | Source.hasOne(Target)
+          | Target.belongsTo(Source)
+          | &nbsp;
+          | sequelize
+          |   .sync({ force: true })
+          |   .complete(function(err) {
+          |     // Even if we didn't define any foreign key or something else,
+          |     // instances of Target will have a column SourceId!
+          |   })
+
       h4 One to many
       p
         | An association between one source and many target is called "one to many" or 1:N association.
@@ -253,6 +268,22 @@ block documentation
         | Sequelize expects a foreign key in the target's schema. That means that there has to be an
         | attribute respectively a column in the target's table.
 
+
+      pre.dark-blue
+        code.javascript
+          | var Source = sequelize.define('Source', {})
+          |   , Target = sequelize.define('Target', {})
+          | &nbsp;
+          | Source.hasMany(Target)
+          | Target.belongsTo(Source)
+          | &nbsp;
+          | sequelize
+          |   .sync({ force: true })
+          |   .complete(function(err) {
+          |     // Even if we didn't define any foreign key or something else,
+          |     // instances of Target will have a column SourceId!
+          |   })
+
       h4 Many to many
       p
         | An association between many sources and many targets is called "many to many" or N:M association.
@@ -262,6 +293,21 @@ block documentation
       p
         | Sequelize expects a junction table which contains a foreign key to the source table
         | and a foreign key to the target table. A row in the table connects a source with a target.
+
+      pre.dark-blue
+        code.javascript
+          | var Source = sequelize.define('Source', {})
+          |   , Target = sequelize.define('Target', {})
+          | &nbsp;
+          | Source.hasMany(Target)
+          | Target.hasMany(Source)
+          | &nbsp;
+          | sequelize
+          |   .sync({ force: true })
+          |   .complete(function(err) {
+          |     // Even if we didn't define any foreign key or something else,
+          |     // Sequelize will create a table SourcesTargets.
+          |   })
 
 
       h3#combined A combined example
