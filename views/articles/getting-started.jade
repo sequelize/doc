@@ -223,6 +223,47 @@ block documentation
         | Please note that there won't be any error if no user with the name "john-doe" has been found.
         | This is intended, as there is not internal or authentication error.
 
+      h3#associations Defining associations
+      p
+        | A very common use case is the definition of associations between two or even more models.
+        | Once declared, Sequelize will know how to query the database to get or set associated data.
+        | Furthermore it will be able to automatically create the respective foreign key columns for you.
+
+      p
+        | Before taking a closer look at the code, it is critical to understand some details about
+        | the three different association types.
+
+      h4 One to one
+      p
+        | An association between one source and one target is called "one to one" or 1:1 association.
+        | It consists of a source that <strong>has one</strong> target and a target that
+        | <strong>belongs to</strong> a source.
+
+      p
+        | Sequelize expects a foreign key in the target's schema. That means that there has to be an
+        | attribute respectively a column in the target's table.
+
+      h4 One to many
+      p
+        | An association between one source and many target is called "one to many" or 1:N association.
+        | It consists of a source that <strong>has many</strong> targets and some targets that
+        | are <strong>belonging to</strong> a source.
+
+      p
+        | Sequelize expects a foreign key in the target's schema. That means that there has to be an
+        | attribute respectively a column in the target's table.
+
+      h4 Many to many
+      p
+        | An association between many sources and many targets is called "many to many" or N:M association.
+        | It consists of sources that <strong>have many</strong> targets and some targets that
+        | <strong>have many</strong> a source.
+
+      p
+        | Sequelize expects a junction table which contains a foreign key to the source table
+        | and a foreign key to the target table. A row in the table connects a source with a target.
+
+
       h3#combined A combined example
       p
         | Now that you know the basics of Sequelize, you might want to see everything in a single program.
