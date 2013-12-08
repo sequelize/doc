@@ -309,6 +309,102 @@ block documentation
           |     // Sequelize will create a table SourcesTargets.
           |   })
 
+      h4 Getting/Setting associations
+      p
+        | Defining associations is nice, but won't give you any advantage if you cannot read or set
+        | associations. Of course Sequelize will add respective functions to your models.
+        | Depending on the type of association you will find different methods:
+
+      pre.dark-blue
+        code.javascript
+          | var Source = sequelize.define('Source', {})
+          |   , Target = sequelize.define('Target', {})
+          | &nbsp;
+          | Source.hasOne(Target)
+          | Target.belongsTo(Source)
+          | &nbsp;
+          | Source.create({}).complete(function(err, source) {
+          |   Target.create({}).complete(function(err, target) {
+          |     // Set the association
+          |     source.setTarget(target).complete(function(err) {
+          |       // Get the association
+          |       source.getTarget().complete(function(err, _target) {
+          |         console.log(_target.values)
+          |         /*
+          |           {
+          |             id: 1,
+          |             createdAt: Sun Dec 08 2013 11:46:42 GMT+0100 (CET),
+          |             updatedAt: Sun Dec 08 2013 11:46:42 GMT+0100 (CET),
+          |             SourceId: 1
+          |           }
+          |         */
+          |       })
+          |     })
+          |   })
+          | })
+
+      h4 Clearing associations
+      p
+        | Assuming we already defined the models (as in the previous code example) and
+        | synced the schema with the database, we can clear the associations like this:
+
+      pre.dark-blue
+        code.javascript
+          | source.setTarget(null).complete(function(err) {
+          |   source.getTarget().complete(function(err, target) {
+          |     console.log(target)
+          |     // null
+          |   })
+          | })
+
+      h4 Adding / removing associations
+      p
+        | For 1:N and N:M associations it makes sense to not only set the associations,
+        | but also to add or remove associations. Furthermore checking for an association
+        | can be handy.
+
+      pre.dark-blue
+        code.javascript
+          | var Source = sequelize.define('Source', {})
+          |   , Target = sequelize.define('Target', {})
+          | &nbsp;
+          | Source.hasMany(Target)
+          | Target.belongsTo(Source)
+          | &nbsp;
+          | Source.create({}).complete(function(err, source) {
+          |   Target.create({}).complete(function(err, target1) {
+          |     Target.create({}).complete(function(err, target2) {
+          |       // Set the association
+          |       source.setTargets([target1, target2]).complete(function(err) {
+          |         // Get the association
+          |         source.getTargets().complete(function(err, targets) {
+          |           console.log(targets.length) // = 2
+          |           // Remove an association
+          |           source.removeTarget(target1).complete(function(err) {
+          |             source.getTargets().complete(function(err, targets) {
+          |               console.log(targets.length) // = 1
+          |               // Check for an association
+          |               source.hasTarget(target1).complete(function(err, hasTarget) {
+          |                 console.log(hasTarget) // false
+          |                 // Adding an association
+          |                 source.addTarget(target1).complete(function(err) {
+          |                   source.getTargets().complete(function(err, targets) {
+          |                     console.log(targets.length) // = 2
+          |                     source.hasTarget(target1).complete(function(err, hasTarget) {
+          |                       console.log(hasTarget) // true
+          |                     })
+          |                   })
+          |                 })
+          |               })
+          |             })
+          |           })
+          |         })
+          |       })
+          |     })
+          |   })
+          | })
+
+
 
       h3#combined A combined example
       p
