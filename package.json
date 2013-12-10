@@ -13,12 +13,11 @@
     "semver": "~2.2.1",
     "lodash": "~2.3.0",
     "marked": "~0.2.10",
-    "request": "~2.29.0"
+    "request": "~2.29.0",
+    "cheerio": "~0.12.4"
   },
   "devDependencies": {
     "html2jade": "~0.5.3",
-    "request": "~2.27.0",
-    "cheerio": "~0.12.4",
     "uuid": "~1.4.1",
     "async": "~0.2.9"
   },
