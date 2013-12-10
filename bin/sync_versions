@@ -15,9 +15,9 @@ tags.forEach(function(tag) {
   var tagFolder = "." + tag
 
   sh.run([
-    "cd " + __dirname + "/../views/docs/",
-    "git submodule add --quiet git@github.com:sequelize/sequelize-doc.git " + __dirname + "/../views/docs/" + tagFolder,
-    "cd " + __dirname + "/../views/docs/" + tagFolder,
+    "cd " + __dirname + "/../",
+    "git submodule add --quiet git@github.com:sequelize/sequelize-doc.git views/docs/" + tagFolder,
+    "cd views/docs/" + tagFolder,
     "git checkout --quiet " + tag
   ].join(";"))
 })
