@@ -1,0 +1,3 @@
+[submodule "views/docs/.1.7.0-beta.1"]
+	path = views/docs/.1.7.0-beta.1
+	url = git@github.com:sequelize/sequelize-doc.git
