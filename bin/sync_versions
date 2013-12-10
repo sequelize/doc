@@ -16,8 +16,8 @@ tags.forEach(function(tag) {
 
   sh.run([
     "cd " + __dirname + "/../views/docs/",
-    "git clone --quiet https://github.com/sequelize/sequelize-doc.git " + tagFolder,
-    "cd " + tagFolder,
+    "git submodule add --quiet git@github.com:sequelize/sequelize-doc.git " + __dirname + "/../views/docs/" + tagFolder,
+    "cd " + __dirname + "/../views/docs/" + tagFolder,
     "git checkout --quiet " + tag
   ].join(";"))
 })
