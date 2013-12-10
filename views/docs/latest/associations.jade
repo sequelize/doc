@@ -1,0 +1,465 @@
+extends ../../layouts/with-sidebar
+
+block documentation
+  section
+    div
+      h2 Associations
+      p
+        | With Sequelize you can also specify associations between multiple classes&period; Doing so will help you to easily access and set those associated objects&period; The library therefore provides for each defined class different methods&comma; which are explained in the following chapters&period;
+      p
+        strong Note&colon;&nbsp;
+        | Associations with models that use custom primaryKeys &lpar;so not the field &apos;id&apos;&rpar; are currently unsupported&period;
+
+
+      h3#one-to-one One-To-One associations
+      p
+        | One-To-One associations are connecting one source with exactly one target&period; In order to define a proper database schema&comma; Sequelize utilizes the methods
+        code belongsTo
+        | and
+        code hasOne
+        | &period; You can use them as follows&colon;
+      pre.dark-blue
+        code.javascript
+          | var User = sequelize.define('User', {/* ... */})
+          | var Project = sequelize.define('Project', {/* ... */})
+          | &nbsp;
+          | // One-way associations
+          | Project.hasOne(User)
+          | &nbsp;
+          | /*
+          |   In this example hasOne will add an attribute ProjectId to the User model!
+          |   Furthermore, Project.prototype will gain the methods getUser and setUser according
+          |   to the first parameter passed to define. If you have underscore style
+          |   enabled, the added attribute will be project_id instead of ProjectId.
+          | &nbsp;
+          |   You can also define the foreign key, e.g. if you already have an existing
+          |   database and want to work on it:
+          | */
+          | &nbsp;
+          | Project.hasOne(User, { foreignKey: 'initiator_id' })
+          | &nbsp;
+          | /*
+          |   Because Sequelize will use the model's name (first parameter of define) for
+          |   the accessor methods, it is also possible to pass a special option to hasOne:
+          | */
+          | &nbsp;
+          | Project.hasOne(User, { as: 'Initiator' })
+          | // Now you will get Project#getInitiator and Project#setInitiator
+          | &nbsp;
+          | // Or let's define some self references
+          | var Person = sequelize.define('Person', { /* ... */})
+          | &nbsp;
+          | Person.hasOne(Person, {as: 'Father'})
+          | // this will add the attribute FatherId to Person
+          | &nbsp;
+          | // also possible:
+          | Person.hasOne(Person, {as: 'Father', foreignKey: 'DadId'})
+          | // this will add the attribute DadId to Person
+          | &nbsp;
+          | // In both cases you will be able to do:
+          | Person#setFather
+          | Person#getFather
+          | &nbsp;
+          | // If you need to join a table twice you can double join the same table
+          | Team
+          |   .hasOne(Game, {foreignKey : 'homeTeamId'});
+          |   .hasOne(Game, {foreignKey , 'awayTeamId'});
+          | Game
+          |   .belongsTo(Team);
+          | &nbsp;
+          | &nbsp;
+          | // Since v1.3.0 you can also chain associations:
+          | Project
+          |   .hasOne(User)
+          |   .hasOne(Deadline)
+          |   .hasOne(Attachment)
+
+      p
+        | To get the association working the other way around &lpar;so from
+        code User
+        | to
+        code Project
+        | &rpar;&comma; it&apos;s necessary to do this&colon;
+      pre.dark-blue
+        code.javascript
+          | var User = sequelize.define('User', {/* ... */})
+          | var Project = sequelize.define('Project', {/* ... */})
+          | &nbsp;
+          | // One-way back associations
+          | Project.belongsTo(User)
+          | &nbsp;
+          | /*
+          |   In this example belongsTo will add an attribute UserId to the Project model!
+          |   That's the only difference to hasMany. Self references are working the very same way!
+          | */
+
+
+
+      h3#one-to-many One-To-Many associations
+      p
+        | One-To-Many associations are connecting one source with multiple targets&period; The targets however are again connected to exactly one specific source&period;
+      pre.dark-blue
+        code.javascript
+          | var User = sequelize.define('User', {/* ... */})
+          | var Project = sequelize.define('Project', {/* ... */})
+          | &nbsp;
+          | // OK. Now things get more complicated (not really visible to the user :)).
+          | // First let's define a hasMany association
+          | Project.hasMany(User, {as: 'Workers'})
+          | &nbsp;
+          | /*
+          |   This will add the attribute ProjectId or project_id to User.
+          |   Instances of Project will get the accessors getWorkers and setWorkers.
+          | &nbsp;
+          |   We could just leave it the way it is and let it be a one-way association.
+          |   But we want more! Let's define the other way around:
+          | */
+
+
+
+      h3#many-to-many Many-To-Many associations
+      p
+        | Many-To-Many associations are used to connect sources with multiple targets&period; Furthermore the targets can also have connections to multiple sources&period;
+      pre.dark-blue
+        code.javascript
+          | // again the Project association to User
+          | Project.hasMany(User, { as: 'Workers' })
+          | &nbsp;
+          | // now comes the association between User and Project
+          | User.hasMany(Project)
+          | &nbsp;
+          | /*
+          |   This will remove the attribute ProjectId (or project_id) from User and create
+          |   a new model called ProjectsUsers with the equivalent foreign keys ProjectId
+          |   (or project_id) and UserId (or user_id). If the attributes are camelcase or
+          |   not depends on the Model it represents.
+          | &nbsp;
+          |   Now you can use Project#getWorkers, Project#setWorkers, User#getTasks and
+          |   User#setTasks.
+          | */
+          | &nbsp;
+          | // Of course you can also define self references with hasMany:
+          | &nbsp;
+          | Person.hasMany(Person, { as: 'Children' })
+          | // This will create the table ChildrenPersons which stores the ids of the objects.
+          | &nbsp;
+          | // Since v1.5.0 you can also reference the same Model without creating a junction
+          | // table (but only if each object will have just one 'parent'). If you need that,
+          | // use the option foreignKey and set useJunctionTable to false
+          | Person.hasMany(Person, { as: 'Children', foreignKey: 'ParentId', useJunctionTable: false })
+          | &nbsp;
+          | // You can also use a predefined junction table using the option joinTableName:
+          | Project.hasMany(User, {joinTableName: 'project_has_users'})
+          | User.hasMany(Project, {joinTableName: 'project_has_users'})
+
+      p
+        | If you want additional attributes in your join table&comma; you can define a model for the join table in sequelize&comma; before you define the association&comma; and then tell sequelize that it should use that model for joining&comma; instead of creating a new one&colon;
+      pre.dark-blue
+        code.javascript
+          | User = sequelize.define('User', {})
+          | Project = sequelize.define('Project', {})
+          | UserProjects = sequelize.define('UserProjects', {
+          |     status: DataTypes.STRING
+          | })
+          | &nbsp;
+          | User.hasMany(Project, { joinTableModel: UserProjects })
+          | Project.hasMany(User, { joinTableModel: UserProjects })
+
+      p
+        | The code above will add ProjectId and UserId to the UserProjects table&comma; and
+        em remove any previsouly defined primary key attribute
+        | &comma; - the table will be uniquely identified by the combination of the keys of the two tables&comma; and there is no reason to have other PK columns&period;
+
+
+      h3#associating-objects Associating objects
+      p
+        | Because Sequelize is doing a lot of magic&comma; you have to call
+        code Sequelize&num;sync
+        | after setting the associations&excl; Doing so will allow you the following&colon;
+      pre.dark-blue
+        code.javascript
+          | Project.hasMany(Task)
+          | Task.hasMany(Project)
+          | &nbsp;
+          | Project.create()...
+          | Task.create()...
+          | Task.create()...
+          | &nbsp;
+          | // save them... and then:
+          | project.setTasks([task1, task2]).success(function() {
+          |   // saved!
+          | })
+          | &nbsp;
+          | // ok now they are save... how do I get them later on?
+          | project.getTasks().success(function(associatedTasks) {
+          |   // associatedTasks is an array of tasks
+          | })
+          | &nbsp;
+          | // You can also pass filters to the getter method.
+          | // They are equal to the options you can pass to a usual finder method.
+          | project.getTasks({ where: 'id > 10' }).success(function(tasks) {
+          |   // tasks with an id greater than 10 :)
+          | })
+          | &nbsp;
+          | // You can also only retrieve certain fields of a associated object.
+          | // This example will retrieve the attibutes "title" and "id"
+          | project.getTasks({attributes: ['title']}).success(function(tasks) {
+          |   // tasks with an id greater than 10 :)
+          | })
+
+      p
+        | To remove created associations you can just call the set method without a specific id&colon;
+      pre.dark-blue
+        code.javascript
+          | // remove the association with task1
+          | project.setTasks([task2]).success(function(associatedTasks) {
+          |   // you will get task2 only
+          | })
+          | &nbsp;
+          | // remove 'em all
+          | projects.setTasks([]).success(function(associatedTasks) {
+          |   // you will get an empty array
+          | })
+          | &nbsp;
+          | // or remove 'em more directly
+          | projects.removeTask(task1).success(function() {
+          |   // it's gone
+          | })
+          | &nbsp;
+          | // and add 'em again
+          | projects.addTask(task1).success(function() {
+          |   // it's back again
+          | })
+
+      p You can of course also do it vice versa&colon;
+      pre.dark-blue
+        code.javascript
+          | // project is associated with task1 and task2
+          | task2.setProject(null).success(function() {
+          |   // and it's gone
+          | })
+
+      p For hasOne&sol;belongsTo its basically the same&colon;
+      pre.dark-blue
+        code.javascript
+          | Task.hasOne(User, {as: "Author"})
+          | Task#setAuthor(anAuthor)
+
+      p
+        | Adding associations to a relation with a custom join table can be done in two ways &lpar;continuing with the associations defined in the previous chapter&rpar;&colon;
+      pre.dark-blue
+        code.javascript
+          | // Either by adding a property with the name of the join table model to the object, before creating the association
+          | project.UserProjects = {
+          |   status: 'active'
+          | }
+          | u.addProject(project)
+          | &nbsp;
+          | // Or by providing a second argument when adding the association, containing the data that should go in the join table
+          | u.addProject(project, { status: 'active' })
+          | &nbsp;
+          | &nbsp;
+          | // When associating multiple objects, you can combine the two options above. In this case the second argument
+          | // will be treated as a defaults object, that will be used if no data is provided
+          | project1.UserProjects = {
+          |     status: 'inactive'
+          | }
+          | &nbsp;
+          | u.setProjects([project1, project2], { status: 'active' })
+          | // The code above will record inactive for project one, and active for project two in the join table
+
+      p
+        | When getting data on an association that has a custom join table&comma; the data from the join table will be returned as a DAO instance&colon;
+      pre.dark-blue
+        code.javascript
+          | u.getProjects().success(function(projects) {
+          |   var project = projects[0]
+          | &nbsp;
+          |   if (project.UserProjects.status === 'active') {
+          |     // .. do magic
+          | &nbsp;
+          |     // since this is a real DAO instance, you can save it directly after you are done doing magic
+          |     project.UserProjects.save()
+          |   }
+          | })
+
+      p
+        | If you only need some of the attributes from the join table&comma; you can provide an array with the attributes you want&colon;
+      pre.dark-blue
+        code.javascript
+          | // This will select only name from the Projects table, and only status from the UserProjects table
+          | user.getProjects({ attributes: ['name'], joinTableAttributes: ['status']})
+
+
+
+      h3#check-associations Check associations
+      p
+        | Sequelize
+        code v1&period;5&period;0
+        | introduced methods which allows you&comma; to check if an object is already associated with another one &lpar;N&colon;M only&rpar;&period; Here is how you&apos;d do it&colon;
+      pre.dark-blue
+        code.javascript
+          | // check if an object is one of associated ones:
+          | Project.create({ /* */ }).success(function(project) {
+          |   User.create({ /* */ }).success(function(user) {
+          |     project.hasUser(user).success(function(result) {
+          |       // result would be false
+          |       project.addUser(user).success(function() {
+          |         project.hasUser(user).success(function(result) {
+          |           // result would be true
+          |         })
+          |       })
+          |     })
+          |   })
+          | })
+          | &nbsp;
+          | // check if all associated objects are as expected:
+          | // let's assume we have already a project and two users
+          | project.setUsers([user1, user2]).success(function() {
+          |   project.hasUsers([user1]).success(function(result) {
+          |     // result would be false
+          |     project.hasUsers([user1, user2]).success(function(result) {
+          |       // result would be true
+          |     })
+          |   })
+          | })
+
+
+
+      h3#foreign-keys Foreign Keys
+      h4#foreign-keys-constraints Foreign key constraints
+      pre.dark-blue
+        code.javascript
+          | // First setup our models
+          | var Task = this.sequelize.define('Task', { title: Sequelize.STRING })
+          |   , User = this.sequelize.define('User', { username: Sequelize.STRING })
+          | &nbsp;
+          | // Then our associations with a constraint
+          | User.hasMany(Task, {onDelete: 'restrict'})
+
+      p
+        | The same works for
+        code hasOne&lpar;&rpar;
+        | and
+        code belongsTo&lpar;&rpar;
+        | &period; Valid options are&colon;
+      ul
+        li
+          code &lcub;onDelete&colon; &apos;restrict&VerticalLine;cascade&apos;&rcub;
+        li
+          code &lcub;onUpdate&colon; &apos;restrict&VerticalLine;cascade&apos;&rcub;
+        li
+          code &lcub;foreignKeyConstraint&colon; true&rcub;
+          | - Set to true to gain a
+          code REFERENCES
+          | declaration without either
+          code onDelete
+          | or
+          code onUpdate
+          | &lpar;that is&comma;
+          code foreignKeyConstraint
+          | is implied if
+          code onDelete
+          | or
+          code onUpdate
+          | are set&rpar;&period; This may be a helpful performance optimization in some cases&period;
+      p
+        strong Implementation notes&colon;
+      ul
+        li
+          | Enabling constraints is opt-in&colon; they are only created if one or more of the options above are used when defining an association&period;
+        li
+          | MySQL &lpar;with InnoDB tables&rpar; and Postgres support foreign key references by default&period; SQLite does not unless
+          code PRAGMA FOREIGN&UnderBar;KEYS&equals;ON
+          | is issued&period; We do so when opening the database connection&comma; unless explicitly disabled with a global option&comma; to get parity across implementations&period;
+          strong Note&colon;
+          | enabling this doesn&apos;t make any difference unless there are actual constraints in place&period;
+        li
+          | Only simple foreign keys are supported &lpar;because associations only support simple keys&rpar;&period; This is the &quot;80&percnt;&quot; use case of course&period; Setting one of foreign key options in a situation where there is more than one primary key defined will cause the option to be ignored&period;
+        li
+          | SQL allows two ways to define foreign keys&colon; &quot;inline&quot; &lpar;
+          code someId INTEGER REFERENCES someTable&lpar;id&rpar; ON DELETE CASCADE
+          | &rpar; or &quot;standalone&quot; &lpar;
+          code FOREIGN KEY&lpar;someId&rpar; REFERENCES someTable&lpar;id&rpar; ON DELETE CASCADE
+          | placed as a separate clause inside a
+          code CREATE TABLE
+          | statement&rpar;&period; Since associations in sequelize create foreign key attributes the &quot;inline&quot; syntax is used&comma; and
+          code attributesToSQL
+          | is taught how to add the relevant suffix to any &quot;raw&quot; attribute with the relevant meta-data attached&period; This works for Postgres and SQLite &lpar;MySQL ignores this syntax&rpar; requiring the &quot;standalone&quot; approach&period; For MySQL&comma; we move the declaration to the end with a bit of string manipulation&period; This is analogous to how
+          code PRIMARY KEY
+          | is handled and allows this to be done without major refactoring&period;
+        li
+          | If we have foreign key constraints&comma; the order in which tables are created matters&colon; if
+          code foo
+          | has a foreign key to
+          code bar
+          | with a constraint&comma; then
+          code bar
+          | has to exist before
+          code foo
+          | can be created&period; To make sure this happens&comma; we use a topological sort of relationships &lpar;via the
+          code Toposort-class
+          | module&rpar; to sequence calls to
+          code CREATE TABLE
+          | in
+          code sync&lpar;&rpar;
+          | &period; This also necessitates
+          code sync&lpar;&rpar;
+          | being serialized&comma; but given it&apos;s an &quot;on startup&quot; operation that shouldn&apos;t be too much of an issue&period;
+        li
+          | A similar concern happens with
+          code dropAllTables&lpar;&rpar;
+          | &comma; but here we don&apos;t have enough information to sort the list&period; Instead&comma; we do one of two things&colon; for SQLite and MySQL&comma; we temporarily disable constraint checking&period; For Postgres&comma; we use
+          code DROP TABLE &period;&period;&period; CASCADE
+          | to drop relevant constraints when required&period; &lpar;MySQL and SQLite only support the former and Postgres only supports the latter&rpar;&period; This is blunt&comma; but OK given that the function is attempting to drop
+          em all
+          | the tables&period;
+        li
+          | For other calls to
+          code dropTable&lpar;&rpar;
+          | the caller is expected to sequence calls appropriately&comma; or wrap the call in
+          code disableForeignKeyConstraints&lpar;&rpar;
+          | and
+          code enableForeignKeyConstraints&lpar;&rpar;
+          | &lpar;MySQL and SQLite&semi; no-ops in Postgres&rpar; and&sol;or pass &lcub;cascade&colon; true&rcub; in options &lpar;Postgres&semi; no-op in MySQL and SQLite&rpar;&period;
+      h4 Enforcing a foreign key reference
+
+      pre.dark-blue
+        code.javascript
+          | var Series, Trainer, Video
+          | &nbsp;
+          | // Series has a trainer_id=Trainer.id foreign reference key after we call Trainer.hasMany(series)
+          | Series = sequelize.define('Series', {
+          |   title:        DataTypes.STRING,
+          |   sub_title:    DataTypes.STRING,
+          |   description:  DataTypes.TEXT,
+          | &nbsp;
+          |   // Set FK relationship (hasMany) with `Trainer`
+          |   trainer_id: {
+          |     type: DataTypes.INTEGER,
+          |     references: "Trainer",
+          |     referencesKey: "id"
+          |   }
+          | })
+          | &nbsp;
+          | Trainer = sequelize.define('Trainer', {
+          |   first_name: DataTypes.STRING,
+          |   last_name:  DataTypes.STRING
+          | });
+          | &nbsp;
+          | // Video has a series_id=Series.id foreign reference key after we call Series.hasOne(Video)...
+          | Video = sequelize.define('Video', {
+          |   title:        DataTypes.STRING,
+          |   sequence:     DataTypes.INTEGER,
+          |   description:  DataTypes.TEXT,
+          | &nbsp;
+          |   // set relationship (hasOne) with `Series`
+          |   series_id: {
+          |     type: DataTypes.INTEGER,
+          |     references: "Series",
+          |     referencesKey: "id"
+          |   }
+          | });
+          | &nbsp;
+          | Series.hasOne(Video);
+          | Trainer.hasMany(Series);

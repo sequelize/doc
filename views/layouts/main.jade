@@ -1,0 +1,57 @@
+doctype 5
+html
+  head
+    title
+      = ["Sequelize", title].join(" - ")
+    link(rel="shortcut icon", type="image/x-icon", href="/favicon.ico")
+    link(rel='stylesheet', href='/stylesheets/style.css')
+
+  body
+    .navbar.navbar-default.navbar-fixed-top(role='navigation')
+      .container-liquid
+        .col-sm-4.navbar-left
+          section
+            a.navbar-brand(href='/')
+              img(src="/images/logo-small.png")
+              span Sequelize
+            .clearfix
+        .col-sm-8.navbar-right
+          section
+            button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+              span.sr-only Toggle navigation
+              span.icon-bar
+              span.icon-bar
+              span.icon-bar
+
+            .navbar-collapse.collapse
+              ul.nav.navbar-nav
+              ul.nav.navbar-nav.navbar-right
+                li(class=(activeNavItem === 'home' ? 'active' : ''))
+                  a(href='/') Home
+                li(class=(activeNavItem === 'docs' ? 'active' : ''))
+                  a(href='/docs') Docs
+                li(class=(activeNavItem === 'articles' ? 'active' : ''))
+                  a(href='/articles') Articles
+                li(class=(activeNavItem === 'changelog' ? 'active' : ''))
+                  a(href='/changelog') Changelog
+                li(class=(activeNavItem === 'blog' ? 'active' : ''))
+                  a(href='/blog') Blog
+
+    block content
+
+    script(src='/javascripts/jquery-1.10.2.min.js')
+    script(src="/javascripts/highlight.pack.js")
+    script hljs.initHighlightingOnLoad();
+
+    block bottom
+
+    script(type="text/javascript").
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-9039631-4']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();

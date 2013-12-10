@@ -1,9 +1,0 @@
-<div class="row">
-  <div class="span12">
-    <% ['compatibility', 'asynchronicity', 'links'].each do |section| %>
-      <%= markdown("documentation/sections/misc/#{section}".to_sym) %>
-    <% end %>
-
-    <%= erb 'documentation/sections/misc/users'.to_sym %>
-  </div>
-</div>
