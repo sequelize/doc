@@ -65,6 +65,15 @@ block documentation
           |   // - currently supported: 'mysql', 'sqlite', 'postgres'
           |   dialect: 'mysql',
           | &nbsp;
+          |   // you can also pass any dialect options to the underlying dialect library
+          |   // - default is empty
+          |   // - currently supported: 'mysql', 'mariadb'
+          |   dialectOptions: {
+          |     socketPath: '/Applications/MAMP/tmp/mysql/mysql.sock',
+          |     supportBigNumbers: true,
+          |     bigNumberStrings: true
+          |   },
+          | &nbsp;
           |   // the storage engine for sqlite
           |   // - default ':memory:'
           |   storage: 'path/to/database.sqlite',
@@ -201,6 +210,11 @@ block documentation
           |   // so: we want mysql!
           |   dialect: 'mysql'
           | })
+
+      p
+        | <strong>Note:</strong> You can pass options directly to dialect library by setting the
+        | <code>dialectOptions</code> parameter. See <a href="/docs/latest/usage#options">Options</a>
+        | for examples (currently only mysql and mariadb are supported).
 
       h4#dialects-sqlite SQLite
       p

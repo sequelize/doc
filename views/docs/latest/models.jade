@@ -131,10 +131,18 @@ block documentation
       pre.dark-blue
         code.javascript
           | var Foo = sequelize.define('Foo', {
+          |   name: { Sequelize.STRING },
           |   title: {
           |     type     : Sequelize.STRING,
           |     allowNull: false,
-          |     get      : function()  { /* do your magic here and return something! */ },
+          |     get      : function()  {
+          |        /*
+          |          do your magic here and return something!
+          |          'this' allows you to access attributes of the model.
+          | &nbsp;
+          |         example: this.getDataValue('name') works
+          |       */
+          |     },
           |     set      : function(v) { /* do your magic with the input here! */ }
           |   }
           | });
