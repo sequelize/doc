@@ -48,6 +48,13 @@ body .navbar ul.nav.navbar-nav li.active a {
   border-radius: 20px;
   color: #fff;
 }
+.imprint {
+  line-height: 50px;
+  text-transform: uppercase;
+}
+.imprint a {
+  color: #fff;
+}
 .company-or-project h4 {
   padding-top: 90px;
   border-bottom: 1px dotted #333;
@@ -75,9 +82,13 @@ body .navbar ul.nav.navbar-nav li.active a {
 .dark-blue {
   background-color: #314267;
 }
+.very-dark-blue {
+  background-color: #14233d;
+}
 .light-blue,
 .mid-blue,
-.dark-blue {
+.dark-blue,
+.very-dark-blue {
   color: #fff;
 }
 .container-liquid {

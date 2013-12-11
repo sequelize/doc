@@ -39,9 +39,23 @@ html
 
     block content
 
+    .imprint.very-dark-blue
+      .container
+        .col-sm-4
+          | &copy;
+          | Sascha Depold,
+          | <a href="https://github.com/sequelize/sequelize-doc/graphs/contributors" target="_blank" rel="nofollow">et al.</a>
+          | 2006 -&nbsp;
+          = new Date().getFullYear()
+        .col-sm-8(style="text-align: right")
+          a(href="/imprint") Imprint
+
     script(src='/javascripts/jquery-1.10.2.min.js')
     script(src="/javascripts/highlight.pack.js")
-    script hljs.initHighlightingOnLoad();
+    script(type="text/javascript").
+      $(function() {
+        $('pre code:not(.skip)').each(function(i, e) {hljs.highlightBlock(e)});
+      })
 
     block bottom
 
