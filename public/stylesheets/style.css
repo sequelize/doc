@@ -2,7 +2,7 @@
 @import "bootstrap-theme.min.css";
 @import "ir_black.css";
 @import url("http://fonts.googleapis.com/css?family=Ubuntu:400,700");
-@import url("http://fonts.googleapis.com/css?family=UbuntuMono");
+@import url("http://fonts.googleapis.com/css?family=Ubuntu%20Mono");
 body .navbar .navbar-brand span {
   font-size: 35px;
   position: relative;
@@ -142,7 +142,7 @@ body pre {
 body pre code {
   margin: 0 40px 40px 40px;
   background: transparent;
-  font-family: 'Ubuntu Mono', sans-serif;
+  font-family: 'Ubuntu Mono', monospace;
   font-size: 18px;
 }
 body section .jumbotron {
