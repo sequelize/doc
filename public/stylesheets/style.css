@@ -21,6 +21,14 @@ body .navbar .navbar-right section {
     display: none;
   }
 }
+@media (max-width: 1240px) and (min-width: 768px) {
+  body .navbar li:not(.active) span.text {
+    display: none;
+  }
+}
+body .navbar li span.text {
+  padding-left: 10px;
+}
 @media (max-width: 768px) {
   body .navbar .navbar-left {
     float: left;
