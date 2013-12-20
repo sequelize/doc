@@ -7,7 +7,7 @@ html
     link(rel='stylesheet', href='/stylesheets/style.css')
     block head
 
-  body
+  body(id=bodyId)
     .navbar.navbar-default.navbar-fixed-top(role='navigation')
       .container-liquid
         .col-sm-4.navbar-left
@@ -54,7 +54,7 @@ html
                     span.text Blog
                 li(class=(activeNavItem === 'search' ? 'active' : ''))
                   a.search(href='/search')
-                    span.glyphicon.glyphicon-search
+                    i.fa.fa-search
                     span.spacer &nbsp;
                     span.text Search
 
@@ -72,6 +72,7 @@ html
           a(href="/imprint") Imprint
 
     script(src='/javascripts/jquery-1.10.2.min.js')
+    script(src='/javascripts/bootstrap.min.js')
     script(src="/javascripts/highlight.pack.js")
     script(type="text/javascript").
       $(function() {

@@ -5,3 +5,7 @@ exports.index = function(req, res) {
 exports.imprint = function(req, res) {
   res.render('imprint', { title: 'Imprint' })
 }
+
+exports.search = function (req, res) {
+  res.render('search', { title: 'Search', activeNavItem: 'search', bodyId: 'search' })
+}
