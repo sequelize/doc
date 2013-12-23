@@ -63,7 +63,7 @@ block documentation
           |   .authenticate()
           |   .complete(function(err) {
           |     if (!!err) {
-          |       console.log('Unable to connect to the database.')
+          |       console.log('Unable to connect to the database:', err)
           |     } else {
           |       console.log('Connection has been established successfully.')
           |     }
@@ -116,7 +116,7 @@ block documentation
           |   .sync({ force: true })
           |   .complete(function(err) {
           |      if (!!err) {
-          |        console.log('An error occurred while create the table.')
+          |        console.log('An error occurred while create the table:', err)
           |      } else {
           |        console.log('It worked!')
           |      }
@@ -179,7 +179,7 @@ block documentation
           |   .save()
           |   .complete(function(err) {
           |     if (!!err) {
-          |       console.log('The instance has not been saved.')
+          |       console.log('The instance has not been saved:', err)
           |     } else {
           |       console.log('We have a persisted instance now')
           |     }
@@ -210,7 +210,7 @@ block documentation
           |   .find({ where: { username: 'john-doe' } })
           |   .complete(function(err, johnDoe) {
           |     if (!!err) {
-          |       console.log('An error occurred while searching for John!')
+          |       console.log('An error occurred while searching for John:', err)
           |     } else if (!johnDoe) {
           |       console.log('No user with the username "john-doe" has been found.')
           |     } else {
