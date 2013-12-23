@@ -519,6 +519,20 @@ block documentation
           |     description: DataTypes.TEXT
           |   })
           | }
+      p
+        | Since 
+        code v1&period;7&period;0
+        | the
+        code import
+        | -method can now accept a callback as an argument&period;
+      pre.dark-blue
+        code.javascript
+          | sequelize.import('Project', function(sequelize, DataTypes) {
+          |   return sequelize.define("Project", {
+          |     name: DataTypes.STRING,
+          |     description: DataTypes.TEXT
+          |   })
+          | })
 
       h3#database-synchronization Database synchronization
       p
