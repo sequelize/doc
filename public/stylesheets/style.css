@@ -105,6 +105,7 @@ body .navbar ul.nav.navbar-nav li.active a {
 }
 .container-liquid .documentation {
   min-height: 100%;
+  margin: 0;
 }
 .container-liquid .documentation > * {
   min-height: 100%;
