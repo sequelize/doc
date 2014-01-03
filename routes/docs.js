@@ -3,7 +3,7 @@ var fs            = require('fs')
   , _             = require('lodash')
   , semver        = require('semver')
   , SidebarHelper = require('../helpers/sidebar-helpers')
-  , sectionNames  = ["installation", "usage", "models", "instances", "associations", "migrations", "utils", "misc"]
+  , sectionNames  = ["installation", "usage", "models", "instances", "associations", "transactions", "migrations", "utils", "misc"]
 
 exports.index = function(req, res) {
   var path     = 'docs/latest'
