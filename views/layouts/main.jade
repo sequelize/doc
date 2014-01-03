@@ -5,8 +5,9 @@ html
       = ["Sequelize", title].join(" - ")
     link(rel="shortcut icon", type="image/x-icon", href="/favicon.ico")
     link(rel='stylesheet', href='/stylesheets/style.css')
+    block head
 
-  body
+  body(id=bodyId)
     .navbar.navbar-default.navbar-fixed-top(role='navigation')
       .container-liquid
         .col-sm-4.navbar-left
@@ -27,15 +28,35 @@ html
               ul.nav.navbar-nav
               ul.nav.navbar-nav.navbar-right
                 li(class=(activeNavItem === 'home' ? 'active' : ''))
-                  a(href='/') Home
+                  a(href='/')
+                    span.glyphicon.glyphicon-home
+                    span.spacer &nbsp;
+                    span.text Home
                 li(class=(activeNavItem === 'docs' ? 'active' : ''))
-                  a(href='/docs') Docs
+                  a(href='/docs')
+                    span.glyphicon.glyphicon-info-sign
+                    span.spacer &nbsp;
+                    span.text Docs
                 li(class=(activeNavItem === 'articles' ? 'active' : ''))
-                  a(href='/articles') Articles
+                  a(href='/articles')
+                    span.glyphicon.glyphicon-book
+                    span.spacer &nbsp;
+                    span.text Articles
                 li(class=(activeNavItem === 'changelog' ? 'active' : ''))
-                  a(href='/changelog') Changelog
+                  a(href='/changelog')
+                    span.glyphicon.glyphicon-list
+                    span.spacer &nbsp;
+                    span.text Changelog
                 li(class=(activeNavItem === 'blog' ? 'active' : ''))
-                  a(href='/blog') Blog
+                  a(href='/blog')
+                    span.glyphicon.glyphicon-comment
+                    span.spacer &nbsp;
+                    span.text Blog
+                li(class=(activeNavItem === 'search' ? 'active' : ''))
+                  a.search(href='/search')
+                    i.fa.fa-search
+                    span.spacer &nbsp;
+                    span.text Search
 
     block content
 
@@ -51,6 +72,7 @@ html
           a(href="/imprint") Imprint
 
     script(src='/javascripts/jquery-1.10.2.min.js')
+    script(src='/javascripts/bootstrap.min.js')
     script(src="/javascripts/highlight.pack.js")
     script(type="text/javascript").
       $(function() {

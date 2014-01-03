@@ -27,6 +27,18 @@ body {
       }
     }
 
+    @media (max-width: 1240px) and (min-width: 768px) {
+      li:not(.active) {
+        span.text { display: none }
+      }
+    }
+
+    li {
+      span.text {
+        padding-left: 10px
+      }
+    }
+
     @media (max-width: 768px) {
       .navbar-left { float: left }
       .navbar-toggle {

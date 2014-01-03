@@ -145,12 +145,12 @@ block documentation
           | &nbsp;
           | // Since v1.5.0 you can also reference the same Model without creating a junction
           | // table (but only if each object will have just one 'parent'). If you need that,
-          | // use the option foreignKey and set useJunctionTable to false
-          | Person.hasMany(Person, { as: 'Children', foreignKey: 'ParentId', useJunctionTable: false })
+          | // use the option foreignKey and set through to null
+          | Person.hasMany(Person, { as: 'Children', foreignKey: 'ParentId', through: null })
           | &nbsp;
-          | // You can also use a predefined junction table using the option joinTableName:
-          | Project.hasMany(User, {joinTableName: 'project_has_users'})
-          | User.hasMany(Project, {joinTableName: 'project_has_users'})
+          | // You can also use a predefined junction table using the option through:
+          | Project.hasMany(User, {through: 'project_has_users'})
+          | User.hasMany(Project, {through: 'project_has_users'})
 
       p
         | If you want additional attributes in your join table&comma; you can define a model for the join table in sequelize&comma; before you define the association&comma; and then tell sequelize that it should use that model for joining&comma; instead of creating a new one&colon;
@@ -162,8 +162,8 @@ block documentation
           |     status: DataTypes.STRING
           | })
           | &nbsp;
-          | User.hasMany(Project, { joinTableModel: UserProjects })
-          | Project.hasMany(User, { joinTableModel: UserProjects })
+          | User.hasMany(Project, { through: UserProjects })
+          | Project.hasMany(User, { through: UserProjects })
 
       p
         | The code above will add ProjectId and UserId to the UserProjects table&comma; and

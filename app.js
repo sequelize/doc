@@ -27,6 +27,7 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index)
+app.get('/search', routes.search)
 app.get('/imprint', routes.imprint)
 app.get('/docs', docs.index)
 app.get('/docs/:version', docs.index)
