@@ -1000,6 +1000,38 @@ block documentation
           |   */
           | })
 
+      h3#nested-eager-loading Nested eager loading
+        pre.dark-blue
+          code.javascript
+            | User.findAll({
+            |   include: [
+            |     {model: Tool, as: 'Instruments', include: [
+            |       {model: Teacher, include: [ /* etc */]}
+            |     ]}
+            |   ] 
+            | }).success(function(users) {
+            |   console.log(JSON.stringify(users))
+            | &nbsp;
+            |   /*
+            |     [{
+            |       "name": "John Doe",
+            |       "id": 1,
+            |       "createdAt": "2013-03-20T20:31:45.000Z",
+            |       "updatedAt": "2013-03-20T20:31:45.000Z",
+            |       "instruments": [{ // 1:M and N:M association
+            |         "name": "Toothpick",
+            |         "id": 1,
+            |         "createdAt": null,
+            |         "updatedAt": null,
+            |         "UserId": 1,
+            |         "Teacher": { // 1:1 association
+            |           "name": "Jimi Hendrix"
+            |         }
+            |       }]
+            |     }]
+            |   */
+            | })
+
       p
         strong Final note&colon;
         | If you include an object which is not associated&comma; Sequelize will throw an error&period;
