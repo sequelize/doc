@@ -179,7 +179,7 @@ body pre {
 body pre code {
   margin: 0 40px 40px 40px;
   background: transparent;
-  font-family: 'Ubuntu Mono', sans-serif;
+  font-family: 'Ubuntu Mono', Consolas, 'Liberation Mono', Courier, monospace;
   font-size: 18px;
 }
 body section .jumbotron {
