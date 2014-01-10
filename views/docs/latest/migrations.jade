@@ -119,6 +119,17 @@ block documentation
           | migration.createTable(
           |   'nameOfTheNewTable',
           |   {
+          |     id: {
+          |       type: DataTypes.INTEGER,
+          |       primaryKey: true,
+          |       autoIncrement: true
+          |     },
+          |     createdAt: {
+          |       type: DataTypes.DATE
+          |     },
+          |     updatedAt: {
+          |       type: DataTypes.DATE
+          |     },
           |     attr1: DataTypes.STRING,
           |     attr2: DataTypes.INTEGER,
           |     attr3: {
