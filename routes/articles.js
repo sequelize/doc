@@ -26,7 +26,7 @@ var getArticles = function() {
 
   files.forEach(function(filename) {
     var content = fs.readFileSync(path.join(dir, filename)).toString()
-      , title   = content.match(/h2\s(.+)\n/)[1]
+      , title   = content.match(/h2\s(.+)(\n)|\r\n/)[1]
 
     articles.push({
       path:        path.join(dir, filename),

@@ -714,6 +714,23 @@ block documentation
         | &period;&period;&period; the existing entry will not be changed&period; See the
         code job
         | of the second user&comma; and the fact that created was false&period;
+
+      p
+        | Notice that the success callback has two arguments. When using 
+        a(href='/docs/latest/misc#asynchronicity') promises 
+        | you should call
+        code spread
+        a(href='https://github.com/petkaantonov/bluebird/blob/master/API.md#spreadfunction-fulfilledhandler--function-rejectedhandler----promise', target='_blank') (API ref) 
+        |instead of
+        code then
+        |, since
+        code then
+        |will only recieve the first argument (the DAO), while
+        code spread
+        |will recieve both the DAO, and the
+        code created
+        |boolean.
+
       h4#finders-findandcountall
         | findAndCountAll - Search for multiple elements in the database&comma; returns both data and total count
       p
