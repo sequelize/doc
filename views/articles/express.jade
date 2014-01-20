@@ -128,8 +128,8 @@ block documentation
           |   })
           | &nbsp;
           | Object.keys(db).forEach(function(modelName) {
-          |   if (db[modelName].options.hasOwnProperty('associate')) {
-          |     db[modelName].options.associate(db)
+          |   if ('associate' in db[modelName]) {
+          |     db[modelName].associate(db)
           |   }
           | })
           | &nbsp;
@@ -157,8 +157,10 @@ block documentation
           |   var User = sequelize.define('User', {
           |     username: DataTypes.STRING
           |   }, {
-          |     associate: function(models) {
-          |       User.hasMany(models.Task)
+          |     classMethods: {
+          |       associate: function(models) {
+          |         User.hasMany(models.Task)
+          |       }
           |     }
           |   })
           | &nbsp;
@@ -175,8 +177,10 @@ block documentation
           |   var Task = sequelize.define('Task', {
           |     title: DataTypes.STRING
           |   }, {
-          |     associate: function(models) {
-          |       Task.belongsTo(models.User)
+          |     classMethods: {
+          |       associate: function(models) {
+          |         Task.belongsTo(models.User)
+          |       }
           |     }
           |   })
           | &nbsp;
