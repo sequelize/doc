@@ -49,6 +49,16 @@ block documentation
           | }, function(err) {
           |   // err...
           | })
+          | &nbsp;
+          | &nbsp;
+          | // For functions with multiple success values (e.g. findOrCreate) there is also spread
+          | &nbsp;
+          | user.findOrCreate(...).spread(function(user, wasCreated) {
+          |   // all arguments are passed
+          | })
+          | user.findOrCreate(...).then(function(user) {
+          |   // only the first argument is passed
+          | })
 
       p
         strong Please notice&colon;

@@ -38,7 +38,7 @@ var getSections = function() {
 
     if (!!m) {
       var content = fs.readFileSync(path.join(dir, section)).toString()
-        , title   = content.match(/h2\s(.+)\n/)[1]
+        , title   = content.match(/h2\s(.+)(\n|\r\n)/)[1]
         , subs    = SidebarHelper.readSubSections('blog/posts/' + section.replace('.jade', ''))
 
       var teaser = content.split('\n').reduce(function(acc, line) {
