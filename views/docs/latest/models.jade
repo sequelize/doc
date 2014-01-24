@@ -716,11 +716,11 @@ block documentation
         | of the second user&comma; and the fact that created was false&period;
 
       p
-        | Notice that the success callback has two arguments. When using 
-        a(href='/docs/latest/misc#asynchronicity') promises 
+        | Notice that the success callback has two arguments. When using
+        a(href='/docs/latest/misc#asynchronicity') promises
         | you should call
         code spread
-        a(href='https://github.com/petkaantonov/bluebird/blob/master/API.md#spreadfunction-fulfilledhandler--function-rejectedhandler----promise', target='_blank') (API ref) 
+        a(href='https://github.com/petkaantonov/bluebird/blob/master/API.md#spreadfunction-fulfilledhandler--function-rejectedhandler----promise', target='_blank') (API ref)
         |instead of
         code then
         |, since
@@ -754,10 +754,16 @@ block documentation
           | - an array of objects&comma; the records &lpar;matching the where clause&rpar; within the limit&sol;offset range
       pre.dark-blue
         code.javascript
-          | Project.findAndCountAll({where: ["title LIKE 'foo%'"], offset: 10, limit: 2}).success(function(result) {
-          |   console.log(result.count);
-          |   console.log(result.rows);
-          | });
+          | Project
+          |   .findAndCountAll({
+          |      where: ["title LIKE 'foo%'"],
+          |      offset: 10,
+          |      limit: 2
+          |   })
+          |   .success(function(result) {
+          |     console.log(result.count);
+          |     console.log(result.rows);
+          |   });
 
       p
         | The options &lsqb;object&rsqb; that you pass to
@@ -814,6 +820,40 @@ block documentation
           |     }
           |   }
           | })
+
+      h4#finders-complex-where-queries Complex filtering
+      p
+        | Since <code>v1.7.0-rc3</code>, it is possible to do complex where queries with
+        | multiple nestings of AND and OR queries:
+
+      pre.dark-blue
+        code.javascript
+          | Project.find({
+          |   where: Sequelize.and(
+          |     { name: 'a project' },
+          |     Sequelize.or(
+          |       { id: [1,2,3] },
+          |       { id: { lt: 10 } }
+          |     )
+          |   )
+          | })
+
+      p This code will generate the following query:
+      pre.dark-blue
+        code.javascript
+          | SELECT *
+          | FROM `Projects`
+          | WHERE (
+          |   `Projects`.`name`='a project'
+          |    AND (`Projects`.`id` IN (1,2,3) OR `Projects`.`id` < 10)
+          | )
+          | LIMIT 1
+          | ;
+
+      p
+        | Notice, that you can also use a <code>Sequelize.or</code> as value for the where clause
+        | as well as just an array which gets treated as <code>Sequelize.and</code> if it contains
+        | objects or hashes or other complex data types.
 
       h4#finders-limit---offset---order---group Manipulating the dataset with limit&comma; offset&comma; order and group
       p To get more relevant data&comma; you can use limit&comma; offset&comma; order and grouping&colon;
@@ -923,6 +963,23 @@ block documentation
           | Project.min('age').success(function(max) {
           |   // this will return 5
           | })
+
+      h4#finder-sum sum - Sum the value of specific attributes
+      p
+        | In order to calculate the sum over a specific column of a table, you can
+        | use the `sum` method.
+      pre.dark-blue
+        code.javascript
+          | /*
+          |   Let's assume 3 person objects with an attribute age.
+          |   The first one is 10 years old,
+          |   the second one is 5 years old,
+          |   the third one is 40 years old.
+          | */
+          | Project.sum('age').success(function(sum) {
+          |   // this will return 55
+          | })
+
 
       h3#eager-loading Eager loading
       p
