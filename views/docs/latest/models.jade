@@ -88,6 +88,7 @@ block documentation
           | &nbsp;
           | Sequelize.BLOB                        // BLOB (bytea for PostgreSQL)
           | Sequelize.BLOB('tiny')                // TINYBLOB (bytea for PostgreSQL. Other options are medium and long)
+          | Sequelize.UUID                        // UUID datatype for PostgreSQL and SQLite, CHAR(36) BINARY for MySQL (use defaultValue: Sequelize.UUIDV1 or Sequelize.UUIDV4 to make sequelize generate the ids automatically)
 
       p
         | The BLOB data type allows you to insert data both as strings and as buffers&period; When you do a find or findAll on a model which has a BLOB column&comma; that data will always be returned as a buffer&period;
