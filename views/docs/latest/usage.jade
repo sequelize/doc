@@ -62,7 +62,7 @@ block documentation
           | &nbsp;
           |   // the sql dialect of the database
           |   // - default is 'mysql'
-          |   // - currently supported: 'mysql', 'sqlite', 'postgres'
+          |   // - currently supported: 'mysql', 'sqlite', 'postgres', 'mariadb'
           |   dialect: 'mysql',
           | &nbsp;
           |   // you can also pass any dialect options to the underlying dialect library
@@ -215,6 +215,16 @@ block documentation
         | <strong>Note:</strong> You can pass options directly to dialect library by setting the
         | <code>dialectOptions</code> parameter. See <a href="/docs/latest/usage#options">Options</a>
         | for examples (currently only mysql and mariadb are supported).
+
+      h4#dialects-mariadb MariaDB
+      p
+        | For MariaDB compatibility you have to install the package <code>mariasql</code>.
+        | The configuration needs to look like this:
+      pre.dark-blue
+        code.javascript
+          | var sequelize = new Sequelize('database', 'username', 'password', {
+          |   dialect: 'mariadb'
+          | })
 
       h4#dialects-sqlite SQLite
       p
