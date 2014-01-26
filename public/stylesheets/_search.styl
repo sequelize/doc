@@ -20,8 +20,22 @@ body#search {
   }
 
   .gsc-search-button {
+    position: relative;
+
+    &:after {
+      content: "Search";
+      display: block;
+      color: black;
+      position: absolute;
+      top: 8px;
+      left: 9px;
+    }
+
     input {
       height: 26px;
+      position: relative;
+      top: 1px;
+
     }
   }
 }

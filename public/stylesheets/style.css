@@ -131,8 +131,21 @@ body#search .jumbotron i.fa.fa-search {
 body#search .gsc-selected-option {
   font-size: 9px;
 }
+body#search .gsc-search-button {
+  position: relative;
+}
+body#search .gsc-search-button:after {
+  content: "Search";
+  display: block;
+  color: #000;
+  position: absolute;
+  top: 8px;
+  left: 9px;
+}
 body#search .gsc-search-button input {
   height: 26px;
+  position: relative;
+  top: 1px;
 }
 body,
 html {
