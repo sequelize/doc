@@ -150,6 +150,15 @@ block documentation
           li 
             code Model.destroy
 
+      p
+        | Since you are working with multiple models, the callbacks will not return DAO instances. BulkCreate will return an array of model instances/DAOs, they will however, unlike 
+        code create
+        | , not have the resulting values of autoIncrement attributes. 
+        code update 
+        | and 
+        code destroy
+        | will return the number of affected rows.
+
        p
         | First lets look at bulkCreate
       pre.dark-blue
@@ -176,7 +185,8 @@ block documentation
           |   Task.update(
           |     {status: 'inactive'} /* set attributes' value */, 
           |     {subject: 'programming'} /* where criteria */
-          |   ).success(function() {
+          |   ).success(function(affectedRows) {
+          |     // affectedRows will be 2
           |     Task.findAll().success(function(tasks) {
           |       console.log(tasks) // the 'programming' tasks will both have a status of 'inactive'
           |     })
@@ -195,7 +205,8 @@ block documentation
           |   Task.destroy(
           |     {subject: 'programming'} /* where criteria */,
           |     {truncate: true /* truncate the whole table, ignoring where criteria */} /* options */
-          |   ).success(function() {
+          |   ).success(function(affectedRows) {
+          |     // affectedRows will be 2
           |     Task.findAll().success(function(tasks) {
           |       console.log(tasks) // no programming, just reading :(
           |     })
