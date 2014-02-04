@@ -54,8 +54,9 @@ block documentation
           |   // - postgres only, useful for heroku
           |   protocol: null,
           | &nbsp;
-          |   // disable logging; default: console.log
-          |   logging: false,
+          |   // logging function; first parameter is string that will be logged
+          |   // default: false
+          |   logging: console.log,
           | &nbsp;
           |   // max concurrent database requests; default: 50
           |   maxConcurrentQueries: 100,
