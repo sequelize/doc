@@ -131,6 +131,10 @@ body#search .jumbotron i.fa.fa-search {
 body#search .gsc-selected-option {
   font-size: 9px;
 }
+body#search .gscb_a {
+  position: relative;
+  top: 3px;
+}
 body#search .gsc-search-button {
   position: relative;
 }
