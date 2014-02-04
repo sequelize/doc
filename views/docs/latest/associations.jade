@@ -217,17 +217,17 @@ block documentation
           | })
           | &nbsp;
           | // remove 'em all
-          | projects.setTasks([]).success(function(associatedTasks) {
+          | project.setTasks([]).success(function(associatedTasks) {
           |   // you will get an empty array
           | })
           | &nbsp;
           | // or remove 'em more directly
-          | projects.removeTask(task1).success(function() {
+          | project.removeTask(task1).success(function() {
           |   // it's gone
           | })
           | &nbsp;
           | // and add 'em again
-          | projects.addTask(task1).success(function() {
+          | project.addTask(task1).success(function() {
           |   // it's back again
           | })
 
