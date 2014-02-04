@@ -15,6 +15,9 @@ block documentation
         | and
         code updatedAt
         | to it&period; So you will be able to know when the database entry went into the db and when it was updated the last time&period;
+        | If you do not want timestamps on your models, only want some timestamps, or you are working with an existing database where the columns are named something else, jump straight onto 
+        a(href='#configuration', rel='nofollow') configuration 
+        | to see how to do that.
       pre.dark-blue
         code.javascript
           | var Project = sequelize.define('Project', {
@@ -462,7 +465,7 @@ block documentation
           | &nbsp;
           |   // don't delete database entries but set the newly added attribute deletedAt
           |   // to the current date (when deletion was done). paranoid will only work if
-          |   // timestamps are not disabled
+          |   // timestamps are enabled
           |   paranoid: true,
           | &nbsp;
           |   // don't use camelcase for automatically added attributes but underscore style
@@ -476,6 +479,24 @@ block documentation
           | &nbsp;
           |   // define the table's name
           |   tableName: 'my_very_custom_table_name'
+          | })
+
+      p If you want sequelize to handle timestamps, but only want some of them, or want your timestamps to be called something else, you can override each column individually:
+      pre.dark-blue
+        code.javascript
+          | var Foo = sequelize.define('Foo',  { /* bla */ }, {
+          |   // don't forget to enable timestamps!
+          |   timestamps: true,
+          | &nbsp;
+          |   // I don't want createdAt
+          |   createdAt: false,
+          | &nbsp;
+          |   // I want updatedAt to actually be called updateTimestamp
+          |   updatedAt: 'updateTimestamp'
+          | &nbsp;
+          |   // And deletedAt to be called destroyTime (remember to enable paranoid for this to work)
+          |   deletedAt: 'destroyTime',
+          |   paranoid: true
           | })
 
       p
