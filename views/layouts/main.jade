@@ -76,7 +76,20 @@ html
     script(src="/javascripts/highlight.pack.js")
     script(type="text/javascript").
       $(function() {
-        $('pre code:not(.skip)').each(function(i, e) {hljs.highlightBlock(e)});
+        $('pre code:not(.skip)').each(function(i, e) {
+          var $code  = $(e)
+            //- , lineId = "block-" + i + "-"
+
+          hljs.highlightBlock(e)
+
+
+          $code.html(
+            $code.html().split("\n").reduce(function(lines, line, lineNumber) {
+              var href = "block-" + i + "-line-" + lineNumber + ""
+              return lines + "<a href='#" + href + "' class='code-anchor' id='" + href + "'>" + line + "</a>\n"
+            }, "")
+          )
+        })
       })
 
     block bottom

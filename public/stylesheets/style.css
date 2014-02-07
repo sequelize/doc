@@ -151,6 +151,18 @@ body#search .gsc-search-button input {
   position: relative;
   top: 1px;
 }
+.code-anchor {
+  display: inline-block;
+  text-decoration: none;
+  color: #f8f8f8;
+}
+.code-anchor:hover,
+.code-anchor:focus {
+  background: #14233d;
+  text-decoration: none;
+  outline: 0;
+  color: #f8f8f8;
+}
 body,
 html {
   height: 100%;

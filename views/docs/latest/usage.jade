@@ -334,22 +334,20 @@ block documentation
           |   console.log(projects)
           | })
 
-      p
-        strong One note&colon;&nbsp;
-        | If the attribute names of the table contain dots, the resulting objects
-        | will be nested:
+      p.
+        <strong>One note:</strong> If the attribute names of the table contain dots, the resulting objects will be nested:
       pre.dark-blue
-        code.javascript
-          | sequelize.query('select 1 as `foo.bar.baz`').success(function(rows) {
-          |   console.log(JSON.stringify(rows))
-          | &nbsp;
-          |   /*
-          |     [{
-          |       "foo": {
-          |         "bar": {
-          |           "baz": 1
-          |         }
-          |       }
-          |     }]
-          |   */
-          | })
+        code.javascript.
+          sequelize.query('select 1 as `foo.bar.baz`').success(function(rows) {
+            console.log(JSON.stringify(rows))
+
+            /*
+              [{
+                "foo": {
+                  "bar": {
+                    "baz": 1
+                  }
+                }
+              }]
+            */
+          })
