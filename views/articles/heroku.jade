@@ -254,6 +254,28 @@ block documentation
           |   })
           | }
 
+      h3#migrations Running Migrations
+
+      p
+        | To run migrations on Heroku you must have the following
+        | entry in your config/config.json file:
+
+      pre.dark-blue
+        code.javascript
+          | "production": {
+          |   "use_env_variable": "DATABASE_URL"
+          | }
+
+      p
+        | Which also means you must make sure your Heroku environment has
+        | <a href="https://devcenter.heroku.com/articles/heroku-postgresql#establish-primary-db">a promoted database.</a>
+        | Then from the command line run
+
+      pre.dark-blue
+        code.bash
+          | heroku run bash
+          | sequelize -m
+
       h3#tldr tl;dr
 
       p
