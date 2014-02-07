@@ -3,6 +3,7 @@ var request      = require('request')
   , cheerio      = require('cheerio')
   , rawChangelog = null
   , changelog    = null
+  , _            = require('lodash')
 
 exports.index = function(req, res) {
   getSections(function(sections) {
@@ -15,6 +16,7 @@ exports.show = function(req, res) {
     res.render('changelog/show', {
       sections:      sections,
       permalink:     req.param('version'),
+      version:       prettifyVersion(req.param('version')),
       activeNavItem: 'changelog',
       sidebarTitle:  'Changelog',
       title:         'Changelog',
@@ -36,7 +38,7 @@ var getSections = function(callback) {
       sections.push({
         permalink:   version,
         url:         '/changelog/' + version,
-        title:       'v' + version.match(/v?(\d+)-(\d+)-(\d+)/).slice(1).join('.'),
+        title:       prettifyVersion(version),
         subSections: Object.keys(changelog[version]).map(function(item) {
           return {
             anchor: item,
@@ -92,4 +94,11 @@ var splitChangelogIntoVersions = function(content) {
   })
 
   return result
+}
+
+var prettifyVersion = function(s) {
+  return 'v' + [
+    s.match(/v?(\d+)-(\d+)-(\d+)/).slice(1).join('.'),
+    (s.replace(/(v?\d+-\d+-\d+-?)/, '').match(/([^-]+)/) || [])[0]
+  ].join(" ").trim()
 }
