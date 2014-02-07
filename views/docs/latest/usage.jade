@@ -336,7 +336,8 @@ block documentation
 
       p
         strong One note&colon;&nbsp;
-        | If the attribute names of the table contain dots&comma; the resulting objects will get a nesting&colon;
+        | If the attribute names of the table contain dots, the resulting objects
+        | will be nested:
       pre.dark-blue
         code.javascript
           | sequelize.query('select 1 as `foo.bar.baz`').success(function(rows) {
