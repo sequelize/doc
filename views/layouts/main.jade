@@ -90,6 +90,28 @@ html
             }, "")
           )
         })
+
+
+        var scrollToAnchor = function(anchor) {
+          var $element = $('[name="' + anchor + '"],[id="' + anchor + '"]')
+          $('html, body').animate({ scrollTop: $element.offset().top - 150 }, 'slow')
+        }
+
+        var match = document.location.href.match(/#(.+)$/)
+
+        if (match) {
+          setTimeout(function() { scrollToAnchor(match[1]) }, 200)
+        }
+
+        $('.code-anchor').click(function(e) {
+          var anchor = $(e.currentTarget).attr('id')
+
+          if (history.pushState) {
+            history.pushState(null, null, '#' + anchor);
+            e.preventDefault()
+            scrollToAnchor($(e.currentTarget).attr('id'))
+          }
+        })
       })
 
     block bottom
