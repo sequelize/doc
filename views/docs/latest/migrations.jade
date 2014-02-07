@@ -285,3 +285,27 @@ block documentation
           | migration.removeIndex('Person', ['firstname', 'lastname'])
 
 
+      h3#programmatic-use Programmatic use
+      p
+        | If you need to interact with the migrator within your code,
+        | you can easily achieve that via <code>sequelize.getMigrator</code>.
+        | You can specify the path to your migrations as well as a pattern
+        | which represents the files that contain the migrations.
+      pre.dark-blue
+        code.javascript
+          | var migrator = sequelize.getMigrator({
+          |   path:        process.cwd() + '/database/migrations',
+          |   filesFilter: /\.coffee$/
+          | })
+      p
+        | Once you have a migrator object, you can run its migration
+        | with <code>migrator.migrate</code>. By default, this will
+        | execute all the up methods within your pending migrations.
+        | If you want to rollback a migration, just call it like this:
+      pre.dark-blue
+        code.javascript
+          | migrator
+          |   .migrate({ method: 'down' })
+          |   .success(function() {
+          |     // The migrations have been executed!
+          |   })
