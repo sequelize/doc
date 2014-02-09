@@ -22,6 +22,7 @@ exports.index = function(req, res) {
       permalink:   sectionName,
       title:       sectionName.charAt(0).toUpperCase() + sectionName.slice(1),
       subSections: SidebarHelper.readSubSections(path + '/' + sectionName),
+      showSubSections: true
     }
 
     section.url = "/docs/" + req.param('version') + "/" + section.permalink
@@ -37,7 +38,8 @@ exports.index = function(req, res) {
     permalink:     req.param('section'),
     sections:      sections,
     activeNavItem: 'docs',
-    sidebarTitle:  'Documentation'
+    sidebarTitle:  'Documentation',
+    bodyId:        'documentation'
   })
 }
 
