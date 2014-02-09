@@ -230,7 +230,7 @@ body .navigation > ul {
   margin: 0;
 }
 body .navigation > ul:first-of-type {
-  margin-top: 92px;
+  margin-top: 30px;
 }
 body .navigation > ul > li {
   list-style-type: none;

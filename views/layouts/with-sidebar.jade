@@ -6,7 +6,6 @@ block content
       .col-sm-4.mid-blue.sidebar
         .headline-spacer
         section.navigation
-          h2= sidebarTitle
           ul
             each section in sections
               - isActiveSection = (section.permalink === permalink)
