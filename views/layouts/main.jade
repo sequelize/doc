@@ -91,6 +91,17 @@ html
           )
         })
 
+         $("code[class='javascript']").each(function(){
+            var $c = $(this);
+            var $a = $('<a/>').addClass('view-raw').text('raw');
+            $a.click(function(){
+              var popup = window.open('', "popup");
+              $(popup.document.body).append($('<pre/>').text($c.text()));
+            });
+
+            $a.insertBefore($c);
+         });
+
 
         var scrollToAnchor = function(anchor) {
           var $element = $('[name="' + anchor + '"],[id="' + anchor + '"]')
