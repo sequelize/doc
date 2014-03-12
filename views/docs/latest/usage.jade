@@ -178,32 +178,15 @@ block documentation
       p
         | With the release of Sequelize
         code v1&period;6&period;0
-        | &comma; the library got independent from specific dialects&period; That mean&comma; that you&apos;ll have to add the respective dialect library yourself&period; Another option is the use of the sequelize packages that ship the dialect libraries as well&period;
+        | &comma; the library got independent from specific dialects&period; This means&comma; that you&apos;ll have to add the respective connector library to your project yourself. Version 1.7.0 stable has been released in bundles with the connector libraries (sequelize-mysql, sequelize-postgres etc.) but these bundles are not maintained, and will not be released for 2.0.0 upwards.
+
       h4#dialects-mysql MySQL
       p
         | In order to get Sequelize working nicely together with MySQL&comma; you&apos;ll need to install
         code mysql&commat;~2&period;0&period;0-alpha7
-        | &period; Once that&apos;s done you can use it like this&colon;
+        | or higher&period; Once that&apos;s done you can use it like this&colon;
       pre.dark-blue
         code.javascript
-          | var sequelize = new Sequelize('database', 'username', 'password', {
-          |   // mysql is the default dialect, but you know...
-          |   // for demo purporses we are defining it nevertheless :)
-          |   // so: we want mysql!
-          |   dialect: 'mysql'
-          | })
-
-      p
-        | Also possible is the use of
-        code sequelize-mysql
-        | &period; Just install it via
-        code npm install sequelize-mysql
-        | and use it like this&colon;
-      pre.dark-blue
-        code.javascript
-          | var Sequelize = require('sequelize-mysql').sequelize
-          | var mysql     = require('sequelize-mysql').mysql
-          | &nbsp;
           | var sequelize = new Sequelize('database', 'username', 'password', {
           |   // mysql is the default dialect, but you know...
           |   // for demo purporses we are defining it nevertheless :)
@@ -218,7 +201,7 @@ block documentation
 
       h4#dialects-mariadb MariaDB
       p
-        | For MariaDB compatibility you have to install the package <code>mariasql</code>.
+        | For MariaDB compatibility you have to install the package <code>mariasql@0.1.20</code>, or higher.
         | The configuration needs to look like this:
       pre.dark-blue
         code.javascript
@@ -242,20 +225,6 @@ block documentation
           |   storage: 'path/to/database.sqlite'
           | })
 
-      p
-        | If you want to use the bundled version&comma; run
-        code npm install sequelize-sqlite
-        | and use the following code&colon;
-      pre.dark-blue
-        code.javascript
-          | var Sequelize = require('sequelize-sqlite').sequelize
-          | var sqlite    = require('sequelize-sqlite').sqlite
-          | &nbsp;
-          |  var sequelize = new Sequelize('database', 'username', 'password', {
-          |   dialect: 'sqlite',
-          |   storage: 'path/to/database.sqlite'
-          | })
-
       h4#dialects-postgresql PostgreSQL
       p
         | The library for PostgreSQL is
@@ -265,19 +234,6 @@ block documentation
         code.javascript
           | var sequelize = new Sequelize('database', 'username', 'password', {
           |   // gimme postgres, please!
-          |   dialect: 'postgres'
-          | })
-
-      p
-        | In order to use the bundled version&comma; use this
-        code npm install sequelize-postgres
-        | and require the lib this way&colon;
-      pre.dark-blue
-        code.javascript
-          | var Sequelize = require('sequelize-postgres').sequelize
-          | var postgres  = require('sequelize-postgres').postgres
-          | &nbsp;
-          |  var sequelize = new Sequelize('database', 'username', 'password', {
           |   dialect: 'postgres'
           | })
 
