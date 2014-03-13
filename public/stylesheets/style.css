@@ -212,6 +212,11 @@ body pre code {
   font-family: 'Ubuntu Mono', Consolas, 'Liberation Mono', Courier, monospace;
   font-size: 18px;
 }
+body pre .view-raw {
+  float: right;
+  padding-right: 10px;
+  cursor: pointer;
+}
 body section .jumbotron {
   background: transparent;
 }
