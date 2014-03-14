@@ -3,7 +3,7 @@ extends main
 block content
   .container-liquid
     .row.documentation
-      .col-sm-4.mid-blue.sidebar
+      .col-sm-2.mid-blue.sidebar
         .headline-spacer
         section.navigation
           ul
@@ -18,7 +18,7 @@ block content
                       li
                         a(href=url)= item.text
         .clearfix
-      .col-sm-8.beige.content
+      .col-sm-9.col-sm-offset-1.beige.content
         block documentation
 
 block bottom

@@ -258,15 +258,15 @@ body .navigation > ul > li ul li {
   list-style-type: none;
   font-size: 16px;
   line-height: 40px;
-  width: 200px;
+  width: 250px;
 }
 body .sidebar {
-  padding: 0 30px 30px 30px;
+  padding: 0 0px 30px 27px;
 }
 @media (min-width: 768px) {
   body .sidebar section,
   body .navbar .navbar-left section {
-    float: right;
+    display: inline-block;
   }
 }
 body .content {
@@ -274,9 +274,10 @@ body .content {
 }
 body .content section {
   max-width: 900px;
+  min-height: 2800px;
 }
 body .content h2 {
-  padding-top: 60px;
+  padding-top: 90px;
 }
 body .content h3 {
   padding-top: 90px;
