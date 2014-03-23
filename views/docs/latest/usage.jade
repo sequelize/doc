@@ -16,18 +16,18 @@ block documentation
       p
         | This will save the passed database credentials and provide all further methods&period; Furthermore you can specify a non-default host&sol;port&colon;
       pre.dark-blue
-        code.javascript
-          | var sequelize = new Sequelize('database', 'username', 'password', {
-          |   host: "my.server.tld",
-          |   port: 12345
-          | })
+        code.javascript.
+          var sequelize = new Sequelize('database', 'username', 'password', {
+            host: "my.server.tld",
+            port: 12345
+          })
 
       p If you just don&apos;t have a password&colon;
       pre.dark-blue
-        code.javascript
-          | var sequelize = new Sequelize('database', 'username')
-          | // or
-          | var sequelize = new Sequelize('database', 'username', null)
+        code.javascript.
+          var sequelize = new Sequelize('database', 'username')
+          // or
+          var sequelize = new Sequelize('database', 'username', null)
 
       p You can also use a connection string&colon;
       pre.dark-blue
