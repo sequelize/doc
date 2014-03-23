@@ -1,9 +1,11 @@
 $(function() {
   $('pre code:not(.skip)').each(function(i, e) {
     var $code     = $(e)
-      , codeLines = $code.html().split("\n")
 
     hljs.highlightBlock(e)
+
+    var codeLines = $code.html().split("\n")
+
 
     $code.html(
       codeLines.reduce(function(lines, line, lineNumber) {
