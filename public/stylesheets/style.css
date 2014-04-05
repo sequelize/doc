@@ -203,7 +203,7 @@ body .dark-blue h2.centered:not(:first-of-type) {
 }
 body pre {
   border: 0;
-  line-height: 26px;
+  line-height: 20px;
   padding: 0;
 }
 body pre code {
