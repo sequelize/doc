@@ -15,45 +15,64 @@ block documentation
       p
         | In order to run migrations&comma; sequelize comes with a handy binary file which can setup your project and run migrations&period; The following snippet shows the possible things&colon;
       pre.dark-blue
-        code.javascript
-          | sequelize -h
-          | sequelize --help
-          | --> prints the help
-          | &nbsp;
-          | sequelize -V
-          | sequelize --version
-          | --> prints the version
-          | &nbsp;
-          | sequelize -i
-          | sequelize --init
-          | --> creates a migration folder
-          | --> creates a config folder
-          | --> saves a config.json inside the config folder
-          | &nbsp;
-          | sequelize -i -f
-          | sequelize --init --force
-          | --> forced creation of migration and config folder
-          | --> existing data will be deleted first
-          | &nbsp;
-          | sequelize -m
-          | sequelize --migrate
-          | --> needs a valid config.json
-          | --> runs pending migrations
-          | --> saves successfully executed migrations inside the database
-          | &nbsp;
-          | sequelize -m -u
-          | sequelize --migrate --undo
-          | --> needs a valid config.json
-          | --> reverts the last successfull migration
-          | --> when there were multiple executed migrations, all of them are reverted
-          | &nbsp;
-          | sequelize -c [migration-name]
-          | sequelize --create-migration [migration-name]
-          | --> creates the migrations folder
-          | --> creates a file with current timestamp + migration-name
-          | --> migration-name has the default 'unnamed-migration'
+        code.bash.
+          sequelize -h
+          sequelize --help
+          # prints the help
 
+          sequelize -V
+          sequelize --version
+          # prints the version
 
+          sequelize -i
+          sequelize --init
+          # creates a migration folder
+          # creates a config folder
+          # saves a config.json inside the config folder
+
+          sequelize -e [environment]
+          sequelize --env [environment]
+          # Use the passed environment. Default: development
+
+          sequelize -i -f
+          sequelize --init --force
+          # forced creation of migration and config folder
+          # existing data will be deleted first
+
+          sequelize -m
+          sequelize --migrate
+          # needs a valid config.json
+          # runs pending migrations
+          # saves successfully executed migrations inside the database
+
+          sequelize -m -u
+          sequelize --migrate --undo
+          # needs a valid config.json
+          # reverts the last successfull migration
+          # when there were multiple executed migrations, all of them are reverted
+
+          sequelize -c [migration-name]
+          sequelize --create-migration [migration-name]
+          # creates the migrations folder
+          # creates a file with current timestamp + migration-name
+          # migration-name has the default 'unnamed-migration'
+
+          sequelize -p [path]
+          sequelize --migration-path [path]
+          # Defines the path to the migration directory.
+
+          sequelize -o [path]
+          sequelize --options-path [path]
+          # Defines the path to the options file.
+          # The options file (.js or .json) needs to return an object.
+          # Keys / values references cli options
+          # e.g.: { migrationPath: 'db/migrations' }
+
+          sequelize --config [path]
+          # Defines the path to the configuration file.
+
+          sequelize --coffee
+          # Enables coffeescript support.
 
       h3#skeleton Skeleton
       p
