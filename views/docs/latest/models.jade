@@ -1135,6 +1135,31 @@ block documentation
           |   */
           | })
 
+      h3#ordered-eager-loading Ordering Eager Loaded Associations
+      p
+        | In the case of a one-to-many relationship.
+      pre.dark-blue
+        code.javascript
+          | Company.findAll({ include: [ Division ], order: [ [ Division, 'name' ] ] });
+          | Company.findAll({ include: [ Division ], order: [ [ Division, 'name', 'DESC' ] ] });
+          | Company.findAll({
+          |   include: [ { model: Division, as: 'Div' } ],
+          |   order: [ [ { model: Division, as: 'Div' }, 'name' ] ]
+          | });
+          | Company.findAll({
+          |   include: [ { model: Division, include: [ Department ] } ],
+          |   order: [ [ Division, Department, 'name' ] ]
+          | });
+      p
+        | In the case of many-to-many joins, you are also able to sort by attributes in the through table.
+      pre.dark-blue
+        code.javascript
+          | Company.findAll({
+          |   include: [ { model: Division, include: [ Department ] } ],
+          |   order: [ [ Division, DepartmentDivision, 'name' ] ]
+          | });
+
+
       h3#nested-eager-loading Nested eager loading
         pre.dark-blue
           code.javascript
