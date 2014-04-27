@@ -97,8 +97,12 @@ var splitChangelogIntoVersions = function(content) {
 }
 
 var prettifyVersion = function(s) {
-  return 'v' + [
-    s.match(/v?(\d+)-(\d+)-(\d+)/).slice(1).join('.'),
-    (s.replace(/(v?\d+-\d+-\d+-?)/, '').match(/([^-]+)/) || [])[0]
-  ].join(" ").trim()
+  try {
+    return 'v' + [
+      s.match(/v?(\d+)-(\d+)-(\d+)/).slice(1).join('.'),
+      (s.replace(/(v?\d+-\d+-\d+-?)/, '').match(/([^-]+)/) || [])[0]
+    ].join(" ").trim()
+  } catch(e) {
+    return 'next'
+  }
 }
