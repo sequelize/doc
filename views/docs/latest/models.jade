@@ -46,11 +46,14 @@ block documentation
           |   // is not null before querying the DB, look at the validations section below.
           |   title: { type: Sequelize.STRING, allowNull: false},
           | &nbsp;
-          |   // Creating two objects with the same value will throw an error. Currently composite unique
-          |   // keys can only be created 'addIndex' from the migration-section below
+          |   // Creating two objects with the same value will throw an error. The unique property can be either a 
+          |   // boolean, or a string. If you provide the same string for multiple columns, they will form a 
+          |   // composite unique key.
           |   someUnique: {type: Sequelize.STRING, unique: true},
-          |   // Go on reading for further information about primary keys
+          |   uniqueOne: { type: Sequelize.STRING,  unique: 'compositeIndex'},
+          |   uniqueTwo: { type: Sequelize.INTEGER, unique: 'compositeIndex'}
           | &nbsp;
+          |   // Go on reading for further information about primary keys
           |   identifier: { type: Sequelize.STRING, primaryKey: true},
           | &nbsp;
           |   // autoIncrement can be used to create auto_incrementing integer columns
