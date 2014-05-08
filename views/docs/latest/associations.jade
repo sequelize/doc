@@ -327,102 +327,107 @@ block documentation
 
 
       h3#foreign-keys Foreign Keys
-      h4#foreign-keys-constraints Foreign key constraints
+      p
+        | When you create associations between your models in sequelize, foreign key references with constraints will automatically be created. The setup below:
       pre.dark-blue
         code.javascript
-          | // First setup our models
           | var Task = this.sequelize.define('Task', { title: Sequelize.STRING })
           |   , User = this.sequelize.define('User', { username: Sequelize.STRING })
           | &nbsp;
-          | // Then our associations with a constraint
-          | User.hasMany(Task, {onDelete: 'restrict'})
+          | User.hasMany(Task)
+          | Task.belongsTo(User)
 
       p
-        | The same works for
-        code hasOne&lpar;&rpar;
+        | Will generate the following SQL:
+      pre.dark-blue
+        code.sql
+          | CREATE TABLE IF NOT EXISTS `User` (
+          |   `id` INTEGER PRIMARY KEY, 
+          |   `username` VARCHAR(255)
+          | );
+          | 
+          | CREATE TABLE IF NOT EXISTS `Task` (
+          |   `id` INTEGER PRIMARY KEY, 
+          |   `title` VARCHAR(255), 
+          |   `user_id` INTEGER REFERENCES `User` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+          | );
+
+      p 
+        | The relation between task and user injects the
+        code user_id
+        |foreign key on tasks, and marks it as a reference to the
+        code User
+        |table. By default
+        code user_id
+        | will be set to
+        code NULL
+        |if the referenced user is deleted, and updated if the id of the user id updated. These options can be overriden by passing 
+        code onUpdate 
         | and
-        code belongsTo&lpar;&rpar;
-        | &period; Valid options are&colon;
-      ul
-        li
-          code &lcub;onDelete&colon; &apos;restrict&VerticalLine;cascade&apos;&rcub;
-        li
-          code &lcub;onUpdate&colon; &apos;restrict&VerticalLine;cascade&apos;&rcub;
-        li
-          code &lcub;foreignKeyConstraint&colon; true&rcub;
-          | - Set to true to gain a
-          code REFERENCES
-          | declaration without either
-          code onDelete
-          | or
-          code onUpdate
-          | &lpar;that is&comma;
-          code foreignKeyConstraint
-          | is implied if
-          code onDelete
-          | or
-          code onUpdate
-          | are set&rpar;&period; This may be a helpful performance optimization in some cases&period;
+        code onDelete
+        | options to the association calls. The validation options are
+        code RESTRICT, CASCADE, NO ACTION, SET DEFAULT, SET NULL
+        |. 
+
       p
-        strong Implementation notes&colon;
-      ul
-        li
-          | Enabling constraints is opt-in&colon; they are only created if one or more of the options above are used when defining an association&period;
-        li
-          | MySQL &lpar;with InnoDB tables&rpar; and Postgres support foreign key references by default&period; SQLite does not unless
-          code PRAGMA FOREIGN&UnderBar;KEYS&equals;ON
-          | is issued&period; We do so when opening the database connection&comma; unless explicitly disabled with a global option&comma; to get parity across implementations&period;
-          strong Note&colon;
-          | enabling this doesn&apos;t make any difference unless there are actual constraints in place&period;
-        li
-          | Only simple foreign keys are supported &lpar;because associations only support simple keys&rpar;&period; This is the &quot;80&percnt;&quot; use case of course&period; Setting one of foreign key options in a situation where there is more than one primary key defined will cause the option to be ignored&period;
-        li
-          | SQL allows two ways to define foreign keys&colon; &quot;inline&quot; &lpar;
-          code someId INTEGER REFERENCES someTable&lpar;id&rpar; ON DELETE CASCADE
-          | &rpar; or &quot;standalone&quot; &lpar;
-          code FOREIGN KEY&lpar;someId&rpar; REFERENCES someTable&lpar;id&rpar; ON DELETE CASCADE
-          | placed as a separate clause inside a
-          code CREATE TABLE
-          | statement&rpar;&period; Since associations in sequelize create foreign key attributes the &quot;inline&quot; syntax is used&comma; and
-          code attributesToSQL
-          | is taught how to add the relevant suffix to any &quot;raw&quot; attribute with the relevant meta-data attached&period; This works for Postgres and SQLite &lpar;MySQL ignores this syntax&rpar; requiring the &quot;standalone&quot; approach&period; For MySQL&comma; we move the declaration to the end with a bit of string manipulation&period; This is analogous to how
-          code PRIMARY KEY
-          | is handled and allows this to be done without major refactoring&period;
-        li
-          | If we have foreign key constraints&comma; the order in which tables are created matters&colon; if
-          code foo
-          | has a foreign key to
-          code bar
-          | with a constraint&comma; then
-          code bar
-          | has to exist before
-          code foo
-          | can be created&period; To make sure this happens&comma; we use a topological sort of relationships &lpar;via the
-          code Toposort-class
-          | module&rpar; to sequence calls to
-          code CREATE TABLE
-          | in
-          code sync&lpar;&rpar;
-          | &period; This also necessitates
-          code sync&lpar;&rpar;
-          | being serialized&comma; but given it&apos;s an &quot;on startup&quot; operation that shouldn&apos;t be too much of an issue&period;
-        li
-          | A similar concern happens with
-          code dropAllTables&lpar;&rpar;
-          | &comma; but here we don&apos;t have enough information to sort the list&period; Instead&comma; we do one of two things&colon; for SQLite and MySQL&comma; we temporarily disable constraint checking&period; For Postgres&comma; we use
-          code DROP TABLE &period;&period;&period; CASCADE
-          | to drop relevant constraints when required&period; &lpar;MySQL and SQLite only support the former and Postgres only supports the latter&rpar;&period; This is blunt&comma; but OK given that the function is attempting to drop
-          em all
-          | the tables&period;
-        li
-          | For other calls to
-          code dropTable&lpar;&rpar;
-          | the caller is expected to sequence calls appropriately&comma; or wrap the call in
-          code disableForeignKeyConstraints&lpar;&rpar;
-          | and
-          code enableForeignKeyConstraints&lpar;&rpar;
-          | &lpar;MySQL and SQLite&semi; no-ops in Postgres&rpar; and&sol;or pass &lcub;cascade&colon; true&rcub; in options &lpar;Postgres&semi; no-op in MySQL and SQLite&rpar;&period;
-      h4 Enforcing a foreign key reference
+        |For 1:1 and 1:m associations the default option is
+        code SET NULL
+        | for deletion, and
+        code CASCADE
+        | for updates. For n:m, the default for both is
+        code CASCADE
+        |. This means, that if you delete or update a row from one side of an n:m association, all the rows in the join table refrencing that row will also be deleted or updated.
+
+      p 
+        | Adding constriants between tables means that tables must be created in the database in a certain order, when using
+        code sequelize.sync
+        |. If Task has a reference to User, the User table must be created before the Task table can be created. This can sometimes lead to circular references, where sequelize cannot find an order in which to sync.
+        | Imagine a scenario of documents and versions. A document can have multiple versions, and for convenience, a document has an reference to it's current version.
+
+      pre.dark-blue
+        code.javascript
+          | var Document = this.sequelize.define('Document', {
+          |       author: Sequelize.STRING
+          |     })
+          |   , Version = this.sequelize.define('Version', {
+          |       timestamp: Sequelize.DATE
+          |     })
+          | 
+          | Document.hasMany(Version) // This adds document_id to version
+          | Document.belongsTo(Version, { as: 'Current', foreignKey: 'current_version_id'}) // This adds current_version_id to document
+
+      p
+        | However, the code above will result in the following error: 
+        code Cyclic dependency found. 'Document' is dependent of itself. Dependency Chain: Document -> Version => Document
+        | In order to alleviate that, we can pass 
+        code constraints: false
+        | to one of the associations:
+
+      pre.dark-blue
+        code.javascript
+          | Document.hasMany(Version)
+          | Document.belongsTo(Version, { as: 'Current', foreignKey: 'current_version_id', constraints: false})
+
+      p
+        | Which will allow us to sync the tables correctly:
+
+      pre.dark-blue
+        code.sql
+          | CREATE TABLE IF NOT EXISTS `Document` (
+          |   `id` INTEGER PRIMARY KEY, 
+          |   `author` VARCHAR(255), 
+          |   `current_version_id` INTEGER
+          | );
+          | CREATE TABLE IF NOT EXISTS `Version` (
+          |   `id` INTEGER PRIMARY KEY, 
+          |   `timestamp` DATETIME, 
+          |   `document_id` INTEGER REFERENCES `Document` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+          | );
+
+      h4 Enforcing a foreign key reference without constraints
+      p
+        | Some times you may want to reference another table, without adding any constraints, or associations. In that case you can manually add the reference attributes to your schema definition
+        |, and mark the relations between them.
 
       pre.dark-blue
         code.javascript
@@ -456,7 +461,7 @@ block documentation
           |   // set relationship (hasOne) with `Series`
           |   series_id: {
           |     type: DataTypes.INTEGER,
-          |     references: "Series",
+          |     references: Series, // Can be both a string representing the table name, or a reference to the model
           |     referencesKey: "id"
           |   }
           | });
