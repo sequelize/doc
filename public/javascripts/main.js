@@ -2,7 +2,7 @@ $(function() {
   $('pre code:not(.skip)').each(function(i, e) {
     var $code     = $(e)
 
-    hljs.highlightBlock(e)
+    
 
     var codeLines = $code.html().split("\n")
 
@@ -20,6 +20,9 @@ $(function() {
 
       }, "")
     )
+
+    hljs.configure({classPrefix: ''});
+    hljs.highlightBlock(e);
   })
 
    $("code[class='javascript']").each(function(){
