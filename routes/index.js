@@ -1,5 +1,5 @@
 exports.index = function(req, res) {
-  res.render('index', { title: 'Home', activeNavItem: 'home', bodyId: 'home' })
+  res.render('index', { title: 'Node.js ORM for Postgres, MySQL, SQLite', activeNavItem: 'home', bodyId: 'home' })
 }
 
 exports.imprint = function(req, res) {
