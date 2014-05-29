@@ -161,13 +161,13 @@ block documentation
 
       pre.dark-blue
         code.javascript
-          | Model.destroy({accessLevel: 0}, {hooks: true}) 
+          | Model.destroy({accessLevel: 0}, {individualHooks: true}) 
           | // Will select all records that are about to be deleted and emit before- + after- Destroy on each instance
           | 
-          | Model.update({username: 'Toni'}, {accessLevel: 0}, {hooks: true})
+          | Model.update({username: 'Toni'}, {accessLevel: 0}, {individualHooks: true})
           | // Will select all records that are about to be updated and emit before- + after- Update on each instance
           | 
-          | Model.bulkCreate({accessLevel: 0}, null, {hooks: true}) 
+          | Model.bulkCreate({accessLevel: 0}, null, {individualHooks: true}) 
           | // Will select all records that are about to be deleted and emit before- + after- Create on each instance
 
       p 
