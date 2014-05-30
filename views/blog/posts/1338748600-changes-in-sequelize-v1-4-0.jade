@@ -1,0 +1,88 @@
+extends ../../layouts/with-sidebar
+
+block documentation
+  section
+    div
+      h2 Changes in Sequelize v1.4.0
+
+      h3#introduction Introduction
+      p
+        | Sequelize v1.4.0 was released in April 2012. Besides some
+        | important bugfixes, the new version shipped also major improvements
+        | as support for PostgreSQL, compatibility to <code>JSON.stringify</code>,
+        | connection pooling for MySQL, the possibility to set a date’s default
+        | value to the current date, as well as the chance to customize the logging strategy.
+
+      h3#postgres PostgreSQL support
+      p
+        | Due to the great work of
+        | <a href="https://github.com/swoodtke" target="_blank" rel="nofollow">Shawn Woodtke</a>,
+        | Sequelize is from v1.4.0 on compatible to PostgreSQL. This means it can for example
+        | be used with Heroku! Massive win :) The documentation about that feature can be
+        | found <a href="/docs/latest/usage#dialects">here</a>.
+
+      p
+        | So, if you want to use PostgreSQL, you need to install the library <code>pg</code>.
+        | The best way to do it is either automagically via <code>npm install pg --save</code>
+        | or manually via adding <code>pg</code> to the <code>package.json</code> file:
+
+      pre.dark-blue
+        code.javascript
+          | {
+          |   "name": "my project",
+          |   // ...
+          |   "dependencies": {
+          |     // ...
+          |     "pg": "0.6.x",
+          |     "sequelize": "1.3.x",
+          |     // ...
+          |   }
+          |   // ...
+          | }
+
+      p Furthermore it is necessary to define the dialect when instantiating Sequelize:
+
+      pre.dark-blue
+        code.javascript
+          | var sequelize = new Sequelize('database', 'username', 'password', {
+          |   dialect: 'postgres'
+          | })
+
+      h3#json-stringify JSON.stringify
+      p
+        | One often reported issue was the incompatibility of objects to
+        | <code>JSON.stringify</code>. In the past you got an error saying
+        | something about circular references. Instead of that error, you
+        | will now get a map of all attributes and it’s values.
+
+      h3#pooling Connection pooling (MySQL)
+      p
+        | <a href="https://github.com/megshark" target="_blank" rel="nofollow">Meg Sharkey</a>
+        | added (again :D) support for connection pooling for MySQL. You can
+        | use pooling in order to reduce db connection overload and to increase
+        | speed of db queries. To activate it, you have to do this:
+
+      pre.dark-blue
+        code.javascript
+          | var sequelize = new Sequelize('database', 'username', 'password', {
+          |   pool: { maxConnections: 5, maxIdleTime: 30 }
+          | })
+
+      h3#default-values Default value for date attributes
+      p
+        | You can now define, that a date’s value should be the current
+        | time by default. This is how to do it:
+
+      pre.dark-blue
+        code.javascript
+          | var User = sequelize.define('users', {
+          |   myDate: { type: Sequelize.DATE, defaultValue: Sequelize.NOW }
+          | })
+
+      h3#bug-fixes Bug fixes
+
+      p <code>v1.4.0</code> fixed the following bugs:
+      ul
+        li Fixed booleans in sqlite (thanks to alexstrat)
+        li Fixed forced sync of many-to-many associations (thanks to SirUli)
+        li Fixed date handling in sqlite (thanks to iizukanao)

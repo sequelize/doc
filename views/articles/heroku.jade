@@ -1,0 +1,318 @@
+extends ../layouts/with-sidebar
+
+block documentation
+  section
+    div
+      h2 Usage on Heroku
+
+      h3#introduction Introduction
+      p This section covers the use of Sequelize on Heroku. It will explain how to get started with Heroku and what is necessary to setup a proper environment. We will use MySQL on the development machine and PostgreSQL on the remote servers.
+
+      h3#getting-started Getting started with Heroku
+      p Before we can roll out any software on the Heroku cluster, we need to sign up and have to connect our development environment. Here are the most basic steps:
+
+      ul
+        li
+          a(href="https://api.heroku.com/signup/devcenter", rel="nofollow", target="_blank")
+            | Sign up
+          | &nbsp;
+          | for a Heroku account.
+        li
+          a(href="https://toolbelt.heroku.com/", rel="nofollow", target="_blank") Install
+          | &nbsp;
+          | the Heroku Toolbelt. This tool will let you create applications and is a
+          | handy way to configure them on the command line.
+        li
+          | Use the new binary to login. Run the following command on command line:
+          code heroku login
+
+      p
+        | And that's it. You should now be able to do things like
+        code heroku apps
+        | . This should list all applications you've currently created on the
+        | Heroku cluster. If you've just created a new account, this should show
+        | you an empty list.&nbsp;
+
+        a(href="https://devcenter.heroku.com/articles/quickstart", rel="nofollow", target="_blank")
+          | You can get further information about the registration process here
+        | .
+
+      h3#minimal-app A minimal express application
+
+      p
+        | In order to create a minimal express application, we need to install express first.
+        | We can do this via the following commands:
+
+      pre.dark-blue
+        code.bash
+          | mkdir example-app
+          | cd example-app
+          | npm install express
+          | node_modules/.bin/express . -f
+          | npm install
+          | node app.js
+
+      p
+        | So now we have a default express application.
+        | If you point your browser to <code>http://localhost:8080</code>,
+        | you will see a tiny page welcoming you.
+
+      p Next step: Deploy the application to Heroku.
+
+      h3#deployment Deployment to Heroku
+      p
+        | First of all, we need to add the right version of Node.JS and NPM to
+        | the <code>package.json</code>. The file should look similiar to this:
+      pre.dark-blue
+        code.bash
+          | {
+          |   "name": "application-name",
+          |   "version": "0.0.1",
+          |   "private": true,
+          |   "scripts": {
+          |     "start": "node app.js"
+          |   },
+          |   "dependencies": {
+          |     "express": "3.1.1",
+          |     "jade": "*"
+          |   },
+          |   "engines": {
+          |     "node": "0.8.x",
+          |     "npm": "1.1.x"
+          |   }
+          | }
+
+      p Now we can create a Heroku application and deploy to it:
+
+      pre.dark-blue
+        code.bash
+          | echo "web: node app.js" > Procfile
+          | echo "node_modules" > .gitignore
+          | git init
+          | git add .
+          | git commit -m "initial commit"
+          | heroku create
+          | git push heroku master
+          | heroku ps:scale web=1
+          | heroku open
+
+      p You should now see a browser with the same application as on your local machine.
+
+      h3#spawning-a-database Spawning a database on Heroku
+
+      p
+        | In order to get a database on Heroku we can use their CLI.
+        | Just run the following command and take a closer look at it's output:
+
+      pre.dark-blue
+        code.bash
+          | heroku addons:add heroku-postgresql:dev
+
+      p This will result in something like this:
+
+      pre.dark-blue
+        code.bash
+          | Adding heroku-postgresql:dev on fast-dusk-7858... done, v5 (free)
+          | Attached as HEROKU_POSTGRESQL_BRONZE_URL
+          | Database has been created and is available
+          |  ! This database is empty. If upgrading, you can transfer
+          |  ! data from another database with pgbackups:restore.
+          | Use `heroku addons:docs heroku-postgresql:dev` to view documentation.
+
+      p
+        | What we will need is the color (sounds strange right?) of the database.
+        | In this case we just created a <code>bronze</code> one. That means,
+        | that we will have an environment variable <code>HEROKU_POSTGRESQL_BRONZE_URL</code>
+        | containing the URI of the database.
+
+      p If you are interested in the URI, you can just run this command:
+
+      pre.dark-blue
+        code.bash
+          | heroku config:get HEROKU_POSTGRESQL_BRONZE_URL
+          | # => postgres://pfforbjhkrletg:aic5oO6Cran1g3hk6mJa5QqNZB@ec2-23-21-91-97.compute-1.amazonaws.com:5432/dek11b2j1g3mfb
+
+      h3#adding-sequelize Adding Sequelize to the application
+
+      p
+        | The following commands will install <code>sequelize</code>, the needed
+        | PostgreSQL library as well as the MySQL bindings. Also we will create a
+        | folder <code>models</code>, that will contain the model definitions.
+
+      pre.dark-blue
+        code.bash
+          | npm install --save sequelize pg mysql
+          | mkdir models
+
+      h4#adding-sequelize-app-js app.js
+      p
+        | In order to create a maintainable application, we will put all the
+        | database logic into the <code>models</code> folder. The application's
+        | main file will then just sync the models with the database and run the
+        |  server. This way we don't clutter the application.
+
+      pre.dark-blue
+        code.javascript
+          | var express = require('express')
+          |   , routes  = require('./routes')
+          |   , user    = require('./routes/user')
+          |   , http    = require('http')
+          |   , path    = require('path')
+          |   , db      = require('./models')
+          | &nbsp;
+          | var app = express()
+          | &nbsp;
+          | // all environments
+          | app.set('port', process.env.PORT || 3000)
+          | app.set('views', __dirname + '/views')
+          | app.set('view engine', 'jade')
+          | app.use(express.favicon())
+          | app.use(express.logger('dev'))
+          | app.use(express.bodyParser())
+          | app.use(express.methodOverride())
+          | app.use(app.router)
+          | app.use(express.static(path.join(__dirname, 'public')))
+          | &nbsp;
+          | // development only
+          | if ('development' === app.get('env')) {
+          |   app.use(express.errorHandler())
+          | }
+          | &nbsp;
+          | app.get('/', routes.index)
+          | app.get('/users', user.list)
+          | &nbsp;
+          | db.sequelize.sync().complete(function(err) {
+          |   if (err) {
+          |     throw err[0]
+          |   } else {
+          |     http.createServer(app).listen(app.get('port'), function(){
+          |       console.log('Express server listening on port ' + app.get('port'))
+          |     })
+          |   }
+          | })
+
+      h4#adding-sequelize-models-index-js models/index.js
+      p
+        | The idea of this file is to configure a connection to the database and
+        | to collect all model definitions. Once everything is in place we will
+        | store the stuff in a singleton. This will make it possible to load the
+        | file whenever we need database access without running into issues with
+        | duplicated database access.
+
+      p This file will also differ between the local machine and the Heroku server.
+
+      pre.dark-blue
+        code.javascript
+          | if (!global.hasOwnProperty('db')) {
+          |   var Sequelize = require('sequelize')
+          |     , sequelize = null
+          | &nbsp;
+          |   if (process.env.HEROKU_POSTGRESQL_BRONZE_URL) {
+          |     // the application is executed on Heroku ... use the postgres database
+          |     var match = process.env.HEROKU_POSTGRESQL_BRONZE_URL.match(/postgres:\/\/([^:]+):([^@]+)@([^:]+):(\d+)\/(.+)/)
+          | &nbsp;
+          |     sequelize = new Sequelize(match[5], match[1], match[2], {
+          |       dialect:  'postgres',
+          |       protocol: 'postgres',
+          |       port:     match[4],
+          |       host:     match[3],
+          |       logging:  true //false
+          |     })
+          |   } else {
+          |     // the application is executed on the local machine ... use mysql
+          |     sequelize = new Sequelize('example-app-db', 'root', null)
+          |   }
+          | &nbsp;
+          |   global.db = {
+          |     Sequelize: Sequelize,
+          |     sequelize: sequelize,
+          |     User:      sequelize.import(__dirname + '/user')
+          | &nbsp;
+          |     // add your other models here
+          |   }
+          | &nbsp;
+          |   /*
+          |     Associations can be defined here. E.g. like this:
+          |     global.db.User.hasMany(global.db.SomethingElse)
+          |   */
+          | }
+          | &nbsp;
+          | module.exports = global.db
+
+      h4#adding-sequelize-models-user-js models/user.js
+      p
+        | All the other models of our application will be located
+        | as separate files in the <code>models</code> folder. We
+        | will use the <code>import</code>-method of Sequelize to
+        | load those files.
+
+      pre.dark-blue
+        code.javascript
+          | module.exports = function(sequelize, DataTypes) {
+          |   return sequelize.define("User", {
+          |     username: DataTypes.STRING
+          |   })
+          | }
+
+      h3#migrations Running Migrations
+
+      p
+        | To run migrations on Heroku you must have the following
+        | entry in your config/config.json file:
+
+      pre.dark-blue
+        code.javascript
+          | "production": {
+          |   "use_env_variable": "DATABASE_URL"
+          | }
+
+      p
+        | Which also means you must make sure your Heroku environment has
+        | <a href="https://devcenter.heroku.com/articles/heroku-postgresql#establish-primary-db">a promoted database.</a>
+        | Then from the command line run
+
+      pre.dark-blue
+        code.bash
+          | heroku run bash
+          | sequelize -m
+
+      h3#tldr tl;dr
+
+      p
+        | This article explains a straight-forward but maintainable approach
+        | for hosting an express application on Heroku. If you don't want to
+        | read all the stuff mentioned, just execute the following stuff and
+        | have fun.
+
+      pre.dark-blue
+        code.bash
+          | mkdir example-app
+          | cd example-app
+          | npm install express
+          | node_modules/.bin/express . -f
+          | npm install
+          | curl -s https://gist.github.com/sdepold/ced7d2a4a847f38901ef/raw/459c923dd0a14841c932bb95ff3be8a8170bd563/package.json > package.json
+          | echo "web: node app.js" > Procfile
+          | echo "node_modules" > .gitignore
+          | npm install --save sequelize pg mysql
+          | mkdir models
+          | git init
+          | git add .
+          | git commit -m "initial commit"
+          | heroku create
+          | git push heroku master
+          | heroku ps:scale web=1
+          | heroku addons:add heroku-postgresql:dev
+          | curl -s https://gist.github.com/sdepold/ced7d2a4a847f38901ef/raw/6db41e130a8b901cd0843bf52390b7cb11db5f15/app.js > app.js
+          | curl -s https://gist.github.com/sdepold/ced7d2a4a847f38901ef/raw/26c5a94d74db4a242464b02aa8e0ae4b3bac6880/models-index.js > models/index.js
+          | curl -s https://gist.github.com/sdepold/ced7d2a4a847f38901ef/raw/3b37b0e5d459b2e4b3833a63a018b600a1001795/models-user.js > models/user.js
+          | clear
+          | &nbsp;
+          | # Now run the following command and change HEROKU_POSTGRESQL_BRONZE_URL in
+          | # the file "models/index.js" to its result:
+          | heroku config|grep HEROKU_POSTGRESQL|cut -d : -f 1
+          | &nbsp;
+          | git add .
+          | git commit -m "sequelize application"
+          | git push heroku master
+          | heroku open
