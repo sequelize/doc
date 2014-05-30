@@ -1,0 +1,36 @@
+extends layout
+
+block head
+  script.
+    (function() {
+      var cx = '016780262123472569217:o01wwrtjffs';
+      var gcse = document.createElement('script');
+      gcse.type = 'text/javascript';
+      gcse.async = true;
+      gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+          '//www.google.com/cse/cse.js?cx=' + cx;
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(gcse, s);
+    })();
+
+block content
+  section.beige.small-full-height(style="padding-top: 80px;")
+    .container.small-full-height
+      .jumbotron.small-full-height
+        .row.small-full-height
+          table.small-full-height
+            td.col-md-4.small-full-height(align="center")
+              i.fa.fa-search
+            td.col-md-8.small-full-height
+              h1 Search
+
+              p(style="margin: 1em 0")
+                | Interested in specific topics? Use our search!
+
+
+
+
+
+  section.light-blue
+    .container(style="padding: 40px")
+      != "<gcse:search></gcse:search>"

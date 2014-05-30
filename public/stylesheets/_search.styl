@@ -1,0 +1,46 @@
+body#search {
+  .jumbotron {
+    i.fa.fa-search { font-size: 160px }
+
+    @media (max-width: 992px) and (min-width: 768px) {
+      i.fa.fa-search { font-size: 120px }
+    }
+
+    @media (max-width: 768px) {
+      i.fa.fa-search { font-size: 80px }
+    }
+
+    @media (max-width: 500px) {
+      i.fa.fa-search { font-size: 50px }
+    }
+  }
+
+  .gsc-selected-option {
+    font-size: 9px
+  }
+
+  .gscb_a {
+    position: relative;
+    top: 3px;
+  }
+
+  .gsc-search-button {
+    position: relative;
+
+    &:after {
+      content: "Search";
+      display: block;
+      color: black;
+      position: absolute;
+      top: 8px;
+      left: 9px;
+    }
+
+    input {
+      height: 26px;
+      position: relative;
+      top: 1px;
+
+    }
+  }
+}
