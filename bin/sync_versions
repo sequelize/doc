@@ -16,6 +16,6 @@ tags.forEach(function(tag) {
 
   sh.run([
     "cd " + __dirname + "/../",
-    "git subtree add --prefix views/docs/" + tagFolder + " git@github.com:sequelize/doc.git:views/docs/latest/ " + tag + " --squash",
+    "git subtree add --prefix views/docs/" + tagFolder + " git@github.com:sequelize/doc.git " + tag + " --squash",
   ].join(";"))
 })
