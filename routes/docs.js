@@ -10,7 +10,7 @@ exports.index = function(req, res) {
     , sections = []
 
   if (!req.param('version')) {
-    return res.redirect("/docs/latest", 301)
+    return res.redirect("/docs/" + getLatestStableVersion(), 301)
   } else if (!req.param('section')) {
     return res.redirect("/docs/" + req.param('version') + "/" + sectionNames[0], 301)
   } else if (req.param('version') !== 'latest') {
@@ -46,7 +46,7 @@ exports.index = function(req, res) {
 // helpers
 
 
-var getVersions = function(sections) {
+var getVersions = function() {
   var dirs = fs.readdirSync(path.join(__dirname, '..', 'views', 'docs'))
     , subs = []
 
@@ -76,4 +76,14 @@ var getVersions = function(sections) {
     title:           'Versions',
     subSections:     subs
   }
+}
+
+var getLatestStableVersion = function() {
+  var versions = getVersions().subSections.map(function(section) {
+    return section.text
+  }).filter(function(version) {
+    return version !== 'Latest'
+  })
+
+  return semver.maxSatisfying(versions, "1.x")
 }
