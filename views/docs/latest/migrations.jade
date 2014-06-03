@@ -3,76 +3,69 @@ extends ../../layouts/with-sidebar
 block documentation
   section
     div
-      h2 Migrations
+      h2 CLI / Migrations
 
-      p
-        | Sequelize
-        code v1&period;3&period;0
-        | introduced migrations&period; With those mechanism you can transform your existing database into another state and vice versa&period; Those state transitions are saved in migration files&comma; which describe the way how to get to the new state and how to revert the changes in order to get back to the old state&period;
+      p.
+        Sequelize <code>2.0.0</code> introduces a new CLI which is based on
+        <a href="http://gulpjs.com/" target="_blank" rel="nofollow">gulp</a>
+        and combines
+        <a href="https://github.com/sequelize/cli" target="_blank" rel="nofollow">sequelize-cli</a>
+        and <a href="https://github.com/sequelize/gulp-sequelize" target="_blank" rel="nofollow">gulp-sequelize</a>.
+        The CLI ships support for migrations and project bootstrapping. With migrations
+        you can transfer your existing database into another state and vice versa:
+        Those state transitions are saved in migration files, which describe the
+        way how to get to the new state and how to revert the changes in order
+        to get back to the old state.
 
 
-      h3#the-binary The binary
-      p
-        | In order to run migrations&comma; sequelize comes with a handy binary file which can setup your project and run migrations&period; The following snippet shows the possible things&colon;
+      h3#cli The CLI
+      p. In order to use the CLI you need to install the respective package:
       pre.dark-blue
         code.bash.
-          sequelize -h
-          sequelize --help
-          # prints the help
+          npm install --save sequelize-cli
 
-          sequelize -V
-          sequelize --version
-          # prints the version
+      p.
+        The CLI currently supports the following commands:
 
-          sequelize -i
-          sequelize --init
-          # creates a migration folder
-          # creates a config folder
-          # saves a config.json inside the config folder
+      pre.dark-blue
+        code.bash.
+          sequelize db:migrate        # Run pending migrations.
+          sequelize db:migrate:undo   # Revert the last migration run.
+          sequelize help              # Display this help text.
+          sequelize init              # Initializes the project.
+          sequelize migration:create  # Generates a new migration file.
+          sequelize version           # Prints the version number.
 
-          sequelize -e [environment]
-          sequelize --env [environment]
-          # Use the passed environment. Default: development
+      p.
+        Further and more detailled information about the available commands
+        can be obtained via the help command:
 
-          sequelize -i -f
-          sequelize --init --force
-          # forced creation of migration and config folder
-          # existing data will be deleted first
+      pre.dark-blue
+        code.bash.
+          sequelize help:init
+          sequelize help:db:migrate
+          sequelize help:db:migrate:undo
+          # etc
 
-          sequelize -m
-          sequelize --migrate
-          # needs a valid config.json
-          # runs pending migrations
-          # saves successfully executed migrations inside the database
+      p.
+        The latter one for example will print out the following output:
 
-          sequelize -m -u
-          sequelize --migrate --undo
-          # needs a valid config.json
-          # reverts the last successfull migration
-          # when there were multiple executed migrations, all of them are reverted
+      pre.dark-blue
+        code.bash.
+          Sequelize [CLI: v0.0.2, ORM: v1.7.5]
 
-          sequelize -c [migration-name]
-          sequelize --create-migration [migration-name]
-          # creates the migrations folder
-          # creates a file with current timestamp + migration-name
-          # migration-name has the default 'unnamed-migration'
+          COMMANDS
+              sequelize db:migrate:undo -- Revert the last migration run.
 
-          sequelize -p [path]
-          sequelize --migration-path [path]
-          # Defines the path to the migration directory.
+          DESCRIPTION
+              Revert the last migration run.
 
-          sequelize -o [path]
-          sequelize --options-path [path]
-          # Defines the path to the options file.
-          # The options file (.js or .json) needs to return an object.
-          # Keys / values references cli options
-          # e.g.: { migrationPath: 'db/migrations' }
+          OPTIONS
+              --env           The environment to run the command in. Default: development
+              --options-path  The path to a JSON file with additional options. Default: none
+              --coffee        Enables coffee script support. Default: false
+              --config        The path to the config file. Default: config/config.json
 
-          sequelize --config [path]
-          # Defines the path to the configuration file.
-
-          sequelize --coffee
-          # Enables coffeescript support.
 
       h3#skeleton Skeleton
       p
