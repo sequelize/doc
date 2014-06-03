@@ -14,7 +14,13 @@ exports.index = function(req, res) {
   } else if (!req.param('section')) {
     return res.redirect("/docs/" + req.param('version') + "/" + sectionNames[0], 301)
   } else if (req.param('version') !== 'latest') {
-    path = 'docs/.' + req.param('version') + '/views/' + path
+    var version = req.param('version')
+
+    if (version !== 'latest') {
+      version = "." + version
+    }
+
+    path = 'docs/' + version
   }
 
   sectionNames.forEach(function(sectionName) {
