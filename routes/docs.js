@@ -10,7 +10,7 @@ exports.index = function(req, res) {
     , sections = []
 
   if (!req.param('version')) {
-    return res.redirect("/docs/" + getLatestStableVersion(), 301)
+    return res.redirect("/docs/" + getLatestStableVersion(), 302)
   } else if (!req.param('section')) {
     return res.redirect("/docs/" + req.param('version') + "/" + sectionNames[0], 301)
   } else if (req.param('version') !== 'latest') {
@@ -84,6 +84,8 @@ var getLatestStableVersion = function() {
   }).filter(function(version) {
     return version !== 'Latest'
   })
+
+  console.log(semver.maxSatisfying(versions, "1.x"))
 
   return semver.maxSatisfying(versions, "1.x")
 }
