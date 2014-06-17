@@ -281,6 +281,7 @@ block documentation
           |     type: Sequelize.STRING,
           |     validate: {
           |       is: ["^[a-z]+$",'i'],     // will only allow letters
+          |       is: /^[a-z]+$/i,          // same as the previous example using real RegExp
           |       not: ["[a-z]",'i'],       // will not allow letters
           |       isEmail: true,            // checks for email format (foo@bar.com)
           |       isUrl: true,              // checks for url format (http://foo.com)
