@@ -216,30 +216,24 @@ block documentation
       p
         | If you are accepting values directly from the user, it might be beneficial to limit the columns that you want to actually insert.
         code bulkCreate&lpar;&rpar;
-        | accepts a second parameter &lpar;an array&rpar; to let it know which fields you want to build explicitly
+        | accepts an options object as the second parameter. The object can have a
+        code fields
+        | parameter, &lpar;an array&rpar; to let it know which fields you want to build explicitly
       pre.dark-blue
         code.javascript
           | User.bulkCreate([
           |   { username: 'foo' },
           |   { username: 'bar', admin: true}
-          | ], ['username']).success(function() {
+          | ], { fields: ['username'] }).success(function() {
           |   // nope bar, you can't be admin! 
-          | })
-          | &nbsp;
-          | // an easier way to keep track of which fields you want to explicitly build, use Object.keys() like so
-          | var objects = [
-          |   { username: 'foo' },
-          |   { username: 'bar' }
-          | ]
-          | &nbsp;
-          | User.bulkCreate(objects, Object.keys(objects)).success(function() {
-          |   // ...
           | })
 
       p
         code bulkCreate&lpar;&rpar;
-        | was originally made to be a mainstream&sol;fast way of inserting records&comma; however&comma; sometimes you want the luxury of being able to insert multiple rows at once without sacrificing model validations even when you explicitly tell Sequelize which columns to sift through&period; You can do by adding a third parameter of an object with the value of
-        code &lcub;validate&colon; true&rcub;
+        | was originally made to be a mainstream&sol;fast way of inserting records&comma; however&comma; sometimes you want the luxury of being able to insert multiple rows at once without
+        | sacrificing model validations even when you explicitly tell Sequelize which columns to sift through&period; You can do by adding a 
+        code validate: true
+        |property to the optons object.
       pre.dark-blue
         code.javascript
           | var Tasks = sequelize.define('Task', {
@@ -261,31 +255,22 @@ block documentation
           |   {name: 'foo', code: '123'},
           |   {code: '1234'},
           |   {name: 'bar', code: '1'}
-          | ], null, {validate: true}).error(function(errors) {
+          | ], { validate: true }).error(function(errors) {
           |   /* console.log(errors) would look like:
           |   [
-          |     {
-          |       "record": {
-          |         "code": "1234"
-          |       },
-          |       "errors": {
-          |         "name": [
-          |           "name cannot be null"
-          |         ]
-          |       }
-          |     },
-          |     {
-          |       "record": {
-          |         "name": "bar",
-          |         "code": "1"
-          |       },
-          |       "errors": {
-          |         "code": [
-          |           "String is not in range: code"
-          |         ]
-          |       }
-          |     }
-          |   ]
+          |     { record: 
+          |     ... 
+          |     errors: 
+          |       { name: 'SequelizeValidationError',
+          |         message: 'Validation error',
+          |         errors: [Object] } },
+          |     { record: 
+          |       ...
+          |       errors: 
+          |         { name: 'SequelizeValidationError',
+          |         message: 'Validation error',
+          |         errors: [Object] } } 
+          |   ]  
           |   */
           | })
 
