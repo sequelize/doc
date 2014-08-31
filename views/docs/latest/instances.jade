@@ -137,8 +137,20 @@ block documentation
           |     // now i'm gone :)
           |   })
           | })
+      p
+        | If the
+        code paranoid
+        |options is true, the object will not be deleted, instead the
+        code deletedAt
+        |column will be set to the current timestamp. To force the deletion, you can pass
+        code force: true
+        |to the destroy call:
+
+      pre.dark-blue
+        code.javascript
+          | task.destroy({ force: true })
   
-      h3#bulk Working in bulk (updating multiple rows at once)
+      h3#bulk Working in bulk (creating, updating and destroying multiple rows at once)
       p
         | In addition to updating a single instance, you can also create, update, and delete multiple instances at once. The functions you are looking for are called
 
@@ -151,13 +163,13 @@ block documentation
             code Model.destroy
 
       p
-        | Since you are working with multiple models, the callbacks will not return DAO instances. BulkCreate will return an array of model instances/DAOs, they will however, unlike 
+        | Since you are working with multiple models, the callbacks will not return DAO instances. BulkCreate will return an array of model instances/DAOs, they will however, unlike
         code create
-        | , not have the resulting values of autoIncrement attributes. 
-        code update 
-        | and 
+        |, not have the resulting values of autoIncrement attributes.
+        code update
+        |and 
         code destroy
-        | will return the number of affected rows.
+        |will return the number of affected rows.
 
        p
         | First lets look at bulkCreate
