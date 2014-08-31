@@ -106,15 +106,10 @@ block documentation
           | // OK. Now things get more complicated (not really visible to the user :)).
           | // First let's define a hasMany association
           | Project.hasMany(User, {as: 'Workers'})
-          | &nbsp;
-          | /*
-          |   This will add the attribute ProjectId or project_id to User.
-          |   Instances of Project will get the accessors getWorkers and setWorkers.
-          | &nbsp;
-          |   We could just leave it the way it is and let it be a one-way association.
-          |   But we want more! Let's define the other way around:
-          | */
-
+      p
+        | This will add the attribute ProjectId or project_id to User. Instances of Project will get the accessors getWorkers and setWorkers. 
+        | We could just leave it the way it is and let it be a one-way association.
+        | But we want more! Let's define it the other way around by creating a many to many assocation in the next section:
 
 
       h3#many-to-many Many-To-Many associations
@@ -123,32 +118,79 @@ block documentation
       pre.dark-blue
         code.javascript
           | // again the Project association to User
-          | Project.hasMany(User, { as: 'Workers' })
+          | Project.hasMany(User)
           | &nbsp;
           | // now comes the association between User and Project
           | User.hasMany(Project)
-          | &nbsp;
-          | /*
-          |   This will remove the attribute ProjectId (or project_id) from User and create
-          |   a new model called ProjectsUsers with the equivalent foreign keys ProjectId
-          |   (or project_id) and UserId (or user_id). If the attributes are camelcase or
-          |   not depends on the Model it represents.
-          | &nbsp;
-          |   Now you can use Project#getWorkers, Project#setWorkers, User#getTasks and
-          |   User#setTasks.
-          | */
-          | &nbsp;
-          | // Of course you can also define self references with hasMany:
-          | &nbsp;
+      p
+        | This will remove the attribute
+        code ProjectId
+        | (or
+        code project_id
+        |) from User and create
+        | a new model called ProjectsUsers with the equivalent foreign keys 
+        code ProjectId
+        |(or 
+        code project_id
+        |) and 
+        code UserId
+        |(or
+        code user_id
+        |). Whether the attributes are camelcase or
+        | not depends on the two models joined by the table (in this case User and Project)
+      p
+        | This will add methods
+        code getUsers
+        |,
+        code setUsers
+        |,
+        code addUsers
+        | to 
+        code Project
+        |, and 
+        code getProjects
+        |,
+        code setProjects
+        | and
+        code addProject
+        | to 
+        code User
+        |.
+      p Sometimes you may want to rename your models when using them in associations. Let's define users as workers and projects as tasks by using the alias (
+        code as
+        |) option:
+      pre.dark-blue
+        code.javascript
+          | User.hasMany(Project, { as: 'Tasks', through: 'worker_tasks' })
+          | Project.hasMany(User, { as: 'Workers', through: 'worker_tasks' })
+      p 
+        | Notice how we used the
+        code through
+        |option together with the alias in the code above. This is needed to tell sequelize that the two
+        code hasMany
+        |calls are actually two sides of the same association. If you don't use an alias (as shown in the first example of this section) this matching happens
+        | automagically, but with aliassed assocations
+        code through
+        | is required.
+
+      p Of course you can also define self references with hasMany:
+      pre.dark-blue
+        code.javascript
           | Person.hasMany(Person, { as: 'Children' })
           | // This will create the table ChildrenPersons which stores the ids of the objects.
           | &nbsp;
-          | // Since v1.5.0 you can also reference the same Model without creating a junction
+          | // You can also reference the same Model without creating a junction
           | // table (but only if each object will have just one 'parent'). If you need that,
           | // use the option foreignKey and set through to null
-          | Person.hasMany(Person, { as: 'Children', foreignKey: 'ParentId', through: null })
-          | &nbsp;
-          | // You can also use a predefined junction table using the option through:
+          | Comment.hasMany(Comment, { as: 'Children', foreignKey: 'ParentId', through: null })
+
+      p 
+        | By default, sequelize will handle everything related to the join table for you. However, sometimes you might want some more control over the table. This is where the
+        code through
+        |options comes in handy.
+      p If you just want to control the name of the join table, you can pass a string:
+      pre.dark-blue
+        code.javascript
           | Project.hasMany(User, {through: 'project_has_users'})
           | User.hasMany(Project, {through: 'project_has_users'})
 
@@ -165,11 +207,71 @@ block documentation
           | User.hasMany(Project, { through: UserProjects })
           | Project.hasMany(User, { through: UserProjects })
 
-      p
-        | The code above will add ProjectId and UserId to the UserProjects table&comma; and
-        em remove any previsouly defined primary key attribute
-        | &comma; - the table will be uniquely identified by the combination of the keys of the two tables&comma; and there is no reason to have other PK columns&period;
+      p To add a new project to a user and set it's status, you pass an extra object to the setter, which contains the attributes for the join table
+      pre.dark-blue
+        code.javascript
+          | user.addProject(project, { status: 'started' })
 
+      p
+        | By default the code above will add ProjectId and UserId to the UserProjects table&comma; and
+        em remove any previsouly defined primary key attribute 
+        | - the table will be uniquely identified by the combination of the keys of the two tables&comma; and there is no reason to have other PK columns. To enforce a primary key on the
+        code UserProjects
+        |model you can add it manually.
+      pre.dark-blue
+        code.javascript
+          | UserProjects = sequelize.define('UserProjects', {
+          |     id: {
+          |       type: Sequelize.INTEGER,
+          |       primaryKey: true,
+          |       autoIncrement: true
+          |     },
+          |     status: DataTypes.STRING
+          | })
+
+      h3#naming-strategy Naming strategy
+      p
+        | By default sequelize will use the model name (the name passed to
+        code sequelize.define
+        |) to figure out the name of the model when used in associations. For example, a model named
+        code user
+        | will add the functions
+        code get/set/add User
+        |to instances of the associated model, and a property named
+        code .user
+        |in eager loading, while a model named
+        code User
+        | will add the same functions, but a property named
+        code .User
+        |(notice the upper case U) in eager loading.
+
+      p
+        | As we've already seen, you can alias models in associations using
+        code as
+        |. In single assocations (has one and belongs to), the alias should be singular, while for many associations (has many) it should be plural. Sequelize then uses the 
+        a(href='https://www.npmjs.org/package/inflection') inflection 
+        | library to convert the alias to its singular form. However, this might not always work for irregular or non-english words. In this case, you can provide both the plural and the singular form of the alias:
+       pre.dark-blue
+        code.javascript
+          | User.hasMany(Project, { as: { singular: 'task', plural: 'tasks' }}) 
+          | // Notice that inflection has no problem singularizing tasks, this is just for illustrative purposes.
+
+      p If you know that a model will always use the same alias in associations, you can provide it when creating the model
+
+      pre.dark-blue
+        code.javascript
+          | var Project = sequelize.define('project', attributes, {
+          |   name: {
+          |     singular: 'task',
+          |     plural: 'tasks',
+          |   }
+          | })
+          | &nbsp;
+          | User.hasMany(Project);
+      p 
+        | This will add the functions 
+        code add/set/get Tasks
+        |to user instances.
 
       h3#associating-objects Associating objects
       p

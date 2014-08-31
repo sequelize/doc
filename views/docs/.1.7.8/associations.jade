@@ -106,16 +106,10 @@ block documentation
           | // OK. Now things get more complicated (not really visible to the user :)).
           | // First let's define a hasMany association
           | Project.hasMany(User, {as: 'Workers'})
-          | &nbsp;
-          | /*
-          |   This will add the attribute ProjectId or project_id to User.
-          |   Instances of Project will get the accessors getWorkers and setWorkers.
-          | &nbsp;
-          |   We could just leave it the way it is and let it be a one-way association.
-          |   But we want more! Let's define the other way around:
-          | */
-
-
+      p
+        | This will add the attribute ProjectId or project_id to User. Instances of Project will get the accessors getWorkers and setWorkers. 
+        | We could just leave it the way it is and let it be a one-way association.
+        | But we want more! Let's define it the other way around by creating a many to many assocation in the next section:
 
       h3#many-to-many Many-To-Many associations
       p
