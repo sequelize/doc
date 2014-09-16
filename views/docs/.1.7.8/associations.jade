@@ -106,16 +106,10 @@ block documentation
           | // OK. Now things get more complicated (not really visible to the user :)).
           | // First let's define a hasMany association
           | Project.hasMany(User, {as: 'Workers'})
-          | &nbsp;
-          | /*
-          |   This will add the attribute ProjectId or project_id to User.
-          |   Instances of Project will get the accessors getWorkers and setWorkers.
-          | &nbsp;
-          |   We could just leave it the way it is and let it be a one-way association.
-          |   But we want more! Let's define the other way around:
-          | */
-
-
+      p
+        | This will add the attribute ProjectId or project_id to User. Instances of Project will get the accessors getWorkers and setWorkers. 
+        | We could just leave it the way it is and let it be a one-way association.
+        | But we want more! Let's define it the other way around by creating a many to many assocation in the next section:
 
       h3#many-to-many Many-To-Many associations
       p
@@ -349,79 +343,28 @@ block documentation
           | CREATE TABLE IF NOT EXISTS `Task` (
           |   `id` INTEGER PRIMARY KEY, 
           |   `title` VARCHAR(255), 
-          |   `user_id` INTEGER REFERENCES `User` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+          |   `user_id` INTEGER
           | );
 
       p 
-        | The relation between task and user injects the
-        code user_id
-        |foreign key on tasks, and marks it as a reference to the
-        code User
-        |table. By default
-        code user_id
-        | will be set to
-        code NULL
-        |if the referenced user is deleted, and updated if the id of the user id updated. These options can be overriden by passing 
-        code onUpdate 
+        | To add references constraints to the columns, you can pass the options 
+        code onUpdate
         | and
         code onDelete
-        | options to the association calls. The validation options are
+        |to the association calls. The validation options are
         code RESTRICT, CASCADE, NO ACTION, SET DEFAULT, SET NULL
-        |. 
-
-      p
-        |For 1:1 and 1:m associations the default option is
-        code SET NULL
-        | for deletion, and
-        code CASCADE
-        | for updates. For n:m, the default for both is
-        code CASCADE
-        |. This means, that if you delete or update a row from one side of an n:m association, all the rows in the join table refrencing that row will also be deleted or updated.
-
-      p 
-        | Adding constriants between tables means that tables must be created in the database in a certain order, when using
-        code sequelize.sync
-        |. If Task has a reference to User, the User table must be created before the Task table can be created. This can sometimes lead to circular references, where sequelize cannot find an order in which to sync.
-        | Imagine a scenario of documents and versions. A document can have multiple versions, and for convenience, a document has an reference to it's current version.
+        |, for example:
 
       pre.dark-blue
         code.javascript
-          | var Document = this.sequelize.define('Document', {
-          |       author: Sequelize.STRING
-          |     })
-          |   , Version = this.sequelize.define('Version', {
-          |       timestamp: Sequelize.DATE
-          |     })
-          | 
-          | Document.hasMany(Version) // This adds document_id to version
-          | Document.belongsTo(Version, { as: 'Current', foreignKey: 'current_version_id'}) // This adds current_version_id to document
-
-      p
-        | However, the code above will result in the following error: 
-        code Cyclic dependency found. 'Document' is dependent of itself. Dependency Chain: Document -> Version => Document
-        | In order to alleviate that, we can pass 
-        code constraints: false
-        | to one of the associations:
-
-      pre.dark-blue
-        code.javascript
-          | Document.hasMany(Version)
-          | Document.belongsTo(Version, { as: 'Current', foreignKey: 'current_version_id', constraints: false})
-
-      p
-        | Which will allow us to sync the tables correctly:
-
+          | User.hasMany(Task, { onDelete: 'SET NULL', onUpdate: 'CASCADE' })
+          
       pre.dark-blue
         code.sql
-          | CREATE TABLE IF NOT EXISTS `Document` (
+          | CREATE TABLE IF NOT EXISTS `Task` (
           |   `id` INTEGER PRIMARY KEY, 
-          |   `author` VARCHAR(255), 
-          |   `current_version_id` INTEGER
-          | );
-          | CREATE TABLE IF NOT EXISTS `Version` (
-          |   `id` INTEGER PRIMARY KEY, 
-          |   `timestamp` DATETIME, 
-          |   `document_id` INTEGER REFERENCES `Document` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+          |   `title` VARCHAR(255), 
+          |   `user_id` INTEGER REFERENCES `User` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
           | );
 
       h4 Enforcing a foreign key reference without constraints
