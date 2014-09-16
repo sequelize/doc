@@ -19,14 +19,14 @@ block documentation
         code.bash
           | mkdir example-app
           | cd example-app
-          | npm install express
+          | npm install express express-generator
           | node_modules/.bin/express . -f
           | npm install
-          | node app.js
+          | ./bin/www
 
       p
         | So now we have a default express application. If you point your browser
-        | to <code>http://localhost:8080</code>, you will see a tiny page welcoming you.
+        | to <code>http://localhost:3000</code>, you will see a tiny page welcoming you.
 
       h3#adding-sequelize Adding Sequelize to the application
       p
@@ -100,6 +100,10 @@ block documentation
           |     }
           |   })
 
+      p.
+        Please notice that in later versions of express.js the actual
+        server starter has been moved to `bin/www`. Just wrap the `sync`
+        call around the `app.listen` block.
 
       h4#models-index-js models/index.js
       p
@@ -249,8 +253,3 @@ block documentation
         | Besides the use of Sequelize as model backend in your ExpressJS application,
         | you might also want to turn your server into a restful API. If that is the
         | case, check out <a href="https://github.com/sequelize/sequelize-restful" target="_blank" rel="nofollow">the repository on Github</a>.
-
-
-
-
-
