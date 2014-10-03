@@ -4,10 +4,23 @@ var express   = require('express')
   , articles  = require('./routes/articles')
   , changelog = require('./routes/changelog')
   , blog      = require('./routes/blog')
+  , github    = require('./routes/github')
   , http      = require('http')
   , path      = require('path')
   , app       = express()
 
+// helpers
+app.locals({
+  fromGithub: function (owner, repo, file) {
+    var id  = "partial" + ~~(Math.random() * 1000000);
+    var url = "/github?owner="+owner+"&repo="+repo+"&file="+file;
+
+    return [
+      "<pre class='dark-blue'><code class='javascript' id='" + id + "'></code></pre>",
+      "<script>$(function () { fromGithub('" + id + "', '" + url + "') })</script>"
+    ].join("\n")
+  }
+});
 
 // all environments
 app.set('port', process.env.PORT || 3000)
@@ -41,6 +54,7 @@ app.get('/changelog', changelog.index)
 app.get('/changelog/:version', changelog.show)
 app.get('/blog', blog.index)
 app.get('/blog/:permalink', blog.show)
+app.get('/github', github.show)
 
 http.createServer(app).listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'))

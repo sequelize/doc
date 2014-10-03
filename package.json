@@ -6,15 +6,15 @@
     "start": "node app.js"
   },
   "dependencies": {
+    "cheerio": "~0.12.4",
+    "execSync": "~1.0.1-pre",
     "express": "3.4.4",
     "jade": "*",
-    "stylus": "*",
-    "execSync": "~1.0.1-pre",
-    "semver": "~2.2.1",
     "lodash": "~2.3.0",
     "marked": "~0.2.10",
     "request": "~2.29.0",
-    "cheerio": "~0.12.4"
+    "semver": "~2.2.1",
+    "stylus": "*"
   },
   "devDependencies": {
     "html2jade": "~0.5.3",

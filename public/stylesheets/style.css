@@ -296,7 +296,7 @@ body .content li {
 body .content p code,
 body .content li code {
   background: #3b7cb9;
-  margin: 0 10px;
+  margin: 0px;
   color: #fff;
 }
 #documentation .navigation > ul > li {

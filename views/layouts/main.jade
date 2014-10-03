@@ -5,6 +5,15 @@ html
       = ["Sequelize", title].join(" - ")
     link(rel="shortcut icon", type="image/x-icon", href="/favicon.ico")
     link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src='/javascripts/jquery-1.10.2.min.js')
+    script.
+      fromGithub = function (partialId, url) {
+        var $partial = $("#" + partialId)
+
+        $partial.load(url, function () {
+          hljs.highlightBlock($partial.get(0));
+        });
+      }
     block head
 
   body(id=bodyId)
@@ -76,7 +85,6 @@ html
         .col-sm-8(style="text-align: right")
           a(href="/imprint") Imprint
 
-    script(src='/javascripts/jquery-1.10.2.min.js')
     script(src='/javascripts/bootstrap.min.js')
     script(src="/javascripts/highlight.pack.js")
     script(src="/javascripts/main.js")

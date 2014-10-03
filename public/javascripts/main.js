@@ -1,11 +1,7 @@
 $(function() {
   $('pre code:not(.skip)').each(function(i, e) {
     var $code     = $(e)
-
-    
-
     var codeLines = $code.html().split("\n")
-
 
     $code.html(
       codeLines.reduce(function(lines, line, lineNumber) {
