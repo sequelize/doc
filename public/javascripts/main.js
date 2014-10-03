@@ -51,7 +51,7 @@ $(function() {
     var $headline = $(this);
     var id        = $headline.attr('id');
 
-    if (id) {
+    if (id && ($headline.html().indexOf("<a") === -1)) {
       var $link = $('<a>').attr('href', '#' + id).text($headline.text());
       $headline.html($link);
     }
