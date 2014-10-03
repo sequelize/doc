@@ -35,22 +35,32 @@ $(function() {
 
   var scrollToAnchor = function(anchor) {
     var $element = $('[name="' + anchor + '"],[id="' + anchor + '"]')
-    $('html, body').animate({ scrollTop: $element.offset().top - 150 }, 'slow')
+    $('html, body').stop().animate({ scrollTop: $element.offset().top - 150 }, 'slow')
   }
 
   var match = document.location.href.match(/#(.+)$/)
 
   if (match) {
-    setTimeout(function() { scrollToAnchor(match[1]) }, 200)
+    ([200, 1000]).forEach(function (delay) {
+      setTimeout(function() { scrollToAnchor(match[1]) }, delay);
+    });
   }
 
-  $('.code-anchor').click(function(e) {
-    var anchor = $(e.currentTarget).attr('id')
+
+  $("h1,h2,h3,h4,h5,h6,h7,h8,h9").each(function () {
+    var $headline = $(this);
+    var $link     = $('<a>').attr('href', '#' + $headline.attr('id')).text($headline.text());
+
+    $headline.html($link);
+  });
+
+  $("a[href^=#]").click(function(e) {
+    var anchor = $(e.currentTarget).attr('href');
 
     if (history.pushState) {
-      history.pushState(null, null, '#' + anchor);
-      e.preventDefault()
-      scrollToAnchor($(e.currentTarget).attr('id'))
+      history.pushState(null, null, anchor);
+      e.preventDefault();
+      scrollToAnchor(anchor.replace("#", ""));
     }
   })
 })
