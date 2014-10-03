@@ -49,9 +49,12 @@ $(function() {
 
   $("h1,h2,h3,h4,h5,h6,h7,h8,h9").each(function () {
     var $headline = $(this);
-    var $link     = $('<a>').attr('href', '#' + $headline.attr('id')).text($headline.text());
+    var id        = $headline.attr('id');
 
-    $headline.html($link);
+    if (id) {
+      var $link = $('<a>').attr('href', '#' + id).text($headline.text());
+      $headline.html($link);
+    }
   });
 
   $("a[href^=#]").click(function(e) {
