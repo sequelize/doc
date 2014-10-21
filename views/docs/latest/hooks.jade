@@ -247,7 +247,7 @@ block documentation
           | // the callback.
           | User.hook('afterCreate', function(user, options) {
           |   // 'trans' will be available in options.transaction
-          |
+          | 
           |   // This operation will be part of the same transaction as the 
           |   // original User.create call.
           |   return User.update({
@@ -259,8 +259,8 @@ block documentation
           |     transaction: options.transaction
           |   });
           | });
-          |
-          |
+          | 
+          | 
           | sequelize.transaction(function(trans) {
           |   User.create({
           |     username: 'someguy',
@@ -269,7 +269,6 @@ block documentation
           |     transaction: trans
           |   });
           | });
-          |
               
       p
         | If we had not included the transaction option in our call to 
