@@ -1,1 +1,1 @@
-py-gfm
+git+https://github.com/dart-lang/py-gfm.git
