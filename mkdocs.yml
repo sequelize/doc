@@ -3,7 +3,3 @@ theme: readthedocs
 repo_url: https://github.com/sequelize/sequelize
 site_favicon: favicon.ico
 markdown_extensions: [gfm]
-pages:
-- ['index.md', 'Home']
-- ['sequelize.md', 'Sequelize']
-- ['instance.md', 'Instance']
