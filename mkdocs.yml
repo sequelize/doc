@@ -1,6 +1,5 @@
 site_name: Sequelize docs
 theme: readthedocs
-docs_dir: api
 repo_url: https://github.com/sequelize/sequelize
 site_favicon: favicon.ico
 markdown_extensions: [gfm]
