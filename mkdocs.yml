@@ -1,10 +1,6 @@
 site_name: Sequelize docs
 theme: readthedocs
+docs_dir: api
 repo_url: https://github.com/sequelize/sequelize
 site_favicon: favicon.ico
-markdown_extensions: [gfm, codehilite]
-pages:
-- ['index.md', 'Home']
-- ['articles/heroku.md', 'Articles', 'Heroku']
-- ['articles/getting-started.md', 'Articles', 'Getting started']
-- ['docs/associations.md', 'Docs', 'Associations']
+markdown_extensions: [gfm]
