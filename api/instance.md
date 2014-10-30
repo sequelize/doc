@@ -1,4 +1,4 @@
-### Class Instance
+# Class Instance
 This class represents an single instance, a database row. You might see it referred to as both Instance and instance. You should not
 instantiate the Instance class directly, instead you access it using the finder and creation methods on the model.
 
@@ -22,12 +22,12 @@ Accessing properties directly or using `get` is preferred for regular use, `getD
 
 ======
 
-#### `isNewRecord` -> `Boolean`
+## `isNewRecord` -> `Boolean`
 Returns true if this instance has not yet been persisted to the database
 
 ======
 
-#### `Model()` -> `Model`
+## `Model()` -> `Model`
 Returns the Model the instance was created from.
 
 **See:**
@@ -37,7 +37,7 @@ Returns the Model the instance was created from.
 
 ======
 
-#### `sequelize()` -> `Sequelize`
+## `sequelize()` -> `Sequelize`
 A reference to the sequelize instance
 
 **See:**
@@ -47,12 +47,12 @@ A reference to the sequelize instance
 
 ======
 
-#### `isDeleted()` -> `Boolean`
+## `isDeleted()` -> `Boolean`
 If timestamps and paranoid are enabled, returns whether the deletedAt timestamp of this instance is set. Otherwise, always returns false.
 
 ======
 
-#### `values()` -> `Object`
+## `values()` -> `Object`
 Get the values of this Instance. Proxies to `this.get`
 
 **See:**
