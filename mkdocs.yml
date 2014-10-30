@@ -2,8 +2,15 @@ site_name: Sequelize docs
 theme: readthedocs
 repo_url: https://github.com/sequelize/sequelize
 site_favicon: favicon.ico
-markdown_extensions: [gfm]
+markdown_extensions: [gfm, codehilite]
 pages:
-- ['index.md', 'Home']
-- ['sequelize.md', 'Sequelize']
-- ['instance.md', 'Instance']
+- ['index.md', 'Home', 'Home']
+- ['sequelize.md', 'Sequelize', 'Sequelize']
+- ['model.md', 'Model', 'Model']
+- ['instance.md', 'Instance', 'Instance']
+- ['associations.md', 'Associations', 'Associations']
+- ['hooks.md', 'Hooks', 'Hooks']
+- ['promise.md', 'Promise', 'Promise']
+- ['transaction.md', 'Transaction', 'Transaction']
+- ['datatypes.md', 'Datatypes', 'Datatypes']
+- ['errors.md', 'Errors', 'Errors']

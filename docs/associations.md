@@ -1,4 +1,4 @@
-### Class Mixin
+# Mixin Mixin
 Creating assocations in sequelize is done by calling one of the belongsTo / hasOne / hasMany functions
 on a model (the source), and prodiving another model as the first argument to the function (the target).
 
@@ -83,9 +83,9 @@ get an error along the lines of `Error: Cyclic dependency found. 'users' is depe
 you should either disable some constraints, or rethink your associations completely.
 
 
-======
+***
 
-#### `hasOne`
+## `hasOne`
 Creates an association between this (the source) and the provided target. The foreign key is added on the target.
 
 Example: `User.hasOne(Profile)`. This will add userId to the profile table.
@@ -99,7 +99,8 @@ The following methods are injected on the source:
 All methods return a promise
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | target | Model |  |
@@ -112,9 +113,9 @@ All methods return a promise
 | [options.constraints=true] | boolean | Should on update and on delete constraints be enabled on the foreign key. |
 
 
-======
+***
 
-#### `belongsTo`
+## `belongsTo`
 Creates an association between this (the source) and the provided target. The foreign key is added on the source.
 
 Example: `Profile.belongsTo(User)`. This will add userId to the profile table.
@@ -128,7 +129,8 @@ The following methods are injected on the source:
 All methods return a promise
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | target | Model |  |
@@ -141,9 +143,9 @@ All methods return a promise
 | [options.constraints=true] | boolean | Should on update and on delete constraints be enabled on the foreign key. |
 
 
-======
+***
 
-#### `hasMany(target, [options])`
+## `hasMany(target, [options])`
 Create an association that is either 1:m or n:m.
 
 ```js
@@ -202,7 +204,8 @@ user.getProjects().success(function (projects) {
 ```
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | target | Model |  |
@@ -220,6 +223,6 @@ user.getProjects().success(function (projects) {
 | [options.constraints=true] | boolean | Should on update and on delete constraints be enabled on the foreign key. |
 
 
-======
+***
 
 _This document is automatically generated based on source code comments. Please do not edit it directly, as your changes will be ignored. Please write on <a href="irc://irc.freenode.net/#sequelizejs">IRC</a>, open an issue or a create a pull request if you feel something can be improved. For help on how to write source code documentation see [JSDoc](http://usejsdoc.org) and [dox](https://github.com/tj/dox)_

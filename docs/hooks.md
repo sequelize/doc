@@ -1,4 +1,4 @@
-### Class Hooks
+# Mixin Hooks
 Hooks are function that are called before and after  (bulk-) creation/updating/deletion and validation. Hooks can be added to you models in three ways:
 
 1. By specifying them as options in `sequelize.define`
@@ -32,13 +32,14 @@ Model.afterBulkUpdate(function () {})
 * [Sequelize#define](/Sequelize#define)
 
 
-======
+***
 
-#### `addHook(hooktype, [name], fn)`
+## `addHook(hooktype, [name], fn)`
 Add a hook to the model
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | hooktype | String |  |
@@ -47,60 +48,65 @@ Add a hook to the model
 
 __Aliases:__ hook
 
-======
+***
 
-#### `beforeValidate(name, fn)`
+## `beforeValidate(name, fn)`
 A hook that is run before validation
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | name | String |  |
 | fn | Function | A callback function that is called with instance, options, callback(err) |
 
 
-======
+***
 
-#### `afterValidate(name, fn)`
+## `afterValidate(name, fn)`
 A hook that is run after validation
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | name | String |  |
 | fn | Function | A callback function that is called with instance, options, callback(err) |
 
 
-======
+***
 
-#### `beforeCreate(name, fn)`
+## `beforeCreate(name, fn)`
 A hook that is run before creating a single instance
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | name | String |  |
 | fn | Function | A callback function that is called with attributes, options, callback(err) |
 
 
-======
+***
 
-#### `afterCreate(name, fn)`
+## `afterCreate(name, fn)`
 A hook that is run after creating a single instance
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | name | String |  |
 | fn | Function | A callback function that is called with attributes, options, callback(err) |
 
 
-======
+***
 
-#### `beforeDestroy(name, fn)`
+## `beforeDestroy(name, fn)`
 A hook that is run before destroying a single instance
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | name | String |  |
@@ -108,12 +114,13 @@ A hook that is run before destroying a single instance
 
 __Aliases:__ beforeDelete
 
-======
+***
 
-#### `afterDestroy(name, fn)`
+## `afterDestroy(name, fn)`
 A hook that is run after destroying a single instance
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | name | String |  |
@@ -121,60 +128,65 @@ A hook that is run after destroying a single instance
 
 __Aliases:__ afterDelete
 
-======
+***
 
-#### `beforeUpdate(name, fn)`
+## `beforeUpdate(name, fn)`
 A hook that is run before updating a single instance
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | name | String |  |
 | fn | Function | A callback function that is called with instance, options, callback(err) |
 
 
-======
+***
 
-#### `afterUpdate(name, fn)`
+## `afterUpdate(name, fn)`
 A hook that is run after updating a single instance
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | name | String |  |
 | fn | Function | A callback function that is called with instance, options, callback(err) |
 
 
-======
+***
 
-#### `beforeBulkCreate(name, fn)`
+## `beforeBulkCreate(name, fn)`
 A hook that is run before creating instances in bulk
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | name | String |  |
 | fn | Function | A callback function that is called with instances, options, callback(err) |
 
 
-======
+***
 
-#### `afterBulkCreate(name, fn)`
+## `afterBulkCreate(name, fn)`
 A hook that is run after creating instances in bulk
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | name | String |  |
 | fn | Function | A callback function that is called with instances, options, callback(err) |
 
 
-======
+***
 
-#### `beforeBulkDestroy(name, fn)`
+## `beforeBulkDestroy(name, fn)`
 A hook that is run before destroying instances in bulk
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | name | String |  |
@@ -182,12 +194,13 @@ A hook that is run before destroying instances in bulk
 
 __Aliases:__ beforeBulkDelete
 
-======
+***
 
-#### `afterBulkDestroy(name, fn)`
+## `afterBulkDestroy(name, fn)`
 A hook that is run after destroying instances in bulk
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | name | String |  |
@@ -195,126 +208,136 @@ A hook that is run after destroying instances in bulk
 
 __Aliases:__ afterBulkDelete
 
-======
+***
 
-#### `beforeBulkUpdate(name, fn)`
+## `beforeBulkUpdate(name, fn)`
 A hook that is run after updating instances in bulk
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | name | String |  |
 | fn | Function | A callback function that is called with options, callback(err) |
 
 
-======
+***
 
-#### `afterBulkUpdate(name, fn)`
+## `afterBulkUpdate(name, fn)`
 A hook that is run after updating instances in bulk
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | name | String |  |
 | fn | Function | A callback function that is called with options, callback(err) |
 
 
-======
+***
 
-#### `beforeFind(name, fn)`
+## `beforeFind(name, fn)`
 A hook that is run before a find (select) query
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | name | String |  |
 | fn | Function | A callback function that is called with options, callback(err) |
 
 
-======
+***
 
-#### `beforeFindAfterExpandIncludeAll(name, fn)`
+## `beforeFindAfterExpandIncludeAll(name, fn)`
 A hook that is run before a find (select) query, after any { include: {all: ...} } options are expanded
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | name | String |  |
 | fn | Function | A callback function that is called with options, callback(err) |
 
 
-======
+***
 
-#### `beforeFindAfterOptions(name, fn)`
+## `beforeFindAfterOptions(name, fn)`
 A hook that is run before a find (select) query, after all option parsing is complete
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | name | String |  |
 | fn | Function | A callback function that is called with options, callback(err) |
 
 
-======
+***
 
-#### `afterFind(name, fn)`
+## `afterFind(name, fn)`
 A hook that is run after a find (select) query
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | name | String |  |
 | fn | Function | A callback function that is called with instance(s), options, callback(err) |
 
 
-======
+***
 
-#### `beforeDefine(name, fn)`
+## `beforeDefine(name, fn)`
 A hook that is run before a define call
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | name | String |  |
 | fn | Function | A callback function that is called with attributes, options, callback(err) |
 
 
-======
+***
 
-#### `afterDefine(name, fn)`
+## `afterDefine(name, fn)`
 A hook that is run after a define call
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | name | String |  |
 | fn | Function | A callback function that is called with factory, callback(err) |
 
 
-======
+***
 
-#### `beforeInit(name, fn)`
+## `beforeInit(name, fn)`
 A hook that is run before Sequelize() call
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | name | String |  |
 | fn | Function | A callback function that is called with config, options, callback(err) |
 
 
-======
+***
 
-#### `afterInit(name, fn)`
+## `afterInit(name, fn)`
 A hook that is run after Sequelize() call
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | name | String |  |
 | fn | Function | A callback function that is called with sequelize, callback(err) |
 
 
-======
+***
 
 _This document is automatically generated based on source code comments. Please do not edit it directly, as your changes will be ignored. Please write on <a href="irc://irc.freenode.net/#sequelizejs">IRC</a>, open an issue or a create a pull request if you feel something can be improved. For help on how to write source code documentation see [JSDoc](http://usejsdoc.org) and [dox](https://github.com/tj/dox)_

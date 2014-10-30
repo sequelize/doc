@@ -20,12 +20,12 @@ Accessing properties directly or using `get` is preferred for regular use, `getD
 * [Sequelize#define](/Sequelize#define)
 
 
-======
+***
 
 ## `isNewRecord` -> `Boolean`
 Returns true if this instance has not yet been persisted to the database
 
-======
+***
 
 ## `Model()` -> `Model`
 Returns the Model the instance was created from.
@@ -35,7 +35,7 @@ Returns the Model the instance was created from.
 * [Model](/Model)
 
 
-======
+***
 
 ## `sequelize()` -> `Sequelize`
 A reference to the sequelize instance
@@ -45,12 +45,12 @@ A reference to the sequelize instance
 * [Sequelize](/Sequelize)
 
 
-======
+***
 
 ## `isDeleted()` -> `Boolean`
 If timestamps and paranoid are enabled, returns whether the deletedAt timestamp of this instance is set. Otherwise, always returns false.
 
-======
+***
 
 ## `values()` -> `Object`
 Get the values of this Instance. Proxies to `this.get`
@@ -60,9 +60,9 @@ Get the values of this Instance. Proxies to `this.get`
 * [Instance#get](/Instance#get)
 
 
-======
+***
 
-#### `isDirty()` -> `Boolean`
+## `isDirty()` -> `Boolean`
 A getter for `this.changed()`. Returns true if any keys have changed.
 
 
@@ -71,46 +71,49 @@ A getter for `this.changed()`. Returns true if any keys have changed.
 * [Instance#changed](/Instance#changed)
 
 
-======
+***
 
-#### `primaryKeyValues()` -> `Object`
+## `primaryKeyValues()` -> `Object`
 Get the values of the primary keys of this instance.
 
 
-======
+***
 
-#### `getDataValue(key)` -> `any`
+## `getDataValue(key)` -> `any`
 Get the value of the underlying data value
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | key | String |  |
 
 
-======
+***
 
-#### `setDataValue(key, value)`
+## `setDataValue(key, value)`
 Update the underlying data value
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | key | String |  |
 | value | any |  |
 
 
-======
+***
 
-#### `get([key], [options])` -> `Object`
+## `get([key], [options])` -> `Object`
 If no key is given, returns all values of the instance, also invoking virtual getters.
 
 If key is given and a field or virtual getter is present for the key it will call that getter - else it will return the value for key.
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | [key] | String |  |
@@ -118,9 +121,9 @@ If key is given and a field or virtual getter is present for the key it will cal
 | [options.plain=false] | Boolean | If set to true, included instances will be returned as plain objects |
 
 
-======
+***
 
-#### `set(key, value, [options])`
+## `set(key, value, [options])`
 Set is used to update values on the instance (the sequelize representation of the instance that is, remember that nothing will be persisted before you actually call `save`).
 In its most basic form `set` will update a value stored in the underlying `dataValues` object. However, if a custom setter function is defined for the key, that function
 will be called instead. To bypass the setter, you can pass `raw: true` in the options object.
@@ -138,7 +141,8 @@ Set can also be used to build instances for associations, if you have values for
 * [Model#find](/Model#find)
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | key | String |  |
@@ -150,41 +154,44 @@ Set can also be used to build instances for associations, if you have values for
 
 __Aliases:__ setAttributes
 
-======
+***
 
-#### `changed([key])` -> `Boolean`
+## `changed([key])` -> `Boolean`
 If changed is called with a string it will return a boolean indicating whether the value of that key in `dataValues` is different from the value in `_previousDataValues`.
 
 If changed is called without an argument, it will return an array of keys that have changed.
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | [key] | String |  |
 
 
-======
+***
 
-#### `previous(key)` -> `any`
+## `previous(key)` -> `any`
 Returns the previous value for key from `_previousDataValues`.
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | key | String |  |
 
 
-======
+***
 
-#### `save([fields], [options])` -> `Promise<this`
+## `save([fields], [options])` -> `Promise<this`
 Validate this instance, and if the validation passes, persist it to the database.
 
 On success, the callback will be called with this instance. On validation error, the callback will be called with an instance of `Sequelize.ValidationError`.
 This error will have a property for each of the fields for which validation failed, with the error message for that field.
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | [fields] | Array | An optional array of strings, representing database columns. If fields is provided, only those columns will be validation and saved. |
@@ -194,9 +201,9 @@ This error will have a property for each of the fields for which validation fail
 | [options.transaction] | Transaction |  |
 
 
-======
+***
 
-#### `reload([options])` -> `Promise<this>`
+## `reload([options])` -> `Promise<this>`
 Refresh the current instance in-place, i.e. update the object with current data from the DB and return the same object.
 This is different from doing a `find(Instance.id)`, because that would create and return a new instance. With this method,
 all references to the Instance are updated with the new data and no new objects are created.
@@ -207,15 +214,16 @@ all references to the Instance are updated with the new data and no new objects 
 * [Model#find](/Model#find)
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | [options] | Object | Options that are passed on to `Model.find` |
 
 
-======
+***
 
-#### `validate([options])` -> `Promise<undefined`
+## `validate([options])` -> `Promise<undefined`
 Validate the attribute of this instance according to validation rules set in the model definition.
 
 Emits null if and only if validation successful; otherwise an Error instance containing { field name : [error msgs] } entries.
@@ -226,16 +234,17 @@ Emits null if and only if validation successful; otherwise an Error instance con
 * [InstanceValidator](/InstanceValidator)
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | [options] | Object | Options that are passed to the validator |
 | [options.skip] | Array | An array of strings. All properties that are in this array will not be validated |
 
 
-======
+***
 
-#### `updateAttributes(updates, options)` -> `Promise<this>`
+## `updateAttributes(updates, options)` -> `Promise<this>`
 This is the same as calling `setAttributes`, then calling `save`.
 
 
@@ -245,29 +254,31 @@ This is the same as calling `setAttributes`, then calling `save`.
 * [Instance#save](/Instance#save)
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | updates | Object | See `setAttributes` |
 | options | Object | See `save`  |
 
 
-======
+***
 
-#### `destroy([options={}])` -> `Promise<undefined>`
+## `destroy([options={}])` -> `Promise<undefined>`
 Destroy the row corresponding to this instance. Depending on your setting for paranoid, the row will either be completely deleted, or have its deletedAt timestamp set to the current time.
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | [options={}] | Object |  |
 | [options.force=false] | Boolean | If set to true, paranoid models will actually be deleted  |
 
 
-======
+***
 
-#### `increment(fields, [options])` -> `Promise`
+## `increment(fields, [options])` -> `Promise`
 Increment the value of one or more columns. This is done in the database, which means it does not use the values currently stored on the Instance. The increment is done using a
 ```sql
 SET column = column + X
@@ -287,7 +298,8 @@ instance.increment({ answer: 42, tries: 1}, { by: 2 }) // increment answer by 42
 * [Instance#reload](/Instance#reload)
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | fields | String | If a string is provided, that column is incremented by the value of `by` given in options. If an array is provided, the same is true for each column. If and object is provided, each column is incremented by the value given |
@@ -296,9 +308,9 @@ instance.increment({ answer: 42, tries: 1}, { by: 2 }) // increment answer by 42
 | [options.transaction=null] | Transaction |  |
 
 
-======
+***
 
-#### `decrement(fields, [options])` -> `Promise`
+## `decrement(fields, [options])` -> `Promise`
 Decrement the value of one or more columns. This is done in the database, which means it does not use the values currently stored on the Instance. The decrement is done using a
 ```sql
 SET column = column - X
@@ -318,7 +330,8 @@ instance.decrement({ answer: 42, tries: 1}, { by: 2 }) // decrement answer by 42
 * [Instance#reload](/Instance#reload)
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | fields | String | If a string is provided, that column is decremented by the value of `by` given in options. If an array is provided, the same is true for each column. If and object is provided, each column is decremented by the value given |
@@ -327,33 +340,35 @@ instance.decrement({ answer: 42, tries: 1}, { by: 2 }) // decrement answer by 42
 | [options.transaction=null] | Transaction |  |
 
 
-======
+***
 
-#### `equals(other)` -> `Boolean`
+## `equals(other)` -> `Boolean`
 Check whether all values of this and `other` Instance are the same
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | other | Instance |  |
 
 
-======
+***
 
-#### `equalsOneOf(others)` -> `Boolean`
+## `equalsOneOf(others)` -> `Boolean`
 Check if this is eqaul to one of `others` by calling equals
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | others | Array |  |
 
 
-======
+***
 
-#### `toJSON()` -> `object`
+## `toJSON()` -> `object`
 Convert the instance to a JSON representation. Proxies to calling `get` with no keys. This means get all values gotten from the DB, and apply all custom getters.
 
 
@@ -362,6 +377,6 @@ Convert the instance to a JSON representation. Proxies to calling `get` with no 
 * [Instance#get](/Instance#get)
 
 
-======
+***
 
 _This document is automatically generated based on source code comments. Please do not edit it directly, as your changes will be ignored. Please write on <a href="irc://irc.freenode.net/#sequelizejs">IRC</a>, open an issue or a create a pull request if you feel something can be improved. For help on how to write source code documentation see [JSDoc](http://usejsdoc.org) and [dox](https://github.com/tj/dox)_

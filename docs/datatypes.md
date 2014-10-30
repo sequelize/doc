@@ -1,4 +1,4 @@
-### Class DataTypes
+# Class DataTypes
 A convenience class holding commonly used data types. The datatypes are used when definining a new model using `Sequelize.define`, like this:
 ```js
 sequelize.define('model', {
@@ -26,103 +26,103 @@ sequelize.define('model', {
 ```
 
 
-======
+***
 
-#### `STRING`
+## `STRING`
 A variable length string. Default length 255
 
 Available properties: `BINARY`
 
 
-======
+***
 
-#### `CHAR`
+## `CHAR`
 A fixed length string. Default length 255
 
 Available properties: `BINARY`
 
 
-======
+***
 
-#### `TEXT`
+## `TEXT`
 An unlimited length text column
 
-======
+***
 
-#### `INTEGER`
+## `INTEGER`
 A 32 bit integer.
 
 Available properties: `UNSIGNED`, `ZEROFILL`
 
 
-======
+***
 
-#### `BIGINT`
+## `BIGINT`
 A 64 bit integer.
 
 Available properties: `UNSIGNED`, `ZEROFILL`
 
 
-======
+***
 
-#### `DATE`
+## `DATE`
 A datetime column
 
-======
+***
 
-#### `BOOLEAN`
+## `BOOLEAN`
 A boolean / tinyint column, depending on dialect
 
-======
+***
 
-#### `FLOAT`
+## `FLOAT`
 Floating point number. Accepts one or two arguments for precision
 
 Available properties: `UNSIGNED`, `ZEROFILL`
 
 
-======
+***
 
-#### `NOW`
+## `NOW`
 A default value of the current timestamp
 
-======
+***
 
-#### `BLOB`
+## `BLOB`
 Binary storage. Available lengths: `tiny`, `medium`, `long`
 
 
-======
+***
 
-#### `DECIMAL`
+## `DECIMAL`
 Decimal number. Accepts one or two arguments for precision
 
 Available properties: `UNSIGNED`, `ZEROFILL`
 
 
-======
+***
 
-#### `UUID`
+## `UUID`
 A column storing a unique univeral identifier. Use with `UUIDV1` or `UUIDV4` for default values.
 
-======
+***
 
-#### `UUIDV1`
+## `UUIDV1`
 A default unique universal identifier generated following the UUID v1 standard
 
-======
+***
 
-#### `UUIDV4`
+## `UUIDV4`
 A default unique universal identifier generated following the UUID v2 standard
 
-======
+***
 
-#### `HSTORE`
+## `HSTORE`
 A key / value column. Only available in postgres.
 
-======
+***
 
-#### `VIRTUAL`
+## `VIRTUAL`
 A virtual value that is not stored in the DB. This could for example be useful if you want to provide a default value in your model
 that is returned to the user but not stored in the DB.
 
@@ -149,17 +149,17 @@ sequelize.define('user', {
 In the above code the password is stored plainly in the password field so it can be validated, but is never stored in the DB. 
 __Aliases:__ NONE
 
-======
+***
 
-#### `ENUM`
+## `ENUM`
 An enumeration. `DataTypes.ENUM('value', 'another value')`.
 
 
-======
+***
 
-#### `ARRAY()`
+## `ARRAY()`
 An array of `type`, e.g. `DataTypes.ARRAY(DataTypes.DECIMAL)`. Only available in postgres.
 
-======
+***
 
 _This document is automatically generated based on source code comments. Please do not edit it directly, as your changes will be ignored. Please write on <a href="irc://irc.freenode.net/#sequelizejs">IRC</a>, open an issue or a create a pull request if you feel something can be improved. For help on how to write source code documentation see [JSDoc](http://usejsdoc.org) and [dox](https://github.com/tj/dox)_

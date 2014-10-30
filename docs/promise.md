@@ -1,4 +1,4 @@
-### Class Promise
+# Class Promise
 A slightly modified version of bluebird promises. This means that, on top of the methods below, you can also call all the methods listed on the link below.
 
 The main difference is that sequelize promises allows you to attach a listener that will be called with the generated SQL, each time a query is run.
@@ -9,34 +9,36 @@ If you want to propagate SQL events across `then`, `all` calls etc., you must us
 ### Mixes:
 * https://github.com/petkaantonov/bluebird/blob/master/API.md
 
-======
+***
 
-#### `on(evt, fct)`
+## `on(evt, fct)`
 Listen for events, event emitter style. Mostly for backwards compat. with EventEmitter
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | evt | String |  |
 | fct | Function |  |
 
 
-======
+***
 
-#### `emit(type, value(s)*)`
+## `emit(type, value(s)*)`
 Emit an event from the emitter
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | type | string | The type of event |
 | value(s)* | any | All other arguments will be passed to the event listeners |
 
 
-======
+***
 
-#### `success(onSuccess)` -> `this`
+## `success(onSuccess)` -> `this`
 Listen for success events.
 
 ```js
@@ -46,16 +48,17 @@ promise.success(function (result) {
 ```
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | onSuccess | function |  |
 
 __Aliases:__ ok
 
-======
+***
 
-#### `error(onError)` -> `this`
+## `error(onError)` -> `this`
 Listen for error events
 
 ```js
@@ -65,16 +68,17 @@ promise.error(function (err) {
 ```
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | onError | function |  |
 
 __Aliases:__ fail, failure
 
-======
+***
 
-#### `done(onDone)` -> `this`
+## `done(onDone)` -> `this`
 Listen for both success and error events.
 
 ```js
@@ -84,31 +88,34 @@ promise.done(function (err, result) {
 ```
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | onDone | function |  |
 
 __Aliases:__ complete
 
-======
+***
 
-#### `sql(onSQL)` -> `this`
+## `sql(onSQL)` -> `this`
 Attach a function that is called every time the function that created this emitter executes a query.
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | onSQL | function |  |
 
 
-======
+***
 
-#### `proxy(promise, [options])` -> `this`
+## `proxy(promise, [options])` -> `this`
 Proxy every event of this promise to another one.
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | promise | SequelizePromise | The promise that should receive the events. |
@@ -116,6 +123,6 @@ Proxy every event of this promise to another one.
 | [options.events] | Array | An array of the events to proxy. Defaults to sql, error and success |
 
 
-======
+***
 
 _This document is automatically generated based on source code comments. Please do not edit it directly, as your changes will be ignored. Please write on <a href="irc://irc.freenode.net/#sequelizejs">IRC</a>, open an issue or a create a pull request if you feel something can be improved. For help on how to write source code documentation see [JSDoc](http://usejsdoc.org) and [dox](https://github.com/tj/dox)_

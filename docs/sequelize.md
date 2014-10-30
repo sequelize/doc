@@ -1,4 +1,4 @@
-### Class Sequelize
+# Class Sequelize
 This is the main class, the entry point to sequelize. To use it, you just need to import sequelize:
 
 ```js
@@ -8,9 +8,9 @@ var Sequelize = require('sequelize');
 In addition to sequelize, the connection library for the dialect you want to use should also be installed in your project. You don't need to import it however, as sequelize will take care of that.
 
 
-======
+***
 
-### `new Sequelize(database, [username=null], [password=null], [options={}])`
+## `new Sequelize(database, [username=null], [password=null], [options={}])`
 Instantiate sequelize with name of database, username and password
 
 #### Example usage
@@ -33,7 +33,8 @@ var sequelize = new Sequelize('mysql://localhost:3306/database', {})
 ```
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | database | String | The name of the database |
@@ -66,26 +67,27 @@ var sequelize = new Sequelize('mysql://localhost:3306/database', {})
 | [options.quoteIdentifiers=true] | Boolean | Set to `false` to make table names and attributes case-insensitive on Postgres and skip double quoting of them. |
 
 
-======
+***
 
-### `new Sequelize(uri, [options={}])`
+## `new Sequelize(uri, [options={}])`
 Instantiate sequlize with an URI
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | uri | String | A full database URI |
 | [options={}] | object | See above for possible options |
 
 
-======
+***
 
-#### `models`
+## `models`
 Models are stored here under the name given to `sequelize.define`
 
-======
+***
 
-#### `Sequelize`
+## `Sequelize`
 A reference to Sequelize constructor from sequelize. Useful for accessing DataTypes, Errors etc.
 
 **See:**
@@ -93,9 +95,9 @@ A reference to Sequelize constructor from sequelize. Useful for accessing DataTy
 * [Sequelize](/Sequelize)
 
 
-======
+***
 
-#### `Utils`
+## `Utils`
 A reference to sequelize utilities. Most users will not need to use these utils directly. However, you might want to use `Sequelize.Utils._`, which is a reference to the lodash library, if you don't already have it imported in your project.
 
 **See:**
@@ -103,9 +105,9 @@ A reference to sequelize utilities. Most users will not need to use these utils 
 * [Utils](/Utils)
 
 
-======
+***
 
-#### `Promise`
+## `Promise`
 A modified version of bluebird promises, that allows listening for sql events
 
 **See:**
@@ -113,9 +115,9 @@ A modified version of bluebird promises, that allows listening for sql events
 * [Promise](/Promise)
 
 
-======
+***
 
-#### `Validator`
+## `Validator`
 Exposes the validator.js object, so you can extend it with custom validation functions. The validator is exposed both on the instance, and on the constructor.
 
 **See:**
@@ -123,9 +125,9 @@ Exposes the validator.js object, so you can extend it with custom validation fun
 
 
 
-======
+***
 
-#### `Transaction`
+## `Transaction`
 A reference to the sequelize transaction class. Use this to access isolationLevels when creating a transaction
 
 **See:**
@@ -134,9 +136,9 @@ A reference to the sequelize transaction class. Use this to access isolationLeve
 * [Sequelize#transaction](/Sequelize#transaction)
 
 
-======
+***
 
-#### `Instance`
+## `Instance`
 A reference to the sequelize instance class.
 
 **See:**
@@ -144,9 +146,9 @@ A reference to the sequelize instance class.
 * [Instance](/Instance)
 
 
-======
+***
 
-#### `Error`
+## `Error`
 A general error class
 
 **See:**
@@ -154,9 +156,9 @@ A general error class
 * [Errors#BaseError](/Errors#BaseError)
 
 
-======
+***
 
-#### `ValidationError`
+## `ValidationError`
 Emitted when a validation fails
 
 **See:**
@@ -164,9 +166,9 @@ Emitted when a validation fails
 * [Errors#ValidationError](/Errors#ValidationError)
 
 
-======
+***
 
-#### `ValidationErrorItem`
+## `ValidationErrorItem`
 Describes a validation error on an instance path
 
 **See:**
@@ -174,9 +176,9 @@ Describes a validation error on an instance path
 * [Errors#ValidationErrorItem](/Errors#ValidationErrorItem)
 
 
-======
+***
 
-#### `DatabaseError`
+## `DatabaseError`
 A base class for all database related errors.
 
 **See:**
@@ -184,9 +186,9 @@ A base class for all database related errors.
 * [Errors#DatabaseError](/Errors#DatabaseError)
 
 
-======
+***
 
-#### `TimeoutError`
+## `TimeoutError`
 Thrown when a database query times out because of a deadlock
 
 **See:**
@@ -194,9 +196,9 @@ Thrown when a database query times out because of a deadlock
 * [Errors#TimeoutError](/Errors#TimeoutError)
 
 
-======
+***
 
-#### `UniqueConstraintError`
+## `UniqueConstraintError`
 Thrown when a unique constraint is violated in the database
 
 **See:**
@@ -204,9 +206,9 @@ Thrown when a unique constraint is violated in the database
 * [Errors#UniqueConstraintError](/Errors#UniqueConstraintError)
 
 
-======
+***
 
-#### `ForeignKeyConstraintError`
+## `ForeignKeyConstraintError`
 Thrown when a foreign key constraint is violated in the database
 
 **See:**
@@ -214,16 +216,16 @@ Thrown when a foreign key constraint is violated in the database
 * [Errors#ForeignKeyConstraintError](/Errors#ForeignKeyConstraintError)
 
 
-======
+***
 
-#### `getDialect()` -> `String`
+## `getDialect()` -> `String`
 Returns the specified dialect.
 
 __Returns:__ The specified dialect.
 
-======
+***
 
-#### `getQueryInterface()` -> `QueryInterface`
+## `getQueryInterface()` -> `QueryInterface`
 Returns an instance of QueryInterface.
 
 
@@ -233,9 +235,9 @@ Returns an instance of QueryInterface.
 
 __Returns:__ An instance (singleton) of QueryInterface. 
 
-======
+***
 
-#### `getMigrator([options={}], [force=false])` -> `Migrator`
+## `getMigrator([options={}], [force=false])` -> `Migrator`
 Returns an instance (singleton) of Migrator.
 
 
@@ -244,7 +246,8 @@ Returns an instance (singleton) of Migrator.
 * [Migrator](/Migrator)
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | [options={}] | Object | See Migrator for options |
@@ -252,9 +255,9 @@ Returns an instance (singleton) of Migrator.
 
 __Returns:__ An instance of Migrator.
 
-======
+***
 
-#### `define(modelName, attributes, [options])` -> `Model`
+## `define(modelName, attributes, [options])` -> `Model`
 Define a new model, representing a table in the DB.
 
 The table columns are define by the hash that is given as the second argument. Each attribute of the hash represents a column. A short table definition might look like this:
@@ -299,7 +302,8 @@ For more about validation, see http://sequelizejs.com/docs/latest/models#validat
 * [Hooks](/Hooks)
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | modelName | String | The name of the model. The model will be stored in `sequelize.models` under this name |
@@ -356,48 +360,51 @@ For more about validation, see http://sequelizejs.com/docs/latest/models#validat
 | [options.validate] | Object | An object of model wide validations. Validations have access to all model values via `this`. If the validator function takes an argument, it is asumed to be async, and is called with a callback that accepts an optional error.  |
 
 
-======
+***
 
-#### `model(modelName)` -> `Model`
+## `model(modelName)` -> `Model`
 Fetch a DAO factory which is already defined
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | modelName | String | The name of a model defined with Sequelize.define |
 
 
-======
+***
 
-#### `isDefined(modelName)` -> `Boolean`
+## `isDefined(modelName)` -> `Boolean`
 Checks whether a model with the given name is defined
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | modelName | String | The name of a model defined with Sequelize.define |
 
 
-======
+***
 
-#### `import(path)` -> `Model`
+## `import(path)` -> `Model`
 Imports a model defined in another file
 
 Imported models are cached, so multiple calls to import with the same path will not load the file multiple times
 
 See https://github.com/sequelize/sequelize/blob/master/examples/using-multiple-model-files/Task.js for a short example of how to define your models in separate files so that they can be imported by sequelize.import
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | path | String | The path to the file that holds the model you want to import. If the part is relative, it will be resolved relatively to the calling file |
 
 
-======
+***
 
-#### `query(sql, [callee], [options={}], [replacements])` -> `Promise`
+## `query(sql, [callee], [options={}], [replacements])` -> `Promise`
 Execute a query on the DB, with the posibility to bypass all the sequelize goodness.
 
 If you do not provide other arguments than the SQL, raw will be assumed to the true, and sequelize will not try to do any formatting to the results of the query.
@@ -408,7 +415,8 @@ If you do not provide other arguments than the SQL, raw will be assumed to the t
 * [Model#build](/Model#build)
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | sql | String |  |
@@ -421,14 +429,15 @@ If you do not provide other arguments than the SQL, raw will be assumed to the t
 | [replacements] | Object | Either an object of named parameter replacements in the format `:param` or an array of unnamed replacements to replace `?` in your SQL. |
 
 
-======
+***
 
-#### `set(variables, options)` -> `Promise`
+## `set(variables, options)` -> `Promise`
 Execute a query which would set an environment or user variable. The variables are set per connection, so this function needs a transaction.
 Only works for MySQL.
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | variables | Object | Object with multiple variables. |
@@ -436,9 +445,9 @@ Only works for MySQL.
 | options.transaction | Transaction | The transaction that the query should be executed under  |
 
 
-======
+***
 
-#### `createSchema(schema)` -> `Promise`
+## `createSchema(schema)` -> `Promise`
 Create a new database schema.
 
 Note,that this is a schema in the [postgres sense of the word](http://www.postgresql.org/docs/9.1/static/ddl-schemas.html),
@@ -450,49 +459,52 @@ not a database table. In mysql and sqlite, this command will do nothing.
 * [Model#schema](/Model#schema)
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | schema | String | Name of the schema |
 
 
-======
+***
 
-#### `showAllSchemas()` -> `Promise`
+## `showAllSchemas()` -> `Promise`
 Show all defined schemas
 
 Note,that this is a schema in the [postgres sense of the word](http://www.postgresql.org/docs/9.1/static/ddl-schemas.html),
 not a database table. In mysql and sqlite, this will show all tables.
 
-======
+***
 
-#### `dropSchema(schema)` -> `Promise`
+## `dropSchema(schema)` -> `Promise`
 Drop a single schema
 
 Note,that this is a schema in the [postgres sense of the word](http://www.postgresql.org/docs/9.1/static/ddl-schemas.html),
 not a database table. In mysql and sqlite, this drop a table matching the schema name
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | schema | String | Name of the schema |
 
 
-======
+***
 
-#### `dropAllSchemas()` -> `Promise`
+## `dropAllSchemas()` -> `Promise`
 Drop all schemas
 
 Note,that this is a schema in the [postgres sense of the word](http://www.postgresql.org/docs/9.1/static/ddl-schemas.html),
 not a database table. In mysql and sqlite, this is the equivalent of drop all tables.
 
-======
+***
 
-#### `sync([options={}])` -> `Promise`
+## `sync([options={}])` -> `Promise`
 Sync all defined DAOs to the DB.
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | [options={}] | Object |  |
@@ -502,9 +514,9 @@ Sync all defined DAOs to the DB.
 | [options.schema='public'] | String | The schema that the tables should be created in. This can be overriden for each table in sequelize.define |
 
 
-======
+***
 
-#### `drop(options)` -> `Promise`
+## `drop(options)` -> `Promise`
 Drop all tables defined through this sequelize instance. This is done by calling Model.drop on each model
 
 **See:**
@@ -512,22 +524,23 @@ Drop all tables defined through this sequelize instance. This is done by calling
 * [Model#drop](/Model#drop)
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | options | object | The options passed to each call to Model.drop |
 
 
-======
+***
 
-#### `authenticate()` -> `Promise`
+## `authenticate()` -> `Promise`
 Test the connection by trying to authenticate
 
 __Aliases:__ validate
 
-======
+***
 
-#### `fn ` -> `Sequelize.fn`
+## `fn ` -> `Sequelize.fn`
 Creates a object representing a database function. This can be used in search queries, both in where and order parts, and as default values in column definitions.
 If you want to refer to columns in your function, you should use `sequelize.col`, so that the columns are properly interpreted as columns and not a strings.
 
@@ -547,16 +560,17 @@ instance.updateAttributes({
 * [Sequelize#col](/Sequelize#col)
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | fn | String | The function you want to call |
 | args | any | All further arguments will be passed as arguments to the function  |
 
 
-======
+***
 
-#### `col` -> `Sequelize.col`
+## `col` -> `Sequelize.col`
 Creates a object representing a column in the DB. This is often useful in conjunction with `sequelize.fn`, since raw string arguments to fn will be escaped.
 
 **See:**
@@ -564,41 +578,44 @@ Creates a object representing a column in the DB. This is often useful in conjun
 * [Sequelize#fn](/Sequelize#fn)
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | col | String | The name of the column |
 
 
-======
+***
 
-#### `cast` -> `Sequelize.cast`
+## `cast` -> `Sequelize.cast`
 Creates a object representing a call to the cast function.
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | val | any | The value to cast |
 | type | String | The type to cast it to |
 
 
-======
+***
 
-#### `literal` -> `Sequelize.literal`
+## `literal` -> `Sequelize.literal`
 Creates a object representing a literal, i.e. something that will not be escaped.
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | val | any |  |
 
 __Aliases:__ asIs
 
-======
+***
 
-#### `and` -> `Sequelize.and`
+## `and` -> `Sequelize.and`
 An AND query
 
 **See:**
@@ -606,15 +623,16 @@ An AND query
 * [Model#find](/Model#find)
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | args | String | Each argument will be joined by AND |
 
 
-======
+***
 
-#### `or` -> `Sequelize.or`
+## `or` -> `Sequelize.or`
 An OR query
 
 **See:**
@@ -622,15 +640,16 @@ An OR query
 * [Model#find](/Model#find)
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | args | String | Each argument will be joined by OR |
 
 
-======
+***
 
-#### `json` -> `Sequelize.json`
+## `json` -> `Sequelize.json`
 Creates an object representing nested where conditions for postgres's json data-type.
 
 **See:**
@@ -638,16 +657,17 @@ Creates an object representing nested where conditions for postgres's json data-
 * [Model#find](/Model#find)
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | conditions | String | A hash containing strings/numbers or other nested hash, a string using dot notation or a string using postgres json syntax. |
 | [value] | String | An optional value to compare against. Produces a string of the form "<json path> = '<value>'". |
 
 
-======
+***
 
-#### `where` -> `Sequelize.where`
+## `where` -> `Sequelize.where`
 A way of specifying attr = condition.
 
 The attr can either be an object taken from `Model.rawAttributes` (for example `Model.rawAttributes.id` or `Model.rawAttributes.name`). The
@@ -661,7 +681,8 @@ For string attributes, use the regular `{ where: { attr: something }}` syntax. I
 * [Model#find](/Model#find)
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | attr | Object | The attribute, which can be either an attribute object from `Model.rawAttributes` or a sequelize object, for example an instance of `sequelize.fn`. For simple string attributes, use the POJO syntax |
@@ -670,9 +691,9 @@ For string attributes, use the regular `{ where: { attr: something }}` syntax. I
 
 __Aliases:__ condition
 
-======
+***
 
-#### `transaction([options={}])` -> `Promise`
+## `transaction([options={}])` -> `Promise`
 Start a transaction. When using transactions, you should pass the transaction in the options argument in order for the query to happen under that transaction
 
 ```js
@@ -706,7 +727,8 @@ sequelize.transaction(function (t) { // Note that we use a callback rather than 
 * [Transaction](/Transaction)
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | [options={}] | Object |  |
@@ -714,6 +736,6 @@ sequelize.transaction(function (t) { // Note that we use a callback rather than 
 | [options.isolationLevel='REPEATABLE | String | READ'] See `Sequelize.Transaction.ISOLATION_LEVELS` for possible options |
 
 
-======
+***
 
 _This document is automatically generated based on source code comments. Please do not edit it directly, as your changes will be ignored. Please write on <a href="irc://irc.freenode.net/#sequelizejs">IRC</a>, open an issue or a create a pull request if you feel something can be improved. For help on how to write source code documentation see [JSDoc](http://usejsdoc.org) and [dox](https://github.com/tj/dox)_

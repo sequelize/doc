@@ -1,24 +1,25 @@
-### Class Model
+# Class Model
 A Model represents a table in the database. Sometimes you might also see it refererred to as model, or simply as factory. This class should _not_ be instantiated directly, it is created using `sequelize.define`, and already created models can be loaded using `sequelize.import`
 
 ### Mixes:
 * Hooks
 * Associations
 
-======
+***
 
-#### `removeAttribute([attribute])`
+## `removeAttribute([attribute])`
 Remove attribute from model definition
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | [attribute] | String |  |
 
 
-======
+***
 
-#### `sync()` -> `Promise<this>`
+## `sync()` -> `Promise<this>`
 Sync this Model to the DB, that is create the table. Upon success, the callback will be called with the model instance (this)
 
 **See:**
@@ -26,26 +27,28 @@ Sync this Model to the DB, that is create the table. Upon success, the callback 
 * [Sequelize#sync](/Sequelize#sync)
 
 
-======
+***
 
-#### `drop([options])` -> `Promise`
+## `drop([options])` -> `Promise`
 Drop the table represented by this Model
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | [options] | Object |  |
 | [options.cascade=false] | Boolean | Also drop all objects depending on this table, such as views. Only works in postgres |
 
 
-======
+***
 
-#### `schema(schema, [options])` -> `this`
+## `schema(schema, [options])` -> `this`
 Apply a schema to this model. For postgres, this will actually place the schema in front of the table name - `"schema"."tableName"`,
 while the schema will be prepended to the table name for mysql and sqlite - `'schema.tablename'`.
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | schema | String | The name of the schema |
@@ -53,22 +56,23 @@ while the schema will be prepended to the table name for mysql and sqlite - `'sc
 | [options.schemaDelimiter='.'] | String | The character(s) that separates the schema name from the table name |
 
 
-======
+***
 
-#### `getTableName(options)` -> `String`
+## `getTableName(options)` -> `String`
 Get the tablename of the model, taking schema into account. The method will return The name as a string if the model has no schema,
 or an object with `tableName`, `schema` and `delimiter` properties.
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | options | Object | The hash of options from any query. You can use one model to access tables with matching schemas by overriding `getTableName` and using custom key/values to alter the name of the table. (eg. subscribers_1, subscribers_2) |
 
 
-======
+***
 
-#### `scope(options*)` -> `Model`
+## `scope(options*)` -> `Model`
 Apply a scope created in `define` to the model. First let's look at how to create scopes:
 ```js
 var Model = sequelize.define('model', attributes, {
@@ -105,16 +109,17 @@ Model.scope({ method: ['complexFunction' 'dan@sequelize.com', 42]}).findAll()
 ```
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | options* | Array | The scope(s) to apply. Scopes can either be passed as consecutive arguments, or as an array of arguments. To apply simple scopes, pass them as strings. For scope function, pass an object, with a `method` property. The value can either be a string, if the method does not take any arguments, or an array, where the first element is the name of the method, and consecutive elements are arguments to that method. Pass null to remove all scopes, including the default. |
 
 __Returns:__ A reference to the model, with the scope(s) applied. Calling scope again on the returned model will clear the previous scope.
 
-======
+***
 
-#### `findAll([options], [queryOptions])` -> `Promise<Array<Instance>>`
+## `findAll([options], [queryOptions])` -> `Promise<Array<Instance>>`
 Search for multiple instances.
 
 __Simple search using AND and =__
@@ -179,7 +184,8 @@ The success listener is called with an array of instances if the query succeeds.
 * [Sequelize#query](/Sequelize#query)
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | [options] | Object | A hash of options to describe the scope of the search |
@@ -203,9 +209,9 @@ The success listener is called with an array of instances if the query succeeds.
 
 __Aliases:__ all
 
-======
+***
 
-#### `findOne([options], [queryOptions])` -> `Promise<Instance>`
+## `findOne([options], [queryOptions])` -> `Promise<Instance>`
 Search for a single instance. This applies LIMIT 1, so the listener will always be called with a single instance.
 
 
@@ -214,7 +220,8 @@ Search for a single instance. This applies LIMIT 1, so the listener will always 
 * [Model#findAll](/Model#findAll)
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | [options] | Object | A hash of options to describe the scope of the search, or a number to search by id. |
@@ -222,13 +229,14 @@ Search for a single instance. This applies LIMIT 1, so the listener will always 
 
 __Aliases:__ find
 
-======
+***
 
-#### `aggregate(field, aggregateFunction, [options])` -> `Promise<options.dataType>`
+## `aggregate(field, aggregateFunction, [options])` -> `Promise<options.dataType>`
 Run an aggregation method on the specified field
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | field | String | The field to aggregate over. Can be a field name or * |
@@ -238,15 +246,16 @@ Run an aggregation method on the specified field
 | [options.distinct] | boolean | Applies DISTINCT to the field being aggregated over  |
 
 
-======
+***
 
-#### `count([options])` -> `Promise<Integer>`
+## `count([options])` -> `Promise<Integer>`
 Count the number of records matching the provided where clause.
 
 If you provide an `include` option, the number of matching associations will be counted instead.
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | [options] | Object |  |
@@ -254,9 +263,9 @@ If you provide an `include` option, the number of matching associations will be 
 | [options.distinct] | boolean | Appliy COUNT(DISTINCT(col))  |
 
 
-======
+***
 
-#### `findAndCountAll([findOptions], [queryOptions])` -> `Promise<Object>`
+## `findAndCountAll([findOptions], [queryOptions])` -> `Promise<Object>`
 Find all the rows matching your query, within a specified offset / limit, and get the total number of rows matching your query. This is very usefull for paging
 
 ```js
@@ -275,16 +284,17 @@ In the above example, `result.rows` will contain rows 13 through 24, while `resu
 * [Model#findAll](/Model#findAll)
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | [findOptions] | Object | See findAll |
 | [queryOptions] | Object | See Sequelize.query  |
 
 
-======
+***
 
-#### `max(field, [options])` -> `Promise<Any>`
+## `max(field, [options])` -> `Promise<Any>`
 Find the maximum value of field
 
 
@@ -293,16 +303,17 @@ Find the maximum value of field
 * [Model#aggregate](/Model#aggregate)
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | field | String |  |
 | [options] | Object | See aggregate |
 
 
-======
+***
 
-#### `min(field, [options])` -> `Promise<Any>`
+## `min(field, [options])` -> `Promise<Any>`
 Find the minimum value of field
 
 
@@ -311,16 +322,17 @@ Find the minimum value of field
 * [Model#aggregate](/Model#aggregate)
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | field | String |  |
 | [options] | Object | See aggregate |
 
 
-======
+***
 
-#### `sum(field, [options])` -> `Promise<Number>`
+## `sum(field, [options])` -> `Promise<Number>`
 Find the sum of field
 
 
@@ -329,20 +341,22 @@ Find the sum of field
 * [Model#aggregate](/Model#aggregate)
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | field | String |  |
 | [options] | Object | See aggregate |
 
 
-======
+***
 
-#### `build(values, [options])` -> `Instance`
+## `build(values, [options])` -> `Instance`
 Builds a new model instance. Values is an object of key value pairs, must be defined but can be empty.
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | values | Object |  |
@@ -353,9 +367,9 @@ Builds a new model instance. Values is an object of key value pairs, must be def
 | [options.include] | Array | an array of include options - Used to build prefetched/included model instances. See `set`  |
 
 
-======
+***
 
-#### `create(values, [options])` -> `Promise<Instance>`
+## `create(values, [options])` -> `Promise<Instance>`
 Builds a new model instance and calls save on it.
 
 
@@ -365,7 +379,8 @@ Builds a new model instance and calls save on it.
 * [Instance#save](/Instance#save)
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | values | Object |  |
@@ -378,14 +393,15 @@ Builds a new model instance and calls save on it.
 | [options.transaction] | Transaction |  |
 
 
-======
+***
 
-#### `` -> `Promise<Instance>`
+## `` -> `Promise<Instance>`
 Find a row that matches the query, or build (but don't save) the row if none is found.
 The successfull result of the promise will be (instance, initialized) - Make sure to use .spread()
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | options | Object |  |
@@ -395,9 +411,9 @@ The successfull result of the promise will be (instance, initialized) - Make sur
 
 __Aliases:__ findOrBuild
 
-======
+***
 
-#### `findOrCreate(options, [queryOptions])` -> `Promise<Instance`
+## `findOrCreate(options, [queryOptions])` -> `Promise<Instance`
 Find a row that matches the query, or build and save the row if none is found
 The successfull result of the promise will be (instance, created) - Make sure to use .spread()
 
@@ -406,7 +422,8 @@ However, it is not always possible to handle this case in SQLite, specifically i
 If a transaction is created, a savepoint will be created instead, and any unique constraint violation will be handled internally.
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | options | Object |  |
@@ -415,9 +432,9 @@ If a transaction is created, a savepoint will be created instead, and any unique
 | [queryOptions] | Object | Options passed to the find and create calls  |
 
 
-======
+***
 
-#### `bulkCreate(records, [options])` -> `Promise<Array<Instance>>`
+## `bulkCreate(records, [options])` -> `Promise<Array<Instance>>`
 Create and insert multiple instances in bulk.
 
 The success handler is passed an array of instances, but please notice that these may not completely represent the state of the rows in the DB. This is because MySQL
@@ -425,7 +442,8 @@ and SQLite do not make it easy to obtain back automatically generated IDs and ot
 To obtain Instances for the newly created values, you will need to query for them again.
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | records | Array | List of objects (key/value pairs) to create instances from |
@@ -437,13 +455,14 @@ To obtain Instances for the newly created values, you will need to query for the
 | [options.ignoreDuplicates=false] | Boolean | Ignore duplicate values for primary keys? (not supported by postgres)  |
 
 
-======
+***
 
-#### `destroy()` -> `Promise<undefined>`
+## `destroy()` -> `Promise<undefined>`
 Delete multiple instances, or set their deletedAt timestamp to the current time if `paranoid` is enabled.
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | [options.where] | Object | Filter the destroy |
@@ -455,14 +474,15 @@ Delete multiple instances, or set their deletedAt timestamp to the current time 
 | [options.cascade=false] | Boolean | Only used in conjuction with TRUNCATE. Truncates all tables that have foreign-key references to the named table, or to any tables added to the group due to CASCADE.  |
 
 
-======
+***
 
-#### `update(values, options)` -> `Promise<Array<affectedCount`
+## `update(values, options)` -> `Promise<Array<affectedCount`
 Update multiple instances that match the where options. The promise returns an array with one or two elements. The first element is always the number
 of affected rows, while the second element is the actual affected rows (only supported in postgres with `options.returning` true.)
 
 
-##### Params:
+**Params:**
+
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | values | Object |  |
@@ -475,15 +495,15 @@ of affected rows, while the second element is the actual affected rows (only sup
 | [options.limit] | Number | How many rows to update (only for mysql and mariadb)  |
 
 
-======
+***
 
-#### `describe()` -> `Promise`
+## `describe()` -> `Promise`
 Run a describe query on the table. The result will be return to the listener as a hash of attributes and their types.
 
 
-======
+***
 
-#### `dataset()` -> `node-sql`
+## `dataset()` -> `node-sql`
 A proxy to the node-sql query builder, which allows you to build your query through a chain of method calls.
 The returned instance already has all the fields property populated with the field of the model.
 
@@ -494,6 +514,6 @@ The returned instance already has all the fields property populated with the fie
 
 __Returns:__ A node-sql instance
 
-======
+***
 
 _This document is automatically generated based on source code comments. Please do not edit it directly, as your changes will be ignored. Please write on <a href="irc://irc.freenode.net/#sequelizejs">IRC</a>, open an issue or a create a pull request if you feel something can be improved. For help on how to write source code documentation see [JSDoc](http://usejsdoc.org) and [dox](https://github.com/tj/dox)_
