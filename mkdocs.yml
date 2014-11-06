@@ -1,16 +1,18 @@
-site_name: Sequelize docs
-theme: readthedocs
+site_name: Sequelize - node.js ORM for Postgres, MySQl, MariaDB and SQLite
+theme_dir: readthedocs_theme
 repo_url: https://github.com/sequelize/sequelize
 site_favicon: favicon.ico
 markdown_extensions: [gfm, codehilite]
+extra_css:
+- css/custom.css
 pages:
-- ['index.md', 'Home', 'Home']
-- ['sequelize.md', 'Sequelize', 'Sequelize']
-- ['model.md', 'Model', 'Model']
-- ['instance.md', 'Instance', 'Instance']
-- ['associations.md', 'Associations', 'Associations']
-- ['hooks.md', 'Hooks', 'Hooks']
-- ['promise.md', 'Promise', 'Promise']
-- ['transaction.md', 'Transaction', 'Transaction']
-- ['datatypes.md', 'Datatypes', 'Datatypes']
-- ['errors.md', 'Errors', 'Errors']
+- ['index.md', 'Home', 'Welcome']
+- ['api/sequelize.md', 'API', 'Sequelize']
+- ['api/model.md', 'API', 'Model']
+- ['api/instance.md', 'API', 'Instance']
+- ['api/associations.md', 'API', 'Associations']
+- ['api/hooks.md', 'API', 'Hooks']
+- ['api/promise.md', 'API', 'Promise']
+- ['api/transaction.md', 'API', 'Transaction']
+- ['api/datatypes.md', 'API', 'Datatypes']
+- ['api/errors.md', 'API', 'Errors']
