@@ -19,17 +19,17 @@ block documentation
         a(href='#configuration', rel='nofollow') configuration #{''}
         | to see how to do that.
       pre.dark-blue
-        code.javascript
-          | var Project = sequelize.define('Project', {
-          |   title: Sequelize.STRING,
-          |   description: Sequelize.TEXT
-          | })
-          | &nbsp;
-          | var Task = sequelize.define('Task', {
-          |   title: Sequelize.STRING,
-          |   description: Sequelize.TEXT,
-          |   deadline: Sequelize.DATE
-          | })
+        code.javascript.
+          var Project = sequelize.define('Project', {
+            title: Sequelize.STRING,
+            description: Sequelize.TEXT
+          })
+          &nbsp;
+          var Task = sequelize.define('Task', {
+            title: Sequelize.STRING,
+            description: Sequelize.TEXT,
+            deadline: Sequelize.DATE
+          })
 
       p You can also set some options on each column&colon;
       pre.dark-blue
@@ -73,57 +73,57 @@ block documentation
       h3#data-types Data types
       p Sequelize currently supports the following datatypes&colon;
       pre.dark-blue
-        code.javascript
-          | Sequelize.STRING                      // VARCHAR(255)
-          | Sequelize.STRING(1234)                // VARCHAR(1234)
-          | Sequelize.STRING.BINARY               // VARCHAR BINARY
-          | Sequelize.TEXT                        // TEXT
-          | &nbsp;
-          | Sequelize.INTEGER                     // INTEGER
-          | Sequelize.BIGINT                      // BIGINT
-          | Sequelize.BIGINT(11)                  // BIGINT(11)
-          | Sequelize.FLOAT                       // FLOAT
-          | Sequelize.FLOAT(11)                   // FLOAT(11)
-          | Sequelize.FLOAT(11, 12)               // FLOAT(11,12)
-          | &nbsp;
-          | Sequelize.DECIMAL                     // DECIMAL
-          | Sequelize.DECIMAL(10, 2)              // DECIMAL(10,2)
-          | &nbsp;
-          | Sequelize.DATE                        // DATETIME for mysql / sqlite, TIMESTAMP WITH TIME ZONE for postgres
-          | Sequelize.BOOLEAN                     // TINYINT(1)
-          | &nbsp;
-          | Sequelize.ENUM('value 1', 'value 2')  // An ENUM with allowed values 'value 1' and 'value 2'
-          | Sequelize.ARRAY(Sequelize.TEXT)       // Defines an array. PostgreSQL only.
-          | &nbsp;
-          | Sequelize.BLOB                        // BLOB (bytea for PostgreSQL)
-          | Sequelize.BLOB('tiny')                // TINYBLOB (bytea for PostgreSQL. Other options are medium and long)
-          | Sequelize.UUID                        // UUID datatype for PostgreSQL and SQLite, CHAR(36) BINARY for MySQL (use defaultValue: Sequelize.UUIDV1 or Sequelize.UUIDV4 to make sequelize generate the ids automatically)
+        code.javascript.
+          Sequelize.STRING                      // VARCHAR(255)
+          Sequelize.STRING(1234)                // VARCHAR(1234)
+          Sequelize.STRING.BINARY               // VARCHAR BINARY
+          Sequelize.TEXT                        // TEXT
+          &nbsp;
+          Sequelize.INTEGER                     // INTEGER
+          Sequelize.BIGINT                      // BIGINT
+          Sequelize.BIGINT(11)                  // BIGINT(11)
+          Sequelize.FLOAT                       // FLOAT
+          Sequelize.FLOAT(11)                   // FLOAT(11)
+          Sequelize.FLOAT(11, 12)               // FLOAT(11,12)
+          &nbsp;
+          Sequelize.DECIMAL                     // DECIMAL
+          Sequelize.DECIMAL(10, 2)              // DECIMAL(10,2)
+          &nbsp;
+          Sequelize.DATE                        // DATETIME for mysql / sqlite, TIMESTAMP WITH TIME ZONE for postgres
+          Sequelize.BOOLEAN                     // TINYINT(1)
+          &nbsp;
+          Sequelize.ENUM('value 1', 'value 2')  // An ENUM with allowed values 'value 1' and 'value 2'
+          Sequelize.ARRAY(Sequelize.TEXT)       // Defines an array. PostgreSQL only.
+          &nbsp;
+          Sequelize.BLOB                        // BLOB (bytea for PostgreSQL)
+          Sequelize.BLOB('tiny')                // TINYBLOB (bytea for PostgreSQL. Other options are medium and long)
+          Sequelize.UUID                        // UUID datatype for PostgreSQL and SQLite, CHAR(36) BINARY for MySQL (use defaultValue: Sequelize.UUIDV1 or Sequelize.UUIDV4 to make sequelize generate the ids automatically)
 
       p
         | The BLOB data type allows you to insert data both as strings and as buffers&period; When you do a find or findAll on a model which has a BLOB column&comma; that data will always be returned as a buffer&period;
       p
         | In addition to the type mentioned above&comma; integer&comma; bigint and float also support unsigned and zerofill properties&comma; which can be combined in any order&colon;
       pre.dark-blue
-        code.javascript
-          | Sequelize.INTEGER.UNSIGNED              // INTEGER UNSIGNED
-          | Sequelize.INTEGER(11).UNSIGNED          // INTEGER(11) UNSIGNED
-          | Sequelize.INTEGER(11).ZEROFILL          // INTEGER(11) ZEROFILL
-          | Sequelize.INTEGER(11).ZEROFILL.UNSIGNED // INTEGER(11) UNSIGNED ZEROFILL
-          | Sequelize.INTEGER(11).UNSIGNED.ZEROFILL // INTEGER(11) UNSIGNED ZEROFILL
+        code.javascript.
+          Sequelize.INTEGER.UNSIGNED              // INTEGER UNSIGNED
+          Sequelize.INTEGER(11).UNSIGNED          // INTEGER(11) UNSIGNED
+          Sequelize.INTEGER(11).ZEROFILL          // INTEGER(11) ZEROFILL
+          Sequelize.INTEGER(11).ZEROFILL.UNSIGNED // INTEGER(11) UNSIGNED ZEROFILL
+          Sequelize.INTEGER(11).UNSIGNED.ZEROFILL // INTEGER(11) UNSIGNED ZEROFILL
 
       p
         em
           | The examples above only show integer&comma; but the same can be done with bigint and float
       p Usage in object notation&colon;
       pre.dark-blue
-        code.javascript
-          | // for enums:
-          | sequelize.define('model', {
-          |   states: {
-          |     type:   Sequelize.ENUM,
-          |     values: ['active', 'pending', 'deleted']
-          |   }
-          | })
+        code.javascript.
+          // for enums:
+          sequelize.define('model', {
+            states: {
+              type:   Sequelize.ENUM,
+              values: ['active', 'pending', 'deleted']
+            }
+          })
 
 
       h3#getters---setters Getters & setters
@@ -139,23 +139,23 @@ block documentation
         | If a getter or setter is defined in both places then the function found in the relevant property definition will always take precedence&period;
       h4#getters---setters-defining-as-part-of-a-property Defining as part of a property
       pre.dark-blue
-        code.javascript
-          | var Foo = sequelize.define('Foo', {
-          |   name: { Sequelize.STRING },
-          |   title: {
-          |     type     : Sequelize.STRING,
-          |     allowNull: false,
-          |     get      : function()  {
-          |        /*
-          |          do your magic here and return something!
-          |          'this' allows you to access attributes of the model.
-          | &nbsp;
-          |         example: this.getDataValue('name') works
-          |       */
-          |     },
-          |     set      : function(v) { /* do your magic with the input here! */ }
-          |   }
-          | });
+        code.javascript.
+          var Foo = sequelize.define('Foo', {
+            name: { Sequelize.STRING },
+            title: {
+              type     : Sequelize.STRING,
+              allowNull: false,
+              get      : function()  {
+                 /*
+                   do your magic here and return something!
+                   'this' allows you to access attributes of the model.
+          &nbsp;
+                  example: this.getDataValue('name') works
+                */
+              },
+              set      : function(v) { /* do your magic with the input here! */ }
+            }
+          });
 
       h4#getters---setters-defining-as-part-of-the-model-options Defining as part of the model options
       p
@@ -180,46 +180,46 @@ block documentation
         a(href='#get_and_set_helper_funcs') see below
         | &rpar;&period;
       pre.dark-blue
-        code.javascript
-          | var defaultToWhiteSpace = function(characters) {
-          |     if (characters == null)
-          |       return '\\s';
-          |     else if (characters.source)
-          |       return characters.source;
-          |     else
-          |       return ;
-          |   };
-          | &nbsp;
-          | var slugify = function(str) {
-          |   var from  = "ąàáäâãåæćęèéëêìíïîłńòóöôõøśùúüûñçżź",
-          |       to    = "aaaaaaaaceeeeeiiiilnoooooosuuuunczz",
-          |       regex = new RegExp('[' + from.replace(/([.*+?^=!:${}()|[\]\/\\])/g, '\\$1') + ']', 'g');
-          | &nbsp;
-          |   if (str == null) return '';
-          | &nbsp;
-          |   str = String(str).toLowerCase().replace(regex, function(c) {
-          |     return to.charAt(from.indexOf(c)) || '-';
-          |   });
-          | &nbsp;
-          |   return str.replace(/[^\w\s-]/g, '').replace(/([A-Z])/g, '-$1').replace(/[-_\s]+/g, '-').toLowerCase();
-          | }
-          | &nbsp;
-          | var Foo = sequelize.define('Foo', {
-          |   title: {
-          |     type     : Sequelize.STRING,
-          |     allowNull: false,
-          |   }
-          | }, {
-          | &nbsp;
-          |   getterMethods   : {
-          |     title       : function()  { /* do your magic here and return something! */ },
-          |     title_slug  : function()  { return slugify(this.title); }
-          |   },
-          | &nbsp;
-          |   setterMethods   : {
-          |     title       : function(v) { /* do your magic with the input here! */ },
-          |   }
-          | });
+        code.javascript.
+          var defaultToWhiteSpace = function(characters) {
+              if (characters == null)
+                return '\\s';
+              else if (characters.source)
+                return characters.source;
+              else
+                return ;
+            };
+          &nbsp;
+          var slugify = function(str) {
+            var from  = "ąàáäâãåæćęèéëêìíïîłńòóöôõøśùúüûñçżź",
+                to    = "aaaaaaaaceeeeeiiiilnoooooosuuuunczz",
+                regex = new RegExp('[' + from.replace(/([.*+?^=!:${}()|[\]\/\\])/g, '\\$1') + ']', 'g');
+          &nbsp;
+            if (str == null) return '';
+          &nbsp;
+            str = String(str).toLowerCase().replace(regex, function(c) {
+              return to.charAt(from.indexOf(c)) || '-';
+            });
+          &nbsp;
+            return str.replace(/[^\w\s-]/g, '').replace(/([A-Z])/g, '-$1').replace(/[-_\s]+/g, '-').toLowerCase();
+          }
+          &nbsp;
+          var Foo = sequelize.define('Foo', {
+            title: {
+              type     : Sequelize.STRING,
+              allowNull: false,
+            }
+          }, {
+          &nbsp;
+            getterMethods   : {
+              title       : function()  { /* do your magic here and return something! */ },
+              title_slug  : function()  { return slugify(this.title); }
+            },
+          &nbsp;
+            setterMethods   : {
+              title       : function(v) { /* do your magic with the input here! */ },
+            }
+          });
 
       h4#getters---setters--helper-functions-for-use-inside-getter-setter-definitions
         a#get_and_set_helper_funcs
@@ -230,11 +230,11 @@ block documentation
           code this&period;getDataValue&lpar;&rpar;
           | &comma; e&period;g&period;&colon;
       pre.dark-blue
-        code.javascript
-          | /* a getter for 'title' property */
-          | function() {
-          |     return this.getDataValue('title');
-          | }
+        code.javascript.
+          /* a getter for 'title' property */
+          function() {
+              return this.getDataValue('title');
+          }
 
       ul
         li
@@ -242,11 +242,11 @@ block documentation
           code this&period;setDataValue&lpar;&rpar;
           | &comma; e&period;g&period;&colon;
       pre.dark-blue
-        code.javascript
-          | /* a setter for 'title' property */
-          | function(title) {
-          |     return this.setDataValue('title', title.toString().toLowerCase());
-          | }
+        code.javascript.
+          /* a setter for 'title' property */
+          function(title) {
+              return this.setDataValue('title', title.toString().toLowerCase());
+          }
 
       p
         strong N.B.:&nbsp;
@@ -278,55 +278,55 @@ block documentation
         code create&lpar;&rpar;
         | functions&period;
       pre.dark-blue
-        code.javascript
-          | var ValidateMe = sequelize.define('Foo', {
-          |   foo: {
-          |     type: Sequelize.STRING,
-          |     validate: {
-          |       is: ["^[a-z]+$",'i'],     // will only allow letters
-          |       is: /^[a-z]+$/i,          // same as the previous example using real RegExp
-          |       not: ["[a-z]",'i'],       // will not allow letters
-          |       isEmail: true,            // checks for email format (foo@bar.com)
-          |       isUrl: true,              // checks for url format (http://foo.com)
-          |       isIP: true,               // checks for IPv4 (129.89.23.1) or IPv6 format
-          |       isIPv4: true,             // checks for IPv4 (129.89.23.1)
-          |       isIPv6: true,             // checks for IPv6 format
-          |       isAlpha: true,            // will only allow letters
-          |       isAlphanumeric: true      // will only allow alphanumeric characters, so "_abc" will fail
-          |       isNumeric: true           // will only allow numbers
-          |       isInt: true,              // checks for valid integers
-          |       isFloat: true,            // checks for valid floating point numbers
-          |       isDecimal: true,          // checks for any numbers
-          |       isLowercase: true,        // checks for lowercase
-          |       isUppercase: true,        // checks for uppercase
-          |       notNull: true,            // won't allow null
-          |       isNull: true,             // only allows null
-          |       notEmpty: true,           // don't allow empty strings
-          |       equals: 'specific value', // only allow a specific value
-          |       contains: 'foo',          // force specific substrings
-          |       notIn: [['foo', 'bar']],  // check the value is not one of these
-          |       isIn: [['foo', 'bar']],   // check the value is one of these
-          |       notContains: 'bar',       // don't allow specific substrings
-          |       len: [2,10],              // only allow values with length between 2 and 10
-          |       isUUID: 4,                // only allow uuids
-          |       isDate: true,             // only allow date strings
-          |       isAfter: "2011-11-05",    // only allow date strings after a specific date
-          |       isBefore: "2011-11-05",   // only allow date strings before a specific date
-          |       max: 23,                  // only allow values <= 23
-          |       min: 23,                  // only allow values >= 23
-          |       isCreditCard: true,       // check for valid credit card numbers
-          | &nbsp;
-          |       // custom validations are also possible:
-          |       isEven: function(value) {
-          |         if(parseInt(value) % 2 != 0) {
-          |           throw new Error('Only even values are allowed!')
-          |         // we also are in the model's context here, so this.otherField
-          |         // would get the value of otherField if it existed
-          |         }
-          |       }
-          |     }
-          |   }
-          | })
+        code.javascript.
+          var ValidateMe = sequelize.define('Foo', {
+            foo: {
+              type: Sequelize.STRING,
+              validate: {
+                is: ["^[a-z]+$",'i'],     // will only allow letters
+                is: /^[a-z]+$/i,          // same as the previous example using real RegExp
+                not: ["[a-z]",'i'],       // will not allow letters
+                isEmail: true,            // checks for email format (foo@bar.com)
+                isUrl: true,              // checks for url format (http://foo.com)
+                isIP: true,               // checks for IPv4 (129.89.23.1) or IPv6 format
+                isIPv4: true,             // checks for IPv4 (129.89.23.1)
+                isIPv6: true,             // checks for IPv6 format
+                isAlpha: true,            // will only allow letters
+                isAlphanumeric: true      // will only allow alphanumeric characters, so "_abc" will fail
+                isNumeric: true           // will only allow numbers
+                isInt: true,              // checks for valid integers
+                isFloat: true,            // checks for valid floating point numbers
+                isDecimal: true,          // checks for any numbers
+                isLowercase: true,        // checks for lowercase
+                isUppercase: true,        // checks for uppercase
+                notNull: true,            // won't allow null
+                isNull: true,             // only allows null
+                notEmpty: true,           // don't allow empty strings
+                equals: 'specific value', // only allow a specific value
+                contains: 'foo',          // force specific substrings
+                notIn: [['foo', 'bar']],  // check the value is not one of these
+                isIn: [['foo', 'bar']],   // check the value is one of these
+                notContains: 'bar',       // don't allow specific substrings
+                len: [2,10],              // only allow values with length between 2 and 10
+                isUUID: 4,                // only allow uuids
+                isDate: true,             // only allow date strings
+                isAfter: "2011-11-05",    // only allow date strings after a specific date
+                isBefore: "2011-11-05",   // only allow date strings before a specific date
+                max: 23,                  // only allow values <= 23
+                min: 23,                  // only allow values >= 23
+                isCreditCard: true,       // check for valid credit card numbers
+          &nbsp;
+                // custom validations are also possible:
+                isEven: function(value) {
+                  if(parseInt(value) % 2 != 0) {
+                    throw new Error('Only even values are allowed!')
+                  // we also are in the model's context here, so this.otherField
+                  // would get the value of otherField if it existed
+                  }
+                }
+              }
+            }
+          })
 
       p
         | Note that where multiple arguments need to be passed to the built-in validation
@@ -343,21 +343,21 @@ block documentation
         | object instead of the plain value or array of arguments&comma; for example a validator
         | which needs no argument can be given a custom message with
       pre.dark-blue
-        code.javascript
-          | isInt: {
-          |   msg: "Must be an integer number of pennies"
-          | }
+        code.javascript.
+          isInt: {
+            msg: "Must be an integer number of pennies"
+          }
 
       p
         | or if arguments need to also be passed add an
         code args
         | property&colon;
       pre.dark-blue
-        code.javascript
-          | isIn: {
-          |   args: [['en', 'zh']],
-          |   msg: "Must be English or Chinese"
-          | }
+        code.javascript.
+          isIn: {
+            args: [['en', 'zh']],
+            msg: "Must be English or Chinese"
+          }
 
       p
         | When using custom validator functions the error message will be whatever message
@@ -422,31 +422,31 @@ block documentation
         | if a field exists with the same name as a custom model validation&period;&rpar;
       p An example&colon;
       pre.dark-blue
-        code.javascript
-          | var Pub = Sequelize.define('Pub', {
-          |   name: { type: Sequelize.STRING },
-          |   address: { type: Sequelize.STRING },
-          |   latitude: {
-          |     type: Sequelize.INTEGER,
-          |     allowNull: true,
-          |     defaultValue: null,
-          |     validate: { min: -90, max: 90 }
-          |   },
-          |   longitude: {
-          |     type: Sequelize.INTEGER,
-          |     allowNull: true,
-          |     defaultValue: null,
-          |     validate: { min: -180, max: 180 }
-          |   },
-          | }, {
-          |   validate: {
-          |     bothCoordsOrNone: function() {
-          |       if ((this.latitude === null) === (this.longitude === null)) {
-          |         throw new Error('Require either both latitude and longitude or neither')
-          |       }
-          |     }
-          |   }
-          | })
+        code.javascript.
+          var Pub = Sequelize.define('Pub', {
+            name: { type: Sequelize.STRING },
+            address: { type: Sequelize.STRING },
+            latitude: {
+              type: Sequelize.INTEGER,
+              allowNull: true,
+              defaultValue: null,
+              validate: { min: -90, max: 90 }
+            },
+            longitude: {
+              type: Sequelize.INTEGER,
+              allowNull: true,
+              defaultValue: null,
+              validate: { min: -180, max: 180 }
+            },
+          }, {
+            validate: {
+              bothCoordsOrNone: function() {
+                if ((this.latitude === null) === (this.longitude === null)) {
+                  throw new Error('Require either both latitude and longitude or neither')
+                }
+              }
+            }
+          })
 
       p
         | In this simple case an object fails validation if latitude or longitude is
@@ -455,77 +455,77 @@ block documentation
         code raging&UnderBar;bullock&UnderBar;arms&period;validate&lpar;&rpar;
         | might return
       pre.dark-blue
-        code.javascript
-          | {
-          |   'latitude': ['Invalid number: latitude'],
-          |   'bothCoordsOrNone': ['Require either both latitude and longitude or neither']
-          | }
+        code.javascript.
+          {
+            'latitude': ['Invalid number: latitude'],
+            'bothCoordsOrNone': ['Require either both latitude and longitude or neither']
+          }
 
       h3#configuration Configuration
       p You can also influence the way Sequelize handles your column names&colon;
       pre.dark-blue
-        code.javascript
-          | var Bar = sequelize.define('Bar', { /* bla */ }, {
-          |   // don't add the timestamp attributes (updatedAt, createdAt)
-          |   timestamps: false,
-          | &nbsp;
-          |   // don't delete database entries but set the newly added attribute deletedAt
-          |   // to the current date (when deletion was done). paranoid will only work if
-          |   // timestamps are enabled
-          |   paranoid: true,
-          | &nbsp;
-          |   // don't use camelcase for automatically added attributes but underscore style
-          |   // so updatedAt will be updated_at
-          |   underscored: true,
-          | &nbsp;
-          |   // disable the modification of tablenames; By default, sequelize will automatically
-          |   // transform all passed model names (first parameter of define) into plural.
-          |   // if you don't want that, set the following
-          |   freezeTableName: true,
-          | &nbsp;
-          |   // define the table's name
-          |   tableName: 'my_very_custom_table_name'
-          | })
+        code.javascript.
+          var Bar = sequelize.define('Bar', { /* bla */ }, {
+            // don't add the timestamp attributes (updatedAt, createdAt)
+            timestamps: false,
+          &nbsp;
+            // don't delete database entries but set the newly added attribute deletedAt
+            // to the current date (when deletion was done). paranoid will only work if
+            // timestamps are enabled
+            paranoid: true,
+          &nbsp;
+            // don't use camelcase for automatically added attributes but underscore style
+            // so updatedAt will be updated_at
+            underscored: true,
+          &nbsp;
+            // disable the modification of tablenames; By default, sequelize will automatically
+            // transform all passed model names (first parameter of define) into plural.
+            // if you don't want that, set the following
+            freezeTableName: true,
+          &nbsp;
+            // define the table's name
+            tableName: 'my_very_custom_table_name'
+          })
 
       p If you want sequelize to handle timestamps, but only want some of them, or want your timestamps to be called something else, you can override each column individually:
       pre.dark-blue
-        code.javascript
-          | var Foo = sequelize.define('Foo',  { /* bla */ }, {
-          |   // don't forget to enable timestamps!
-          |   timestamps: true,
-          | &nbsp;
-          |   // I don't want createdAt
-          |   createdAt: false,
-          | &nbsp;
-          |   // I want updatedAt to actually be called updateTimestamp
-          |   updatedAt: 'updateTimestamp'
-          | &nbsp;
-          |   // And deletedAt to be called destroyTime (remember to enable paranoid for this to work)
-          |   deletedAt: 'destroyTime',
-          |   paranoid: true
-          | })
+        code.javascript.
+          var Foo = sequelize.define('Foo',  { /* bla */ }, {
+            // don't forget to enable timestamps!
+            timestamps: true,
+          &nbsp;
+            // I don't want createdAt
+            createdAt: false,
+          &nbsp;
+            // I want updatedAt to actually be called updateTimestamp
+            updatedAt: 'updateTimestamp'
+          &nbsp;
+            // And deletedAt to be called destroyTime (remember to enable paranoid for this to work)
+            deletedAt: 'destroyTime',
+            paranoid: true
+          })
 
       p
         | You can also change the database engine&comma; e&period;g&period; to MyISAM&period; InnoDB is default since
         code v1&period;2&period;1
         | of Sequelize&period;
       pre.dark-blue
-        code.javascript
-          | var Person = sequelize.define('Person', { /* attributes */ }, {
-          |   engine: 'MYISAM'
-          | })
-          | &nbsp;
-          | // or globally
-          | var sequelize = new Sequelize(db, user, pw, {
-          |   define: { engine: 'MYISAM' }
-          | })
+        code.javascript.
+          var Person = sequelize.define('Person', { /* attributes */ }, {
+            engine: 'MYISAM'
+          })
+          &nbsp;
+          // or globally
+          var sequelize = new Sequelize(db, user, pw, {
+            define: { engine: 'MYISAM' }
+          })
 
       p Finaly you can specify a comment for the table in MySQL and PG
       pre.dark-blue
-        code.javascript
-          | var Person = sequelize.define('Person', { /* attributes */ }, {
-          |   comment: "I'm a table comment!"
-          | })
+        code.javascript.
+          var Person = sequelize.define('Person', { /* attributes */ }, {
+            comment: "I'm a table comment!"
+          })
 
       h3#import Import
       p
@@ -535,18 +535,18 @@ block documentation
         code v1&period;5&period;0
         | of Sequelize the import is cached&comma; so you won&apos;t run into troubles when calling the import of a file twice or more often&period;
       pre.dark-blue
-        code.javascript
-          | // in your server file - e.g. app.js
-          | var Project = sequelize.import(__dirname + "/path/to/models/project")
-          | &nbsp;
-          | // The model definition is done in /path/to/models/project.js
-          | // As you might notice, the DataTypes are the very same as explained above
-          | module.exports = function(sequelize, DataTypes) {
-          |   return sequelize.define("Project", {
-          |     name: DataTypes.STRING,
-          |     description: DataTypes.TEXT
-          |   })
-          | }
+        code.javascript.
+          // in your server file - e.g. app.js
+          var Project = sequelize.import(__dirname + "/path/to/models/project")
+          &nbsp;
+          // The model definition is done in /path/to/models/project.js
+          // As you might notice, the DataTypes are the very same as explained above
+          module.exports = function(sequelize, DataTypes) {
+            return sequelize.define("Project", {
+              name: DataTypes.STRING,
+              description: DataTypes.TEXT
+            })
+          }
       p
         | Since
         code v1&period;7&period;0
@@ -554,136 +554,136 @@ block documentation
         code import
         | -method can now accept a callback as an argument&period;
       pre.dark-blue
-        code.javascript
-          | sequelize.import('Project', function(sequelize, DataTypes) {
-          |   return sequelize.define("Project", {
-          |     name: DataTypes.STRING,
-          |     description: DataTypes.TEXT
-          |   })
-          | })
+        code.javascript.
+          sequelize.import('Project', function(sequelize, DataTypes) {
+            return sequelize.define("Project", {
+              name: DataTypes.STRING,
+              description: DataTypes.TEXT
+            })
+          })
 
       h3#database-synchronization Database synchronization
       p
         | When starting a new project you won&apos;t have a database structure and using Sequelize you won&apos;t need to&period; Just specify your model structures and let the library do the rest&period; Currently supported is the creation and deletion of tables&colon;
       pre.dark-blue
-        code.javascript
-          | // Create the tables:
-          | Project.sync() // will emit success or failure event
-          | Task.sync() // will emit success or failure event
-          | &nbsp;
-          | // Force the creation!
-          | Project.sync({force: true}) // this will drop the table first and re-create it afterwards
-          | &nbsp;
-          | // drop the tables:
-          | Project.drop() // will emit success or failure event
-          | Task.drop() // will emit success or failure event
-          | &nbsp;
-          | // event handling:
-          | Project.[sync|drop]().success(function() {
-          |   // ok ... everything is nice!
-          | }).error(function(error) {
-          |   // oooh, did you entered wrong database credentials?
-          | })
+        code.javascript.
+          // Create the tables:
+          Project.sync() // will emit success or failure event
+          Task.sync() // will emit success or failure event
+          &nbsp;
+          // Force the creation!
+          Project.sync({force: true}) // this will drop the table first and re-create it afterwards
+          &nbsp;
+          // drop the tables:
+          Project.drop() // will emit success or failure event
+          Task.drop() // will emit success or failure event
+          &nbsp;
+          // event handling:
+          Project.[sync|drop]().success(function() {
+            // ok ... everything is nice!
+          }).error(function(error) {
+            // oooh, did you entered wrong database credentials?
+          })
 
       p
         | Because synchronizing and dropping all of your tables might be a lot of lines to write&comma; you can also let Sequelize do the work for you&colon;
       pre.dark-blue
-        code.javascript
-          | // create all tables... now!
-          | sequelize.sync() // will emit success or failure
-          | &nbsp;
-          | // force it!
-          | sequelize.sync({force: true}) // emit ... nomnomnom
-          | &nbsp;
-          | // want to drop 'em all?
-          | sequelize.drop() // I guess you've got it (emit)
-          | &nbsp;
-          | // emit handling:
-          | sequelize.[sync|drop]().success(function() {
-          |   // woot woot
-          | }).error(function(error) {
-          |   // whooops
-          | })
+        code.javascript.
+          // create all tables... now!
+          sequelize.sync() // will emit success or failure
+          &nbsp;
+          // force it!
+          sequelize.sync({force: true}) // emit ... nomnomnom
+          &nbsp;
+          // want to drop 'em all?
+          sequelize.drop() // I guess you've got it (emit)
+          &nbsp;
+          // emit handling:
+          sequelize.[sync|drop]().success(function() {
+            // woot woot
+          }).error(function(error) {
+            // whooops
+          })
 
       h3#expansion-of-models Expansion of models
       p
         | Sequelize allows you to pass custom methods to a model and it&apos;s instances&period; Just do the following&colon;
       pre.dark-blue
-        code.javascript
-          | var Foo = sequelize.define('Foo', { /* attributes */}, {
-          |   classMethods: {
-          |     method1: function(){ return 'smth' }
-          |   },
-          |   instanceMethods: {
-          |     method2: function() { return 'foo' }
-          |   }
-          | })
-          | &nbsp;
-          | // Example:
-          | Foo.method1()
-          | Foo.build().method2()
+        code.javascript.
+          var Foo = sequelize.define('Foo', { /* attributes */}, {
+            classMethods: {
+              method1: function(){ return 'smth' }
+            },
+            instanceMethods: {
+              method2: function() { return 'foo' }
+            }
+          })
+          &nbsp;
+          // Example:
+          Foo.method1()
+          Foo.build().method2()
 
       p Of course you can also access the instance&apos;s data and generate virtual getters&colon;
       pre.dark-blue
-        code.javascript
-          | var User = sequelize.define('User', { firstname: Sequelize.STRING, lastname: Sequelize.STRING }, {
-          |   instanceMethods: {
-          |     getFullname: function() {
-          |       return [this.firstname, this.lastname].join(' ')
-          |     }
-          |   }
-          | })
-          | &nbsp;
-          | // Example:
-          | User.build({ firstname: 'foo', lastname: 'bar' }).getFullname() // 'foo bar'
+        code.javascript.
+          var User = sequelize.define('User', { firstname: Sequelize.STRING, lastname: Sequelize.STRING }, {
+            instanceMethods: {
+              getFullname: function() {
+                return [this.firstname, this.lastname].join(' ')
+              }
+            }
+          })
+          &nbsp;
+          // Example:
+          User.build({ firstname: 'foo', lastname: 'bar' }).getFullname() // 'foo bar'
 
       p You can also set custom methods to all of your models during the instantiation&colon;
       pre.dark-blue
-        code.javascript
-          | var sequelize = new Sequelize('database', 'username', 'password', {
-          |   // Other options during the initialization could be here
-          |   define: {
-          |     classMethods: {
-          |       method1: function() {},
-          |       method2: function() {}
-          |     },
-          |     instanceMethods: {
-          |       method3: function() {}
-          |     }
-          |   }
-          | })
-          | &nbsp;
-          | // Example:
-          | var Foo = sequelize.define('Foo', { /* attributes */});
-          | Foo.method1()
-          | Foo.method2()
-          | Foo.build().method3()
+        code.javascript.
+          var sequelize = new Sequelize('database', 'username', 'password', {
+            // Other options during the initialization could be here
+            define: {
+              classMethods: {
+                method1: function() {},
+                method2: function() {}
+              },
+              instanceMethods: {
+                method3: function() {}
+              }
+            }
+          })
+          &nbsp;
+          // Example:
+          var Foo = sequelize.define('Foo', { /* attributes */});
+          Foo.method1()
+          Foo.method2()
+          Foo.build().method3()
 
       h3#finders Data retrieval / Finders
       p
         | Finder methods are designed to get data from the database&period; The returned data isn&apos;t just a plain object&comma; but instances of one of the defined classes&period; Check the next major chapter about instances for further information&period; But as those things are instances&comma; you can e&period;g&period; use the just describe expanded instance methods&period; So&comma; here is what you can do&colon;
       h4#finders-find find - Search for one specific element in the database
       pre.dark-blue
-        code.javascript
-          | // search for known ids
-          | Project.find(123).success(function(project) {
-          |   // project will be an instance of Project and stores the content of the table entry
-          |   // with id 123. if such an entry is not defined you will get null
-          | })
-          | &nbsp;
-          | // search for attributes
-          | Project.find({ where: {title: 'aProject'} }).success(function(project) {
-          |   // project will be the first entry of the Projects table with the title 'aProject' || null
-          | })
-          | &nbsp;
-          | // since v1.3.0: only select some attributes and rename one
-          | Project.find({
-          |   where: {title: 'aProject'},
-          |   attributes: ['id', ['name', 'title']]
-          | }).success(function(project) {
-          |   // project will be the first entry of the Projects table with the title 'aProject' || null
-          |   // project.title will contain the name of the project
-          | })
+        code.javascript.
+          // search for known ids
+          Project.find(123).success(function(project) {
+            // project will be an instance of Project and stores the content of the table entry
+            // with id 123. if such an entry is not defined you will get null
+          })
+          &nbsp;
+          // search for attributes
+          Project.find({ where: {title: 'aProject'} }).success(function(project) {
+            // project will be the first entry of the Projects table with the title 'aProject' || null
+          })
+          &nbsp;
+          // since v1.3.0: only select some attributes and rename one
+          Project.find({
+            where: {title: 'aProject'},
+            attributes: ['id', ['name', 'title']]
+          }).success(function(project) {
+            // project will be the first entry of the Projects table with the title 'aProject' || null
+            // project.title will contain the name of the project
+          })
 
       h4#finders-findorcreate findOrCreate - Search for a specific element or create it if not available
       p
@@ -699,50 +699,50 @@ block documentation
         code job
         | &period;
       pre.dark-blue
-        code.javascript
-          | User
-          |   .findOrCreate({ username: 'sdepold' }, { job: 'Technical Lead JavaScript' })
-          |   .success(function(user, created) {
-          |     console.log(user.values)
-          |     console.log(created)
-          |   &nbsp;
-          |     /*
-          |       {
-          |         username: 'sdepold',
-          |         job: 'Technical Lead JavaScript',
-          |         id: 1,
-          |         createdAt: Fri Mar 22 2013 21: 28: 34 GMT + 0100(CET),
-          |         updatedAt: Fri Mar 22 2013 21: 28: 34 GMT + 0100(CET)
-          |       }
-          |       created: true
-          |     */
-          |   })
+        code.javascript.
+          User
+            .findOrCreate({ username: 'sdepold' }, { job: 'Technical Lead JavaScript' })
+            .success(function(user, created) {
+              console.log(user.values)
+              console.log(created)
+            &nbsp;
+              /*
+                {
+                  username: 'sdepold',
+                  job: 'Technical Lead JavaScript',
+                  id: 1,
+                  createdAt: Fri Mar 22 2013 21: 28: 34 GMT + 0100(CET),
+                  updatedAt: Fri Mar 22 2013 21: 28: 34 GMT + 0100(CET)
+                }
+                created: true
+              */
+            })
 
       p The code created a new instance&period;
       p So when we already have an instance &period;&period;&period;
       pre.dark-blue
-        code.javascript
-          | User
-          |   .create({ username: 'fnord', job: 'omnomnom' })
-          |   .success(function() {
-          |     User
-          |       .findOrCreate({ username: 'fnord' }, { job: 'something else' })
-          |       .success(function(user, created) {
-          |         console.log(user.values)
-          |         console.log(created)
-          |     &nbsp;
-          |         /*
-          |           {
-          |             username: 'fnord',
-          |             job: 'omnomnom',
-          |             id: 2,
-          |             createdAt: Fri Mar 22 2013 21: 28: 34 GMT + 0100(CET),
-          |             updatedAt: Fri Mar 22 2013 21: 28: 34 GMT + 0100(CET)
-          |           }
-          |           created: false
-          |         */
-          |       })
-          |   })
+        code.javascript.
+          User
+            .create({ username: 'fnord', job: 'omnomnom' })
+            .success(function() {
+              User
+                .findOrCreate({ username: 'fnord' }, { job: 'something else' })
+                .success(function(user, created) {
+                  console.log(user.values)
+                  console.log(created)
+              &nbsp;
+                  /*
+                    {
+                      username: 'fnord',
+                      job: 'omnomnom',
+                      id: 2,
+                      createdAt: Fri Mar 22 2013 21: 28: 34 GMT + 0100(CET),
+                      updatedAt: Fri Mar 22 2013 21: 28: 34 GMT + 0100(CET)
+                    }
+                    created: false
+                  */
+                })
+            })
 
       p
         | &period;&period;&period; the existing entry will not be changed&period; See the
@@ -787,17 +787,17 @@ block documentation
           code rows
           | - an array of objects&comma; the records &lpar;matching the where clause&rpar; within the limit&sol;offset range
       pre.dark-blue
-        code.javascript
-          | Project
-          |   .findAndCountAll({
-          |      where: ["title LIKE 'foo%'"],
-          |      offset: 10,
-          |      limit: 2
-          |   })
-          |   .success(function(result) {
-          |     console.log(result.count);
-          |     console.log(result.rows);
-          |   });
+        code.javascript.
+          Project
+            .findAndCountAll({
+               where: ["title LIKE 'foo%'"],
+               offset: 10,
+               limit: 2
+            })
+            .success(function(result) {
+              console.log(result.count);
+              console.log(result.rows);
+            });
 
       p
         | The options &lsqb;object&rsqb; that you pass to
@@ -807,53 +807,53 @@ block documentation
         | &lpar;described below&rpar;&period;
       h4#finders-findall findAll - Search for multiple elements in the database
       pre.dark-blue
-        code.javascript
-          | // find multiple entries
-          | Project.findAll().success(function(projects) {
-          |   // projects will be an array of all Project instances
-          | })
-          | &nbsp;
-          | // also possible:
-          | Project.all().success(function(projects) {
-          |   // projects will be an array of all Project instances
-          | })
-          | &nbsp;
-          | // search for specific attributes - hash usage
-          | Project.findAll({ where: { name: 'A Project' } }).success(function(projects) {
-          |   // projects will be an array of Project instances with the specified name
-          | })
-          | &nbsp;
-          | // search with string replacements
-          | Project.findAll({ where: ["id > ?", 25] }).success(function(projects) {
-          |   // projects will be an array of Projects having a greater id than 25
-          | })
-          | &nbsp;
-          | // search within a specific range
-          | Project.findAll({ where: { id: [1,2,3] } }).success(function(projects) {
-          |   // projects will be an array of Projects having the id 1, 2 or 3
-          |   // this is actually doing an IN query
-          | })
-          | &nbsp;
-          | // or
-          | Project.findAll({ where: "name = 'A Project'" }).success(function(projects) {
-          |   // the difference between this and the usage of hashes (objects) is, that string usage
-          |   // is not sql injection safe. so make sure you know what you are doing!
-          | })
-          | &nbsp;
-          | // since v1.7.0 we can now improve our where searches
-          | Project.findAll({
-          |   where: {
-          |     id: {
-          |       gt: 6,              // id > 6
-          |       gte: 6,             // id >= 6
-          |       lt: 10,             // id < 10
-          |       lte: 10,            // id <= 10
-          |       ne: 20,             // id != 20
-          |       between: [6, 10],   // BETWEEN 6 AND 10
-          |       nbetween: [11, 15]  // NOT BETWEEN 11 AND 15
-          |     }
-          |   }
-          | })
+        code.javascript.
+          // find multiple entries
+          Project.findAll().success(function(projects) {
+            // projects will be an array of all Project instances
+          })
+          &nbsp;
+          // also possible:
+          Project.all().success(function(projects) {
+            // projects will be an array of all Project instances
+          })
+          &nbsp;
+          // search for specific attributes - hash usage
+          Project.findAll({ where: { name: 'A Project' } }).success(function(projects) {
+            // projects will be an array of Project instances with the specified name
+          })
+          &nbsp;
+          // search with string replacements
+          Project.findAll({ where: ["id > ?", 25] }).success(function(projects) {
+            // projects will be an array of Projects having a greater id than 25
+          })
+          &nbsp;
+          // search within a specific range
+          Project.findAll({ where: { id: [1,2,3] } }).success(function(projects) {
+            // projects will be an array of Projects having the id 1, 2 or 3
+            // this is actually doing an IN query
+          })
+          &nbsp;
+          // or
+          Project.findAll({ where: "name = 'A Project'" }).success(function(projects) {
+            // the difference between this and the usage of hashes (objects) is, that string usage
+            // is not sql injection safe. so make sure you know what you are doing!
+          })
+          &nbsp;
+          // since v1.7.0 we can now improve our where searches
+          Project.findAll({
+            where: {
+              id: {
+                gt: 6,              // id > 6
+                gte: 6,             // id >= 6
+                lt: 10,             // id < 10
+                lte: 10,            // id <= 10
+                ne: 20,             // id != 20
+                between: [6, 10],   // BETWEEN 6 AND 10
+                nbetween: [11, 15]  // NOT BETWEEN 11 AND 15
+              }
+            }
+          })
 
       h4#finders-complex-where-queries Complex filtering / OR queries
       p
@@ -865,28 +865,28 @@ block documentation
         | <code>OR</code>.
 
       pre.dark-blue
-        code.javascript
-          | Project.find({
-          |   where: Sequelize.and(
-          |     { name: 'a project' },
-          |     Sequelize.or(
-          |       { id: [1,2,3] },
-          |       { id: { lt: 10 } }
-          |     )
-          |   )
-          | })
+        code.javascript.
+          Project.find({
+            where: Sequelize.and(
+              { name: 'a project' },
+              Sequelize.or(
+                { id: [1,2,3] },
+                { id: { lt: 10 } }
+              )
+            )
+          })
 
       p This code will generate the following query:
       pre.dark-blue
-        code.javascript
-          | SELECT *
-          | FROM `Projects`
-          | WHERE (
-          |   `Projects`.`name`='a project'
-          |    AND (`Projects`.`id` IN (1,2,3) OR `Projects`.`id` < 10)
-          | )
-          | LIMIT 1
-          | ;
+        code.javascript.
+          SELECT *
+          FROM `Projects`
+          WHERE (
+            `Projects`.`name`='a project'
+             AND (`Projects`.`id` IN (1,2,3) OR `Projects`.`id` < 10)
+          )
+          LIMIT 1
+          ;
 
       p
         | Notice, that instead of <code>Sequelize.and</code> you can also use a plain array
@@ -897,50 +897,50 @@ block documentation
       h4#finders-limit---offset---order---group Manipulating the dataset with limit&comma; offset&comma; order and group
       p To get more relevant data&comma; you can use limit&comma; offset&comma; order and grouping&colon;
       pre.dark-blue
-        code.javascript
-          | // limit the results of the query
-          | Project.findAll({ limit: 10 })
-          | &nbsp;
-          | // step over the first 10 elements
-          | Project.findAll({ offset: 10 })
-          | &nbsp;
-          | // step over the first 10 elements, and take 2
-          | Project.findAll({ offset: 10, limit: 2 })
+        code.javascript.
+          // limit the results of the query
+          Project.findAll({ limit: 10 })
+          &nbsp;
+          // step over the first 10 elements
+          Project.findAll({ offset: 10 })
+          &nbsp;
+          // step over the first 10 elements, and take 2
+          Project.findAll({ offset: 10, limit: 2 })
 
       p
         | The syntax for grouping and ordering are equal&comma; so below it is only explained with a single example for group&comma; and the rest for order&period; Everything you see below can also be done for group
       pre.dark-blue
-        code.javascript
-          | Project.findAll({order: 'title DESC'})
-          | // yields ORDER BY title DESC
-          | &nbsp;
-          | Project.findAll({group: 'name'})
-          | // yields GROUP BY name
+        code.javascript.
+          Project.findAll({order: 'title DESC'})
+          // yields ORDER BY title DESC
+          &nbsp;
+          Project.findAll({group: 'name'})
+          // yields GROUP BY name
 
       p
         | Notice how in the two examples above&comma; the string provided is inserted verbatim into the query&comma; i&period;e&period; column names are not escaped&period; When you provide a string to order &sol; group&comma; this will always be the case as per v 1&period;7&period;0&period; If you want to escape column names&comma; you should provide an array of arguments&comma; even though you only want to order &sol; group by a single column
       pre.dark-blue
-        code.javascript
-          | something.find({
-          |   order: [
-          |     'name',
-          |     // will return `name`
-          |     'username DESC',
-          |     // will return `username DESC` -- i.e. don't do it!
-          |     ['username', 'DESC'],
-          |     // will return `username` DESC
-          |     sequelize.fn('max', sequelize.col('age')),
-          |     // will return max(`age`)
-          |     [sequelize.fn('max', sequelize.col('age')), 'DESC'],
-          |     // will return max(`age`) DESC
-          |     [sequelize.fn('otherfunction', sequelize.col('col1'), 12, 'lalala'), 'DESC'],
-          |     // will return otherfunction(`col1`, 12, 'lalala') DESC
-          |     [sequelize.fn('otherfunction', sequelize.fn('awesomefunction', sequelize.col('col'))), 'DESC']
-          |     // will return otherfunction(awesomefunction(`col`)) DESC, This nesting is potentially infinite!
-          |     [{ raw: 'otherfunction(awesomefunction(`col`))' }, 'DESC']
-          |     // This won't be quoted, but direction will be added
-          |   ]
-          | })
+        code.javascript.
+          something.find({
+            order: [
+              'name',
+              // will return `name`
+              'username DESC',
+              // will return `username DESC` -- i.e. don't do it!
+              ['username', 'DESC'],
+              // will return `username` DESC
+              sequelize.fn('max', sequelize.col('age')),
+              // will return max(`age`)
+              [sequelize.fn('max', sequelize.col('age')), 'DESC'],
+              // will return max(`age`) DESC
+              [sequelize.fn('otherfunction', sequelize.col('col1'), 12, 'lalala'), 'DESC'],
+              // will return otherfunction(`col1`, 12, 'lalala') DESC
+              [sequelize.fn('otherfunction', sequelize.fn('awesomefunction', sequelize.col('col'))), 'DESC']
+              // will return otherfunction(awesomefunction(`col`)) DESC, This nesting is potentially infinite!
+              [{ raw: 'otherfunction(awesomefunction(`col`))' }, 'DESC']
+              // This won't be quoted, but direction will be added
+            ]
+          })
 
       p To recap&comma; the elements of the order &sol; group array can be the following&colon;
       ul
@@ -958,81 +958,78 @@ block documentation
         em DAO
         | &comma; with functions for update&comma; delete&comma; get associations etc&period; If you have thousands of rows&comma; this might take some time&period; If you only need the raw data and don&apos;t want to update anything&comma; you can do like this to get the raw data&period;
       pre.dark-blue
-        code.javascript
-          | // Are you expecting a masssive dataset from the DB, and don't want to spend the time building DAOs for each entry?
-          | // You can pass an extra query option to get the raw data instead:
-          | Project.findAll({ where: ... }, { raw: true })
+        code.javascript.
+          // Are you expecting a masssive dataset from the DB, and don't want to spend the time building DAOs for each entry?
+          // You can pass an extra query option to get the raw data instead:
+          Project.findAll({ where: ... }, { raw: true })
 
       h4#finders-count count - Count the occurences of elements in the database
       p There is also a method for counting database objects&colon;
       pre.dark-blue
-        code.javascript
-          | Project.count().success(function(c) {
-          |   console.log("There are " + c + " projects!")
-          | })
-          | &nbsp;
-          | Project.count({ where: ["id > ?", 25] }).success(function(c) {
-          |   console.log("There are " + c + " projects with an id greater than 25.")
-          | })
+        code.javascript.
+          Project.count().success(function(c) {
+            console.log("There are " + c + " projects!")
+          })
+          &nbsp;
+          Project.count({ where: ["id > ?", 25] }).success(function(c) {
+            console.log("There are " + c + " projects with an id greater than 25.")
+          })
 
       h4#finders-max max - Get the greatest value of a specific attribute within a specific table
       p And here is a method for getting the max value of an attribute&colon;
       pre.dark-blue
-        code.javascript
-          | /*
-          |   Let's assume 3 person objects with an attribute age.
-          |   The first one is 10 years old,
-          |   the second one is 5 years old,
-          |   the third one is 40 years old.
-          | */
-          | Project.max('age').success(function(max) {
-          |   // this will return 40
-          | })
-          | &nbsp;
-          | Project.max('age', { where: { age: { lt: 20 } } }).success(function(max) {
-          |   // wil be 10
-          | })
-
+        code.javascript.
+          /*
+            Let's assume 3 person objects with an attribute age.
+            The first one is 10 years old,
+            the second one is 5 years old,
+            the third one is 40 years old.
+          */
+          Project.max('age').success(function(max) {
+            // this will return 40
+          })
+          &nbsp;
+          Project.max('age', { where: { age: { lt: 20 } } }).success(function(max) {
+            // wil be 10
+          })
 
       h4#finders-min min - Get the least value of a specific attribute within a specific table
       p And here is a method for getting the min value of an attribute&colon;
       pre.dark-blue
-        code.javascript
-          | /*
-          |   Let's assume 3 person objects with an attribute age.
-          |   The first one is 10 years old,
-          |   the second one is 5 years old,
-          |   the third one is 40 years old.
-          | */
-          | Project.min('age').success(function(min) {
-          |   // this will return 5
-          | })
-          | &nbsp;
-          | Project.min('age', { where: { age: { gt: 5 } } }).success(function(min) {
-          |   // wil be 10
-          | })
-
+        code.javascript.
+          /*
+            Let's assume 3 person objects with an attribute age.
+            The first one is 10 years old,
+            the second one is 5 years old,
+            the third one is 40 years old.
+          */
+          Project.min('age').success(function(min) {
+            // this will return 5
+          })
+          &nbsp;
+          Project.min('age', { where: { age: { gt: 5 } } }).success(function(min) {
+            // wil be 10
+          })
 
       h4#finder-sum sum - Sum the value of specific attributes
       p
         | In order to calculate the sum over a specific column of a table, you can
         | use the `sum` method.
       pre.dark-blue
-        code.javascript
-          | /*
-          |   Let's assume 3 person objects with an attribute age.
-          |   The first one is 10 years old,
-          |   the second one is 5 years old,
-          |   the third one is 40 years old.
-          | */
-          | Project.sum('age').success(function(sum) {
-          |   // this will return 55
-          | })
-          | &nbsp;
-          | Project.sum('age', { where: { age: { gt: 5 } } }).success(function(sum) {
-          |   // wil be 50
-          | })
-
+        code.javascript.
+          /*
+            Let's assume 3 person objects with an attribute age.
+            The first one is 10 years old,
+            the second one is 5 years old,
+            the third one is 40 years old.
+          */
+          Project.sum('age').success(function(sum) {
+            // this will return 55
+          })
+          &nbsp;
+          Project.sum('age', { where: { age: { gt: 5 } } }).success(function(sum) {
+            // wil be 50
+          })
 
       h3#eager-loading Eager loading
       p
@@ -1046,66 +1043,66 @@ block documentation
         code findAll
         | &period; Lets assume the following setup&colon;
       pre.dark-blue
-        code.javascript
-          | var User = sequelize.define('User', { name: Sequelize.STRING })
-          |   , Task = sequelize.define('Task', { name: Sequelize.STRING })
-          |   , Tool = sequelize.define('Tool', { name: Sequelize.STRING })
-          | &nbsp;
-          | Task.belongsTo(User)
-          | User.hasMany(Task)
-          | User.hasMany(Tool, { as: 'Instruments' })
-          | &nbsp;
-          | sequelize.sync().done(function() {
-          |   // this is where we continue ...
-          | })
+        code.javascript.
+          var User = sequelize.define('User', { name: Sequelize.STRING })
+            , Task = sequelize.define('Task', { name: Sequelize.STRING })
+            , Tool = sequelize.define('Tool', { name: Sequelize.STRING })
+          &nbsp;
+          Task.belongsTo(User)
+          User.hasMany(Task)
+          User.hasMany(Tool, { as: 'Instruments' })
+          &nbsp;
+          sequelize.sync().done(function() {
+            // this is where we continue ...
+          })
 
       p OK&period; So&comma; first of all&comma; let&apos;s load all tasks with their associated user&period;
       pre.dark-blue
-        code.javascript
-          | Task.findAll({ include: [ User ] }).success(function(tasks) {
-          |   console.log(JSON.stringify(tasks))
-          | &nbsp;
-          |   /*
-          |     [{
-          |       "name": "A Task",
-          |       "id": 1,
-          |       "createdAt": "2013-03-20T20:31:40.000Z",
-          |       "updatedAt": "2013-03-20T20:31:40.000Z",
-          |       "UserId": 1,
-          |       "user": {
-          |         "name": "John Doe",
-          |         "id": 1,
-          |         "createdAt": "2013-03-20T20:31:45.000Z",
-          |         "updatedAt": "2013-03-20T20:31:45.000Z"
-          |       }
-          |     }]
-          |   */
-          | })
+        code.javascript.
+          Task.findAll({ include: [ User ] }).success(function(tasks) {
+            console.log(JSON.stringify(tasks))
+          &nbsp;
+            /*
+              [{
+                "name": "A Task",
+                "id": 1,
+                "createdAt": "2013-03-20T20:31:40.000Z",
+                "updatedAt": "2013-03-20T20:31:40.000Z",
+                "UserId": 1,
+                "user": {
+                  "name": "John Doe",
+                  "id": 1,
+                  "createdAt": "2013-03-20T20:31:45.000Z",
+                  "updatedAt": "2013-03-20T20:31:45.000Z"
+                }
+              }]
+            */
+          })
 
       p
         | Notice that the accessor of the associated data is the name of the model in camelcase with lowercased first character&period; Also the accessor is singular as the association is one-to-something&period;
       p Next thing&colon; Loading of data with many-to-something associations&excl;
       pre.dark-blue
-        code.javascript
-          | User.findAll({ include: [ Task ] }).success(function(users) {
-          |   console.log(JSON.stringify(users))
-          | &nbsp;
-          |   /*
-          |     [{
-          |       "name": "John Doe",
-          |       "id": 1,
-          |       "createdAt": "2013-03-20T20:31:45.000Z",
-          |       "updatedAt": "2013-03-20T20:31:45.000Z",
-          |       "tasks": [{
-          |         "name": "A Task",
-          |         "id": 1,
-          |         "createdAt": "2013-03-20T20:31:40.000Z",
-          |         "updatedAt": "2013-03-20T20:31:40.000Z",
-          |         "UserId": 1
-          |       }]
-          |     }]
-          |   */
-          | })
+        code.javascript.
+          User.findAll({ include: [ Task ] }).success(function(users) {
+            console.log(JSON.stringify(users))
+          &nbsp;
+            /*
+              [{
+                "name": "John Doe",
+                "id": 1,
+                "createdAt": "2013-03-20T20:31:45.000Z",
+                "updatedAt": "2013-03-20T20:31:45.000Z",
+                "tasks": [{
+                  "name": "A Task",
+                  "id": 1,
+                  "createdAt": "2013-03-20T20:31:40.000Z",
+                  "updatedAt": "2013-03-20T20:31:40.000Z",
+                  "UserId": 1
+                }]
+              }]
+            */
+          })
 
       p
         | Notice that the accessor is plural&period; This is because the association is many-to-something&period;
@@ -1120,91 +1117,90 @@ block documentation
         code Instruments
         | above&period; In order to get that right you have to specify the model you want to load&comma; as well as the alias&colon;
       pre.dark-blue
-        code.javascript
-          | User.findAll({ include: [{ model: Tool, as: 'Instruments' }] }).success(function(users) {
-          |   console.log(JSON.stringify(users))
-          | &nbsp;
-          |   /*
-          |     [{
-          |       "name": "John Doe",
-          |       "id": 1,
-          |       "createdAt": "2013-03-20T20:31:45.000Z",
-          |       "updatedAt": "2013-03-20T20:31:45.000Z",
-          |       "instruments": [{
-          |         "name": "Toothpick",
-          |         "id": 1,
-          |         "createdAt": null,
-          |         "updatedAt": null,
-          |         "UserId": 1
-          |       }]
-          |     }]
-          |   */
-          | })
+        code.javascript.
+          User.findAll({ include: [{ model: Tool, as: 'Instruments' }] }).success(function(users) {
+            console.log(JSON.stringify(users))
+          &nbsp;
+            /*
+              [{
+                "name": "John Doe",
+                "id": 1,
+                "createdAt": "2013-03-20T20:31:45.000Z",
+                "updatedAt": "2013-03-20T20:31:45.000Z",
+                "instruments": [{
+                  "name": "Toothpick",
+                  "id": 1,
+                  "createdAt": null,
+                  "updatedAt": null,
+                  "UserId": 1
+                }]
+              }]
+            */
+          })
 
       h3#ordered-eager-loading Ordering Eager Loaded Associations
       p
         | In the case of a one-to-many relationship.
       pre.dark-blue
-        code.javascript
-          | Company.findAll({ include: [ Division ], order: [ [ Division, 'name' ] ] });
-          | Company.findAll({ include: [ Division ], order: [ [ Division, 'name', 'DESC' ] ] });
-          | Company.findAll({
-          |   include: [ { model: Division, as: 'Div' } ],
-          |   order: [ [ { model: Division, as: 'Div' }, 'name' ] ]
-          | });
-          | Company.findAll({
-          |   include: [ { model: Division, include: [ Department ] } ],
-          |   order: [ [ Division, Department, 'name' ] ]
-          | });
+        code.javascript.
+          Company.findAll({ include: [ Division ], order: [ [ Division, 'name' ] ] });
+          Company.findAll({ include: [ Division ], order: [ [ Division, 'name', 'DESC' ] ] });
+          Company.findAll({
+            include: [ { model: Division, as: 'Div' } ],
+            order: [ [ { model: Division, as: 'Div' }, 'name' ] ]
+          });
+          Company.findAll({
+            include: [ { model: Division, include: [ Department ] } ],
+            order: [ [ Division, Department, 'name' ] ]
+          });
       p
         | In the case of many-to-many joins, you are also able to sort by attributes in the through table.
       pre.dark-blue
-        code.javascript
-          | Company.findAll({
-          |   include: [ { model: Division, include: [ Department ] } ],
-          |   order: [ [ Division, DepartmentDivision, 'name' ] ]
-          | });
-
+        code.javascript.
+          Company.findAll({
+            include: [ { model: Division, include: [ Department ] } ],
+            order: [ [ Division, DepartmentDivision, 'name' ] ]
+          });
 
       h3#nested-eager-loading Nested eager loading
         pre.dark-blue
-          code.javascript
-            | User.findAll({
-            |   include: [
-            |     {model: Tool, as: 'Instruments', include: [
-            |       {model: Teacher, include: [ /* etc */]}
-            |     ]}
-            |   ]
-            | }).success(function(users) {
-            |   console.log(JSON.stringify(users))
-            | &nbsp;
-            |   /*
-            |     [{
-            |       "name": "John Doe",
-            |       "id": 1,
-            |       "createdAt": "2013-03-20T20:31:45.000Z",
-            |       "updatedAt": "2013-03-20T20:31:45.000Z",
-            |       "instruments": [{ // 1:M and N:M association
-            |         "name": "Toothpick",
-            |         "id": 1,
-            |         "createdAt": null,
-            |         "updatedAt": null,
-            |         "UserId": 1,
-            |         "Teacher": { // 1:1 association
-            |           "name": "Jimi Hendrix"
-            |         }
-            |       }]
-            |     }]
-            |   */
-            | })
+          code.javascript.
+            User.findAll({
+              include: [
+                {model: Tool, as: 'Instruments', include: [
+                  {model: Teacher, include: [ /* etc */]}
+                ]}
+              ]
+            }).success(function(users) {
+              console.log(JSON.stringify(users))
+            &nbsp;
+              /*
+                [{
+                  "name": "John Doe",
+                  "id": 1,
+                  "createdAt": "2013-03-20T20:31:45.000Z",
+                  "updatedAt": "2013-03-20T20:31:45.000Z",
+                  "instruments": [{ // 1:M and N:M association
+                    "name": "Toothpick",
+                    "id": 1,
+                    "createdAt": null,
+                    "updatedAt": null,
+                    "UserId": 1,
+                    "Teacher": { // 1:1 association
+                      "name": "Jimi Hendrix"
+                    }
+                  }]
+                }]
+              */
+            })
 
       p
         strong Final note&colon;
         | If you include an object which is not associated&comma; Sequelize will throw an error&period;
       pre.dark-blue
-        code.javascript
-          | Tool.findAll({ include: [ User ] }).success(function(tools) {
-          |   console.log(JSON.stringify(tools))
-          | })
-          | &nbsp;
-          | // Error: User is not associated to Tool!
+        code.javascript.
+          Tool.findAll({ include: [ User ] }).success(function(tools) {
+            console.log(JSON.stringify(tools))
+          })
+          &nbsp;
+          // Error: User is not associated to Tool!
