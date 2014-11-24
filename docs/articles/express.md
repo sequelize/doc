@@ -15,7 +15,6 @@
         }, 'html');
     }
 </script>
-
 ## Introduction
 This article explains the usage of Sequelize with the MVC framework Express.You will learn how and where to define models and how to load them when needed.
 

@@ -28,12 +28,9 @@ sequelize.sync().success(function() {
 
 ## Trusted and used by
 
-[![](/images/shutterstock.png)][docs/misc#shutterstock]
+[![](/images/shutterstock.png)](docs/misc#shutterstock)
+[![](/images/clevertech.png)](docs/misc#clevertech)
+[![](/images/metamarkets.png)](docs/misc#metamarkets)
+[![](/images/filsh.png)](docs/misc#filsh)
 
-[![](/images/clevertech.png)][docs/misc#clevertech]
-
-[![](/images/metamarkets.png)][docs/misc#metamarkets]
-
-[![](/images/filsh.png)][docst/misc#filsh]
-
-(c) Sascha Depold, [et al.][https://github.com/sequelize/sequelize-doc/graphs/contributors] 2006 - 2014 [Imprint][imprint]
+(c) Sascha Depold, [et al.](https://github.com/sequelize/sequelize-doc/graphs/contributors) 2006 - 2014 [Imprint](imprint)
