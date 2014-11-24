@@ -85,6 +85,15 @@ Sequelize.UUID                        // UUID datatype for PostgreSQL and SQLite
 ```
 
 The BLOB data type allows you to insert data both as strings and as buffers&period; When you do a find or findAll on a model which has a BLOB column&comma; that data will always be returned as a buffer&period;
+ 
+If you are working with the PostgreSQL TIMESTAMP WITHOUT TIME ZONE and you need to parse it to a different timezone&comma; please use the pg library's own parser&colon;
+
+```js
+require('pg').types.setTypeParser(1114, function(stringValue) {
+  return new Date(stringValue + "+0000"); 
+  // e.g., UTC offset. Use any offset that you would like.
+});
+```
 
 In addition to the type mentioned above&comma; integer&comma; bigint and float also support unsigned and zerofill properties&comma; which can be combined in any order&colon;
 
