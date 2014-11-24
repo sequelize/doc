@@ -5,6 +5,8 @@ site_favicon: favicon.ico
 markdown_extensions: [gfm]
 extra_css:
 - css/custom.css
+extra_javascript:
+- //cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js
 pages:
 - ['index.md', 'Home', 'Welcome']
 - ['imprint.md', 'Home', 'Imprint']

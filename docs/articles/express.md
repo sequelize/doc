@@ -1,9 +1,3 @@
-<!---
-A lot of custom JS used to highlight the code fetched from GH using pygments syntax
--->
-<script src="../../js/esprima.js"></script>
-<script src="../../js/redeyed.js"></script>
-<script src="../../js/peacock-browser.js"></script>
 <script type="text/javascript">
     fromGithub = function (partialId, ext) {
         ext = ext || '';
@@ -12,11 +6,11 @@ A lot of custom JS used to highlight the code fetched from GH using pygments syn
         $.get("https://cdn.rawgit.com/sequelize/express-example/master/" + partialId.replace("_", "/") + ext, function (code) {
 
             if (ext === '.js') {
-                code = peacock.highlight(code);
-            } else {
-                code = '<div class="highlight"><pre>' + code + '</pre></div>';
-            }
+                code = hljs.highlight('js', code).value;
+            } 
 
+            code = '<div class="highlight"><pre>' + code + '</pre></div>';
+        
             $partial.replaceWith(code);
         }, 'html');
     }
