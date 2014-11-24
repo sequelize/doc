@@ -1,33 +1,6 @@
-<style type="text/css">
-table {
-  width:100%;
-}
-
-th:nth-child(1),
-td:nth-child(1) {
-  width: 35%;
-  word-break: break-all;
-}
-
-td:nth-child(2),
-td:nth-child(2) {
-  width: 20%;
-  word-break: break-word;
-}
-
-td,
-th {
-  padding: 6px 13px;
-  border: 1px solid #ddd;
-}
-tr:nth-child(2n) {
-  background-color: #f8f8f8;
-}
-</style>
-
 <a name="promise"></a>
 # Class Promise
-[View code](https://github.com/sequelize/sequelize/blob/c4584892582e63a5b68d0e803a04abd2bf78d24c/lib/promise.js#L25)
+[View code](https://github.com/sequelize/sequelize/blob/5aa77fa291abeaf0498f65724000c75da9ab9028/lib/promise.js#L25)
 A slightly modified version of bluebird promises. This means that, on top of the methods below, you can also call all the methods listed on the link below.
 
 The main difference is that sequelize promises allows you to attach a listener that will be called with the generated SQL, each time a query is run.
@@ -42,9 +15,10 @@ If you want to propagate SQL events across `then`, `all` calls etc., you must us
 
 <a name="on"></a>
 ## `on(evt, fct)`
-[View code](https://github.com/sequelize/sequelize/blob/c4584892582e63a5b68d0e803a04abd2bf78d24c/lib/promise.js#L108)
+[View code](https://github.com/sequelize/sequelize/blob/5aa77fa291abeaf0498f65724000c75da9ab9028/lib/promise.js#L110)
 Listen for events, event emitter style. Mostly for backwards compat. with EventEmitter
 
+**Deprecated** 
 
 **Params:**
 
@@ -58,22 +32,23 @@ Listen for events, event emitter style. Mostly for backwards compat. with EventE
 
 <a name="emit"></a>
 ## `emit(type, value(s)*)`
-[View code](https://github.com/sequelize/sequelize/blob/c4584892582e63a5b68d0e803a04abd2bf78d24c/lib/promise.js#L127)
+[View code](https://github.com/sequelize/sequelize/blob/5aa77fa291abeaf0498f65724000c75da9ab9028/lib/promise.js#L131)
 Emit an event from the emitter
+**Deprecated** 
 
 **Params:**
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | type | string | The type of event |
-| value(s)* | any | All other arguments will be passed to the event listeners |
+| value(s)* | any | All other arguments will be passed to the event listeners  |
 
 
 ***
 
 <a name="success"></a>
 ## `success(onSuccess)` -> `this`
-[View code](https://github.com/sequelize/sequelize/blob/c4584892582e63a5b68d0e803a04abd2bf78d24c/lib/promise.js#L163)
+[View code](https://github.com/sequelize/sequelize/blob/5aa77fa291abeaf0498f65724000c75da9ab9028/lib/promise.js#L169)
 Listen for success events.
 
 ```js
@@ -82,6 +57,7 @@ promise.success(function (result) {
 });
 ```
 
+**Deprecated** 
 
 **Params:**
 
@@ -95,7 +71,7 @@ __Aliases:__ ok
 
 <a name="error"></a>
 ## `error(onError)` -> `this`
-[View code](https://github.com/sequelize/sequelize/blob/c4584892582e63a5b68d0e803a04abd2bf78d24c/lib/promise.js#L188)
+[View code](https://github.com/sequelize/sequelize/blob/5aa77fa291abeaf0498f65724000c75da9ab9028/lib/promise.js#L196)
 Listen for error events
 
 ```js
@@ -104,6 +80,7 @@ promise.error(function (err) {
 });
 ```
 
+**Deprecated** 
 
 **Params:**
 
@@ -117,7 +94,7 @@ __Aliases:__ fail, failure
 
 <a name="done"></a>
 ## `done(onDone)` -> `this`
-[View code](https://github.com/sequelize/sequelize/blob/c4584892582e63a5b68d0e803a04abd2bf78d24c/lib/promise.js#L209)
+[View code](https://github.com/sequelize/sequelize/blob/5aa77fa291abeaf0498f65724000c75da9ab9028/lib/promise.js#L219)
 Listen for both success and error events.
 
 ```js
@@ -126,6 +103,7 @@ promise.done(function (err, result) {
 });
 ```
 
+**Deprecated** done(fct) is deprecated, done() is regular promise syntax to explicitly signal the end of a promise chain and will not be deprecated
 
 **Params:**
 
@@ -139,7 +117,7 @@ __Aliases:__ complete
 
 <a name="sql"></a>
 ## `sql(onSQL)` -> `this`
-[View code](https://github.com/sequelize/sequelize/blob/c4584892582e63a5b68d0e803a04abd2bf78d24c/lib/promise.js#L234)
+[View code](https://github.com/sequelize/sequelize/blob/5aa77fa291abeaf0498f65724000c75da9ab9028/lib/promise.js#L244)
 Attach a function that is called every time the function that created this emitter executes a query.
 
 **Params:**
@@ -153,9 +131,10 @@ Attach a function that is called every time the function that created this emitt
 
 <a name="proxy"></a>
 ## `proxy(promise, [options])` -> `this`
-[View code](https://github.com/sequelize/sequelize/blob/c4584892582e63a5b68d0e803a04abd2bf78d24c/lib/promise.js#L247)
+[View code](https://github.com/sequelize/sequelize/blob/5aa77fa291abeaf0498f65724000c75da9ab9028/lib/promise.js#L259)
 Proxy every event of this promise to another one.
 
+**Deprecated** 
 
 **Params:**
 

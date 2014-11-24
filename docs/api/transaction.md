@@ -1,33 +1,6 @@
-<style type="text/css">
-table {
-  width:100%;
-}
-
-th:nth-child(1),
-td:nth-child(1) {
-  width: 35%;
-  word-break: break-all;
-}
-
-td:nth-child(2),
-td:nth-child(2) {
-  width: 20%;
-  word-break: break-word;
-}
-
-td,
-th {
-  padding: 6px 13px;
-  border: 1px solid #ddd;
-}
-tr:nth-child(2n) {
-  background-color: #f8f8f8;
-}
-</style>
-
 <a name="transaction"></a>
 # Class Transaction
-[View code](https://github.com/sequelize/sequelize/blob/c4584892582e63a5b68d0e803a04abd2bf78d24c/lib/transaction.js#L12)
+[View code](https://github.com/sequelize/sequelize/blob/5aa77fa291abeaf0498f65724000c75da9ab9028/lib/transaction.js#L12)
 The transaction object is used to identify a running transaction. It is created by calling `Sequelize.transaction()`.
 
 To run a query under a transaction, you should pass the transaction in the options object.
@@ -36,7 +9,7 @@ To run a query under a transaction, you should pass the transaction in the optio
 
 <a name="isolation_levels"></a>
 ## `ISOLATION_LEVELS`
-[View code](https://github.com/sequelize/sequelize/blob/c4584892582e63a5b68d0e803a04abd2bf78d24c/lib/transaction.js#L45)
+[View code](https://github.com/sequelize/sequelize/blob/5aa77fa291abeaf0498f65724000c75da9ab9028/lib/transaction.js#L45)
 The possible isolations levels to use when starting a transaction
 
 ```js
@@ -53,7 +26,7 @@ The possible isolations levels to use when starting a transaction
 
 <a name="lock"></a>
 ## `LOCK`
-[View code](https://github.com/sequelize/sequelize/blob/c4584892582e63a5b68d0e803a04abd2bf78d24c/lib/transaction.js#L67)
+[View code](https://github.com/sequelize/sequelize/blob/5aa77fa291abeaf0498f65724000c75da9ab9028/lib/transaction.js#L67)
 Possible options for row locking. Used in conjuction with `find` calls:
 
 ```js
@@ -71,7 +44,7 @@ Model.findAll({
 
 <a name="commit"></a>
 ## `commit()` -> `this`
-[View code](https://github.com/sequelize/sequelize/blob/c4584892582e63a5b68d0e803a04abd2bf78d24c/lib/transaction.js#L77)
+[View code](https://github.com/sequelize/sequelize/blob/5aa77fa291abeaf0498f65724000c75da9ab9028/lib/transaction.js#L77)
 Commit the transaction
 
 
@@ -79,7 +52,7 @@ Commit the transaction
 
 <a name="rollback"></a>
 ## `rollback()` -> `this`
-[View code](https://github.com/sequelize/sequelize/blob/c4584892582e63a5b68d0e803a04abd2bf78d24c/lib/transaction.js#L97)
+[View code](https://github.com/sequelize/sequelize/blob/5aa77fa291abeaf0498f65724000c75da9ab9028/lib/transaction.js#L97)
 Rollback (abort) the transaction
 
 

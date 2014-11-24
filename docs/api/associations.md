@@ -1,33 +1,6 @@
-<style type="text/css">
-table {
-  width:100%;
-}
-
-th:nth-child(1),
-td:nth-child(1) {
-  width: 35%;
-  word-break: break-all;
-}
-
-td:nth-child(2),
-td:nth-child(2) {
-  width: 20%;
-  word-break: break-word;
-}
-
-td,
-th {
-  padding: 6px 13px;
-  border: 1px solid #ddd;
-}
-tr:nth-child(2n) {
-  background-color: #f8f8f8;
-}
-</style>
-
 <a name="mixin"></a>
 # Mixin Mixin
-[View code](https://github.com/sequelize/sequelize/blob/c4584892582e63a5b68d0e803a04abd2bf78d24c/lib/associations/mixin.js#L94)
+[View code](https://github.com/sequelize/sequelize/blob/5aa77fa291abeaf0498f65724000c75da9ab9028/lib/associations/mixin.js#L94)
 Creating assocations in sequelize is done by calling one of the belongsTo / hasOne / hasMany functions
 on a model (the source), and prodiving another model as the first argument to the function (the target).
 
@@ -116,7 +89,7 @@ you should either disable some constraints, or rethink your associations complet
 
 <a name="hasone"></a>
 ## `hasOne(target, [options])`
-[View code](https://github.com/sequelize/sequelize/blob/c4584892582e63a5b68d0e803a04abd2bf78d24c/lib/associations/mixin.js#L144)
+[View code](https://github.com/sequelize/sequelize/blob/5aa77fa291abeaf0498f65724000c75da9ab9028/lib/associations/mixin.js#L144)
 Creates an association between this (the source) and the provided target. The foreign key is added on the target.
 
 Example: `User.hasOne(Profile)`. This will add userId to the profile table.
@@ -148,7 +121,7 @@ All methods return a promise
 
 <a name="belongsto"></a>
 ## `belongsTo(target, [options])`
-[View code](https://github.com/sequelize/sequelize/blob/c4584892582e63a5b68d0e803a04abd2bf78d24c/lib/associations/mixin.js#L169)
+[View code](https://github.com/sequelize/sequelize/blob/5aa77fa291abeaf0498f65724000c75da9ab9028/lib/associations/mixin.js#L169)
 Creates an association between this (the source) and the provided target. The foreign key is added on the source.
 
 Example: `Profile.belongsTo(User)`. This will add userId to the profile table.
@@ -180,7 +153,7 @@ All methods return a promise
 
 <a name="hasmany"></a>
 ## `hasMany(target, [options])`
-[View code](https://github.com/sequelize/sequelize/blob/c4584892582e63a5b68d0e803a04abd2bf78d24c/lib/associations/mixin.js#L243)
+[View code](https://github.com/sequelize/sequelize/blob/5aa77fa291abeaf0498f65724000c75da9ab9028/lib/associations/mixin.js#L244)
 Create an association that is either 1:m or n:m.
 
 ```js
@@ -201,7 +174,8 @@ The following methods are injected on the source:
 * add[AS] - for example addPicture(instance, defaultAttributes|options). Add another associated object.
 * add[AS] [plural] - for example addPictures([instance1, instance2], defaultAttributes|options). Add some more associated objects.
 * create[AS] - for example createPicture(values, options). Build and save a new association.
-* remove[AS] - for example removePicture(instance). Remove a single association
+* remove[AS] - for example removePicture(instance). Remove a single association.
+* remove[AS] [plural] - for example removePictures(instance). Remove multiple association.
 * has[AS] - for example hasPicture(instance). Is source associated to this target?
 * has[AS] [plural] - for example hasPictures(instances). Is source associated to all these targets?
 
