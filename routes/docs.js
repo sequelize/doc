@@ -6,7 +6,8 @@ var fs            = require('fs')
   , sectionNames  = ["installation", "usage", "models", "instances", "associations", "hooks", "transactions", "migrations", "utils", "misc"]
 
 exports.index = function(req, res) {
-  var path     = 'docs/latest'
+  res.redirect("http://sequelize.readthedocs.org/en/latest/", 302);
+  /*var path     = 'docs/latest'
     , sections = []
 
   if (!req.param('version')) {
@@ -46,7 +47,7 @@ exports.index = function(req, res) {
     activeNavItem: 'docs',
     sidebarTitle:  'Documentation',
     bodyId:        'documentation'
-  })
+  })*/
 }
 
 // helpers
