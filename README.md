@@ -1,1 +1,5 @@
-# DEPRECATED - docs are in the main repo! https://github.com/sequelize/sequelize/tree/master/docs/docs
+### v4 docs:
+http://docs.sequelizejs.com
+
+### v3 docs:
+http://sequelize.readthedocs.io/en/v3/
