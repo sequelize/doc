@@ -2,3 +2,4 @@ node_modules
 sequelize
 site/*
 !site/.gitkeep
+!site/.nojekyll
