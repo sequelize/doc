@@ -1,5 +1,5 @@
-### v5 docs:
-https://sequelize.github.io/master
+### v5/latest docs:
+http://docs.sequelizejs.com
 
 ### v4 docs:
 https://sequelize.github.io/v4
