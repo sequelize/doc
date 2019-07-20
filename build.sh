@@ -11,7 +11,7 @@ build_branch () {
     rm -rf ../$1
     if [ $1 == "v3" ];then
         mkdocs build --clean
-        mv ./docs ../$BUILD_DIR/$1
+        mv ./site ../$BUILD_DIR/$1
     else
         mv ./esdoc ../$BUILD_DIR/$1
     fi
