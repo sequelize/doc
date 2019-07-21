@@ -3,3 +3,4 @@ sequelize
 site/*
 !site/.gitkeep
 !site/.nojekyll
+!site/CNAME
